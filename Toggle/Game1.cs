@@ -212,7 +212,6 @@ namespace Toggle
             {
                 i.setState(worldState);
             }
-            int x = 0;
             if (worldState)
             {
                 MediaPlayer.Stop();
