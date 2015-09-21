@@ -52,17 +52,26 @@ namespace Toggle
             }
 
             KittenZombie kt = new KittenZombie(400,300,worldState);
-            creatures.Add(kt);
-            kt = new KittenZombie(100, 100, worldState);
-            creatures.Add(kt);
-            player = new Player(500, 300, worldState);
+            FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+            //creatures.Add(kt);
+            for (int i = 0; i < 5; i++ )
+            {
+                for (int y2 = 0; y2 < 5; y2++)
+                {
+                    kt = new KittenZombie(i * 35, 5 + (y2 * 35), worldState);
+                    ft = new FlowerTentacles(5 + (i * 35),(y2 * 35) + 230, worldState);
+                    creatures.Add(kt);
+                    creatures.Add(ft);
+                }
+            }
+            player = new Player(700, 300, worldState);
             creatures.Add(player);
 
-            FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+            /*FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
             creatures.Add(ft);
 
             ft = new FlowerTentacles(300, 350, worldState);
-            creatures.Add(ft);
+            creatures.Add(ft);*/
 
             GreenBlock b = new GreenBlock(250, 300, worldState);
             items.Add(b);
@@ -101,7 +110,7 @@ namespace Toggle
             oldKeyBoardState = newKeyBoardState;
 
             foreach(Creature c in creatures){
-                c.move();
+                c.move(creatures);
                 if (collision(c.getHitBox()))
                 {
                     //c.invertDirection();
@@ -126,7 +135,6 @@ namespace Toggle
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-
             foreach (Creature c in creatures)
             {
                 spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White);
@@ -136,6 +144,20 @@ namespace Toggle
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
             }
+            /*
+             * code for tile reading.  it just handles sprites but could do objects too
+            foreach (string line in lines)
+            {
+                y++;
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if (line[i] == '1')
+                    {
+                        spriteBatch.Draw(background, new Vector2(i * 32, y * 32), new Rectangle(i * 32, y * 32, 32, 32), Color.White);
+                    }
+                }
+            }
+            */
     
             spriteBatch.End();
 

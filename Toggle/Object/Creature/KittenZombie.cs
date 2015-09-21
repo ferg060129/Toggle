@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -18,14 +19,42 @@ namespace Toggle
             height = 32;
         }
 
-        public override void goodMove()
+        public override void goodMove(ArrayList collidables)
         {
-            x -= velocity;
+            bool canMove = true;
+            foreach (Creature c in collidables)
+            {
+                if (c != this)
+                {
+                    Rectangle otherRect = c.getHitBox();
+                    otherRect.X += velocity;
+                    if (otherRect.Intersects(getHitBox()))
+                    {
+                        canMove = false;
+                    }
+                }
+            }
+            if (canMove)
+                x -= velocity;
         }
 
-        public override void badMove()
+        public override void badMove(ArrayList collidables)
         {
-            x += velocity;
+            bool canMove = true;
+            foreach (Creature c in collidables)
+            {
+                if (c != this)
+                {
+                    Rectangle otherRect = c.getHitBox();
+                    otherRect.X -= velocity;
+                    if (otherRect.Intersects(getHitBox()))
+                    {
+                        canMove = false;
+                    }
+                }
+            }
+            if (canMove)
+                x += velocity;
         }
     }
 }
