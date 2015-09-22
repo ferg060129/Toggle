@@ -23,6 +23,10 @@ namespace Toggle
             y = yLocation;
             state = initialState;
         }
+        public Object(bool initialState)
+        {
+            state = initialState;
+        }
 
         public void switchState(){
             state = !state;

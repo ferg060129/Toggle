@@ -9,7 +9,7 @@ namespace Toggle
     //Maybe this shouldn't inherit from object
     class InventoryItem : Object
     {
-        public InventoryItem(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        public InventoryItem(bool initialState) : base(initialState)
         {
 
         }

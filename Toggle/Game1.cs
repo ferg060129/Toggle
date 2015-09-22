@@ -20,15 +20,16 @@ namespace Toggle
         Player player;
         Song song;
         Song song2;
-
+        Inventory inventory; 
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
+          
         }
 
         protected override void Initialize()
@@ -78,6 +79,7 @@ namespace Toggle
 
             song = Content.Load<Song>("whitesky");
             song2 = Content.Load<Song>("climbing_up_the_walls");
+            inventory = new Inventory(150, 200);
             MediaPlayer.Play(song);
             //MediaPlayer.IsRepeating = true;
         }
@@ -135,6 +137,14 @@ namespace Toggle
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+
+            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            {
+                inventory.drawInventory(spriteBatch);
+
+            }
+            
+            
             foreach (Creature c in creatures)
             {
                 spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White);
@@ -190,7 +200,8 @@ namespace Toggle
         {            
             if (player.getHitBox().Intersects(i.getHitBox()))
             {
-                player.pickUp(i);
+                //player.pickUp(i);
+                inventory.addInventoryItem(i.pickUpItem());
                 items.Remove(i);
             }  
         }
@@ -243,6 +254,17 @@ namespace Toggle
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song2);
+            }
+
+            InventoryItem[,] inventoryItems = inventory.getItems();
+
+            for(int x = 0; x < inventoryItems.GetLength(0);x++)
+            {
+                for (int y = 0; y < inventoryItems.GetLength(1);y++ )
+                {
+                    if(inventoryItems[x,y] != null)
+                    inventoryItems[x, y].switchState();
+                }
             }
         }
     }

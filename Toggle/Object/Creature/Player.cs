@@ -71,7 +71,7 @@ namespace Toggle
 
         public void pickUp(Item i)
         {
-
+            //.addInventoryItem(i.pickUpItem());
         }
     }
 }

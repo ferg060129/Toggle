@@ -9,6 +9,7 @@ namespace Toggle
 {
     class GreenBlock : Item 
     {
+
         public GreenBlock(int xLocation, int yLocation, bool initialState): base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["greenblock"];
@@ -18,5 +19,12 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, width, height);
             hitBox = new Rectangle(xLocation, yLocation, width, height);
         }
+
+        public override void makeInventoryItem()
+        {
+            inventoryItem = new GreenBlockI(state);
+        }
+
+
     }
 }
