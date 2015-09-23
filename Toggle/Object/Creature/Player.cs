@@ -20,6 +20,7 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             width = 32;
             height = 32;
+            velocity = 3;
         }
 
 
