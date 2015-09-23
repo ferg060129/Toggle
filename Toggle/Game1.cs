@@ -30,7 +30,7 @@ namespace Toggle
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
           
         }
@@ -61,7 +61,6 @@ namespace Toggle
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
             /*
->>>>>>> origin/master
             KittenZombie kt = new KittenZombie(400,300,worldState);
             FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
             //creatures.Add(kt);
@@ -92,7 +91,7 @@ namespace Toggle
             song2 = Content.Load<Song>("climbing_up_the_walls");
             inventory = new Inventory(150, 200);
             MediaPlayer.Play(song);
-            makeMapFromFile("map.txt");
+            makeMapFromFile("home.txt");
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()

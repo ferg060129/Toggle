@@ -104,6 +104,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
   </ItemGroup>
   <ItemGroup>
