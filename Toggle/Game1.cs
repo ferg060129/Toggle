@@ -344,18 +344,6 @@ namespace Toggle
 
         public void banana()
         {
-            //this function does nothing, but solves everything
-            //
-            //
-            // asddfasdf
-            // asdfsadfasdf
-            //
-            //
-        }
-
-
-        public void banana()
-        {
             int banana = 0;
         }
 
