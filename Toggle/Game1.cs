@@ -359,17 +359,12 @@ namespace Toggle
             string[] lines = System.IO.File.ReadAllLines("map1.txt");
             int xposition = 0;
             int yposition = 0;
-            
             foreach (string line in lines)
             {
                 foreach(char c in line)
                 {
-                    Tile t = new Tile(xposition,yposition,worldState,gGraphic, String bGraphic, false);
 
-
-                    xposition += 32;
                 }
-                yposition += 32;
             }
         }
 
