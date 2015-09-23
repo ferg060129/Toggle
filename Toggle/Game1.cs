@@ -21,14 +21,8 @@ namespace Toggle
         Player player;
         Song song;
         Song song2;
-<<<<<<< HEAD
-        private bool paused = false;
-        private bool pauseKeyDown = false;
-        private bool pausedForGuide = false;
 
-=======
-        Inventory inventory; 
->>>>>>> origin/master
+        //Inventory inventory; 
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
 
@@ -46,10 +40,6 @@ namespace Toggle
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
             
-<<<<<<< HEAD
-=======
-            
->>>>>>> origin/master
         }
 
         protected override void LoadContent()
@@ -65,17 +55,6 @@ namespace Toggle
                 Textures.textures.Add(Textures.graphicNames[x], Content.Load<Texture2D>(Textures.graphicNames[x]));
             }
             
-<<<<<<< HEAD
-            for (int i = 0; i < width; i+=32) { 
-                for (int z = 0; z < height; z+=32)
-                {
-                    
-                    //get a random #, if below a certain threshhold, draw a flower
-                    Tile t = new Tile(i, z, worldState);
-                    tiles.Add(t);
-                }
-            }
-=======
             for(int x = 0; x < Textures.tileNames.Length; x++)
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tiles/" + Textures.tileNames[x]));
@@ -110,7 +89,7 @@ namespace Toggle
 
             song = Content.Load<Song>("whitesky");
             song2 = Content.Load<Song>("climbing_up_the_walls");
-            inventory = new Inventory(150, 200);
+            //inventory = new Inventory(150, 200);
             MediaPlayer.Play(song);
             makeMap();
             //MediaPlayer.IsRepeating = true;
@@ -143,14 +122,8 @@ namespace Toggle
 
             oldKeyBoardState = newKeyBoardState;
 
-<<<<<<< HEAD
-            foreach (Creature c in creatures)
-            {
-                c.move();
-=======
             foreach(Creature c in creatures){
                 c.move(creatures);
->>>>>>> origin/master
                 if (collision(c.getHitBox()))
                 {
                     //c.invertDirection();
@@ -176,19 +149,10 @@ namespace Toggle
         {
             spriteBatch.Begin();
 
-<<<<<<< HEAD
-            foreach (Tile t in tiles)
-            {
-                spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), t.getImageBoundingRectangle(), Color.White);
-            }
-
-            foreach (Creature c in creatures)
-=======
             drawMap(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.I))
->>>>>>> origin/master
             {
-                inventory.drawInventory(spriteBatch);
+               // inventory.drawInventory(spriteBatch);
             }
 
             foreach (Item i in items)
@@ -249,7 +213,7 @@ namespace Toggle
             if (player.getHitBox().Intersects(i.getHitBox()))
             {
                 //player.pickUp(i);
-                inventory.addInventoryItem(i.pickUpItem());
+                //inventory.addInventoryItem(i.pickUpItem());
                 items.Remove(i);
             }  
         }
@@ -304,8 +268,8 @@ namespace Toggle
                 MediaPlayer.Play(song2);
             }
 
-            InventoryItem[,] inventoryItems = inventory.getItems();
-
+            //InventoryItem[,] inventoryItems = inventory.getItems();
+            /*
             for(int x = 0; x < inventoryItems.GetLength(0);x++)
             {
                 for (int y = 0; y < inventoryItems.GetLength(1);y++ )
@@ -313,7 +277,7 @@ namespace Toggle
                     if(inventoryItems[x,y] != null)
                     inventoryItems[x, y].switchState();
                 }
-            }
+            }*/
             foreach (Tile t in tiles)
             {
                 t.setState(worldState);
@@ -322,37 +286,37 @@ namespace Toggle
 
         public void makeMap()
         {
-            Random r = new Random();
-            for (int x = 0; x < width; x+=32)
-            {
-                for (int y = 0; y < height; y+=32)
-                {
+            /* Random r = new Random();
+             for (int x = 0; x < width; x+=32)
+             {
+                 for (int y = 0; y < height; y+=32)
+                 {
                     
-                    int val = r.Next(4);
-                    val++;
-                    String s = "grass";
-                    if(val!= 1){
-                        s+=val;
-                    }
-                    tiles.Add(new Tile(x, y,true,s, "dark"+s, false));
-                }
-            }
+                     int val = r.Next(4);
+                     val++;
+                     String s = "grass";
+                     if(val!= 1){
+                         s+=val;
+                     }
+                     tiles.Add(new Tile(x, y,true,s, "dark"+s, false));
+                 }
+             }
 
-            for (int x = 4*32; x <= 8*32; x+=32)
-            {
-                tiles.Add(new Tile(x, 3 * 32, true, "woodenwallhorizontal1", "woodenwallhorizontal1", true));
-                tiles.Add(new Tile(x, 9 * 32, true, "woodenwallhorizontal1", "woodenwallhorizontal1", true));
-            }
-            for (int y = 4*32; y <= 8*32; y += 32)
-            {
-                tiles.Add(new Tile(3 * 32, y, true, "woodenwallvertical", "woodenwallvertical", true));
-                tiles.Add(new Tile(9 * 32, y, true, "woodenwallvertical", "woodenwallvertical", true));
-            }
-            tiles.Add(new Tile(3 * 32, 9 * 32, true, "woodenwallbottomleftcorner", "woodenwallbottomleftcorner", true));
-            tiles.Add(new Tile(3 * 32, 3 * 32, true, "woodenwalltopleftcorner", "woodenwalltopleftcorner", true));
-            tiles.Add(new Tile(9 * 32, 9 * 32, true, "woodenwallbottomrightcorner", "woodenwallbottomrightcorner", true));
-            tiles.Add(new Tile(9 * 32, 3 * 32, true, "woodenwalltoprightcorner", "woodenwalltoprightcorner", true));
-
+             for (int x = 4*32; x <= 8*32; x+=32)
+             {
+                 tiles.Add(new Tile(x, 3 * 32, true, "woodenwallhorizontal1", "woodenwallhorizontal1", true));
+                 tiles.Add(new Tile(x, 9 * 32, true, "woodenwallhorizontal1", "woodenwallhorizontal1", true));
+             }
+             for (int y = 4*32; y <= 8*32; y += 32)
+             {
+                 tiles.Add(new Tile(3 * 32, y, true, "woodenwallvertical", "woodenwallvertical", true));
+                 tiles.Add(new Tile(9 * 32, y, true, "woodenwallvertical", "woodenwallvertical", true));
+             }
+             tiles.Add(new Tile(3 * 32, 9 * 32, true, "woodenwallbottomleftcorner", "woodenwallbottomleftcorner", true));
+             tiles.Add(new Tile(3 * 32, 3 * 32, true, "woodenwalltopleftcorner", "woodenwalltopleftcorner", true));
+             tiles.Add(new Tile(9 * 32, 9 * 32, true, "woodenwallbottomrightcorner", "woodenwallbottomrightcorner", true));
+             tiles.Add(new Tile(9 * 32, 3 * 32, true, "woodenwalltoprightcorner", "woodenwalltoprightcorner", true));
+             */
         }
 
         public void makeMap2()
