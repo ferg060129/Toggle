@@ -39,10 +39,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Game1.cs" />
+    <Compile Include="Inventory.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
+    <Compile Include="Object\Inventory Item\GreenBlockI.cs" />
     <Compile Include="Object\Inventory Item\InventoryItem.cs" />
     <Compile Include="Object\Item\GreenBlock.cs" />
     <Compile Include="Object\Item\Item.cs" />
