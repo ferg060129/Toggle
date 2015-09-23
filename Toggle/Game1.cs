@@ -347,8 +347,8 @@ namespace Toggle
             //this function does nothing, but solves everything
             //
             //
-            //This is a conflict, remove this line.
-            //The other one if much more banana.
+            // asddfasdf
+            // asdfsadfasdf
             //
             //
         }
