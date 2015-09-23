@@ -19,7 +19,13 @@ namespace Toggle
                 {'1', "grass,darkgrass"},
                 {'2', "grass2,darkgrass2"},
                 {'3', "grass3,darkgrass3"},
-                {'4', "grass4,darkgrass4"}
+                {'4', "grass4,darkgrass4"},
+                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner"},
+                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner"},
+                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner"},
+                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner"},
+                {'5', "woodenwallvertical,woodenwallvertical"},
+                {'6', "woodenwallhorizontal1,woodenwallhorizontal1"}
             };
 
     }
