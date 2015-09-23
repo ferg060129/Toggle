@@ -1,15 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+<<<<<<< HEAD
+=======
+using System.Collections;
+>>>>>>> origin/master
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 namespace Toggle
 {
     class Tile : Object
     {
+<<<<<<< HEAD
 
         public Tile(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
@@ -22,5 +30,25 @@ namespace Toggle
 
         }
 
+=======
+        bool wall;
+        public Tile(int xLocation, int yLocation, bool initialState, String gGraphic, String bGraphic, bool solid) : base(xLocation, yLocation, initialState)
+        {
+            goodGraphic = Textures.textures[gGraphic];
+            badGraphic = Textures.textures[bGraphic];
+            wall = solid;
+            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            width = 32;
+            height = 32;
+        }
+
+        public bool isWall()
+        {
+            return wall;
+        }
+
+
+
+>>>>>>> origin/master
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
@@ -16,21 +17,21 @@ namespace Toggle
 
         }
 
-        public virtual void move()
+        public virtual void move(ArrayList collidables)
         {
             if (state)
-                goodMove();
+                goodMove(collidables);
             else
-                badMove();
+                badMove(collidables);
 
             hitBox = new Rectangle(x, y, width, height);
         }
 
-        public virtual void goodMove()
+        public virtual void goodMove(ArrayList collidables)
         {
 
         }
-        public virtual void badMove()
+        public virtual void badMove(ArrayList collidables)
         {
 
         }

@@ -77,9 +77,8 @@
     <Content Include="Content\kitten.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\player.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\player.png" />
+    <Content Include="Content\player_right.png" />
     <Content Include="Content\whitesky.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
