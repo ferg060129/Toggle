@@ -15,11 +15,15 @@ namespace Toggle
         SpriteBatch spriteBatch;
         ArrayList creatures = new ArrayList();
         ArrayList items = new ArrayList();
+        ArrayList tiles = new ArrayList();
         int width;
         int height;
         Player player;
         Song song;
         Song song2;
+        private bool paused = false;
+        private bool pauseKeyDown = false;
+        private bool pausedForGuide = false;
 
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
@@ -27,7 +31,7 @@ namespace Toggle
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
         }
 
@@ -36,12 +40,13 @@ namespace Toggle
             base.Initialize();
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
-            width = GraphicsDevice.PresentationParameters.Bounds.Width;
-            height = GraphicsDevice.PresentationParameters.Bounds.Height;
+            
         }
 
         protected override void LoadContent()
         {
+            width = GraphicsDevice.PresentationParameters.Bounds.Width;
+            height = GraphicsDevice.PresentationParameters.Bounds.Height;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -50,7 +55,16 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.graphicNames[x], Content.Load<Texture2D>(Textures.graphicNames[x]));
             }
-
+            
+            for (int i = 0; i < width; i+=32) { 
+                for (int z = 0; z < height; z+=32)
+                {
+                    
+                    //get a random #, if below a certain threshhold, draw a flower
+                    Tile t = new Tile(i, z, worldState);
+                    tiles.Add(t);
+                }
+            }
             KittenZombie kt = new KittenZombie(400,300,worldState);
             creatures.Add(kt);
             kt = new KittenZombie(100, 100, worldState);
@@ -87,7 +101,7 @@ namespace Toggle
             {
                 GraphicsDevice.Clear(Color.Orange);
             }
-            
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -100,7 +114,8 @@ namespace Toggle
 
             oldKeyBoardState = newKeyBoardState;
 
-            foreach(Creature c in creatures){
+            foreach (Creature c in creatures)
+            {
                 c.move();
                 if (collision(c.getHitBox()))
                 {
@@ -113,19 +128,24 @@ namespace Toggle
                     //c.invertDirection();
                     switchStates();
                 }
-                
+
             }
 
-            for(int ii = 0 ; ii < items.Count; ii++)
+            for (int ii = 0; ii < items.Count; ii++)
             {
                 itemCollision((Item)items[ii]);
             }
-            
         }
+           
         
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+
+            foreach (Tile t in tiles)
+            {
+                spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), t.getImageBoundingRectangle(), Color.White);
+            }
 
             foreach (Creature c in creatures)
             {

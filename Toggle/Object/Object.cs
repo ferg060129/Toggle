@@ -13,6 +13,8 @@ namespace Toggle
         protected int width, height;
         protected bool state;           //true good, false bad
         protected Texture2D goodGraphic;
+        protected Texture2D goodGraphicWalk;
+        protected Texture2D badGraphicWalk;
         protected Texture2D badGraphic;
         protected Rectangle hitBox;
         protected Rectangle imageBoundingRectangle;

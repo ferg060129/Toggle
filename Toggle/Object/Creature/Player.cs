@@ -15,7 +15,9 @@ namespace Toggle
         public Player(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["player"];
+            goodGraphicWalk = Textures.textures["player"];
             badGraphic = Textures.textures["player"];
+            badGraphicWalk = Textures.textures["player"];
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             width = 32;
             height = 32;
