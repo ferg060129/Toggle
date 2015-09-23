@@ -58,7 +58,7 @@ namespace Toggle
             
             for(int x = 0; x < Textures.tileNames.Length; x++)
             {
-                Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tiles/" + Textures.tileNames[x]));
+                Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
             /*
 >>>>>>> origin/master
@@ -92,7 +92,7 @@ namespace Toggle
             song2 = Content.Load<Song>("climbing_up_the_walls");
             //inventory = new Inventory(150, 200);
             MediaPlayer.Play(song);
-            makeMap();
+            makeMapFromFile("map.txt");
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()
@@ -323,15 +323,27 @@ namespace Toggle
 
         public void makeMap2()
         {
-            string[] lines = System.IO.File.ReadAllLines("map1.txt");
+ 
+        }
+
+        public void makeMapFromFile(string filename)
+        {
             int xposition = 0;
             int yposition = 0;
+
+            //This directory navigation might have to change for the final product, or even sooner
+            string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
             foreach (string line in lines)
             {
-                foreach(char c in line)
+                foreach (char c in line)
                 {
-
+                    string image = Textures.charToFileName[c];
+                    string[] images = image.Split(',');
+                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], true));
+                    xposition += 32;
                 }
+                xposition = 0;
+                yposition += 32;
             }
         }
 
@@ -341,13 +353,6 @@ namespace Toggle
                 spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), new Rectangle(0,0,32,32), Color.White);
             }
         }
-
-        public void banana()
-        {
-            int banana = 0;
-        }
-
-
 
 
 

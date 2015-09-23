@@ -67,6 +67,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\climbing_up_the_walls.mp3" />
+    <Content Include="Content\Tile\darkgrass.png" />
+    <Content Include="Content\Tile\darkgrass2.png" />
+    <Content Include="Content\Tile\darkgrass3.png" />
+    <Content Include="Content\Tile\darkgrass4.png" />
+    <Content Include="Content\Tile\grass.png" />
     <Content Include="Content\greenblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -81,6 +86,15 @@
     <Content Include="Content\player.png" />
     <Content Include="Content\player_right.png" />
     <Content Include="Content\TestImage.png" />
+    <Content Include="Content\Tile\grass2.png" />
+    <Content Include="Content\Tile\grass3.png" />
+    <Content Include="Content\Tile\grass4.png" />
+    <Content Include="Content\Tile\woodenwallbottomleftcorner.png" />
+    <Content Include="Content\Tile\woodenwallbottomrightcorner.png" />
+    <Content Include="Content\Tile\woodenwallhorizontal1.png" />
+    <Content Include="Content\Tile\woodenwalltopleftcorner.png" />
+    <Content Include="Content\Tile\woodenwalltoprightcorner.png" />
+    <Content Include="Content\Tile\woodenwallvertical.png" />
     <Content Include="Content\whitesky.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -88,6 +102,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\map.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">
