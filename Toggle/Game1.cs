@@ -342,6 +342,17 @@ namespace Toggle
             }
         }
 
+        public void banana()
+        {
+            //this function does nothing, but solves everything
+            //
+            //
+            //
+            //
+            //
+            //
+        }
+
 
         public void banana()
         {
