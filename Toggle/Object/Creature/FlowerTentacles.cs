@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Toggle
 {
+    //small change
     class FlowerTentacles : Creature
     {
         public FlowerTentacles(int xLocation, int yLocation, bool initialState)

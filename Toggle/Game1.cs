@@ -318,6 +318,7 @@ namespace Toggle
              tiles.Add(new Tile(9 * 32, 9 * 32, true, "woodenwallbottomrightcorner", "woodenwallbottomrightcorner", true));
              tiles.Add(new Tile(9 * 32, 3 * 32, true, "woodenwalltoprightcorner", "woodenwalltoprightcorner", true));
              */
+            int c;
         }
 
         public void makeMap2()
@@ -339,6 +340,12 @@ namespace Toggle
             foreach(Tile t in tiles){
                 spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), new Rectangle(0,0,32,32), Color.White);
             }
+        }
+
+
+        public void banana()
+        {
+            int banana = 0;
         }
 
 
