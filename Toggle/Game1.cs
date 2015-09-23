@@ -11,6 +11,7 @@ namespace Toggle
   
     public class Game1 : Game
     {
+        //banana world
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ArrayList creatures = new ArrayList();
@@ -25,7 +26,7 @@ namespace Toggle
         //Inventory inventory; 
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
-
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
