@@ -12,6 +12,7 @@ namespace Toggle
         protected int x, y;
         protected int width, height;
         protected bool state;           //true good, false bad
+        protected bool collidable;       //can things collide with this
         protected Texture2D goodGraphic;
         protected Texture2D goodGraphicWalk;
         protected Texture2D badGraphicWalk;
@@ -24,6 +25,7 @@ namespace Toggle
             x = xLocation;
             y = yLocation;
             state = initialState;
+            collidable = false;
         }
         public Object(bool initialState)
         {
@@ -57,6 +59,7 @@ namespace Toggle
             y = yLocation;
         }
 
+        public bool getCollision() {return collidable;}
         public bool getState() { return state; }
         public int getX(){return x;}
         public int getY(){return y;}

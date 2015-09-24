@@ -22,7 +22,6 @@ namespace Toggle
         Player player;
         Song song;
         Song song2;
-
         Inventory inventory; 
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
@@ -121,9 +120,15 @@ namespace Toggle
             }
 
             oldKeyBoardState = newKeyBoardState;
-
+            //make arraylist of all collidable things, only check collisions against those
+            ArrayList collisions = new ArrayList();
+            foreach (Tile t in tiles)
+            {
+                if (t.getCollision() == true)
+                    collisions.Add(t);
+            }
             foreach(Creature c in creatures){
-                c.move(creatures);
+                c.move(collisions);
                 if (collision(c.getHitBox()))
                 {
                     //c.invertDirection();
@@ -279,7 +284,7 @@ namespace Toggle
                 {
                     string image = Textures.charToFileName[c];
                     string[] images = image.Split(',');
-                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], true));
+                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], true, c));
                     xposition += 32;
                 }
                 xposition = 0;

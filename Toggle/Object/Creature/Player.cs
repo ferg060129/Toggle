@@ -23,6 +23,7 @@ namespace Toggle
             width = 32;
             height = 32;
             velocity = 3;
+            collidable = false;
         }
 
 
@@ -56,7 +57,7 @@ namespace Toggle
         bool checkCollision(ArrayList collidables,int xdiff, int ydiff)
         {
             bool canMove = true;
-            foreach (Creature c in collidables)
+            foreach (Object c in collidables)
             {
                 if (c != this)
                 {
