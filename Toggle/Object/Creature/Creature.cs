@@ -40,5 +40,23 @@ namespace Toggle
         {
             velocity *= -1;
         }
+        protected bool checkCollision(ArrayList collidables, int xdiff, int ydiff)
+        {
+            bool canMove = true;
+            foreach (Object c in collidables)
+            {
+                if (c != this)
+                {
+                    Rectangle otherRect = c.getHitBox();
+                    otherRect.X += xdiff;
+                    otherRect.Y += ydiff;
+                    if (otherRect.Intersects(getHitBox()))
+                    {
+                        canMove = false;
+                    }
+                }
+            }
+            return canMove;
+        }
     }
 }

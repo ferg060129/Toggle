@@ -13,7 +13,7 @@ namespace Toggle
         public KittenZombie(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["kitten"];
-            badGraphic = Textures.textures["zombie"];
+            badGraphic = Textures.textures["zombie"];  
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             width = 32;
             height = 32;
@@ -22,7 +22,7 @@ namespace Toggle
         public override void goodMove(ArrayList collidables)
         {
             bool canMove = true;
-            foreach (Creature c in collidables)
+            foreach (Object c in collidables)
             {
                 if (c != this)
                 {
@@ -41,7 +41,7 @@ namespace Toggle
         public override void badMove(ArrayList collidables)
         {
             bool canMove = true;
-            foreach (Creature c in collidables)
+            foreach (Object c in collidables)
             {
                 if (c != this)
                 {

@@ -54,24 +54,7 @@ namespace Toggle
             oldKeyBoardState = newKeyBoardState;
             hitBox = new Rectangle(x, y, width, height);
         }
-        bool checkCollision(ArrayList collidables,int xdiff, int ydiff)
-        {
-            bool canMove = true;
-            foreach (Object c in collidables)
-            {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X += xdiff;
-                    otherRect.Y += ydiff;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
-            }
-            return canMove;
-        }
+
 
         public void pickUp(Item i)
         {

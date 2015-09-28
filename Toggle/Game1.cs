@@ -59,10 +59,11 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
-            /*
+
             KittenZombie kt = new KittenZombie(400,300,worldState);
-            FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
-            //creatures.Add(kt);
+            //FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+            creatures.Add(kt);
+            /*
             for (int i = 0; i < 5; i++ )
             {
                 for (int y2 = 0; y2 < 5; y2++)
@@ -74,6 +75,7 @@ namespace Toggle
                 }
             }
              * */
+          
             player = new Player(200, 200, worldState);
             creatures.Add(player);
 
@@ -127,6 +129,8 @@ namespace Toggle
                 if (t.getCollision() == true)
                     collisions.Add(t);
             }
+         
+            
             foreach(Creature c in creatures){
                 c.move(collisions);
                 if (collision(c.getHitBox()))
@@ -140,13 +144,12 @@ namespace Toggle
                     //c.invertDirection();
                     switchStates();
                 }
-
             }
-
             for (int ii = 0; ii < items.Count; ii++)
             {
                 itemCollision((Item)items[ii]);
             }
+             
         }
            
         
@@ -284,7 +287,8 @@ namespace Toggle
                 {
                     string image = Textures.charToFileName[c];
                     string[] images = image.Split(',');
-                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], true, c));
+                    bool solid = (images[2].Length > 0);
+                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], solid, c));
                     xposition += 32;
                 }
                 xposition = 0;

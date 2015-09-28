@@ -16,16 +16,16 @@ namespace Toggle
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
-                {'1', "grass,darkgrass"},
-                {'2', "grass2,darkgrass2"},
-                {'3', "grass3,darkgrass3"},
-                {'4', "grass4,darkgrass4"},
-                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner"},
-                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner"},
-                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner"},
-                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner"},
-                {'5', "woodenwallvertical,woodenwallvertical"},
-                {'6', "woodenwallhorizontal1,woodenwallhorizontal1"}
+                {'1', "grass,darkgrass,"},
+                {'2', "grass2,darkgrass2,"},
+                {'3', "grass3,darkgrass3,"},
+                {'4', "grass4,darkgrass4,"},
+                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner,s"},
+                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner,s"},
+                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner,s"},
+                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner,s"},
+                {'5', "woodenwallvertical,woodenwallvertical,s"},
+                {'6', "woodenwallhorizontal1,woodenwallhorizontal1,s"}
             };
 
     }

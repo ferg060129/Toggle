@@ -16,13 +16,15 @@ namespace Toggle
             goodGraphic = Textures.textures[gGraphic];
             badGraphic = Textures.textures[bGraphic];
             wall = solid;
+            collidable = solid;
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             hitBox = new Rectangle(xLocation, yLocation, 32, 32);
             width = 32;
             height = 32;
-            charToCollision(fileCharacter);
+            //charToCollision(fileCharacter);
         }
 
+        /*
         //When loading a map, use chars from it to determine if this tile is collidable
         public void charToCollision(char input)
         {
@@ -42,6 +44,7 @@ namespace Toggle
             }
             collidable = isWall;
         }
+         * */
 
         public void setWall(bool input)
         {
