@@ -12,8 +12,10 @@ namespace Toggle
     class Player : Creature
     {
         KeyboardState oldKeyBoardState;
-
-        public Player(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        Inventory inventory;
+        Game1 engine;
+        bool stateLocked = false;
+        public Player(int xLocation, int yLocation, bool initialState, Inventory i, Game1 eng) : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["player"];
             goodGraphicWalk = Textures.textures["player"];
@@ -24,33 +26,40 @@ namespace Toggle
             height = 32;
             velocity = 3;
             collidable = false;
+            inventory = i;
+            engine = eng;
         }
 
 
-        public override void move(ArrayList colidables)
+        public override void move()
         {
+            previousHitBox = new Rectangle(x, y, width, height);
             KeyboardState newKeyBoardState = Keyboard.GetState();
             if (newKeyBoardState.IsKeyDown(Keys.Up))
             {
-                if (checkCollision(colidables, 0, +velocity) == true)
+                direction = 1;
                     y -= velocity;
             }
             else if (newKeyBoardState.IsKeyDown(Keys.Down))
             {
-                if (checkCollision(colidables, 0, -velocity) == true)
+                direction = 3;
                     y += velocity;
             }
             else if (newKeyBoardState.IsKeyDown(Keys.Left))
             {
-                if (checkCollision(colidables, velocity, 0) == true)
+                direction = 0;
                      x -= velocity;
             }
             else if (newKeyBoardState.IsKeyDown(Keys.Right))
             {
-                if (checkCollision(colidables, -velocity, 0) == true)
+                direction = 2;
                     x += velocity;
             }
-
+            if (newKeyBoardState.IsKeyDown(Keys.T) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.T))
+            {
+                if(!stateLocked)
+                    engine.switchStates();
+            }
             oldKeyBoardState = newKeyBoardState;
             hitBox = new Rectangle(x, y, width, height);
         }
@@ -58,7 +67,39 @@ namespace Toggle
 
         public void pickUp(Item i)
         {
-            //.addInventoryItem(i.pickUpItem());
+            inventory.addInventoryItem(i.pickUpItem());
         }
+        public override void reportCollision(Object o)
+        {
+            base.reportCollision(o);
+            if (o is Item)
+            {
+                pickUp((Item)o);
+            }
+            if (o is GoodTile)
+            {
+                if (!state)
+                {
+                    engine.switchStates();
+                }
+            }
+            if(o is BadTile)
+            {
+                if (state)
+                {
+                    engine.switchStates();
+                }
+            }
+            if (o is LockTile)
+            {
+                stateLocked = true;
+            }
+            if(o is UnlockTile)
+            {
+                stateLocked = false;
+            }
+
+        }
+       
     }
 }

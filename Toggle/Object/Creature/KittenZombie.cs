@@ -17,44 +17,33 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             width = 32;
             height = 32;
+            direction = 0;
         }
 
-        public override void goodMove(ArrayList collidables)
+        public override void goodMove()
         {
-            bool canMove = true;
-            foreach (Object c in collidables)
-            {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X += velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+            switch(direction){
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
             }
-            if (canMove)
-                x -= velocity;
+           
+
+
         }
 
-        public override void badMove(ArrayList collidables)
+        public override void badMove()
         {
-            bool canMove = true;
-            foreach (Object c in collidables)
-            {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X -= velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
-            }
-            if (canMove)
-                x += velocity;
+            
         }
     }
 }

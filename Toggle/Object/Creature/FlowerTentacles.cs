@@ -21,42 +21,27 @@ namespace Toggle
             height = 32;
         }
 
-        public override void goodMove(ArrayList collidables)
+        public override void goodMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
+            switch (direction)
             {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.Y -= velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
             }
-            if (canMove)
-                y += velocity;
         }
 
-        public override void badMove(ArrayList collidables)
+        public override void badMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
-            {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.Y += velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
-            }
-            if (canMove)
-                y -= velocity;
         }
     }
 }

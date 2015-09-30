@@ -11,12 +11,10 @@ namespace Toggle
     class Tile : Object
     {
         bool wall;
-        public Tile(int xLocation, int yLocation, bool initialState, String gGraphic, String bGraphic, bool solid, char fileCharacter) : base(xLocation, yLocation, initialState)
+        public Tile(int xLocation, int yLocation, bool initialState, String gGraphic, String bGraphic) : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures[gGraphic];
             badGraphic = Textures.textures[bGraphic];
-            wall = solid;
-            collidable = solid;
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             hitBox = new Rectangle(xLocation, yLocation, 32, 32);
             width = 32;
@@ -45,15 +43,5 @@ namespace Toggle
             collidable = isWall;
         }
          * */
-
-        public void setWall(bool input)
-        {
-            wall = input;
-        }
-
-        public bool isWall()
-        {
-            return wall;
-        }
     }
 }

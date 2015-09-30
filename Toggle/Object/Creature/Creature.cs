@@ -11,52 +11,161 @@ namespace Toggle
     class Creature : Object
     {
         protected int velocity = 1;
+        //0,1,2,3 for left, up, right,down
+        protected int direction;
+        protected Rectangle previousHitBox;
 
         public Creature(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
-
+            
         }
 
-        public virtual void move(ArrayList collidables)
+        public virtual void move()
         {
+            previousHitBox = new Rectangle(x, y, width, height);
             if (state)
-                goodMove(collidables);
+                goodMove();
             else
-                badMove(collidables);
+                badMove();
 
+            
             hitBox = new Rectangle(x, y, width, height);
         }
 
-        public virtual void goodMove(ArrayList collidables)
+        public virtual void goodMove()
         {
 
         }
-        public virtual void badMove(ArrayList collidables)
+        public virtual void badMove()
         {
 
         }
 
-        public void invertDirection()
+        public virtual void reportCollision(Object o)
         {
-            velocity *= -1;
-        }
-        protected bool checkCollision(ArrayList collidables, int xdiff, int ydiff)
-        {
-            bool canMove = true;
-            foreach (Object c in collidables)
+            if (o is Wall)
             {
-                if (c != this)
+                Rectangle hBO = o.getHitBox(); //hitBoxOther
+                if (direction == 0)
                 {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X += xdiff;
-                    otherRect.Y += ydiff;
-                    if (otherRect.Intersects(getHitBox()))
+                    x = hBO.X + hBO.Width;
+                }
+                else if (direction == 1)
+                {
+                    y = hBO.Y + hBO.Height;
+                }
+                else if (direction == 2)
+                {
+                    x = hBO.X - hitBox.Width;
+
+                }
+                else if (direction == 3)
+                {
+                    y = hBO.Y - hitBox.Height;
+                }
+                //invertDirection();
+            }
+            if (o is Creature)
+            {
+                x = previousHitBox.X;
+                y = previousHitBox.Y;
+
+
+                /*
+                Rectangle previousHBO = ((Creature)o).getPreviousHitBox();
+                
+                
+                int directionOther = ((Creature)o).getDirection();
+
+                if (hitBox.Intersects(previousHBO))
+                {
+                    if (direction == 0)
                     {
-                        canMove = false;
+                        x = previousHBO.X + previousHBO.Width;
+                    }
+                    else if (direction == 1)
+                    {
+                        y = previousHBO.Y + previousHBO.Height;
+                    }
+                    else if (direction == 2)
+                    {
+                        x = previousHBO.X - hitBox.Width;
+                    }
+                    else if (direction == 3)
+                    {
+                        y = previousHBO.Y - hitBox.Height;
                     }
                 }
+                else
+                {
+                    //They were going in opposite directions when they collided
+                    if (Math.Abs(directionOther - direction) == 2)
+                    {
+                        double proportion = (double)direction/(direction + directionOther);
+                        
+                        switch(direction){
+                            case 0:
+                                int distance = previousHBO.X - (previousHitBox.X + previousHitBox.Width);
+                                int addx = (int)proportion * distance;
+                                x = previousHitBox.X + addx;
+                            break;
+                            case 2:
+                            distance = previousHitBox.X - (previousHBO.X + previousHBO.Width);
+                                addx = (int)proportion * distance;
+                                x = previousHitBox.X - addx;
+                            break;
+                            case 1:
+                                distance = previousHitBox.Y - (previousHBO.Y + previousHBO.Height);
+                                int addy = (int)proportion * distance;
+                                y = previousHitBox.Y - addy;
+                            break;
+                            case 3:
+                            distance = previousHBO.Y - (previousHitBox.Y + previousHitBox.Height);
+                                addy = (int)proportion * distance;
+                                y = previousHitBox.Y + addy;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                    }
+
+                }
+                */
             }
-            return canMove;
+        }
+        public int getDirection()
+        {
+            return direction;
+        }
+        public int getVelocity()
+        {
+            return velocity;
+        }
+        public Rectangle getPreviousHitBox()
+        {
+            return previousHitBox;
+        }
+        public void invertDirection()
+        {
+            if (direction == 0)
+            {
+                direction = 2;
+            }
+            else if (direction == 2)
+            {
+                direction = 0;
+            }
+            if (direction == 1)
+            {
+                direction = 3;
+            }
+            else if (direction == 3)
+            {
+                direction = 1;
+            }
         }
     }
 }

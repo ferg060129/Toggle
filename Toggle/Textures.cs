@@ -11,8 +11,9 @@ namespace Toggle
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "inventory", "BigPicture", "player_right" };
-        public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3"
-                                           ,"woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner","woodenwallvertical","woodenwallhorizontal1"};
+        public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
+                                           "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
+                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
@@ -20,12 +21,17 @@ namespace Toggle
                 {'2', "grass2,darkgrass2,"},
                 {'3', "grass3,darkgrass3,"},
                 {'4', "grass4,darkgrass4,"},
-                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner,s"},
-                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner,s"},
-                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner,s"},
-                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner,s"},
-                {'5', "woodenwallvertical,woodenwallvertical,s"},
-                {'6', "woodenwallhorizontal1,woodenwallhorizontal1,s"}
+                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner,w"},
+                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner,w"},
+                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner,w"},
+                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner,w"},
+                {'5', "woodenwallvertical,woodenwallvertical,w"},
+                {'6', "woodenwallhorizontal1,woodenwallhorizontal1,w"},
+                {'f', "frown,frown,"},
+                {'s',"smile,smile,"},
+                {'l',"locktile,locktile,"},
+                {'u',"unlocktile,unlocktile,"}
+
             };
 
     }
