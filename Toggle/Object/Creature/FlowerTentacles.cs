@@ -14,9 +14,11 @@ namespace Toggle
         public FlowerTentacles(int xLocation, int yLocation, bool initialState)
             : base(xLocation, yLocation, initialState)
         {
-            goodGraphic = Textures.textures["kitten"];
-            badGraphic = Textures.textures["zombie"];
-            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            goodGraphic = Textures.textures["sprites"];
+            badGraphic = Textures.textures["sprites"];
+            row = 3;
+            imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
+            
             width = 32;
             height = 32;
             direction = 0;
@@ -24,6 +26,7 @@ namespace Toggle
 
         public override void goodMove()
         {
+            if (row == 2) row = 3;
             switch (direction)
             {
                 case 0:
@@ -38,11 +41,33 @@ namespace Toggle
                 case 3:
                     y += velocity;
                     break;
+                default:
+                    moving = false;
+                    break;
             }
         }
 
         public override void badMove()
         {
+            if (row == 3) row = 2;
+            switch (direction)
+            {
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
+                default:
+                    moving = false;
+                    break;
+            }
         }
     }
 }

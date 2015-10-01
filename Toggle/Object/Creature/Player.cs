@@ -16,14 +16,16 @@ namespace Toggle
         Game1 engine;
         bool stateLocked = false;
 
-        //Variables to keep track of animation sprite.
-        int column = 1, columnGroup = 0, increment = 0, row = 2, waitCounter = 0;
+
 
         public Player(int xLocation, int yLocation, bool initialState, Inventory i, Game1 eng) : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
-            imageBoundingRectangle = new Rectangle(32, 32, 32, 32);
+
+            row = 1;
+            imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
+            
             width = 32;
             height = 32;
             velocity = 3;
@@ -115,48 +117,6 @@ namespace Toggle
 
         }
 
-        public Rectangle getNextImageRectangle(int currentDirection, int lastDirection, bool moving)
-        {
-            if (currentDirection == lastDirection && moving)
-            {
-                if (column == 2)
-                {
-                    increment = -1;
-                }
-                if (column == 0)
-                {
-                    increment = 1;
-                }
-                waitCounter++;
-
-                if (waitCounter == 5)
-                {
-                    column += increment;
-                    waitCounter = 0;
-                }
-            }
-            else
-            {
-                switch (currentDirection)
-                {
-                    case 0:
-                        columnGroup = 3;
-                        break;
-                    case 1:
-                        columnGroup = 2;
-                        break;
-                    case 2:
-                        columnGroup = 1;
-                        break;
-                    case 3:
-                        columnGroup = 0;
-                        break;
-                }
-                column = 1;
-                increment = 1;
-                waitCounter = 0;
-            }
-            return new Rectangle(32 * (3 * columnGroup + column), 32 * row, width, height);
-        }
+        
     }
 }

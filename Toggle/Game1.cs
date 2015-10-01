@@ -83,7 +83,7 @@ namespace Toggle
             FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
             creatures.Add(ft);
 
-            ft = new FlowerTentacles(500, 350, worldState);
+            ft = new FlowerTentacles(500, 400, worldState);
             creatures.Add(ft);
 
             GreenBlock b = new GreenBlock(400, 200, worldState);

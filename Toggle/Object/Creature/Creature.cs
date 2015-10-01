@@ -15,6 +15,10 @@ namespace Toggle
         protected int direction;
         protected Rectangle previousHitBox;
 
+        //Variables to keep track of animation sprite.
+        protected int column = 1, columnGroup = 0, increment = 1, row = 0, waitCounter = 0, oldDirection = -1; protected bool moving = true;
+
+
         public Creature(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
             
@@ -22,13 +26,16 @@ namespace Toggle
 
         public virtual void move()
         {
+            oldDirection = direction;
+            moving = true;
+
             previousHitBox = new Rectangle(x, y, width, height);
             if (state)
                 goodMove();
             else
                 badMove();
 
-            
+             imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
             hitBox = new Rectangle(x, y, width, height);
         }
 
@@ -142,5 +149,53 @@ namespace Toggle
         {
             return previousHitBox;
         }
+
+
+        public Rectangle getNextImageRectangle(int currentDirection, int lastDirection, bool moving)
+        {
+            switch (currentDirection)
+            {
+                case 0:
+                    columnGroup = 3;
+                    break;
+                case 1:
+                    columnGroup = 2;
+                    break;
+                case 2:
+                    columnGroup = 1;
+                    break;
+                case 3:
+                    columnGroup = 0;
+                    break;
+            }
+
+            if (currentDirection == lastDirection && moving)
+            {
+                if (column == 2)
+                {
+                    increment = -1;
+                }
+                if (column == 0)
+                {
+                    increment = 1;
+                }
+                waitCounter++;
+
+                if (waitCounter == 5)
+                {
+                    column += increment;
+                    waitCounter = 0;
+                }
+            }
+            else
+            {
+                column = 1;
+                increment = 1;
+                waitCounter = 0;
+            }
+            return new Rectangle(32 * (3 * columnGroup + column), 32 * row, width, height);
+        }
+
+
     }
 }
