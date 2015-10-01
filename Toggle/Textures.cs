@@ -10,7 +10,7 @@ namespace Toggle
     static class Textures
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
-        public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "inventory", "BigPicture", "player_right" };
+        public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "inventory", "BigPicture", "player_right","sprites" };
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile"};
