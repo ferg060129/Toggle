@@ -19,6 +19,7 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             width = 32;
             height = 32;
+            direction = 0;
         }
 
         public override void goodMove()

@@ -53,7 +53,6 @@
     <Compile Include="Object\Tile\GoodTile.cs" />
     <Compile Include="Object\Tile\LockTile.cs" />
     <Compile Include="Object\Tile\Tile.cs" />
-    <Compile Include="Object\Tile\ToggleTile.cs" />
     <Compile Include="Object\Tile\UnlockTile.cs" />
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Program.cs" />

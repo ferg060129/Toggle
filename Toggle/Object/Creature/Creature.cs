@@ -57,24 +57,18 @@ namespace Toggle
                 else if (direction == 2)
                 {
                     x = hBO.X - hitBox.Width;
-
                 }
                 else if (direction == 3)
                 {
                     y = hBO.Y - hitBox.Height;
                 }
-                //invertDirection();
             }
             if (o is Creature)
             {
                 x = previousHitBox.X;
                 y = previousHitBox.Y;
-
-
                 /*
                 Rectangle previousHBO = ((Creature)o).getPreviousHitBox();
-                
-                
                 int directionOther = ((Creature)o).getDirection();
 
                 if (hitBox.Intersects(previousHBO))
@@ -147,25 +141,6 @@ namespace Toggle
         public Rectangle getPreviousHitBox()
         {
             return previousHitBox;
-        }
-        public void invertDirection()
-        {
-            if (direction == 0)
-            {
-                direction = 2;
-            }
-            else if (direction == 2)
-            {
-                direction = 0;
-            }
-            if (direction == 1)
-            {
-                direction = 3;
-            }
-            else if (direction == 3)
-            {
-                direction = 1;
-            }
         }
     }
 }

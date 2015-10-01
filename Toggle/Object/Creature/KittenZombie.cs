@@ -18,6 +18,7 @@ namespace Toggle
             width = 32;
             height = 32;
             direction = 0;
+        
         }
 
         public override void goodMove()
