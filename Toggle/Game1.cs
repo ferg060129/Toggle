@@ -26,6 +26,8 @@ namespace Toggle
         Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
+
+        public static bool[,] wallArray;
         
         public Game1()
         {
@@ -77,16 +79,34 @@ namespace Toggle
             }
              * */
             inventory = new Inventory(300, 300);
-            player = new Player(500, 200, worldState, inventory, this);
+            player = new Player(32*17, 32*5, worldState, inventory, this);
             creatures.Add(player);
 
-            FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+            FlowerTentacles ft = new FlowerTentacles(32*10, 32*4, worldState);
             creatures.Add(ft);
+            ft.setDefendTileGood(10, 4);
+            ft.setDefendTileBad(11, 7);
 
-            ft = new FlowerTentacles(500, 400, worldState);
+            ft = new FlowerTentacles(32 * 11, 32 * 4, worldState);
             creatures.Add(ft);
+            ft.setDefendTileGood(11, 4);
+            ft.setDefendTileBad(12, 6);
 
-            GreenBlock b = new GreenBlock(400, 200, worldState);
+            ft = new FlowerTentacles(32 * 10, 32 * 11, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(10, 11);
+            ft.setDefendTileBad(13, 7);
+
+            ft = new FlowerTentacles(32 * 11, 32 * 11, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(11, 11);
+            ft.setDefendTileBad(12, 8);
+
+
+            //ft = new FlowerTentacles(500, 400, worldState);
+            //creatures.Add(ft);
+
+            GreenBlock b = new GreenBlock(32*12, 32*7, worldState);
             items.Add(b);
 
             song = Content.Load<Song>("whitesky");
@@ -240,11 +260,14 @@ namespace Toggle
         {
             int xposition = 0;
             int yposition = 0;
-
+            
             //This directory navigation might have to change for the final product, or even sooner
             string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
+
+            wallArray = new bool[lines.GetLength(0), lines[0].Length];
             foreach (string line in lines)
             {
+                
                 foreach (char c in line)
                 {
                     string image = Textures.charToFileName[c];
@@ -284,6 +307,7 @@ namespace Toggle
                         Wall w = new Wall(xposition, yposition, worldState, images[0], images[1]);
                         collidableTiles.Add(w);
                         tiles.Add(w);
+                        wallArray[yposition / 32, xposition / 32] = true;
                     }
                     xposition += 32;
                 }

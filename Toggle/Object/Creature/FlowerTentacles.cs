@@ -11,6 +11,7 @@ namespace Toggle
     //small change
     class FlowerTentacles : Creature
     {
+        int counter = 0;
         public FlowerTentacles(int xLocation, int yLocation, bool initialState)
             : base(xLocation, yLocation, initialState)
         {
@@ -27,6 +28,11 @@ namespace Toggle
         public override void goodMove()
         {
             if (row == 2) row = 3;
+
+            if(x%32 ==0 && y % 32 == 0)
+            direction = getNextPathDirection((int)x/32,(int)y/32,defendTileGoodX,defendTileGoodY);
+
+
             switch (direction)
             {
                 case 0:
@@ -50,6 +56,10 @@ namespace Toggle
         public override void badMove()
         {
             if (row == 3) row = 2;
+
+            if (x % 32 == 0 && y % 32 == 0)
+                direction = getNextPathDirection((int)x / 32, (int)y / 32, defendTileBadX, defendTileBadY);
+
             switch (direction)
             {
                 case 0:
