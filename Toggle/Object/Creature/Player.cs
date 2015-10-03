@@ -23,7 +23,7 @@ namespace Toggle
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
 
-            row = 1;
+            row = 4;
             imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
             
             width = 32;
@@ -42,7 +42,8 @@ namespace Toggle
             KeyboardState newKeyBoardState = Keyboard.GetState();
 
             //Variables to keep track of animation sprite.
-            int oldDirection = direction; bool moving = true;
+            int oldDirection = direction; 
+            moving = true;
             
             if (newKeyBoardState.IsKeyDown(Keys.Up))
             {
