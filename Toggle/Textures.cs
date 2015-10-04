@@ -13,7 +13,7 @@ namespace Toggle
         public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory", "BigPicture", "player_right", "sprites" };
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
-                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile"};
+                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
@@ -21,12 +21,12 @@ namespace Toggle
                 {'2', "grass2,darkgrass2,"},
                 {'3', "grass3,darkgrass3,"},
                 {'4', "grass4,darkgrass4,"},
-                {'!', "woodenwallbottomleftcorner,woodenwallbottomleftcorner,w"},
-                {'#', "woodenwallbottomrightcorner,woodenwallbottomrightcorner,w"},
-                {'$', "woodenwalltopleftcorner,woodenwalltopleftcorner,w"},
-                {'%', "woodenwalltoprightcorner,woodenwalltoprightcorner,w"},
-                {'5', "woodenwallvertical,woodenwallvertical,w"},
-                {'6', "woodenwallhorizontal1,woodenwallhorizontal1,w"},
+                {'!', "woodenwallbottomleftcorner,stone,w"},
+                {'#', "woodenwallbottomrightcorner,stone,w"},
+                {'$', "woodenwalltopleftcorner,stone,w"},
+                {'%', "woodenwalltoprightcorner,stone,w"},
+                {'5', "woodenwallvertical,stone,w"},
+                {'6', "woodenwallhorizontal1,stone,w"},
                 {'f', "frown,frown,"},
                 {'s',"smile,smile,"},
                 {'l',"locktile,locktile,"},

@@ -36,6 +36,9 @@ namespace Toggle
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1400;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.ApplyChanges();
           
         }
 
