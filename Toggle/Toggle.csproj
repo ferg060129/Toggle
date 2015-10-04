@@ -70,10 +70,12 @@
     <Content Include="Content\badgreenblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\baditemblock.png" />
     <Content Include="Content\BigPicture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\climbing_up_the_walls.mp3" />
+    <Content Include="Content\itemblock.png" />
     <Content Include="Content\sprites.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -12,8 +12,8 @@ namespace Toggle
 
         public GreenBlock(int xLocation, int yLocation, bool initialState): base(xLocation, yLocation, initialState)
         {
-            goodGraphic = Textures.textures["greenblock"];
-            badGraphic = Textures.textures["badgreenblock"];
+            goodGraphic = Textures.textures["itemblock"];
+            badGraphic = Textures.textures["baditemblock"];
             width = 32;
             height = 32;
             imageBoundingRectangle = new Rectangle(0, 0, width, height);

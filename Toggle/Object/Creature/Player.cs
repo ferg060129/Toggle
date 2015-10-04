@@ -28,7 +28,7 @@ namespace Toggle
             
             width = 32;
             height = 32;
-            velocity = 3;
+            velocity = 4;
             collidable = false;
             inventory = i;
             engine = eng;

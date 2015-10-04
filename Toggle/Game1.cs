@@ -20,6 +20,7 @@ namespace Toggle
         ArrayList collidableTiles = new ArrayList();
         int width;
         int height;
+        float time;
         Player player;
         Song song;
         Song song2;
@@ -31,6 +32,7 @@ namespace Toggle
         
         public Game1()
         {
+            time = 0;
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
@@ -194,10 +196,24 @@ namespace Toggle
         
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
+            Random rnd = new Random();
+            Matrix camMatrix;
+            if (time < 0)
+                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2, -player.getY() + height / 2, 0);
+            else
+            {
+                time--;
+                int xMod;
+                int yMod;
+                //int xMod = (int)(100 * Math.Sin((time)));
+                //int yMod = (int)(100 * Math.Cos((time)));
+                xMod = (int)(rnd.Next(1, 800) * Math.Sin(time));
+                yMod = (int)(rnd.Next(1, 800) * Math.Sin(time));
+                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2  + xMod, -player.getY() + yMod + height / 2, 0);
+            }
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camMatrix);
 
             drawMap(spriteBatch);
-
 
             foreach (Item i in items)
             {
@@ -220,6 +236,7 @@ namespace Toggle
 
         public void switchStates()
         {
+            time = 10;
             worldState = !worldState;
 
             foreach (Creature c in creatures)
