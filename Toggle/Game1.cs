@@ -207,7 +207,7 @@ namespace Toggle
                 int yMod;
                 //int xMod = (int)(100 * Math.Sin((time)));
                 //int yMod = (int)(100 * Math.Cos((time)));
-                xMod = (int)(rnd.Next(1, 9) * Math.Sin(time));
+                xMod = (int)(rnd.Next(1, 8) * Math.Sin(time));
                 yMod = (int)(rnd.Next(1, 8) * Math.Sin(time));
                 camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2  + xMod, -player.getY() + yMod + height / 2, 0);
             }
