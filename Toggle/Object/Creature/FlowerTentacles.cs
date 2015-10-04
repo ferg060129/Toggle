@@ -11,13 +11,12 @@ namespace Toggle
     //small change
     class FlowerTentacles : Creature
     {
-        int counter = 0;
         public FlowerTentacles(int xLocation, int yLocation, bool initialState)
             : base(xLocation, yLocation, initialState)
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
-            row = 3;
+            row = 4;
             imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
             
             width = 32;
@@ -28,7 +27,7 @@ namespace Toggle
 
         public override void goodMove()
         {
-            if (row == 2) row = 3;
+            if (row == 2) row = 4;
 
             if(x%32 ==0 && y % 32 == 0)
             direction = getNextPathDirection((int)x/32,(int)y/32,defendTileGoodX,defendTileGoodY);
@@ -56,7 +55,7 @@ namespace Toggle
 
         public override void badMove()
         {
-            if (row == 3) row = 2;
+            if (row == 4) row = 2;
 
             if (x % 32 == 0 && y % 32 == 0)
                 direction = getNextPathDirection((int)x / 32, (int)y / 32, defendTileBadX, defendTileBadY);

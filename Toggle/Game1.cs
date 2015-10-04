@@ -84,22 +84,22 @@ namespace Toggle
             }
              * */
             inventory = new Inventory(300, 300);
-            player = new Player(32*17, 32*5, worldState, inventory, this);
+            player = new Player(32*19, 32*5, worldState, inventory, this);
             creatures.Add(player);
 
-            FlowerTentacles ft = new FlowerTentacles(32*10, 32*4, worldState);
-            creatures.Add(ft);
-            ft.setDefendTileGood(10, 4);
-            ft.setDefendTileBad(11, 7);
-
-            ft = new FlowerTentacles(32 * 11, 32 * 4, worldState);
+            FlowerTentacles ft = new FlowerTentacles(32*11, 32*4, worldState);
             creatures.Add(ft);
             ft.setDefendTileGood(11, 4);
+            ft.setDefendTileBad(11, 7);
+
+            ft = new FlowerTentacles(32 * 12, 32 * 4, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(12, 4);
             ft.setDefendTileBad(12, 6);
 
-            ft = new FlowerTentacles(32 * 10, 32 * 11, worldState);
+            ft = new FlowerTentacles(32 * 12, 32 * 11, worldState);
             creatures.Add(ft);
-            ft.setDefendTileGood(10, 11);
+            ft.setDefendTileGood(12, 11);
             ft.setDefendTileBad(13, 7);
 
             ft = new FlowerTentacles(32 * 11, 32 * 11, worldState);
@@ -134,7 +134,7 @@ namespace Toggle
             }
             else
             {
-                GraphicsDevice.Clear(Color.Orange);
+                GraphicsDevice.Clear(Color.Black);
             }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

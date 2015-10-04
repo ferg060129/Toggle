@@ -23,7 +23,7 @@ namespace Toggle
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
 
-            row = 4;
+            row = 7;
             imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
             
             width = 32;
