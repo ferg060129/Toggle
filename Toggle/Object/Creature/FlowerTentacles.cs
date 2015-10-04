@@ -11,52 +11,74 @@ namespace Toggle
     //small change
     class FlowerTentacles : Creature
     {
+        int counter = 0;
         public FlowerTentacles(int xLocation, int yLocation, bool initialState)
             : base(xLocation, yLocation, initialState)
         {
-            goodGraphic = Textures.textures["kitten"];
-            badGraphic = Textures.textures["zombie"];
-            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            goodGraphic = Textures.textures["sprites"];
+            badGraphic = Textures.textures["sprites"];
+            row = 3;
+            imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
+            
             width = 32;
             height = 32;
+            direction = 0;
+            velocity = 2;
         }
 
-        public override void goodMove(ArrayList collidables)
+        public override void goodMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
+            if (row == 2) row = 3;
+
+            if(x%32 ==0 && y % 32 == 0)
+            direction = getNextPathDirection((int)x/32,(int)y/32,defendTileGoodX,defendTileGoodY);
+
+
+            switch (direction)
             {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.Y -= velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
+                default:
+                    moving = false;
+                    break;
             }
-            if (canMove)
-                y += velocity;
         }
 
-        public override void badMove(ArrayList collidables)
+        public override void badMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
+            if (row == 3) row = 2;
+
+            if (x % 32 == 0 && y % 32 == 0)
+                direction = getNextPathDirection((int)x / 32, (int)y / 32, defendTileBadX, defendTileBadY);
+
+            switch (direction)
             {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.Y += velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
+                default:
+                    moving = false;
+                    break;
             }
-            if (canMove)
-                y -= velocity;
         }
     }
 }

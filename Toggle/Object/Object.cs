@@ -32,7 +32,7 @@ namespace Toggle
             state = initialState;
         }
 
-        public void switchState(){
+        public virtual void switchState(){
             state = !state;
         }
 

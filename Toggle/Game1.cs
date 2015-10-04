@@ -17,14 +17,17 @@ namespace Toggle
         ArrayList creatures = new ArrayList();
         ArrayList items = new ArrayList();
         ArrayList tiles = new ArrayList();
+        ArrayList collidableTiles = new ArrayList();
         int width;
         int height;
         Player player;
         Song song;
         Song song2;
-        Inventory inventory; 
+        Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         bool worldState = true;
+
+        public static bool[,] wallArray;
         
         public Game1()
         {
@@ -59,10 +62,11 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
-            /*
-            KittenZombie kt = new KittenZombie(400,300,worldState);
-            FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+
+            //KittenZombie kt = new KittenZombie(400,300,worldState);
+            //FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
             //creatures.Add(kt);
+            /*
             for (int i = 0; i < 5; i++ )
             {
                 for (int y2 = 0; y2 < 5; y2++)
@@ -74,21 +78,40 @@ namespace Toggle
                 }
             }
              * */
-            player = new Player(200, 200, worldState);
+            inventory = new Inventory(300, 300);
+            player = new Player(32*17, 32*5, worldState, inventory, this);
             creatures.Add(player);
 
-            /*FlowerTentacles ft = new FlowerTentacles(600, 250, worldState);
+            FlowerTentacles ft = new FlowerTentacles(32*10, 32*4, worldState);
             creatures.Add(ft);
+            ft.setDefendTileGood(10, 4);
+            ft.setDefendTileBad(11, 7);
 
-            ft = new FlowerTentacles(300, 350, worldState);
-            creatures.Add(ft);*/
+            ft = new FlowerTentacles(32 * 11, 32 * 4, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(11, 4);
+            ft.setDefendTileBad(12, 6);
 
-            GreenBlock b = new GreenBlock(400, 200, worldState);
+            ft = new FlowerTentacles(32 * 10, 32 * 11, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(10, 11);
+            ft.setDefendTileBad(13, 7);
+
+            ft = new FlowerTentacles(32 * 11, 32 * 11, worldState);
+            creatures.Add(ft);
+            ft.setDefendTileGood(11, 11);
+            ft.setDefendTileBad(12, 8);
+
+
+            //ft = new FlowerTentacles(500, 400, worldState);
+            //creatures.Add(ft);
+
+            GreenBlock b = new GreenBlock(32*12, 32*7, worldState);
             items.Add(b);
 
             song = Content.Load<Song>("whitesky");
             song2 = Content.Load<Song>("climbing_up_the_walls");
-            inventory = new Inventory(150, 200);
+            
             MediaPlayer.Play(song);
             makeMapFromFile("home.txt");
             //MediaPlayer.IsRepeating = true;
@@ -114,41 +137,60 @@ namespace Toggle
 
             newKeyBoardState = Keyboard.GetState();
 
-            if (newKeyBoardState.IsKeyDown(Keys.T) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.T))
-            {
-                switchStates();
-            }
+
 
             oldKeyBoardState = newKeyBoardState;
             //make arraylist of all collidable things, only check collisions against those
-            ArrayList collisions = new ArrayList();
-            foreach (Tile t in tiles)
-            {
-                if (t.getCollision() == true)
-                    collisions.Add(t);
-            }
-            foreach(Creature c in creatures){
-                c.move(collisions);
-                if (collision(c.getHitBox()))
-                {
-                    //c.invertDirection();
-                    switchStates();
-                    break;
-                }
-                if (wallBound(c))
-                {
-                    //c.invertDirection();
-                    switchStates();
-                }
 
+            foreach (Creature c in creatures)
+            {
+                c.move();
             }
 
-            for (int ii = 0; ii < items.Count; ii++)
+            checkCollisions();
+            
+             
+        }
+
+        public void checkCollisions()
+        {
+            foreach(Creature c in creatures)
             {
-                itemCollision((Item)items[ii]);
+                Rectangle hitBox = c.getHitBox();
+                foreach (Creature d in creatures)
+                {
+                    if (!c.Equals(d))
+                    {
+                        Rectangle hitBoxOther = d.getHitBox();
+                        if(c.getHitBox().Intersects(d.getHitBox()))
+                        {
+                            c.reportCollision(d);
+                        }
+                    }
+                }
+                foreach (Tile t in collidableTiles)
+                {
+                    Rectangle hitBoxOther = t.getHitBox();
+                    
+                    if (c.getHitBox().Intersects(t.getHitBox()))
+                    {
+                        c.reportCollision(t);
+                    }
+                }
+            }
+
+            for (int ii = items.Count - 1; ii >= 0; ii--)
+            {
+                Rectangle hitBox = ((Item)items[ii]).getHitBox();
+                if (player.getHitBox().Intersects(hitBox))
+                {
+                    //If inventory is not full
+                    player.reportCollision((Item)items[ii]);
+                    items.RemoveAt(ii);
+                }
             }
         }
-           
+
         
         protected override void Draw(GameTime gameTime)
         {
@@ -174,63 +216,6 @@ namespace Toggle
 
             base.Draw(gameTime);
 
-        }
-        public void reloadContent()
-        {
-            
-        }
-
-
-        public bool collision(Rectangle rect)
-        {
-            foreach (Creature c in creatures)
-            {
-                if (!c.getHitBox().Equals(rect))
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    if (rect.Intersects(otherRect))
-                    {
-                        return true;
-                    }    
-                }
-            }
-            return false;
-        }
-
-        internal void itemCollision(Item i)
-        {            
-            if (player.getHitBox().Intersects(i.getHitBox()))
-            {
-                //player.pickUp(i);
-                inventory.addInventoryItem(i.pickUpItem());
-                items.Remove(i);
-            }  
-        }
-
-        internal bool wallBound(Creature c)
-        {
-            Rectangle hitBox = c.getHitBox();
-            if (hitBox.Right > width)
-            {
-                c.setX(width - hitBox.Width);
-                return true;
-            }
-            else if (hitBox.Left < 0)
-            {
-                c.setX(0);
-                return true;
-            }
-            else if (hitBox.Bottom > height)
-            {
-                c.setY(height - hitBox.Height);
-                return true;
-            }
-            else if (hitBox.Top < 0)
-            {
-                c.setY(0);
-                return true;
-            }
-            return false;
         }
 
         public void switchStates()
@@ -275,16 +260,55 @@ namespace Toggle
         {
             int xposition = 0;
             int yposition = 0;
-
+            
             //This directory navigation might have to change for the final product, or even sooner
             string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
+
+            wallArray = new bool[lines.GetLength(0), lines[0].Length];
             foreach (string line in lines)
             {
+                
                 foreach (char c in line)
                 {
                     string image = Textures.charToFileName[c];
                     string[] images = image.Split(',');
-                    tiles.Add(new Tile(xposition, yposition, worldState, images[0], images[1], true, c));
+                    bool solid = (images[2].Length > 0);
+                    if (c == 'f')
+                    {
+                        BadTile t = new BadTile(xposition, yposition, worldState, images[0], images[1]);
+                        collidableTiles.Add(t);
+                        tiles.Add(t);
+                    }
+                    else if (c == 's')
+                    {
+                        GoodTile t = new GoodTile(xposition, yposition, worldState, images[0], images[1]);
+                        collidableTiles.Add(t);
+                        tiles.Add(t);
+                    }
+                    else if (c == 'l')
+                    {
+                        LockTile t = new LockTile(xposition, yposition, worldState, images[0], images[1]);
+                        collidableTiles.Add(t);
+                        tiles.Add(t);
+                    }
+                    else if (c == 'u')
+                    {
+                        UnlockTile t = new UnlockTile(xposition, yposition, worldState, images[0], images[1]);
+                        collidableTiles.Add(t);
+                        tiles.Add(t);
+                    }
+                    else if (!solid)
+                    {
+                        Tile t = new Tile(xposition, yposition, worldState, images[0], images[1]);
+                        tiles.Add(t);
+                    }
+                    else
+                    {
+                        Wall w = new Wall(xposition, yposition, worldState, images[0], images[1]);
+                        collidableTiles.Add(w);
+                        tiles.Add(w);
+                        wallArray[yposition / 32, xposition / 32] = true;
+                    }
                     xposition += 32;
                 }
                 xposition = 0;
@@ -298,8 +322,9 @@ namespace Toggle
                 spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), new Rectangle(0,0,32,32), Color.White);
             }
         }
-
-
-
+        public bool getWorldState()
+        {
+            return worldState;
+        }
     }
 }

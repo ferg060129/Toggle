@@ -12,49 +12,61 @@ namespace Toggle
     {
         public KittenZombie(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
         {
-            goodGraphic = Textures.textures["kitten"];
-            badGraphic = Textures.textures["zombie"];
-            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            goodGraphic = Textures.textures["sprites"];
+            badGraphic = Textures.textures["sprites"];
+            row = 3;
+            imageBoundingRectangle = new Rectangle(32*row, 32, 32, 32);
+            
             width = 32;
             height = 32;
+            direction = 0;
+        
         }
 
-        public override void goodMove(ArrayList collidables)
+        public override void goodMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
-            {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X += velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+            switch(direction){
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
+                default:
+                    moving = false;
+                    break;
             }
-            if (canMove)
-                x -= velocity;
+           
+
+
         }
 
-        public override void badMove(ArrayList collidables)
+        public override void badMove()
         {
-            bool canMove = true;
-            foreach (Creature c in collidables)
+            switch (direction)
             {
-                if (c != this)
-                {
-                    Rectangle otherRect = c.getHitBox();
-                    otherRect.X -= velocity;
-                    if (otherRect.Intersects(getHitBox()))
-                    {
-                        canMove = false;
-                    }
-                }
+                case 0:
+                    x -= velocity;
+                    break;
+                case 1:
+                    y -= velocity;
+                    break;
+                case 2:
+                    x += velocity;
+                    break;
+                case 3:
+                    y += velocity;
+                    break;
+                default:
+                    moving = false;
+                    break;
             }
-            if (canMove)
-                x += velocity;
         }
     }
 }

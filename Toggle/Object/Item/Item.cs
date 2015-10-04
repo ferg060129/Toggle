@@ -22,7 +22,7 @@ namespace Toggle
         public InventoryItem pickUpItem()
         {
             if(inventoryItem==null)
-            makeInventoryItem();
+                makeInventoryItem();
             return inventoryItem;
         }
 
