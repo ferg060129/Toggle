@@ -44,8 +44,8 @@ namespace Toggle
 
             //This directory navigation might have to change for the final product, or even sooner
             string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
-            mapSizeX = lines[0].Length;
-            mapSizeY = lines.Length;
+            mapSizeX = lines[0].Length * 32;
+            mapSizeY = lines.Length * 32;
             Game1.wallArray = new bool[lines.GetLength(0), lines[0].Length];
             foreach (string line in lines)
             {
