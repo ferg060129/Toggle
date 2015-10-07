@@ -11,7 +11,7 @@ namespace Toggle
     class Tile : Object
     {
         bool wall;
-        public Tile(int xLocation, int yLocation, bool initialState, String gGraphic, String bGraphic) : base(xLocation, yLocation, initialState)
+        public Tile(int xLocation, int yLocation, String gGraphic, String bGraphic) : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures[gGraphic];
             badGraphic = Textures.textures[bGraphic];

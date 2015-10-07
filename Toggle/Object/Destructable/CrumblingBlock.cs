@@ -9,7 +9,7 @@ namespace Toggle
 {
     class CrumblingBlock : Destructable
     {
-        public CrumblingBlock(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        public CrumblingBlock(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["crumblingblock"];
             badGraphic = Textures.textures["crumblingblock"];

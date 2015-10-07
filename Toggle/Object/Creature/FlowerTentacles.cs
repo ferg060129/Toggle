@@ -11,8 +11,8 @@ namespace Toggle
     //small change
     class FlowerTentacles : Creature
     {
-        public FlowerTentacles(int xLocation, int yLocation, bool initialState)
-            : base(xLocation, yLocation, initialState)
+        public FlowerTentacles(int xLocation, int yLocation)
+            : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];

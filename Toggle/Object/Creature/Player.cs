@@ -18,7 +18,7 @@ namespace Toggle
 
 
 
-        public Player(int xLocation, int yLocation, bool initialState, Inventory i, Game1 eng) : base(xLocation, yLocation, initialState)
+        public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];

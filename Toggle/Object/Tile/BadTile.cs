@@ -7,8 +7,8 @@ namespace Toggle
 {
     class BadTile : Tile
     {
-        public BadTile(int xLocation, int yLocation, bool initialState, String gGraphic, String bGraphic)
-            : base(xLocation, yLocation, initialState, gGraphic, bGraphic)
+        public BadTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
+            : base(xLocation, yLocation, gGraphic, bGraphic)
         {
         }
     }

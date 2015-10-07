@@ -40,10 +40,15 @@
   <ItemGroup>
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\HouseLevel.cs" />
+    <Compile Include="Level\Level.cs" />
+    <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
+    <Compile Include="Object\Destructable\CrumblingBlock.cs" />
+    <Compile Include="Object\Destructable\Destructable.cs" />
     <Compile Include="Object\Inventory Item\GreenBlockI.cs" />
     <Compile Include="Object\Inventory Item\InventoryItem.cs" />
     <Compile Include="Object\Item\GreenBlock.cs" />
@@ -75,7 +80,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\climbing_up_the_walls.mp3" />
-    <Content Include="Content\crumblingblock.png" />
+    <Content Include="Content\crumblingblock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\itemblock.png" />
     <Content Include="Content\sprites.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -130,6 +137,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\practice.txt" />
     <Content Include="Map Files\laser.txt" />
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />

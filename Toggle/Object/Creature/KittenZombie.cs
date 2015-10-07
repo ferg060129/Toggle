@@ -10,7 +10,7 @@ namespace Toggle
 {
     class KittenZombie : Creature
     {
-        public KittenZombie(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        public KittenZombie(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];

@@ -8,7 +8,7 @@ namespace Toggle
     class Item : Object
     {
         protected InventoryItem inventoryItem;
-        public Item(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        public Item(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
 
 

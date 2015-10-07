@@ -10,7 +10,7 @@ namespace Toggle
     class GreenBlock : Item 
     {
 
-        public GreenBlock(int xLocation, int yLocation, bool initialState): base(xLocation, yLocation, initialState)
+        public GreenBlock(int xLocation, int yLocation): base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["itemblock"];
             badGraphic = Textures.textures["baditemblock"];

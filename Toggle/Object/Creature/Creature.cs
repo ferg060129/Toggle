@@ -21,7 +21,7 @@ namespace Toggle
         protected int column = 1, columnGroup = 0, increment = 1, row = 0, waitCounter = 0, oldDirection = -1; protected bool moving = true;
 
 
-        public Creature(int xLocation, int yLocation, bool initialState) : base(xLocation, yLocation, initialState)
+        public Creature(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
             
         }

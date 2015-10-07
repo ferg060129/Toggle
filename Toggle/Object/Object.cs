@@ -20,11 +20,11 @@ namespace Toggle
         protected Rectangle hitBox;
         protected Rectangle imageBoundingRectangle;
 
-        public Object(int xLocation, int yLocation, bool initialState)
+        public Object(int xLocation, int yLocation)
         {
             x = xLocation;
             y = yLocation;
-            state = initialState;
+            state = Game1.worldState;
             collidable = false;
         }
         public Object(bool initialState)
