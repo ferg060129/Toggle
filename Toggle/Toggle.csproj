@@ -75,6 +75,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\climbing_up_the_walls.mp3" />
+    <Content Include="Content\crumblingblock.png" />
     <Content Include="Content\itemblock.png" />
     <Content Include="Content\sprites.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -129,6 +130,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\laser.txt" />
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
