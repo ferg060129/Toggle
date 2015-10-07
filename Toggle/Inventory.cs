@@ -14,6 +14,7 @@ namespace Toggle
         InventoryItem[,] items;
         Rectangle[,] itemRectangles;
         Texture2D inventoryGraphic;
+        Object center;
         int xLocation, yLocation;
         
         public Inventory(int xLoc, int yLoc)

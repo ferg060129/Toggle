@@ -29,6 +29,7 @@ namespace Toggle
         int height;
         float time;
         Player player;
+        Camera cam;
         Song song;
         Song song2;
         Inventory inventory;
@@ -74,6 +75,7 @@ namespace Toggle
 
             inventory = new Inventory(300, 300);
             player = new Player(32*19, 32*5, inventory, this);
+            cam = new Camera(player, width, height);
             creatures.Add(player);
 
 
@@ -84,6 +86,7 @@ namespace Toggle
 
             currentLevel = houseLevel;
             currentLevel.loadLevel();
+            cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
             MediaPlayer.Play(song);
             //MediaPlayer.IsRepeating = true;
@@ -123,14 +126,8 @@ namespace Toggle
                 }
                 currentLevel.loadLevel();
                 creatures.Add(player);
+                cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             }
-            
-
-            
-
-
-
-
             oldKeyBoardState = newKeyBoardState;
             //make arraylist of all collidable things, only check collisions against those
 
@@ -140,8 +137,6 @@ namespace Toggle
             }
 
             checkCollisions();
-            
-             
         }
 
         public void checkCollisions()
@@ -182,27 +177,10 @@ namespace Toggle
                 }
             }
         }
-
-
-        
         protected override void Draw(GameTime gameTime)
         {
-            Random rnd = new Random();
-            Matrix camMatrix;
-            if (time < 0)
-                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2, -player.getY() + height / 2, 0);
-            else
-            {
-                time--;
-                int xMod;
-                int yMod;
-                //int xMod = (int)(100 * Math.Sin((time)));
-                //int yMod = (int)(100 * Math.Cos((time)));
-                xMod = (int)(rnd.Next(1, 9) * Math.Sin(time));
-                yMod = (int)(rnd.Next(1, 8) * Math.Sin(time));
-                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2  + xMod, -player.getY() + yMod + height / 2, 0);
-            }
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camMatrix);
+            cam.update();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
 
             drawMap(spriteBatch);
 
@@ -224,10 +202,9 @@ namespace Toggle
             base.Draw(gameTime);
 
         }
-
         public void switchStates()
         {
-            time = 10;
+            cam.shake(10);
             worldState = !worldState;
 
             foreach (Creature c in creatures)
@@ -263,11 +240,16 @@ namespace Toggle
                 t.setState(worldState);
             }
         }
-
         public void drawMap(SpriteBatch sb)
         {
             foreach(Tile t in tiles){
-                spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), new Rectangle(0,0,32,32), Color.White);
+                int xLoc = t.getX();
+                int yLoc = t.getY();
+                if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
+                    ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
+                {
+                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
+                }
             }
         }
         public bool getWorldState()

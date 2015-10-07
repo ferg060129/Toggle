@@ -10,7 +10,7 @@ namespace Toggle
 
         public HouseLevel() : base()
         {
-            map = "home.txt";
+            map = "big.txt";
         }
 
 

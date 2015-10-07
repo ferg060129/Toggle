@@ -9,6 +9,8 @@ namespace Toggle
     {
 
         protected string map = "";
+        protected int mapSizeX;
+        protected int mapSizeY;
 
         public Level()
         {
@@ -42,7 +44,8 @@ namespace Toggle
 
             //This directory navigation might have to change for the final product, or even sooner
             string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
-
+            mapSizeX = lines[0].Length;
+            mapSizeY = lines.Length;
             Game1.wallArray = new bool[lines.GetLength(0), lines[0].Length];
             foreach (string line in lines)
             {
@@ -93,8 +96,17 @@ namespace Toggle
                 xposition = 0;
                 yposition += 32;
             }
+           
+            
         }
 
+        public int getMapSizeX(){
+            return mapSizeX;
+        }
+        public int getMapSizeY(){
+            return mapSizeY;
+        }
+        
      
 
     }
