@@ -22,6 +22,7 @@ namespace Toggle
         int height;
         float time;
         Player player;
+        Camera cam;
         Song song;
         Song song2;
         Inventory inventory;
@@ -36,9 +37,9 @@ namespace Toggle
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
-            graphics.PreferredBackBufferWidth = 1400;
-            graphics.PreferredBackBufferHeight = 800;
-            graphics.ApplyChanges();
+            //graphics.PreferredBackBufferWidth = 1400;
+            //graphics.PreferredBackBufferHeight = 800;
+            //graphics.ApplyChanges();
           
         }
 
@@ -85,6 +86,7 @@ namespace Toggle
              * */
             inventory = new Inventory(300, 300);
             player = new Player(32*19, 32*5, worldState, inventory, this);
+            cam = new Camera(player, width, height);
             creatures.Add(player);
 
             FlowerTentacles ft = new FlowerTentacles(32*11, 32*4, worldState);
@@ -199,22 +201,8 @@ namespace Toggle
         
         protected override void Draw(GameTime gameTime)
         {
-            Random rnd = new Random();
-            Matrix camMatrix;
-            if (time < 0)
-                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2, -player.getY() + height / 2, 0);
-            else
-            {
-                time--;
-                int xMod;
-                int yMod;
-                //int xMod = (int)(100 * Math.Sin((time)));
-                //int yMod = (int)(100 * Math.Cos((time)));
-                xMod = (int)(rnd.Next(1, 9) * Math.Sin(time));
-                yMod = (int)(rnd.Next(1, 8) * Math.Sin(time));
-                camMatrix = Matrix.CreateTranslation(-player.getX() + width / 2  + xMod, -player.getY() + yMod + height / 2, 0);
-            }
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camMatrix);
+            cam.update();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
 
             drawMap(spriteBatch);
 
@@ -239,7 +227,7 @@ namespace Toggle
 
         public void switchStates()
         {
-            time = 10;
+            cam.shake(10);
             worldState = !worldState;
 
             foreach (Creature c in creatures)
@@ -331,6 +319,7 @@ namespace Toggle
                     }
                     xposition += 32;
                 }
+                cam.setBounds(xposition, yposition);
                 xposition = 0;
                 yposition += 32;
             }
