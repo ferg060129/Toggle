@@ -17,9 +17,8 @@ namespace Toggle
         Object center;
         int xLocation, yLocation;
         
-        public Inventory(int xLoc, int yLoc,Object centerOn)
+        public Inventory(int xLoc, int yLoc)
         {
-            center = centerOn;
             items = new InventoryItem[2,7];
             initializeItemRectangles();
             inventoryGraphic = Textures.textures["inventory"];
@@ -62,8 +61,6 @@ namespace Toggle
 
         public void drawInventory(SpriteBatch sb)
         {
-            xLocation = center.getX();
-            yLocation = center.getY();
             sb.Draw(inventoryGraphic, new Vector2(xLocation, yLocation), Color.White);
             int xpos = 3;
             int ypos = 3;

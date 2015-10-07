@@ -23,7 +23,7 @@ namespace Toggle
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
 
-            row = 4;
+            row = 7;
             imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
             
             width = 32;
@@ -69,7 +69,8 @@ namespace Toggle
             {
                 moving = false;
             }
-            if (newKeyBoardState.IsKeyDown(Keys.T) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.T))
+            if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
                 if(!stateLocked)
                     engine.switchStates();
