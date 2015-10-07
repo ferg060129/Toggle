@@ -84,10 +84,9 @@ namespace Toggle
                 }
             }
              * */
-           
+            inventory = new Inventory(300, 300, player);
             player = new Player(32*17, 32*5, worldState, inventory, this);
             cam = new Camera(player, width, height);
-            inventory = new Inventory(300, 300,player);
             creatures.Add(player);
 
             FlowerTentacles ft = new FlowerTentacles(32*10, 32*4, worldState);
@@ -320,6 +319,7 @@ namespace Toggle
                     }
                     xposition += 32;
                 }
+                cam.setBounds(xposition, yposition);
                 xposition = 0;
                 yposition += 32;
             }
