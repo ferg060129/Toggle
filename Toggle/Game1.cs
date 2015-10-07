@@ -328,7 +328,13 @@ namespace Toggle
         public void drawMap(SpriteBatch sb)
         {
             foreach(Tile t in tiles){
-                spriteBatch.Draw(t.getGraphic(), new Vector2(t.getX(), t.getY()), new Rectangle(0,0,32,32), Color.White);
+                int xLoc = t.getX();
+                int yLoc = t.getY();
+                if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
+                    ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
+                {
+                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
+                }
             }
         }
         public bool getWorldState()

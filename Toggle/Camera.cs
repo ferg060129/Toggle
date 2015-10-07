@@ -41,13 +41,22 @@ namespace Toggle
             int playerY = camFocus.getY();
             Console.WriteLine(playerX);
             Console.WriteLine(playerY);
-            if ((playerX >= (screenWidth/2)) && (playerX <= (boundX - (screenWidth/2))))
+            if (boundY < screenHeight)
             {
-                x = -camFocus.getX();
+                //if level is smaller than screen, just center it
+                x = -(screenWidth / 2);
+                y = -(screenHeight / 2);
             }
-            if ((playerY >= (screenHeight / 2)) && (playerY <= (boundY - (screenHeight / 2))))
+            else
             {
-                y = -camFocus.getY();
+                if ((playerX >= (screenWidth / 2)) && (playerX <= (boundX - (screenWidth / 2))))
+                {
+                    x = -camFocus.getX();
+                }
+                if ((playerY >= (screenHeight / 2)) && (playerY <= (boundY - (screenHeight / 2))))
+                {
+                    y = -camFocus.getY();
+                }
             }
             Random rnd = new Random();
             if (effectDuration > 0)
