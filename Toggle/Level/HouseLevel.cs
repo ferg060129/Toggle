@@ -35,13 +35,12 @@ namespace Toggle
             Game1.creatures.Add(ft);
             ft.setDefendTileGood(11, 11);
             ft.setDefendTileBad(12, 8);
-
+            
             //ft = new FlowerTentacles(500, 400, worldState);
             //creatures.Add(ft);
 
             GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
             Game1.items.Add(b);
         }
-
     }
 }

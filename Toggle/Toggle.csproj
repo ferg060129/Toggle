@@ -48,13 +48,16 @@
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
+    <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />
     <Compile Include="Object\Destructable\Destructable.cs" />
     <Compile Include="Object\Inventory Item\GreenBlockI.cs" />
     <Compile Include="Object\Inventory Item\InventoryItem.cs" />
     <Compile Include="Object\Item\GreenBlock.cs" />
     <Compile Include="Object\Item\Item.cs" />
+    <Compile Include="Object\Miscellanious\Miscellanious.cs" />
     <Compile Include="Object\Object.cs" />
+    <Compile Include="Object\Miscellanious\Pushable\Pushable.cs" />
     <Compile Include="Object\Tile\BadTile.cs" />
     <Compile Include="Object\Tile\GoodTile.cs" />
     <Compile Include="Object\Tile\LockTile.cs" />
@@ -85,6 +88,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\itemblock.png" />
+    <Content Include="Content\moveableVineBlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\sprites.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -131,6 +137,9 @@
     <Content Include="Content\Tile\woodenwalltopleftcorner.png" />
     <Content Include="Content\Tile\woodenwalltoprightcorner.png" />
     <Content Include="Content\Tile\woodenwallvertical.png" />
+    <Content Include="Content\vineBlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\whitesky.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

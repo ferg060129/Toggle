@@ -30,6 +30,7 @@ namespace Toggle
             Game1.items.Clear();
             Game1.collidableTiles.Clear();
             Game1.tiles.Clear();
+            Game1.miscObjects.Clear();
         }
 
         public virtual void loadLevelObjects()

@@ -112,54 +112,65 @@ namespace Toggle
                     {
                         x = previousHitBox.X;
                         y = previousHitBox.Y;
-                       // y = previousHBO.Y - hitBox.Height;
+                        // y = previousHBO.Y - hitBox.Height;
                     }
                 }
-                    /*
+                /*
+            else
+            {
+                //They were going in opposite directions when they collided
+                x = previousHitBox.X;
+                y = previousHitBox.Y;
+                /*
+                if (Math.Abs(directionOther - direction) == 2 && ((Creature)o).moving && moving)
+                {
+                    double proportion = (double)direction/(direction + directionOther);
+                        
+                    switch(direction){
+                        case 0:
+                            int distance = previousHBO.X - (previousHitBox.X + previousHitBox.Width);
+                            int addx = (int)(proportion * distance);
+                            x = previousHitBox.X + addx;
+                        break;
+                        case 2:
+                        distance = previousHitBox.X - (previousHBO.X + previousHBO.Width);
+                            addx = (int)(proportion * distance);
+                            x = previousHitBox.X - addx;
+                        break;
+                        case 1:
+                            distance = previousHitBox.Y - (previousHBO.Y + previousHBO.Height);
+                            int addy = (int)(proportion * distance);
+                            y = previousHitBox.Y - (addy - 1);
+                        break;
+                        case 3:
+                        distance = previousHBO.Y - (previousHitBox.Y + previousHitBox.Height);
+                            addy = (int)(proportion * distance);
+                            y = previousHitBox.Y + addy;
+                        break;
+                    }
+                }
                 else
                 {
-                    //They were going in opposite directions when they collided
-                    x = previousHitBox.X;
-                    y = previousHitBox.Y;
-                    /*
-                    if (Math.Abs(directionOther - direction) == 2 && ((Creature)o).moving && moving)
-                    {
-                        double proportion = (double)direction/(direction + directionOther);
-                        
-                        switch(direction){
-                            case 0:
-                                int distance = previousHBO.X - (previousHitBox.X + previousHitBox.Width);
-                                int addx = (int)(proportion * distance);
-                                x = previousHitBox.X + addx;
-                            break;
-                            case 2:
-                            distance = previousHitBox.X - (previousHBO.X + previousHBO.Width);
-                                addx = (int)(proportion * distance);
-                                x = previousHitBox.X - addx;
-                            break;
-                            case 1:
-                                distance = previousHitBox.Y - (previousHBO.Y + previousHBO.Height);
-                                int addy = (int)(proportion * distance);
-                                y = previousHitBox.Y - (addy - 1);
-                            break;
-                            case 3:
-                            distance = previousHBO.Y - (previousHitBox.Y + previousHitBox.Height);
-                                addy = (int)(proportion * distance);
-                                y = previousHitBox.Y + addy;
-                            break;
-                        }
-                    }
-                    else
-                    {
-                       // x = previousHitBox.X;
-                       // y = previousHitBox.Y;
-                    }
-                     
-                     
+                   // x = previousHitBox.X;
+                   // y = previousHitBox.Y;
+                }
+            }
+            */
+            }
+
+            if (o is Pushable)
+            {
+                if (((Pushable)o).push(direction, velocity))
+                {
 
                 }
-                */
+                else
+                {
+                    x = previousHitBox.X;
+                    y = previousHitBox.Y;
+                }
             }
+
         }
         public int getDirection()
         {

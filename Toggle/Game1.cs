@@ -14,20 +14,24 @@ namespace Toggle
         //banana world
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        //Make sure all arrays are cleared in Level.unloadLevel
         public static ArrayList creatures = new ArrayList();
         public static ArrayList items = new ArrayList();
         public static ArrayList tiles = new ArrayList();
         public static ArrayList collidableTiles = new ArrayList();
+        public static ArrayList miscObjects = new ArrayList();
+
+
         public static bool worldState = true;
         public static bool[,] wallArray;
 
         HouseLevel houseLevel;
         SchoolLevel schoolLevel;
         Level currentLevel;
-
+        int time;
         int width;
         int height;
-        float time;
         Player player;
         Camera cam;
         Song song;
@@ -149,7 +153,7 @@ namespace Toggle
                     if (!c.Equals(d))
                     {
                         Rectangle hitBoxOther = d.getHitBox();
-                        if(c.getHitBox().Intersects(d.getHitBox()))
+                        if(c.getHitBox().Intersects(hitBoxOther))
                         {
                             c.reportCollision(d);
                         }
@@ -159,9 +163,18 @@ namespace Toggle
                 {
                     Rectangle hitBoxOther = t.getHitBox();
                     
-                    if (c.getHitBox().Intersects(t.getHitBox()))
+                    if (c.getHitBox().Intersects(hitBoxOther))
                     {
                         c.reportCollision(t);
+                    }
+                }
+
+                foreach (Pushable p in miscObjects)
+                {
+                    Rectangle hitBoxOther = p.getHitBox();
+                    if (c.getHitBox().Intersects(hitBoxOther))
+                    {
+                        c.reportCollision(p);
                     }
                 }
             }
@@ -193,6 +206,12 @@ namespace Toggle
             {
                 spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White);
             }
+
+            foreach (Miscellanious m in miscObjects)
+            {
+                spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
                 inventory.drawInventory(spriteBatch);
@@ -214,6 +233,10 @@ namespace Toggle
             foreach (Item i in items)
             {
                 i.setState(worldState);
+            }
+            foreach (Miscellanious m in miscObjects)
+            {
+                m.setState(worldState);
             }
             if (worldState)
             {

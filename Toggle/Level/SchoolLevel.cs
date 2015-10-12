@@ -40,6 +40,9 @@ namespace Toggle
             //ft = new FlowerTentacles(500, 400, worldState);
             //creatures.Add(ft);
 
+            VineMoveBlock vm = new VineMoveBlock(32 * 10, 32 * 5);
+            Game1.miscObjects.Add(vm);
+
             GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
             Game1.items.Add(b);
         }
