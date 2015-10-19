@@ -69,7 +69,7 @@ namespace Toggle
                 }
             }
             
-            foreach (Tile t in Game1.collidableTiles)
+            foreach (Tile t in Game1.solidTiles)
             {
                 if(t is Wall)
                 {

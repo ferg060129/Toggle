@@ -306,3 +306,9 @@
 /processorParam:TextureFormat=Color
 /build:baditemblock.png
 
+#begin kooten.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:kooten.spritefont
+

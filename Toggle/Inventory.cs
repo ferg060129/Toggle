@@ -21,7 +21,7 @@ namespace Toggle
         {
             items = new InventoryItem[2,7];
             initializeItemRectangles();
-            inventoryGraphic = Textures.textures["inventory"];
+            inventoryGraphic = Textures.textures["inventory2"];
             xLocation = xLoc;
             yLocation = yLoc;
         }
@@ -59,9 +59,9 @@ namespace Toggle
 
         }
 
-        public void drawInventory(SpriteBatch sb)
+        public void drawInventory(SpriteBatch sb, int xx, int yy)
         {
-            sb.Draw(inventoryGraphic, new Vector2(xLocation, yLocation), Color.White);
+            sb.Draw(inventoryGraphic, new Vector2(xx, yy), Color.White);
             int xpos = 3;
             int ypos = 3;
             for (int x = 0; x < items.GetLength(0); x++)
@@ -70,12 +70,32 @@ namespace Toggle
                 {
                     if (items[x, y] != null)
                     {
-                        sb.Draw(items[x, y].getGraphic(), new Vector2(xpos + xLocation, ypos + yLocation), new Rectangle(0, 0, 32, 32), Color.White);
+                        sb.Draw(items[x, y].getGraphic(), new Vector2(xpos + xx, ypos + yy), new Rectangle(0, 0, 32, 32), Color.White);
+                        items[x, y].setHitBox(new Rectangle(xpos + xx, ypos + yy, 32, 32));
                     }
                     ypos += 35;
                 }
                 xpos += 35;
             }
+        }
+
+        public string getItemTip(MouseState ms)
+        {
+            for (int x = 0; x < items.GetLength(0); x++)
+            {
+                for (int y = 0; y < items.GetLength(1); y++)
+                {
+                    if (items[x, y] != null)
+                    {
+                        var mousePosition = new Point(ms.X, ms.Y);
+                        if (items[x, y].getHitBox().Contains(mousePosition))
+                        {
+                            return items[x, y].getItemTip();
+                        }
+                    }
+                }
+            }
+            return "banana";
         }
 
         public InventoryItem[,] getItems()

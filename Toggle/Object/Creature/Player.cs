@@ -116,10 +116,19 @@ namespace Toggle
             {
                 stateLocked = false;
             }
-
+            if(o is LevelTile)
+            {
+                if(this.x == o.getX() && this.y == o.getY())
+                {
+                    if(direction == ((LevelTile)o).getEnterDirection())
+                    {
+                        engine.setLevel(((LevelTile)o).getLevel());
+                    }
+                    
+                }
+                
+            }
 
         }
-
-        
     }
 }

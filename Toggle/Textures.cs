@@ -10,11 +10,11 @@ namespace Toggle
     static class Textures
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
-        public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory", "BigPicture", "player_right", "sprites",
-                                              "moveableVineBlock","vineBlock"};
+        public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
+                                              "moveableVineBlock","vineBlock","cursor"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
-                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone"};
+                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone","blackBlock"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
@@ -31,6 +31,8 @@ namespace Toggle
                 {'f', "frown,frown,"},
                 {'s',"smile,smile,"},
                 {'l',"locktile,locktile,"},
+                {'a', "blackBlock,blackBlock,"},
+                {'b', "blackBlock,blackBlock,"},
                 {'u',"unlocktile,unlocktile,"}
 
             };

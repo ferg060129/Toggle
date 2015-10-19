@@ -7,11 +7,12 @@ namespace Toggle
 {
     class GreenBlockI : InventoryItem
     {
-        public GreenBlockI(bool initialState) : base(initialState){
-            goodGraphic = Textures.textures["greenblock"];
-            badGraphic = Textures.textures["badgreenblock"];
+        public GreenBlockI() : base(){
+            goodGraphic = Textures.textures["itemblock"];
+            badGraphic = Textures.textures["baditemblock"];
             width = 32;
             height = 32;
+            itemTip = "This is a green block";
         }
     }
 }

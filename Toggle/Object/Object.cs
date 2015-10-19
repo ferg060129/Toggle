@@ -31,9 +31,18 @@ namespace Toggle
             height = 32;
             hitBox = new Rectangle(xLocation, yLocation, width, height);
         }
-        public Object(bool initialState)
+
+        public Object()
         {
-            state = initialState;
+            state = Game1.worldState;
+            collidable = false;
+
+            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+
+            width = 32;
+            height = 32;
+            //hitBox = new Rectangle(xLocation, yLocation, width, height);
+
         }
 
         public virtual void switchState(){

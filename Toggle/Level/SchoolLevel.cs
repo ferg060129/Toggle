@@ -12,6 +12,8 @@ namespace Toggle
             : base()
         {
             map = "laser.txt";
+            playerStartingX = 15*32;
+            playerStartingY = 16*32;
         }
 
 
@@ -47,6 +49,7 @@ namespace Toggle
             Game1.items.Add(b);
         }
 
+        
 
     }
 }

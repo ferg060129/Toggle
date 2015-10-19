@@ -10,7 +10,9 @@ namespace Toggle
 
         public HouseLevel() : base()
         {
-            map = "big.txt";
+            map = "home.txt";
+            playerStartingX = 5 * 32;
+            playerStartingY = 3 * 32;
         }
 
 
@@ -41,6 +43,10 @@ namespace Toggle
 
             GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
             Game1.items.Add(b);
+            VineMoveBlock vm = new VineMoveBlock(32 * 17, 32 * 8);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 18, 32 * 8);
+            Game1.miscObjects.Add(vm);
         }
     }
 }

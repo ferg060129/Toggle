@@ -39,8 +39,12 @@ namespace Toggle
             int yMod = 0;
             int playerX = camFocus.getX();
             int playerY = camFocus.getY();
-            Console.WriteLine(playerX);
-            Console.WriteLine(playerY);
+            //Console.WriteLine(playerX);
+            //Console.WriteLine(playerY);
+
+
+            
+
             if (boundY < screenHeight)
             {
                 //if level is smaller than screen, just center it

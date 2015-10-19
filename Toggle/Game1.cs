@@ -15,13 +15,21 @@ namespace Toggle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        SpriteFont sf;
+
+        //SpriteFont
         //Make sure all arrays are cleared in Level.unloadLevel
         public static ArrayList creatures = new ArrayList();
         public static ArrayList items = new ArrayList();
         public static ArrayList tiles = new ArrayList();
-        public static ArrayList collidableTiles = new ArrayList();
+        public static ArrayList solidTiles = new ArrayList();
+        //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
+        public static ArrayList playerActivateTiles = new ArrayList();
+        public static ArrayList levelTiles = new ArrayList();
 
+
+        public ArrayList levels = new ArrayList();
 
         public static bool worldState = true;
         public static bool[,] wallArray;
@@ -78,10 +86,11 @@ namespace Toggle
             }
 
             inventory = new Inventory(300, 300);
-            player = new Player(32*19, 32*5, inventory, this);
+            player = new Player(32*15, 32*12, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
+            sf = Content.Load<SpriteFont>("kooten");
 
             song = Content.Load<Song>("whitesky");
             song2 = Content.Load<Song>("climbing_up_the_walls");
@@ -142,7 +151,6 @@ namespace Toggle
 
             checkCollisions();
         }
-
         public void checkCollisions()
         {
             foreach(Creature c in creatures)
@@ -159,7 +167,7 @@ namespace Toggle
                         }
                     }
                 }
-                foreach (Tile t in collidableTiles)
+                foreach (Tile t in solidTiles)
                 {
                     Rectangle hitBoxOther = t.getHitBox();
                     
@@ -189,7 +197,33 @@ namespace Toggle
                     items.RemoveAt(ii);
                 }
             }
+
+            foreach(Tile t in playerActivateTiles)
+            {
+                Rectangle hitBox = t.getHitBox();
+                if(player.getHitBox().Intersects(hitBox))
+                {
+                    player.reportCollision(t);
+                }
+            }
+            checkLevelTileCollision();
         }
+
+
+        public void checkLevelTileCollision()
+        {
+            for(int x = 0; x < levelTiles.Count; x++)
+            {
+
+                Tile t = (Tile)(levelTiles[x]);
+                Rectangle hitBox = t.getHitBox();
+                if(player.getHitBox().Intersects(hitBox))
+                {
+                    player.reportCollision(t);
+                }
+            }
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             cam.update();
@@ -214,8 +248,26 @@ namespace Toggle
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
-                inventory.drawInventory(spriteBatch);
+                inventory.drawInventory(spriteBatch, -cam.getX(), -cam.getY());
+                MouseState mouseState = Mouse.GetState();
+                foreach (InventoryItem i in inventory.getItems())
+                {
+                    if (i != null)
+                    {
+                        Rectangle r = i.getHitBox();
+
+                        //var mousePosition = new Point();
+                        if (r.Contains(new Vector2(mouseState.X, mouseState.Y)))
+                        {
+                            string tip = i.getItemTip();
+                            spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
+
+                        }
+                    }
+                }
+                spriteBatch.Draw(Textures.textures["cursor"], new Vector2(mouseState.X, mouseState.Y), new Rectangle(0, 0, 32, 32), Color.White);
             }
+            
             spriteBatch.End();
 
             base.Draw(gameTime);
@@ -280,6 +332,34 @@ namespace Toggle
             return worldState;
         }
 
+        public void setLevel(string level)
+        {
+            //Eventually turn level strings into global constants
+            if(currentLevel != null)
+            {
+                currentLevel.unloadLevel();
+            }
+
+
+            if(level.Equals("houseLevel"))
+            {
+                currentLevel = houseLevel;
+            }
+            else if(level.Equals("schoolLevel"))
+            {
+                currentLevel = schoolLevel;
+            }
+
+            currentLevel.loadLevel();
+            player.setX(currentLevel.getPlayerStartingX());
+            player.setY(currentLevel.getPlayerStartingY());
+            creatures.Add(player);
+            cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
+           
+             
+        }
+
+    
          
     }
 }
