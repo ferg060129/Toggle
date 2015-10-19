@@ -47,6 +47,16 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 18, 32 * 8);
             Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 51, 32 * 22);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 52, 32 * 23);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 53, 32 * 24);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 54, 32 * 25);
+            Game1.miscObjects.Add(vm);
+           // vm = new VineMoveBlock(32 * 18, 32 * 8);
+           // Game1.miscObjects.Add(vm);
         }
     }
 }

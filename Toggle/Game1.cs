@@ -86,7 +86,7 @@ namespace Toggle
             }
 
             inventory = new Inventory(300, 300);
-            player = new Player(32*15, 32*12, inventory, this);
+            player = new Player(32*46, 32*31, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
@@ -267,6 +267,8 @@ namespace Toggle
                 }
                 spriteBatch.Draw(Textures.textures["cursor"], new Vector2(mouseState.X, mouseState.Y), new Rectangle(0, 0, 32, 32), Color.White);
             }
+
+            spriteBatch.DrawString(sf, player.getX()/32 + " " + player.getY()/32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             
             spriteBatch.End();
 
