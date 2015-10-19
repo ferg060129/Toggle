@@ -15,7 +15,8 @@ namespace Toggle
         protected bool hovered = false;
         public InventoryItem() : base()
         {
-
+            width = 32;
+            height = 32;
         }
 
         public void setHitBox(Rectangle r)
@@ -37,6 +38,8 @@ namespace Toggle
         {
             hovered = b;
         }
+
+
 
 
     }

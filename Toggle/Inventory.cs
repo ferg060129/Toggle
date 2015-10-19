@@ -56,7 +56,6 @@ namespace Toggle
                 }
                 xpos += 35;
             }
-
         }
 
         public void drawInventory(SpriteBatch sb, int xx, int yy)

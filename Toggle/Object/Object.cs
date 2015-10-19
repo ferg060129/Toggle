@@ -72,6 +72,13 @@ namespace Toggle
             y = yLocation;
         }
 
+        public void setPosition(Vector2 v)
+        {
+            x = (int)(v.X + 0.5);
+            y = (int)(v.Y + 0.5);
+            hitBox = new Rectangle(x, y, width, height);
+        }
+
         public bool getCollision() {return collidable;}
         public bool getState() { return state; }
         public int getX(){return x;}
@@ -79,6 +86,7 @@ namespace Toggle
         public Rectangle getHitBox() { return hitBox; }
         public Rectangle getImageBoundingRectangle() { return imageBoundingRectangle; }
         public Vector2 getPositionVector() { return new Vector2(x, y); }
+        public Vector2 getPosition(){return new Vector2(x, y); }
 
     }
 }
