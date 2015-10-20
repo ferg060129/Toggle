@@ -124,7 +124,7 @@ namespace Toggle
                 GraphicsDevice.Clear(Color.Black);
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             newKeyBoardState = Keyboard.GetState();
