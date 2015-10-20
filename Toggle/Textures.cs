@@ -14,7 +14,7 @@ namespace Toggle
                                               "moveableVineBlock","vineBlock","cursor"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
-                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone","blackBlock","woodfloor"};
+                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone","blackBlock","woodfloor","darkwoodfloor"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
@@ -33,7 +33,8 @@ namespace Toggle
                 {'l',"locktile,locktile,"},
                 {'a', "blackBlock,blackBlock,"},
                 {'b', "blackBlock,blackBlock,"},
-                {'u',"unlocktile,unlocktile,"}
+                {'u',"unlocktile,unlocktile,"},
+                {'+',"woodfloor,darkwoodfloor"}
 
             };
 
