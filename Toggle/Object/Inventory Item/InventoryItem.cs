@@ -11,7 +11,8 @@ namespace Toggle
     //Maybe this shouldn't inherit from object
     class InventoryItem : Object
     {
-        protected string itemTip = "This is an item";
+        protected string itemTipGood = "Banana";
+        protected string itemTipBad = "Rotten banana :c";
         protected bool hovered = false;
         public InventoryItem() : base()
         {
@@ -26,7 +27,14 @@ namespace Toggle
         }
         public string getItemTip()
         {
-            return itemTip;
+            if(state)
+            {
+                return itemTipGood;
+            }
+            else
+            {
+                return itemTipBad;
+            }
         }
 
         public bool isHovered()

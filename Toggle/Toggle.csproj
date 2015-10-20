@@ -59,6 +59,7 @@
     <Compile Include="Object\Object.cs" />
     <Compile Include="Object\Miscellanious\Pushable\Pushable.cs" />
     <Compile Include="Object\Tile\BadTile.cs" />
+    <Compile Include="Object\Tile\DarkTile.cs" />
     <Compile Include="Object\Tile\GoodTile.cs" />
     <Compile Include="Object\Tile\LevelTile.cs" />
     <Compile Include="Object\Tile\LockTile.cs" />

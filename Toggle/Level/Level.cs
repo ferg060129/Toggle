@@ -24,6 +24,7 @@ namespace Toggle
         {
             makeMapFromFile(map);
             loadLevelObjects();
+            addDarkTiles();
         }
 
         public void unloadLevel()
@@ -35,6 +36,7 @@ namespace Toggle
             Game1.tiles.Clear();
             Game1.miscObjects.Clear();
             Game1.levelTiles.Clear();
+            Game1.darkTiles.Clear();
         }
 
         public virtual void loadLevelObjects()
@@ -113,8 +115,13 @@ namespace Toggle
                 xposition = 0;
                 yposition += 32;
             }
-           
-            
+        }
+
+        public virtual void addDarkTiles()
+        {
+
+
+
         }
 
         public int getMapSizeX(){

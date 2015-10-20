@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace Toggle
 {
@@ -58,5 +63,26 @@ namespace Toggle
            // vm = new VineMoveBlock(32 * 18, 32 * 8);
            // Game1.miscObjects.Add(vm);
         }
+
+        public override void addDarkTiles()
+        {
+            //int darkZone
+            int startX = 39;
+            int startY = 22;
+            int endX = 54;
+            int endY = 36;
+         
+
+            for(int x = startX; x <= endX; x++)
+            {
+                for(int y = startY; y <= endY; y++)
+                {
+                    DarkTile dt = new DarkTile(x*32, y*32, "blackBlock","blackBlock");
+                    Game1.darkTiles.Add(dt);
+                }
+            }
+
+        }
+
     }
 }

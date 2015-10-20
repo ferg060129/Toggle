@@ -23,6 +23,8 @@ namespace Toggle
         public static ArrayList items = new ArrayList();
         public static ArrayList tiles = new ArrayList();
         public static ArrayList solidTiles = new ArrayList();
+        public static ArrayList darkTiles = new ArrayList();
+
         //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
         public static ArrayList playerActivateTiles = new ArrayList();
@@ -46,6 +48,7 @@ namespace Toggle
         Song song2;
         Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
+        MouseState oldMouseState;
         
         public Game1()
         {
@@ -56,6 +59,7 @@ namespace Toggle
             //graphics.PreferredBackBufferWidth = 1400;
             //graphics.PreferredBackBufferHeight = 800;
            // graphics.ApplyChanges();
+            
           
         }
 
@@ -86,7 +90,7 @@ namespace Toggle
             }
 
             inventory = new Inventory(300, 300);
-            player = new Player(32*46, 32*31, inventory, this);
+            player = new Player(32*15, 32*12, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
@@ -227,6 +231,7 @@ namespace Toggle
         protected override void Draw(GameTime gameTime)
         {
             cam.update();
+            MouseState mouseState = Mouse.GetState();
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
 
             drawMap(spriteBatch);
@@ -248,8 +253,10 @@ namespace Toggle
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
+
+               
                 inventory.drawInventory(spriteBatch, -cam.getX(), -cam.getY());
-                MouseState mouseState = Mouse.GetState();
+                Vector2 cursorPosition = new Vector2(mouseState.X - cam.getX() - width / 2, mouseState.Y - cam.getY() - height / 2);
                 foreach (InventoryItem i in inventory.getItems())
                 {
                     if (i != null)
@@ -257,7 +264,7 @@ namespace Toggle
                         Rectangle r = i.getHitBox();
 
                         //var mousePosition = new Point();
-                        if (r.Contains(new Vector2(mouseState.X, mouseState.Y)))
+                        if (r.Contains(cursorPosition))
                         {
                             string tip = i.getItemTip();
                             spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
@@ -265,12 +272,14 @@ namespace Toggle
                         }
                     }
                 }
-                spriteBatch.Draw(Textures.textures["cursor"], new Vector2(mouseState.X, mouseState.Y), new Rectangle(0, 0, 32, 32), Color.White);
+                spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
             }
 
             spriteBatch.DrawString(sf, player.getX()/32 + " " + player.getY()/32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
-            
+            if(!worldState)
+            drawDarkTiles(spriteBatch);
             spriteBatch.End();
+            
 
             base.Draw(gameTime);
 
@@ -329,6 +338,24 @@ namespace Toggle
                 }
             }
         }
+        public void drawDarkTiles(SpriteBatch sb)
+        {
+            foreach (DarkTile t in darkTiles)
+            {
+
+                int xLoc = t.getX();
+                int yLoc = t.getY();
+                if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
+                    ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
+                {
+
+                    double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
+                    t.addLampLight(distance);
+                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), new Color(Color.White, t.getOpacity()));
+                }
+            }
+        }
+
         public bool getWorldState()
         {
             return worldState;
