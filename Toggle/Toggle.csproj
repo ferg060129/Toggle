@@ -110,9 +110,11 @@
     <Content Include="Content\Tile\blackBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tile\darkwoodfloor.png" />
     <Content Include="Content\Tile\frown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tile\Image3.png" />
     <Content Include="Content\Tile\smile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -155,6 +157,9 @@
     <Content Include="Content\Tile\woodenwalltopleftcorner.png" />
     <Content Include="Content\Tile\woodenwalltoprightcorner.png" />
     <Content Include="Content\Tile\woodenwallvertical.png" />
+    <Content Include="Content\Tile\WoodFloor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\vineBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -33,6 +33,7 @@ namespace Toggle
             screenHeight = gameHeight;
             camMatrix = Matrix.CreateTranslation(x + (screenWidth / 2), y + (screenHeight / 2), 0);
         }
+
         public void update()
         {
             int xMod = 0;
@@ -41,10 +42,6 @@ namespace Toggle
             int playerY = camFocus.getY();
             //Console.WriteLine(playerX);
             //Console.WriteLine(playerY);
-
-
-            
-
             if (boundY < screenHeight)
             {
                 //if level is smaller than screen, just center it
@@ -71,7 +68,24 @@ namespace Toggle
             }
             camMatrix = Matrix.CreateTranslation(x + (screenWidth / 2) + xMod, y + (screenHeight / 2) + yMod, 0);
         }
-
+        public void changeRoom()
+        {
+            x = (screenWidth / 2);
+            y = (screenHeight / 2);
+            int targetX = camFocus.getX();
+            int targetY = camFocus.getY();
+            while ((x < targetX + (screenWidth/2)) && (x < boundX - (screenWidth/2)))
+            {
+                x++;
+            }
+            while ((y < targetY + (screenHeight/2)) && (y < boundY - (screenHeight/2)))
+            {
+                y++;
+            }
+            x = -x;
+            y = -y;
+            camMatrix = Matrix.CreateTranslation(x + (screenWidth / 2), y + (screenHeight / 2), 0);
+        }
         public Matrix getMatrix()
         {
             return camMatrix;
