@@ -110,7 +110,9 @@
     <Content Include="Content\Tile\blackBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tile\darkwoodfloor.png" />
+    <Content Include="Content\Tile\darkwoodfloor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tile\frown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

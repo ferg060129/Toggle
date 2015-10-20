@@ -34,7 +34,7 @@ namespace Toggle
                 {'a', "blackBlock,blackBlock,"},    //takes you to homelevel
                 {'b', "blackBlock,blackBlock,"},
                 {'u',"unlocktile,unlocktile,"},
-                {'+',"woodfloor,darkwoodfloor"}
+                {'+',"woodfloor,darkwoodfloor,"}
 
             };
 
