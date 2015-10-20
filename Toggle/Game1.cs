@@ -384,6 +384,7 @@ namespace Toggle
             player.setY(currentLevel.getPlayerStartingY());
             creatures.Add(player);
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
+            cam.changeRoom();
            
              
         }
