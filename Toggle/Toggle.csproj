@@ -42,9 +42,11 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Level\HouseLevel.cs" />
+    <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
+    <Compile Include="Object\Creature\DogBoogieman.cs" />
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
@@ -78,6 +80,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\animals.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\badgreenblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -160,6 +165,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\hub.txt" />
     <Content Include="Map Files\practice.txt" />
     <Content Include="Map Files\laser.txt" />
     <Content Include="Map Files\big.txt" />

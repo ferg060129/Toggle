@@ -70,7 +70,7 @@ namespace Toggle
                     }
                     else if (c == 'b')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel",3);
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel",1);
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }

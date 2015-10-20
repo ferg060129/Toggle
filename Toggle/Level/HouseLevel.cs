@@ -12,7 +12,6 @@ namespace Toggle
 {
     class HouseLevel : Level
     {
-
         public HouseLevel() : base()
         {
             map = "home.txt";
@@ -60,6 +59,11 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 54, 32 * 25);
             Game1.miscObjects.Add(vm);
+            /*
+            DogBoogieman dbm = new DogBoogieman(32 * 45, 32 * 30);
+            Game1.creatures.Add(dbm);
+            dbm.setDefendTileGood(45, 30);
+            dbm.setAttackTarget(ref player);*/
            // vm = new VineMoveBlock(32 * 18, 32 * 8);
            // Game1.miscObjects.Add(vm);
         }
