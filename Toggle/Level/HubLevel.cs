@@ -26,13 +26,8 @@ namespace Toggle
             Game1.miscObjects.Add(myGate);
             Button myButton = new Button(32 * 19, 32 * 21,myGate);
             Game1.miscObjects.Add(myButton);
-            for (int i = 0; i < 7; i++)
-            {
-                ft = new FlowerTentacles(32 * 19, (32 * (4 + i)));
-                Game1.creatures.Add(ft);
-                ft.setDefendTileGood(15 + (i / 3), 4 + i);
-                ft.setDefendTileBad(26,4 + i);
-            }
+            //level tiles
+            levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level", 2));
         }
 
     }
