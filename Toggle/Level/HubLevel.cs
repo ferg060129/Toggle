@@ -22,10 +22,6 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 13, 32 * 19);
             Game1.miscObjects.Add(vm);
-            Gate myGate = new Gate(32 * 18, 32 * 21);
-            Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 19, 32 * 21,myGate);
-            Game1.miscObjects.Add(myButton);
 
           
             GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);

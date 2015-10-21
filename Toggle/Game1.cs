@@ -81,7 +81,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -555,6 +555,7 @@ namespace Toggle
             {
                 spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
             }
+            spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             //if (!worldState)
                 drawDarkTiles(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.I))
