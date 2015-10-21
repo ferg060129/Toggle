@@ -99,7 +99,7 @@ namespace Toggle
 
         public void moveUpdate()
         {
-            ticks++;
+
             int oldDirection = direction;
             if (currentlyMove)
             {
