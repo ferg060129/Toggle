@@ -51,6 +51,13 @@ namespace Toggle
 
         }
 
+        //used in to set manual locations of creatures
+        public void updateHitbox()
+        {
+            hitBox = new Rectangle(x, y, width, height);
+            previousHitBox = hitBox;
+        }
+
         public virtual void reportCollision(Object o)
         {
             if (o is Wall)
@@ -159,6 +166,14 @@ namespace Toggle
             */
             }
 
+            if (o is Miscellanious)
+            {
+                if (o.getCollision() == true)
+                {
+                    x = previousHitBox.X;
+                    y = previousHitBox.Y;
+                }
+            }
             if (o is Pushable)
             {
                 if (((Pushable)o).push(direction, velocity))

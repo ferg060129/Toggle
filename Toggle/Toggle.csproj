@@ -51,6 +51,7 @@
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
     <Compile Include="Object\Item\BatteryGoo.cs" />
+    <Compile Include="Object\Miscellanious\Strawberry.cs" />
     <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />
     <Compile Include="Object\Destructable\Destructable.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartScreen.cs" />
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +114,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\sprites.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\exit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\start.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tile\blackBlock.png">
