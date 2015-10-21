@@ -18,8 +18,5 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, width, height);
             hitBox = new Rectangle(xLocation, yLocation, width, height);
         }
-
-
-
     }
 }

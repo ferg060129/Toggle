@@ -328,7 +328,10 @@ namespace Toggle
             return -1;
         }
 
-
+        public override void setState(bool st)
+        {
+            base.setState(st);
+        }
 
 
         public void setDefendTileGood(int dTX, int dTY)
@@ -347,7 +350,6 @@ namespace Toggle
         {
             attackTarget = o;
         }
-
 
 
 

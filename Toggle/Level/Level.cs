@@ -66,7 +66,7 @@ namespace Toggle
                     bool solid = (images[2].Length > 0);
                     if(c == 'a')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel",1);
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel",3);
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }
