@@ -703,6 +703,10 @@ namespace Toggle
                 Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
                 spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
             }
+            rect.Dispose();
+
+
+
         }
 
 
@@ -749,6 +753,9 @@ namespace Toggle
 
             spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
 
+
+            rectBottom.Dispose();
+            rectTop.Dispose();
         }
 
         public void inventoryUpdate()
