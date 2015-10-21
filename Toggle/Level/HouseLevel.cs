@@ -74,6 +74,7 @@ namespace Toggle
             dbm.setAttackTarget(ref player);*/
            // vm = new VineMoveBlock(32 * 18, 32 * 8);
            // Game1.miscObjects.Add(vm);
+
         }
 
         public override void addDarkTiles()

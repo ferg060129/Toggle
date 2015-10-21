@@ -9,6 +9,7 @@ namespace Toggle
     {
         string level;
         int enterDirection;
+        int a;
         public LevelTile(int xLocation, int yLocation, String gGraphic, String bGraphic, string level, int enterDirection)
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {

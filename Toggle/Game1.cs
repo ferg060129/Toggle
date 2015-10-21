@@ -45,6 +45,7 @@ namespace Toggle
         Level currentLevel;
         GateLevel gateLevel;
         Gate1Level gate1Level;
+        Gate2Level gate2Level;
         Complex1 complex1Level;
         int time;
         int width;
@@ -72,20 +73,21 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             //IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
             //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
             
+            
           
         }
 
         protected override void Initialize()
         {
-            startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 80, 200);
-            exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 80, 300);
+            startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 300);
+            exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
             base.Initialize();
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
@@ -119,6 +121,7 @@ namespace Toggle
             schoolLevel = new SchoolLevel();
             gateLevel = new GateLevel();
             gate1Level = new Gate1Level();
+            gate2Level = new Gate2Level();
             complex1Level = new Complex1();
 
             currentLevel = hubLevel;
@@ -134,11 +137,13 @@ namespace Toggle
             song2 = Content.Load<Song>("climbing_up_the_walls");
 
             currentLevel.loadLevel();
+            //add level transfer tiles from current level to the array list of tiles
+            tiles.AddRange(currentLevel.getLevelTiles());
+            levelTiles.AddRange(currentLevel.getLevelTiles());
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
             MediaPlayer.Play(song);
-            gameState = "play";
-
+            gameState = "start";
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()
@@ -203,7 +208,10 @@ namespace Toggle
                         c.reportCollision(p);
                         if (p is Button)
                         {
-                            p.onTrigger();
+                            if (((Button)p).isHeavyButton() == false)
+                            {
+                                p.onTrigger();
+                            }
                         }
                     }
                 }
@@ -357,6 +365,7 @@ namespace Toggle
 
         public void setLevel(string level)
         {
+            levelTiles.Clear();
             //Eventually turn level strings into global constants
             if(currentLevel != null)
             {
@@ -375,8 +384,23 @@ namespace Toggle
             {
                 currentLevel = schoolLevel;
             }
+            else if (level.Equals("gate1Level"))
+            {
+                currentLevel = gate1Level;
+            }
+            else if (level.Equals("gate2Level"))
+            {
+                currentLevel = gate2Level;
+            }
+            else if (level.Equals("complex1Level"))
+            {
+                currentLevel = complex1Level;
+            }
 
             currentLevel.loadLevel();
+            //add level transfer tiles from current level to the array list of tiles
+            tiles.AddRange(currentLevel.getLevelTiles());
+            levelTiles.AddRange(currentLevel.getLevelTiles());
             player.setX(currentLevel.getPlayerStartingX());
             player.setY(currentLevel.getPlayerStartingY());
             creatures.Add(player);
@@ -411,6 +435,7 @@ namespace Toggle
         public void startDraw()
         {
             spriteBatch.Begin();
+            spriteBatch.Draw(Textures.textures["titleScreen2"], new Vector2(0,0), Color.White);
             spriteBatch.Draw(Textures.textures["start"], startButtonPosition,  Color.White);
             spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition,  Color.White);
             spriteBatch.End();

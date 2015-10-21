@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,11 @@ namespace Toggle
         protected int mapSizeY;
         protected int playerStartingX;
         protected int playerStartingY;
+        protected ArrayList levelTiles = new ArrayList();
 
         public Level()
         {
-            
+
         }
 
 
@@ -122,6 +124,11 @@ namespace Toggle
 
 
 
+        }
+
+        public ArrayList getLevelTiles()
+        {
+            return levelTiles;
         }
 
         public int getMapSizeX(){

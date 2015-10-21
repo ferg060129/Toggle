@@ -16,19 +16,31 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
-            Gate myGate = new Gate(32 * 1, 32 * 3);
+            Gate myGate = new Gate(12 * 32, 9 * 32);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 14, 32 * 13, myGate);
+            Button myButton = new Button(12 * 32, 12 * 32, myGate);
             Game1.miscObjects.Add(myButton);
-            Strawberry sb = new Strawberry(9 * 32, 7 * 32);
+            Strawberry sb = new Strawberry(15 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
-            sb = new Strawberry(10 * 32, 7 * 32);
+            sb = new Strawberry(3 * 32, 9 * 32);
             Game1.miscObjects.Add(sb);
-            sb = new Strawberry(11 * 32, 7 * 32);
-            Game1.miscObjects.Add(sb);
-            sb = new Strawberry(12 * 32, 7 * 32);
-            Game1.miscObjects.Add(sb);
-
+            VineMoveBlock vb = new VineMoveBlock(7 * 32, 4 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(7 * 32, 9 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(15 * 32, 9 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(14 * 32, 8 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(18 * 32, 2 * 32);
+            Game1.miscObjects.Add(vb);
+            //mook
+            FlowerTentacles ft = new FlowerTentacles(9 * 32, 4 * 32);
+            ft.setDefendTileGood(9, 4);
+            ft.setDefendTileBad(16, 4);
+            Game1.creatures.Add(ft);
+            //level tiles
+            levelTiles.Add(new LevelTile(23 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", 2));
         }
     }
 }
