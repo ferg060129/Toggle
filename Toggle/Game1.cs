@@ -63,6 +63,10 @@ namespace Toggle
 
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
+
+        private Vector2 exitButton2Position;
+        private Vector2 restartButtonPosition;
+
         private Texture2D startButton;
         private Texture2D exitButton;
 
@@ -88,6 +92,8 @@ namespace Toggle
         {
             startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 300);
             exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
+            exitButton2Position = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
+            restartButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
             base.Initialize();
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
@@ -127,7 +133,9 @@ namespace Toggle
             currentLevel = hubLevel;
 
             inventory = new Inventory(300, 300);
-            player = new Player(currentLevel.getPlayerStartingX(), currentLevel.getPlayerStartingY(), inventory, this);
+            player = new Player(13*32, 25*32, inventory, this);
+
+           
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
@@ -350,9 +358,13 @@ namespace Toggle
                 if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
                     ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
                 {
+                    LampI lamp = inventory.getLamp();
+                    if(lamp!= null && lamp.hasBatteries())
+                    {
+                        double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
+                        t.addLampLight(distance);
+                    }
 
-                    double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
-                    t.addLampLight(distance);
                     spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), new Color(Color.White, t.getOpacity()));
                 }
             }
@@ -412,30 +424,39 @@ namespace Toggle
         public void startUpdate()
         {
             MouseState mouseState = Mouse.GetState();
+            int mouseX, mouseY;
 
+            //Magic don't remove
+            if(graphics.IsFullScreen)
+            {
+                mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+            }
+            else
+            {
+                mouseX = mouseState.X;
+                mouseY = mouseState.Y;
+            }
             if(mouseState.LeftButton == ButtonState.Pressed)
             {
 
-                Rectangle startButtonRect = new Rectangle(975, 510, 225, 50);
-                Rectangle exitButtonRect = new Rectangle(975, 675, 225, 50);
-
-                /*
+                
                 Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
                                     (int)startButtonPosition.Y, 160, 64);
                 Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
                                     (int)exitButtonPosition.Y, 160, 64);
-                */
-                if(startButtonRect.Contains(new Vector2(mouseState.X,mouseState.Y)))
+                
+                if(startButtonRect.Contains(new Vector2(mouseX,mouseY)))
                 {
                     gameState = "play";
                 }
 
-                else if (exitButtonRect.Contains(new Vector2(mouseState.X, mouseState.Y)))
+                else if (exitButtonRect.Contains(new Vector2(mouseX, mouseY)))
                 {
                     Exit();
                 }
-                Console.Write(mouseState.X + " " + mouseState.Y);
             }
+            
            
         }
         public void startDraw()
@@ -449,6 +470,10 @@ namespace Toggle
 
         public void playUpdate()
         {
+            newKeyBoardState = Keyboard.GetState();
+            
+
+
             IsMouseVisible = false;
             if (worldState)
             {
@@ -459,8 +484,6 @@ namespace Toggle
                 GraphicsDevice.Clear(Color.Black);
             }
 
-           
-
             foreach (Creature c in creatures)
             {
                 c.move();
@@ -469,15 +492,32 @@ namespace Toggle
 
             checkCollisions();
 
+
             cam.update();
-            if (player.isDead())
-            {
-                gameState = "lost";
-            }
+
             if (shiftCooldown > 0)
             {
                 shiftCooldown--;
             }
+            if (player.isDead())
+            {
+                gameState = "lost";
+                IsMouseVisible = true;
+            }
+
+            inventoryUpdate();
+
+            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
+            {
+                gameState = "pause";
+            }
+
+
+
+            oldKeyBoardState = newKeyBoardState;
+
+
+            oldKeyBoardState = newKeyBoardState;
         }
         public void playDraw()
         {
@@ -503,7 +543,8 @@ namespace Toggle
             {
                 spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
             }
-
+            //if (!worldState)
+                drawDarkTiles(spriteBatch);
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
                 inventory.drawInventory(spriteBatch, -cam.getX(), -cam.getY());
@@ -519,7 +560,6 @@ namespace Toggle
                         {
                             string tip = i.getItemTip();
                             //spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
-
                         }
                     }
                 }
@@ -528,9 +568,8 @@ namespace Toggle
 
 
             spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
-            if (!worldState)
-                drawDarkTiles(spriteBatch);
-            spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
+
+            //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             drawShiftCD();
             drawHealthBar();
             
@@ -541,19 +580,67 @@ namespace Toggle
 
         public void pauseUpdate()
         {
+            newKeyBoardState = Keyboard.GetState();
+            if(newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
+            {
+                gameState = "play";
+            }
 
+
+
+            oldKeyBoardState = newKeyBoardState;
         }
         public void pauseDraw()
         {
-
+            playDraw();
         }
         public void lostUpdate()
         {
+            MouseState m = Mouse.GetState();
+            if (m.LeftButton == ButtonState.Pressed)
+            {
+                Rectangle replayButtonRect = new Rectangle(538,381,140,50);
+                Rectangle exitButtonRect = new Rectangle(544,483,90,45);
+                //Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
+                 //                   (int)startButtonPosition.Y, 160, 64);
+                //Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
+                  //                  (int)exitButtonPosition.Y, 160, 64);
+               // Console.Write(m.X+" "+m.Y+"\n");
+                int mouseX, mouseY;
+                mouseX = (int)(m.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                mouseY = (int)(m.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+
+                if (replayButtonRect.Contains(new Vector2(m.X, m.Y)))
+                {
+                    //setLevel(hubLevel);
+                    gameState = "play";
+                    worldState = true;
+                    currentLevel.unloadLevel();
+                    
+                    currentLevel = hubLevel;
+                    currentLevel.loadLevel();
+                    inventory = new Inventory(300, 300);
+                    player = new Player(13*32, 25*32, inventory, this);
+                    creatures.Add(player);
+                    cam = new Camera(player, width, height);
+                    cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
+                }
+                if (exitButtonRect.Contains(new Vector2(m.X, m.Y)))
+                {
+                    Exit();
+                }
+            }
+
+            
+
+
 
         }
         public void lostDraw()
         {
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(Textures.textures["lostScreen"], new Vector2(0, 0), Color.White);
+            spriteBatch.End();
         }
 
 
@@ -609,21 +696,67 @@ namespace Toggle
             for (int i = 0; i < data.Length; ++i) data[i] = topColor;
             rectTop.SetData(data);
 
+            Texture2D rectBottom;
 
-
-            Texture2D rectBottom = new Texture2D(graphics.GraphicsDevice, healthBar.Width, rectHeight);
-            data = new Color[healthBar.Width * (rectHeight)];
-            for (int i = 0; i < data.Length; ++i) data[i] = bottomColor;
-            rectBottom.SetData(data);
-
+            if (rectHeight > 0)
+            {
+                rectBottom = new Texture2D(graphics.GraphicsDevice, healthBar.Width, rectHeight);
+                data = new Color[healthBar.Width * (rectHeight)];
+                for (int i = 0; i < data.Length; ++i) data[i] = bottomColor;
+                rectBottom.SetData(data);
+                spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), Color.White);
+            }
             spriteBatch.Draw(rectTop, healthBarLocation, Color.White);
-            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), Color.White);
+           
 
             spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
 
         }
 
+        public void inventoryUpdate()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            {
+                MouseState mouseState = Mouse.GetState();
+                Vector2 inventoryPosition = new Vector2(-cam.getX(), -cam.getY());
+                Vector2 cursorPosition = new Vector2(mouseState.X - cam.getX() - width / 2, mouseState.Y - cam.getY() - height / 2);
+                foreach (InventoryItem i in inventory.getItems())
+                {
+                    if (i != null)
+                    {
+                        Rectangle r = new Rectangle(i.getX() + (int)(inventoryPosition.X + 0.5), i.getY() + (int)(inventoryPosition.Y + 0.5), 32, 32);
 
+                        if (mouseState.LeftButton == ButtonState.Released)
+                        {
+                            if(i.isSelected())
+                            {
+                                inventory.setNewIndex(i);
+                            }
+                            i.setSelected(false);
+                        }
+
+                        if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
+                        {
+                            if (r.Contains(cursorPosition.X, cursorPosition.Y))
+                            {
+                                i.setSelected(true);
+                            }
+                        }
+                        if (i.isSelected())
+                        {
+                            int curX = i.getX();
+                            int curY = i.getY();
+
+                            int deltaX = mouseState.X - oldMouseState.X;
+                            int deltaY = mouseState.Y - oldMouseState.Y;
+                            i.setX(curX + deltaX);
+                            i.setY(curY + deltaY);
+                        }
+                    }
+                }
+                oldMouseState = mouseState;
+            }
+        }
 
 
 

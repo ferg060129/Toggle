@@ -101,6 +101,7 @@ namespace Toggle
         public Vector2 getPositionVector() { return new Vector2(x, y); }
         public Vector2 getPosition(){return new Vector2(x, y); }
         public virtual bool getSolid() { return isSolid; }
+        public Vector2 getCenter() { return new Vector2(x + width/2.0f, y + height/2.0f); }
 
     }
 }

@@ -14,6 +14,7 @@ namespace Toggle
         protected string itemTipGood = "Banana";
         protected string itemTipBad = "Rotten banana :c";
         protected bool hovered = false;
+        protected bool selected = false;
         public InventoryItem() : base()
         {
             width = 32;
@@ -47,8 +48,19 @@ namespace Toggle
             hovered = b;
         }
 
+        public void setSelected(bool sel)
+        {
+            selected = sel;
+        }
 
+        public bool isSelected()
+        {
+            return selected;
+        }
 
+        public virtual void combineItems(InventoryItem i)
+        {
 
+        }
     }
 }

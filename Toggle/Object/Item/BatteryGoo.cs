@@ -22,7 +22,7 @@ namespace Toggle
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new GreenBlockI();
+            inventoryItem = new BatteryGooI();
         }
     }
 }

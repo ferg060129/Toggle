@@ -8,21 +8,10 @@ namespace Toggle
     class LevelTile : Tile
     {
         string level;
-        int enterDirection;
-        int a;
-        public LevelTile(int xLocation, int yLocation, String gGraphic, String bGraphic, string level, int enterDirection)
+        public LevelTile(int xLocation, int yLocation, String gGraphic, String bGraphic, string level)
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {
             this.level = level;
-            this.enterDirection = enterDirection;
-        }
-
-
-
-
-        public int getEnterDirection()
-        {
-            return enterDirection;
         }
 
         public string getLevel()
