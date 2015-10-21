@@ -27,14 +27,14 @@ namespace Toggle
             Button myButton = new Button(32 * 19, 32 * 21,myGate);
             Game1.miscObjects.Add(myButton);
 
-            /*
+          
             GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);
             Game1.items.Add(gb);
-            gb = new GreenBlock(11 * 32, 25 * 32);
-            Game1.items.Add(gb);
-            gb = new GreenBlock(10 * 32, 25 * 32);
-            Game1.items.Add(gb);
-            */
+            /* gb = new GreenBlock(11 * 32, 25 * 32);
+           Game1.items.Add(gb);
+           gb = new GreenBlock(10 * 32, 25 * 32);
+           Game1.items.Add(gb);
+           */
 
             //level tiles
             levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level"));

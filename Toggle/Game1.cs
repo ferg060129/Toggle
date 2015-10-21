@@ -562,7 +562,7 @@ namespace Toggle
                         if (r.Contains(cursorPosition))
                         {
                             string tip = i.getItemTip();
-                            //spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
+                            spriteBatch.DrawString(sf, tip, new Vector2(-cam.getX(), -cam.getY() + 70), Color.Black);
                         }
                     }
                 }

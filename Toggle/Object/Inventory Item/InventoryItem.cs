@@ -58,9 +58,10 @@ namespace Toggle
             return selected;
         }
 
-        public virtual void combineItems(InventoryItem i)
+        //return false if items were not combined
+        public virtual bool combineItems(InventoryItem i)
         {
-
+            return false;
         }
     }
 }

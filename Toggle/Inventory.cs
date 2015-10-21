@@ -114,7 +114,8 @@ namespace Toggle
                     Vector2 itemCenter = i.getCenter();
                     //int itemX = (int)(itemCenter.X + 0.5);
                     //int itemY = (int)(itemCenter.Y + 0.5);
-                    if(itemRectangles[x,y].Contains(itemCenter))
+                    //Blame merle. He'll fix this later.
+                    if(itemRectangles[x,y].Contains(itemCenter) && (items[x,y] == null ||(items[x,y] != null && !items[x,y].Equals(i))))
                     {
                         if(items[x,y] == null)
                         {
@@ -125,8 +126,8 @@ namespace Toggle
                         }
                         else
                         {
-                            removeItem(i);
-                            items[x, y].combineItems(i);
+                            if(items[x, y].combineItems(i))
+                                removeItem(i);
                         }
                         
                         return;

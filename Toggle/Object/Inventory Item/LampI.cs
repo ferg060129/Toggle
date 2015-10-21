@@ -21,7 +21,7 @@ namespace Toggle
         }
 
 
-        public override void combineItems(InventoryItem i)
+        public override bool combineItems(InventoryItem i)
         {
             if(i is BatteryGooI && i.getState())
             {
@@ -30,7 +30,9 @@ namespace Toggle
                 itemTipBad = "I am bright as the sun";
                 goodGraphic = Textures.textures["lampon"];
                 badGraphic = Textures.textures["lampon"];
+                return true;
             }
+            return false;
         }
 
         public bool hasBatteries()
