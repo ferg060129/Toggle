@@ -60,7 +60,8 @@ namespace Toggle
         int shiftCooldown = 0;
         int maxShiftCooldown = 60 * 5;
 
-
+        private float blackScreenAlpha;
+        private bool fadeDirection;
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
         private Texture2D startButton;
@@ -73,7 +74,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             //IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -91,6 +92,8 @@ namespace Toggle
             base.Initialize();
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
+            fadeDirection = false;
+            blackScreenAlpha = 0;
             
         }
 
@@ -471,6 +474,15 @@ namespace Toggle
             {
                 shiftCooldown--;
             }
+
+            if ((fadeDirection == true) && (blackScreenAlpha < 1))
+            {
+                blackScreenAlpha+=0.05f;
+            }
+            else if ((fadeDirection == false) && (blackScreenAlpha > 0))
+            {
+                blackScreenAlpha-=0.05f;
+            }
         }
         public void playDraw()
         {
@@ -526,6 +538,7 @@ namespace Toggle
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             drawShiftCD();
             drawHealthBar();
+            //spriteBatch.Draw(Textures.textures["blackScreen"], new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32), new Vector2(800, 640), Color.White);
             
             
             spriteBatch.End();
