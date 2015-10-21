@@ -99,18 +99,34 @@
     <Content Include="Content\badgreenblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\baditemblock.png" />
+    <Content Include="Content\baditemblock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\battery.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BigPicture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\climbing_up_the_walls.mp3" />
+    <Content Include="Content\buttonHDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\buttonHUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\climbing_up_the_walls.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\crumblingblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\cursor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gateClose.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\gateOpen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\goo.png">
@@ -183,7 +199,9 @@
     </Content>
     <Content Include="Content\player.png" />
     <Content Include="Content\player_right.png" />
-    <Content Include="Content\TestImage.png" />
+    <Content Include="Content\TestImage.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Tile\grass2.png" />
     <Content Include="Content\Tile\grass3.png" />
     <Content Include="Content\Tile\grass4.png" />
@@ -203,6 +221,12 @@
     <Content Include="Content\Tile\woodenwalltoprightcorner.png" />
     <Content Include="Content\Tile\woodenwallvertical.png" />
     <Content Include="Content\Tile\WoodFloor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\titleScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\titleScreen2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\vineBlock.png">
