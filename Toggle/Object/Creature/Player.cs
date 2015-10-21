@@ -21,8 +21,6 @@ namespace Toggle
 
 
 
-
-
         public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["sprites"];
@@ -101,6 +99,7 @@ namespace Toggle
 
         public void moveUpdate()
         {
+            ticks++;
             int oldDirection = direction;
             if (currentlyMove)
             {
@@ -133,7 +132,6 @@ namespace Toggle
             {
                 currentlyMove = false;
             }
-            imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, true);
             hitBox = new Rectangle(x, y, width, height);
         }
 
