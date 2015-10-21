@@ -56,11 +56,16 @@ namespace Toggle
         Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState;
+        int shiftCooldown = 0;
+        int maxShiftCooldown = 60 * 5;
+
 
         private Vector2 startButtonPosition;
         private Vector2 exitButtonPosition;
         private Texture2D startButton;
         private Texture2D exitButton;
+
+        Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
 
         public Game1()
@@ -69,7 +74,7 @@ namespace Toggle
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
             //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
@@ -116,7 +121,7 @@ namespace Toggle
             gate1Level = new Gate1Level();
             complex1Level = new Complex1();
 
-            currentLevel = complex1Level;
+            currentLevel = hubLevel;
 
             inventory = new Inventory(300, 300);
             player = new Player(currentLevel.getPlayerStartingX(), currentLevel.getPlayerStartingY(), inventory, this);
@@ -133,6 +138,7 @@ namespace Toggle
             
             MediaPlayer.Play(song);
             gameState = "play";
+
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()
@@ -431,13 +437,23 @@ namespace Toggle
             player.moveUpdate();
 
             checkCollisions();
+
+            cam.update();
+            if (player.isDead())
+            {
+                gameState = "lost";
+            }
+            if (shiftCooldown > 0)
+            {
+                shiftCooldown--;
+            }
         }
         public void playDraw()
         {
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
            
-            cam.update();
+            
             MouseState mouseState = Mouse.GetState();
             
             drawMap(spriteBatch);
@@ -484,6 +500,10 @@ namespace Toggle
             if (!worldState)
                 drawDarkTiles(spriteBatch);
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
+            drawShiftCD();
+            drawHealthBar();
+            
+            
             spriteBatch.End();
 
         }
@@ -503,8 +523,103 @@ namespace Toggle
         public void lostDraw()
         {
 
-        }    
+        }
+
+
+
+        public void drawShiftCD()
+        {
+            Texture2D rect;
+            int rectWidth = (int)((1 - (double)shiftCooldown/maxShiftCooldown) * 124 + 0.5);
+            Vector2 shiftCDLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 10);
+            Rectangle r = new Rectangle(0, 0, (int)(rectWidth+ 0.5), 12);
+            if(rectWidth > 0)
+            {
+                rect = new Texture2D(graphics.GraphicsDevice, r.Width, r.Height);
+                Color[] data = new Color[r.Width * r.Height];
+                for (int i = 0; i < data.Length; ++i) data[i] = Color.Purple;
+                rect.SetData(data);
+                spriteBatch.Draw(rect, new Vector2(shiftCDLocation.X + 2, shiftCDLocation.Y + 2), Color.White);
+            }
+            spriteBatch.Draw(Textures.textures["shiftCooldown"], shiftCDLocation, Color.White);
+            if(player.isLocked())
+            {
+                Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
+                spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+            }
+        }
+
+
+        public void drawHealthBar()
+        {
+
+            Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height/2 + 32);
+            int rectHeight = (int)(player.getProportion() * healthBar.Height);
+            Color bottomColor;
+            Color topColor;
+
+            if (worldState)
+            {
+                bottomColor = Color.White;
+                topColor = Color.Gray;
+            }
+               
+            else
+            {
+                bottomColor = Color.Gray;
+                topColor = Color.White;
+            }
+
+
+
+
+            Texture2D rectTop = new Texture2D(graphics.GraphicsDevice, healthBar.Width, healthBar.Height - rectHeight);
+            Color[] data = new Color[healthBar.Width * (healthBar.Height - rectHeight)];
+            for (int i = 0; i < data.Length; ++i) data[i] = topColor;
+            rectTop.SetData(data);
+
+
+
+            Texture2D rectBottom = new Texture2D(graphics.GraphicsDevice, healthBar.Width, rectHeight);
+            data = new Color[healthBar.Width * (rectHeight)];
+            for (int i = 0; i < data.Length; ++i) data[i] = bottomColor;
+            rectBottom.SetData(data);
+
+            spriteBatch.Draw(rectTop, healthBarLocation, Color.White);
+            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), Color.White);
+
+            spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
+
+        }
+
+
+
+
+
+        /*
+        public void drawHollowRectangle(Rectangle r, Vector2 position, int thickness, Color color)
+        {
+
+            var t = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            t.SetData(new[] { Color.White });
+            spriteBatch.Draw(t, position, new Rectangle(0, 0, thickness, r.Height), color); // Left
+            spriteBatch.Draw(t, position, new Rectangle(r.Width, 0, thickness, r.Height), color); // Right
+            spriteBatch.Draw(t, position, new Rectangle(0, 0, r.Width, thickness), color); // Top
+            spriteBatch.Draw(t, position, new Rectangle(0, r.Height, r.Width, thickness), color); // Bottom
+        }
+        */
+
+        public void setShiftCD()
+        {
+            shiftCooldown = maxShiftCooldown;
+        }
+        public int getShiftCD()
+        {
+            return shiftCooldown;
+        }
     }
+
+
 
     enum GameState
     {
@@ -513,4 +628,8 @@ namespace Toggle
         pause,
         lost
     }
+
+
+    
+
 }

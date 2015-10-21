@@ -17,6 +17,9 @@ namespace Toggle
         bool stateLocked = false;
         bool currentlyMove = false;
         int distanceTraveled = 0;
+        double proportion = 0;
+
+
 
 
 
@@ -34,7 +37,7 @@ namespace Toggle
             collidable = false;
             inventory = i;
             engine = eng;
-           
+            proportion = 0.5;
         }
 
 
@@ -78,14 +81,22 @@ namespace Toggle
             if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
-                if(!stateLocked)
+                if(!stateLocked && engine.getShiftCD() == 0)
+                {
+                    engine.setShiftCD();
                     engine.switchStates();
+                }
+                    
             }
             oldKeyBoardState = newKeyBoardState;
 
             //Get next image for sprite
             imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
             hitBox = new Rectangle(x, y, width, height);
+
+
+            proportion -= 0.0001;
+
         }
 
         public void moveUpdate()
@@ -127,6 +138,8 @@ namespace Toggle
         }
 
 
+        
+
         public void pickUp(Item i)
         {
             inventory.addInventoryItem(i.pickUpItem());
@@ -134,7 +147,7 @@ namespace Toggle
         public override void reportCollision(Object o)
         {
 
-            if(o is Creature || o is Wall || o.getSolid())
+            if(o.getSolid())
             {
                 currentlyMove = false;
             }
@@ -180,5 +193,36 @@ namespace Toggle
             }
 
         }
+
+
+        public double getProportion()
+        {
+            return proportion;
+        }
+
+
+        public override void switchState()
+        {
+            
+        }
+
+
+        public override void setState(bool st)
+        {
+            base.setState(st);
+            proportion = 1 - proportion;
+        }
+
+        public bool isDead()
+        {
+            return proportion <= 0;
+        }
+
+        public bool isLocked()
+        {
+            return stateLocked;
+        }
+
+        
     }
 }

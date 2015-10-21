@@ -58,7 +58,7 @@ namespace Toggle
                 return badGraphic;
         }
 
-        public void setState(bool st)
+        public virtual void setState(bool st)
         {
             state = st;
         }
