@@ -66,13 +66,19 @@ namespace Toggle
                     bool solid = (images[2].Length > 0);
                     if(c == 'a')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel",3);
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel");
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }
                     else if (c == 'b')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel",1);
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel");
+                        Game1.levelTiles.Add(t);
+                        Game1.tiles.Add(t);
+                    }
+                    else if (c == 'c')
+                    {
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "hubLevel");
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }

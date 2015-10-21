@@ -150,6 +150,10 @@ namespace Toggle
             }
 
             base.reportCollision(o);
+            if(o is FlowerTentacles && !o.getState())
+            {
+                proportion -= 0.001;
+            }
             if (o is Item)
             {
                 pickUp((Item)o);
@@ -180,15 +184,9 @@ namespace Toggle
             {
                 if(this.x == o.getX() && this.y == o.getY())
                 {
-                    if(direction == ((LevelTile)o).getEnterDirection())
-                    {
-                        engine.setLevel(((LevelTile)o).getLevel());
-                    }
-                    
+                    engine.setLevel(((LevelTile)o).getLevel());
                 }
-                
             }
-
         }
 
 
