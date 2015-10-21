@@ -48,6 +48,9 @@ namespace Toggle
             BatteryGoo battery = new BatteryGoo(32 * 2, 32 * 2);
             Game1.items.Add(battery);
 
+            Lamp mylamp = new Lamp(32 * 20, 32 * 2);
+            Game1.items.Add(mylamp);
+
             GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
             Game1.items.Add(b);
             VineMoveBlock vm = new VineMoveBlock(32 * 17, 32 * 8);
