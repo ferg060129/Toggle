@@ -75,7 +75,7 @@ namespace Toggle
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
-            //IsMouseVisible = true;
+            IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
             //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
@@ -415,10 +415,8 @@ namespace Toggle
 
             if(mouseState.LeftButton == ButtonState.Pressed)
             {
-                Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
-                                    (int)startButtonPosition.Y, 160, 64);
-                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
-                                    (int)exitButtonPosition.Y, 160, 64);
+                Rectangle startButtonRect = new Rectangle(975, 510, 225, 50);
+                Rectangle exitButtonRect = new Rectangle(975, 675, 225, 50);
 
                 if(startButtonRect.Contains(new Vector2(mouseState.X,mouseState.Y)))
                 {
@@ -429,6 +427,7 @@ namespace Toggle
                 {
                     Exit();
                 }
+                Console.Write(mouseState.X + " " + mouseState.Y);
             }
            
         }
