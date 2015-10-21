@@ -11,24 +11,51 @@ namespace Toggle
             : base()
         {
             map = "gate2Level.txt";
-            playerStartingX = 2 * 32;
-            playerStartingY = 4 * 32;
+            playerStartingX = 12 * 32;
+            playerStartingY = 10 * 32;
         }
         public override void loadLevelObjects()
         {
-            Gate myGate = new Gate(12 * 32, 9 * 32);
+            //gates and buttons
+            Gate myGate = new Gate(10 * 32, 7 * 32);
             Game1.miscObjects.Add(myGate);
             Button myButton = new Button(12 * 32, 12 * 32, myGate);
+            myButton.setHeavyButton(true);
             Game1.miscObjects.Add(myButton);
+            myGate = new Gate(13 * 32, 7 * 32);
+            Game1.miscObjects.Add(myGate);
+            myButton = new Button(12 * 32, 12 * 32, myGate);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
+            //blocks
             VineMoveBlock vb = new VineMoveBlock(7 * 32, 4 * 32);
+            vb = new VineMoveBlock(10 * 32, 9 * 32);
             Game1.miscObjects.Add(vb);
-            vb = new VineMoveBlock(7 * 32, 9 * 32);
+            vb = new VineMoveBlock(10 * 32, 8 * 32);
             Game1.miscObjects.Add(vb);
-            vb = new VineMoveBlock(15 * 32, 9 * 32);
+            vb = new VineMoveBlock(10 * 32, 6 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(10 * 32, 5 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(9 * 32, 8 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(9 * 32, 6 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(13 * 32, 9 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(13 * 32, 8 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(13 * 32, 6 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(13 * 32, 5 * 32);
             Game1.miscObjects.Add(vb);
             vb = new VineMoveBlock(14 * 32, 8 * 32);
             Game1.miscObjects.Add(vb);
-            vb = new VineMoveBlock(18 * 32, 2 * 32);
+            vb = new VineMoveBlock(14 * 32, 6 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(11 * 32, 7 * 32);
+            Game1.miscObjects.Add(vb);
+            vb = new VineMoveBlock(12 * 32, 7 * 32);
             Game1.miscObjects.Add(vb);
             //mook
         }

@@ -87,9 +87,20 @@ namespace Toggle
                 Rectangle hitBoxOther = m.getHitBox();
                 if (!m.Equals(this))
                 {
-                    if (nextHitBox.Intersects(hitBoxOther))
+                    if (m.getSolid() == true)
                     {
-                        return false;
+                        if (nextHitBox.Intersects(hitBoxOther))
+                        {
+                            return false;
+                        }
+                    }
+                    //depress heavy buttons
+                    if ((m is Button) && (nextHitBox.Intersects(hitBoxOther)))
+                    {
+                        if (((Button)m).isHeavyButton() == true)
+                        {
+                            m.onTrigger();
+                        }
                     }
                 }
             }

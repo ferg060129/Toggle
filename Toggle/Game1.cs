@@ -199,7 +199,10 @@ namespace Toggle
                         c.reportCollision(p);
                         if (p is Button)
                         {
-                            p.onTrigger();
+                            if (((Button)p).isHeavyButton() == false)
+                            {
+                                p.onTrigger();
+                            }
                         }
                     }
                 }
