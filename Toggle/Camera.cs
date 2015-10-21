@@ -85,8 +85,8 @@ namespace Toggle
                 y++;
             }
             */
-            x = camFocus.getX() ;
-            y = camFocus.getY() ;
+            x = camFocus.getX();
+            y = camFocus.getY();
             while (x < 0)
             {
                 x++;

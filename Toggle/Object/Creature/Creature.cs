@@ -16,6 +16,7 @@ namespace Toggle
         protected Rectangle previousHitBox;
 
         protected int defendTileGoodX, defendTileGoodY, defendTileBadX, defendTileBadY;
+        protected Object attackTarget;
 
         //Variables to keep track of animation sprite.
         protected int column = 1, columnGroup = 0, increment = 1, row = 0, waitCounter = 0, oldDirection = -1; protected bool moving = true;
@@ -37,7 +38,7 @@ namespace Toggle
             else
                 badMove();
 
-             imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
+            imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
             hitBox = new Rectangle(x, y, width, height);
         }
 
@@ -340,6 +341,11 @@ namespace Toggle
         {
             defendTileBadX = dTX;
             defendTileBadY = dTY;
+        }
+
+        public void setAttackTarget(Object o)
+        {
+            attackTarget = o;
         }
 
 
