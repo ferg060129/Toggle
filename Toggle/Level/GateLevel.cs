@@ -18,7 +18,7 @@ namespace Toggle
         {
             Gate myGate = new Gate(32 * 22, 32 * 11);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 24, 32 * 14, myGate);
+            Button myButton = new Button(32 * 24, 32 * 12, myGate);
             Game1.miscObjects.Add(myButton);
             VineMoveBlock block = new VineMoveBlock(32 * 23, 32 * 15);
             Game1.miscObjects.Add(block);

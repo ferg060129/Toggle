@@ -41,7 +41,9 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="Level\Class1.cs" />
+    <Compile Include="Level\Complex1.cs" />
+    <Compile Include="Level\Gate1Level.cs" />
+    <Compile Include="Level\GateLevel.cs" />
     <Compile Include="Level\HouseLevel.cs" />
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />

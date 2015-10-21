@@ -44,6 +44,8 @@ namespace Toggle
         SchoolLevel schoolLevel;
         Level currentLevel;
         GateLevel gateLevel;
+        Gate1Level gate1Level;
+        Complex1 complex1Level;
         int time;
         int width;
         int height;
@@ -68,8 +70,8 @@ namespace Toggle
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            graphics.PreferredBackBufferWidth = 1400;
-            graphics.PreferredBackBufferHeight = 800;
+            //graphics.PreferredBackBufferWidth = 1400;
+            //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
             
           
@@ -111,8 +113,10 @@ namespace Toggle
             houseLevel = new HouseLevel();
             schoolLevel = new SchoolLevel();
             gateLevel = new GateLevel();
+            gate1Level = new Gate1Level();
+            complex1Level = new Complex1();
 
-            currentLevel = gateLevel;
+            currentLevel = complex1Level;
 
             inventory = new Inventory(300, 300);
             player = new Player(currentLevel.getPlayerStartingX(), currentLevel.getPlayerStartingY(), inventory, this);
@@ -424,6 +428,7 @@ namespace Toggle
             {
                 c.move();
             }
+            player.moveUpdate();
 
             checkCollisions();
         }
@@ -475,7 +480,7 @@ namespace Toggle
             }
 
 
-           // spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             if (!worldState)
                 drawDarkTiles(spriteBatch);
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);

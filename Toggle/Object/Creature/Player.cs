@@ -15,6 +15,8 @@ namespace Toggle
         Inventory inventory;
         Game1 engine;
         bool stateLocked = false;
+        bool currentlyMove = false;
+        int distanceTraveled = 0;
 
 
 
@@ -44,30 +46,34 @@ namespace Toggle
             //Variables to keep track of animation sprite.
             int oldDirection = direction; 
             moving = true;
-            
-            if (newKeyBoardState.IsKeyDown(Keys.Up))
+
+            if (currentlyMove == false)
             {
-                direction = 1;
-                y -= velocity;
-            }
-            else if (newKeyBoardState.IsKeyDown(Keys.Down))
-            {
-                direction = 3;
-                y += velocity;
-            }
-            else if (newKeyBoardState.IsKeyDown(Keys.Left))
-            {
-                direction = 0;
-                x -= velocity;
-            }
-            else if (newKeyBoardState.IsKeyDown(Keys.Right))
-            {
-                direction = 2;
-                x += velocity;
-            }
-            else
-            {
-                moving = false;
+                distanceTraveled = 0;
+                if (newKeyBoardState.IsKeyDown(Keys.Up))
+                {
+                    direction = 1;
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Down))
+                {
+                    direction = 3;
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Left))
+                {
+                    direction = 0;
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Right))
+                {
+                    direction = 2;
+                    currentlyMove = true;
+                }
+                else
+                {
+                    moving = false;
+                }
             }
             if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
@@ -82,6 +88,44 @@ namespace Toggle
             hitBox = new Rectangle(x, y, width, height);
         }
 
+        public void moveUpdate()
+        {
+            int oldDirection = direction;
+            if (currentlyMove)
+            {
+                switch (direction)
+                {
+                    default:
+                        break;
+                    case 0:
+                        x -= velocity;
+                        break;
+                    case 1:
+                        y -= velocity;
+                        break;
+                    case 2:
+                        x += velocity;
+                        break;
+                    case 3:
+                        y += velocity;
+                        break;
+                }
+                distanceTraveled += velocity;
+            }
+            //snapped to tile
+            if ((x % 32 == 0) && (y % 32 == 0))
+            {
+                currentlyMove = false;
+            }
+            //failsafe
+            if (distanceTraveled >= 32)
+            {
+                currentlyMove = false;
+            }
+            imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, true);
+            hitBox = new Rectangle(x, y, width, height);
+        }
+
 
         public void pickUp(Item i)
         {
@@ -89,6 +133,7 @@ namespace Toggle
         }
         public override void reportCollision(Object o)
         {
+            currentlyMove = false;
             base.reportCollision(o);
             if (o is Item)
             {
