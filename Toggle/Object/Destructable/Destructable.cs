@@ -9,7 +9,7 @@ namespace Toggle
     {
         public Destructable(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
-
+            isSolid = true;
         }
 
     }

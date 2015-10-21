@@ -9,7 +9,7 @@ namespace Toggle
     {
         public Wall(int xLocation, int yLocation, String gGraphic, String bGraphic) : base(xLocation,yLocation,gGraphic,bGraphic)
         {
-
+            isSolid = true;
         }
 
     }
