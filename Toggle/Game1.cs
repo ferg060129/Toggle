@@ -60,6 +60,8 @@ namespace Toggle
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
 
+        Texture2D rect, rectTop, rectBottom;
+
         private float blackScreenAlpha;
         private bool fadeDirection;
         private Vector2 startButtonPosition;
@@ -573,8 +575,8 @@ namespace Toggle
             spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
 
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
-            drawShiftCD();
-            drawHealthBar();
+           // drawShiftCD();
+           // drawHealthBar();
             if (blackScreenAlpha > 0)
             {
                 spriteBatch.Draw(Textures.textures["blackScreen"], new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32), new Rectangle(0, 0, 800, 640), new Color(Color.White, blackScreenAlpha));
@@ -667,7 +669,7 @@ namespace Toggle
         }
         public void drawShiftCD()
         {
-            Texture2D rect;
+            
             int rectWidth = (int)((1 - (double)shiftCooldown/maxShiftCooldown) * 124 + 0.5);
             Vector2 shiftCDLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 10);
             Rectangle r = new Rectangle(0, 0, (int)(rectWidth+ 0.5), 12);
@@ -711,12 +713,12 @@ namespace Toggle
 
 
 
-            Texture2D rectTop = new Texture2D(graphics.GraphicsDevice, healthBar.Width, healthBar.Height - rectHeight);
+            rectTop = new Texture2D(graphics.GraphicsDevice, healthBar.Width, healthBar.Height - rectHeight);
             Color[] data = new Color[healthBar.Width * (healthBar.Height - rectHeight)];
             for (int i = 0; i < data.Length; ++i) data[i] = topColor;
             rectTop.SetData(data);
 
-            Texture2D rectBottom;
+           
 
             if (rectHeight > 0)
             {
