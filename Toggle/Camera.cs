@@ -81,11 +81,11 @@ namespace Toggle
             {
                 y++;
             }
-            while (x > boundX)
+            while (x > boundX - (screenWidth/2))
             {
                 x--;
             }
-            while (y > boundY)
+            while (y > boundY - (screenHeight / 2))
             {
                 y--;
             }
