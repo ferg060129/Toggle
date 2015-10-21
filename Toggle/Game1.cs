@@ -53,14 +53,20 @@ namespace Toggle
         Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState;
-        
+
+        private Vector2 startButtonPosition;
+        private Vector2 exitButtonPosition;
+        private Texture2D startButton;
+        private Texture2D exitButton;
+
+
         public Game1()
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
-            
+            IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
             //graphics.PreferredBackBufferHeight = 800;
            // graphics.ApplyChanges();
@@ -69,7 +75,9 @@ namespace Toggle
         }
 
         protected override void Initialize()
-        {   
+        {
+            startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 80, 200);
+            exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) - 80, 300);
             base.Initialize();
             //width = Window.ClientBounds.Width;
             //height = Window.ClientBounds.Height;
@@ -78,6 +86,11 @@ namespace Toggle
 
         protected override void LoadContent()
         {
+
+            startButton = Content.Load<Texture2D>(@"start");
+            exitButton = Content.Load<Texture2D>(@"exit");
+
+
             width = GraphicsDevice.PresentationParameters.Bounds.Width;
             height = GraphicsDevice.PresentationParameters.Bounds.Height;
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -113,7 +126,7 @@ namespace Toggle
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
             MediaPlayer.Play(song);
-            gameState = "play";
+            gameState = "start";
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()
@@ -218,6 +231,8 @@ namespace Toggle
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.Red);
+            
             switch (gameState)
             {
                 case "start":
@@ -233,6 +248,7 @@ namespace Toggle
                     lostDraw();
                     break;
             }
+          
             base.Draw(gameTime);
         }
         public void switchStates()
@@ -339,28 +355,43 @@ namespace Toggle
             creatures.Add(player);
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();
-           
-             
         }
-
-
-
-
-
-
 
         //For each game state
         public void startUpdate()
         {
+            MouseState mouseState = Mouse.GetState();
 
+            if(mouseState.LeftButton == ButtonState.Pressed)
+            {
+                Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
+                                    (int)startButtonPosition.Y, 160, 64);
+                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
+                                    (int)exitButtonPosition.Y, 160, 64);
+
+                if(startButtonRect.Contains(new Vector2(mouseState.X,mouseState.Y)))
+                {
+                    gameState = "play";
+                }
+
+                else if (exitButtonRect.Contains(new Vector2(mouseState.X, mouseState.Y)))
+                {
+                    Exit();
+                }
+            }
+           
         }
         public void startDraw()
         {
-
+            spriteBatch.Begin();
+            spriteBatch.Draw(Textures.textures["start"], startButtonPosition,  Color.White);
+            spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition,  Color.White);
+            spriteBatch.End();
         }
 
         public void playUpdate()
         {
+            IsMouseVisible = false;
             if (worldState)
             {
                 GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -381,10 +412,12 @@ namespace Toggle
         }
         public void playDraw()
         {
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
+           
             cam.update();
             MouseState mouseState = Mouse.GetState();
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
-
+            
             drawMap(spriteBatch);
 
             foreach (Item i in items)
@@ -404,8 +437,6 @@ namespace Toggle
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
-
-
                 inventory.drawInventory(spriteBatch, -cam.getX(), -cam.getY());
                 Vector2 cursorPosition = new Vector2(mouseState.X - cam.getX() - width / 2, mouseState.Y - cam.getY() - height / 2);
                 foreach (InventoryItem i in inventory.getItems())
@@ -447,9 +478,14 @@ namespace Toggle
         public void lostDraw()
         {
 
-        }
+        }    
+    }
 
-    
-         
+    enum GameState
+    {
+        start,
+        play,
+        pause,
+        lost
     }
 }
