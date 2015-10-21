@@ -60,6 +60,7 @@ namespace Toggle
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
 
+        private string currentLevelString;
         private float blackScreenAlpha;
         private bool fadeDirection;
         private Vector2 startButtonPosition;
@@ -78,7 +79,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -100,6 +101,7 @@ namespace Toggle
             //height = Window.ClientBounds.Height;
             fadeDirection = false;
             blackScreenAlpha = 0;
+            currentLevelString = "hub";
             
         }
 
@@ -156,6 +158,11 @@ namespace Toggle
             MediaPlayer.Play(song);
             gameState = "start";
             //MediaPlayer.IsRepeating = true;
+        }
+
+        public void reloadLevel()
+        {
+            setLevel(currentLevelString);
         }
         protected override void UnloadContent()
         {
@@ -380,6 +387,7 @@ namespace Toggle
 
         public void setLevel(string level)
         {
+            currentLevelString = level;
             levelTiles.Clear();
             //Eventually turn level strings into global constants
             if(currentLevel != null)
@@ -473,14 +481,9 @@ namespace Toggle
 
         public void playUpdate()
         {
-<<<<<<< HEAD
+
             time++;
-=======
             newKeyBoardState = Keyboard.GetState();
-            
-
-
->>>>>>> origin/master
             IsMouseVisible = false;
             if (worldState)
             {
@@ -518,6 +521,10 @@ namespace Toggle
             {
                 gameState = "pause";
             }
+            else if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
+            {
+                reloadLevel();
+            }
 
 
 
@@ -530,12 +537,8 @@ namespace Toggle
         {
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
-           
-            
             MouseState mouseState = Mouse.GetState();
-            
             drawMap(spriteBatch);
-
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
@@ -574,13 +577,14 @@ namespace Toggle
             }
 
 
-            spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
 
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             drawShiftCD();
             drawHealthBar();
+            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * (((float)Math.Sin(time * 3.14529 / 180) / 4) + .5f));
             //rays of light juice
-            if (worldState)
+            if ((worldState) && (currentLevel.Equals(houseLevel) == false))
             {
                 spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 4));
             }
@@ -606,7 +610,9 @@ namespace Toggle
         }
         public void pauseDraw()
         {
-            playDraw();
+            spriteBatch.Begin();
+            spriteBatch.Draw(Textures.textures["pause"], new Vector2(0, 0), new Rectangle(0, 0, 800, 640), Color.White);
+            spriteBatch.End();
         }
         public void lostUpdate()
         {

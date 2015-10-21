@@ -153,6 +153,9 @@
     <Content Include="Content\moveableVineBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\pause.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\shiftCooldown.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
