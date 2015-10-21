@@ -58,7 +58,7 @@ namespace Toggle
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState;
         int shiftCooldown = 0;
-        int maxShiftCooldown = 60 * 5;
+        int maxShiftCooldown = 10 * 5;
 
         private float blackScreenAlpha;
         private bool fadeDirection;
@@ -74,7 +74,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -481,15 +481,6 @@ namespace Toggle
             {
                 shiftCooldown--;
             }
-
-            if ((fadeDirection == true) && (blackScreenAlpha < 1))
-            {
-                blackScreenAlpha+=0.05f;
-            }
-            else if ((fadeDirection == false) && (blackScreenAlpha > 0))
-            {
-                blackScreenAlpha-=0.05f;
-            }
         }
         public void playDraw()
         {
@@ -545,10 +536,11 @@ namespace Toggle
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             drawShiftCD();
             drawHealthBar();
-            //spriteBatch.Draw(Textures.textures["blackScreen"], new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32), new Vector2(800, 640), Color.White);
-            
-            
-            spriteBatch.End();
+            if (blackScreenAlpha > 0)
+            {
+                spriteBatch.Draw(Textures.textures["blackScreen"], new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32), new Rectangle(0, 0, 800, 640), new Color(Color.White, blackScreenAlpha));
+            }
+                spriteBatch.End();
 
         }
 
@@ -569,8 +561,23 @@ namespace Toggle
 
         }
 
-
-
+        //these don't work fix them plz
+        public void fadeToBlack()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                blackScreenAlpha += 0.05f;
+                playDraw();
+            }
+        }
+        public void fadeFromBlack()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                blackScreenAlpha -= 0.05f;
+                playDraw();
+            }
+        }
         public void drawShiftCD()
         {
             Texture2D rect;
