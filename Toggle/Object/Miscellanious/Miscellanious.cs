@@ -12,5 +12,10 @@ namespace Toggle
         {
 
         }
+
+        public virtual void onShift()
+        {
+
+        }
     }
 }

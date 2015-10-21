@@ -155,6 +155,7 @@ namespace Toggle
 
             checkCollisions();
         }
+
         public void checkCollisions()
         {
             foreach(Creature c in creatures)
@@ -181,7 +182,7 @@ namespace Toggle
                     }
                 }
 
-                foreach (Pushable p in miscObjects)
+                foreach (Miscellanious p in miscObjects)
                 {
                     Rectangle hitBoxOther = p.getHitBox();
                     if (c.getHitBox().Intersects(hitBoxOther))
@@ -277,7 +278,8 @@ namespace Toggle
 
             spriteBatch.DrawString(sf, player.getX()/32 + " " + player.getY()/32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             if(!worldState)
-            drawDarkTiles(spriteBatch);
+                drawDarkTiles(spriteBatch);
+            spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             spriteBatch.End();
             
 
@@ -300,6 +302,17 @@ namespace Toggle
             foreach (Miscellanious m in miscObjects)
             {
                 m.setState(worldState);
+                m.onShift();
+                //Check if we are in a strawberry and snap into it
+                if ((worldState == true) && (m is Strawberry))
+                {
+                    if (player.checkOverlap(m))
+                    {
+                        player.setX(m.getX());
+                        player.setY(m.getY());
+                        player.updateHitbox();
+                    }
+                }
             }
             if (worldState)
             {

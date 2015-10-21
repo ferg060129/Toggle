@@ -48,6 +48,7 @@
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
+    <Compile Include="Object\Miscellanious\Strawberry.cs" />
     <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />
     <Compile Include="Object\Destructable\Destructable.cs" />

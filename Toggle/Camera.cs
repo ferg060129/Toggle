@@ -68,8 +68,10 @@ namespace Toggle
             }
             camMatrix = Matrix.CreateTranslation(x + (screenWidth / 2) + xMod, y + (screenHeight / 2) + yMod, 0);
         }
+
         public void changeRoom()
         {
+            /*
             x = (screenWidth / 2);
             y = (screenHeight / 2);
             int targetX = camFocus.getX();
@@ -81,6 +83,25 @@ namespace Toggle
             while ((y < targetY + (screenHeight/2)) && (y < boundY - (screenHeight/2)))
             {
                 y++;
+            }
+            */
+            x = camFocus.getX() ;
+            y = camFocus.getY() ;
+            while (x < 0)
+            {
+                x++;
+            }
+            while (y < 0)
+            {
+                y++;
+            }
+            while (x > boundX)
+            {
+                x--;
+            }
+            while (y > boundY)
+            {
+                y--;
             }
             x = -x;
             y = -y;

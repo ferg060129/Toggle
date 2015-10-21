@@ -79,6 +79,18 @@ namespace Toggle
             hitBox = new Rectangle(x, y, width, height);
         }
 
+        //return true is this is overlapping m
+        public bool checkOverlap(Object m)
+        {
+            bool isOverlap = false;
+            if (((x > (m.getX()) - 32) && (x < (m.getX() + 32))) &&
+               ((y > (m.getY()) - 32) && (y < (m.getY() + 32))))
+            {
+                isOverlap = true;
+            }
+            return isOverlap;
+        }
+
         public bool getCollision() {return collidable;}
         public bool getState() { return state; }
         public int getX(){return x;}

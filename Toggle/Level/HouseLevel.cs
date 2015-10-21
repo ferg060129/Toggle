@@ -60,6 +60,8 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 54, 32 * 25);
             Game1.miscObjects.Add(vm);
+            Strawberry sb = new Strawberry(32 * 8, 32 * 3);
+            Game1.miscObjects.Add(sb);
            // vm = new VineMoveBlock(32 * 18, 32 * 8);
            // Game1.miscObjects.Add(vm);
         }
