@@ -24,7 +24,7 @@ namespace Toggle
 
         public Creature(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
-            
+            isSolid = true;
         }
 
         public virtual void move()

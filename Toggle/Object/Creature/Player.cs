@@ -133,7 +133,12 @@ namespace Toggle
         }
         public override void reportCollision(Object o)
         {
-            currentlyMove = false;
+
+            if(o is Creature || o is Wall || o.getSolid())
+            {
+                currentlyMove = false;
+            }
+
             base.reportCollision(o);
             if (o is Item)
             {

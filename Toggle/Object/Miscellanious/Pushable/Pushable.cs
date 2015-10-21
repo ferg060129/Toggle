@@ -12,7 +12,7 @@ namespace Toggle
         public Pushable(int xLocation, int yLocation)
             : base(xLocation, yLocation)
         {
-
+            isSolid = true;
         }
 
         /*
@@ -98,6 +98,13 @@ namespace Toggle
             x = hitBox.X;
             y = hitBox.Y;
             return true;
+        }
+
+
+
+        public override bool getSolid()
+        {
+            return isSolid;
         }
         
     }

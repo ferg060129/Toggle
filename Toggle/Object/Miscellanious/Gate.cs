@@ -13,6 +13,7 @@ namespace Toggle
             goodGraphic = Textures.textures["gateClose"];
             badGraphic = Textures.textures["gateClose"];
             collidable = true;
+            isSolid = true;
         }
 
         public override void onButton()
@@ -20,6 +21,7 @@ namespace Toggle
             goodGraphic = Textures.textures["gateOpen"];
             badGraphic = Textures.textures["gateOpen"];
             collidable = false;
+            isSolid = false;
         }
     }
 }

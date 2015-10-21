@@ -19,6 +19,7 @@ namespace Toggle
         public override void onShift()
         {
             collidable = Game1.worldState;
+            isSolid = Game1.worldState;
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Toggle
         protected Texture2D badGraphic;
         protected Rectangle hitBox;
         protected Rectangle imageBoundingRectangle;
+        protected bool isSolid = false;
 
         public Object(int xLocation, int yLocation)
         {
@@ -99,6 +100,7 @@ namespace Toggle
         public Rectangle getImageBoundingRectangle() { return imageBoundingRectangle; }
         public Vector2 getPositionVector() { return new Vector2(x, y); }
         public Vector2 getPosition(){return new Vector2(x, y); }
+        public virtual bool getSolid() { return isSolid; }
 
     }
 }
