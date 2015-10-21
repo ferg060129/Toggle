@@ -25,6 +25,12 @@ namespace Toggle
 
         }
 
+        //Every update frame
+        public virtual void onUpdate()
+        {
+
+        }
+
         //When the object does something
         public virtual void onTrigger()
         {

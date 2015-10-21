@@ -17,6 +17,7 @@ namespace Toggle
         bool stateLocked = false;
         bool currentlyMove = false;
         int distanceTraveled = 0;
+        int ticks = 0;
 
 
 
@@ -90,6 +91,7 @@ namespace Toggle
 
         public void moveUpdate()
         {
+            ticks++;
             int oldDirection = direction;
             if (currentlyMove)
             {
@@ -122,7 +124,6 @@ namespace Toggle
             {
                 currentlyMove = false;
             }
-            imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, true);
             hitBox = new Rectangle(x, y, width, height);
         }
 

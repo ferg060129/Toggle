@@ -414,7 +414,6 @@ namespace Toggle
                                     (int)startButtonPosition.Y, 160, 64);
                 Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
                                     (int)exitButtonPosition.Y, 160, 64);
-
                 if(startButtonRect.Contains(new Vector2(mouseState.X,mouseState.Y)))
                 {
                     gameState = "play";
