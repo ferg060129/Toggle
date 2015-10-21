@@ -452,6 +452,7 @@ namespace Toggle
 
         public void playUpdate()
         {
+            time++;
             IsMouseVisible = false;
             if (worldState)
             {
@@ -536,11 +537,16 @@ namespace Toggle
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             drawShiftCD();
             drawHealthBar();
-            if (blackScreenAlpha > 0)
+            //rays of light juice
+            if (worldState)
             {
-                spriteBatch.Draw(Textures.textures["blackScreen"], new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32), new Rectangle(0, 0, 800, 640), new Color(Color.White, blackScreenAlpha));
+                spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 4));
             }
-                spriteBatch.End();
+            else
+            {
+                spriteBatch.Draw(Textures.textures["darkHaze"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 2f));
+            }
+            spriteBatch.End();
 
         }
 

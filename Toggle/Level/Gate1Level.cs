@@ -16,7 +16,7 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
-            Gate myGate = new Gate(32 * 1, 32 * 3);
+            Gate myGate = new Gate(32 * 2, 32 * 6);
             Game1.miscObjects.Add(myGate);
             Button myButton = new Button(32 * 14, 32 * 13, myGate);
             Game1.miscObjects.Add(myButton);
@@ -37,7 +37,7 @@ namespace Toggle
             sb = new Strawberry(12 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
             //level tiles
-            levelTiles.Add(new LevelTile(1 * 32, 1 * 32, "blackBlock", "blackBlock", "gate2Level", 1));
+            levelTiles.Add(new LevelTile(2 * 32, 4 * 32, "blackBlock", "blackBlock", "gate2Level", 1));
 
         }
     }
