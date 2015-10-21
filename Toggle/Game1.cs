@@ -45,6 +45,7 @@ namespace Toggle
         Level currentLevel;
         GateLevel gateLevel;
         Gate1Level gate1Level;
+        Gate2Level gate2Level;
         Complex1 complex1Level;
         int time;
         int width;
@@ -114,9 +115,10 @@ namespace Toggle
             schoolLevel = new SchoolLevel();
             gateLevel = new GateLevel();
             gate1Level = new Gate1Level();
+            gate2Level = new Gate2Level();
             complex1Level = new Complex1();
 
-            currentLevel = complex1Level;
+            currentLevel = gate2Level;
 
             inventory = new Inventory(300, 300);
             player = new Player(currentLevel.getPlayerStartingX(), currentLevel.getPlayerStartingY(), inventory, this);

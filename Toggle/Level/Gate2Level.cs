@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Toggle
 {
-    class Complex1 : Level
+    class Gate2Level : Level
     {
-        public Complex1()
+        public Gate2Level()
             : base()
         {
-            map = "complex1.txt";
+            map = "gate2Level.txt";
             playerStartingX = 2 * 32;
             playerStartingY = 4 * 32;
         }
@@ -20,10 +20,6 @@ namespace Toggle
             Game1.miscObjects.Add(myGate);
             Button myButton = new Button(12 * 32, 12 * 32, myGate);
             Game1.miscObjects.Add(myButton);
-            Strawberry sb = new Strawberry(15 * 32, 7 * 32);
-            Game1.miscObjects.Add(sb);
-            sb = new Strawberry(3 * 32, 9 * 32);
-            Game1.miscObjects.Add(sb);
             VineMoveBlock vb = new VineMoveBlock(7 * 32, 4 * 32);
             Game1.miscObjects.Add(vb);
             vb = new VineMoveBlock(7 * 32, 9 * 32);
@@ -35,10 +31,6 @@ namespace Toggle
             vb = new VineMoveBlock(18 * 32, 2 * 32);
             Game1.miscObjects.Add(vb);
             //mook
-            FlowerTentacles ft = new FlowerTentacles(9 * 32, 4 * 32);
-            ft.setDefendTileGood(9, 4);
-            ft.setDefendTileBad(16, 4);
-            Game1.creatures.Add(ft);
         }
     }
 }
