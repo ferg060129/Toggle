@@ -13,7 +13,20 @@ namespace Toggle
 
         }
 
+        //When the world is shifted
         public virtual void onShift()
+        {
+
+        }
+
+        //When a button linked to the object is activated
+        public virtual void onButton()
+        {
+
+        }
+
+        //When the object does something
+        public virtual void onTrigger()
         {
 
         }

@@ -41,6 +41,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\Class1.cs" />
     <Compile Include="Level\HouseLevel.cs" />
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
@@ -51,6 +52,8 @@
     <Compile Include="Object\Creature\KittenZombie.cs" />
     <Compile Include="Object\Creature\Player.cs" />
     <Compile Include="Object\Item\BatteryGoo.cs" />
+    <Compile Include="Object\Miscellanious\Button.cs" />
+    <Compile Include="Object\Miscellanious\Gate.cs" />
     <Compile Include="Object\Miscellanious\Strawberry.cs" />
     <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />

@@ -11,7 +11,7 @@ namespace Toggle
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
-                                              "moveableVineBlock","vineBlock","cursor", "animals","battery","goo","berry","berryRot", "start","exit"};
+                                              "moveableVineBlock","vineBlock","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","gateOpen","gateClose"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone","blackBlock","woodfloor","darkwoodfloor"};

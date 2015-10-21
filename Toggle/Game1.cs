@@ -43,6 +43,7 @@ namespace Toggle
         HouseLevel houseLevel;
         SchoolLevel schoolLevel;
         Level currentLevel;
+        GateLevel gateLevel;
         int time;
         int width;
         int height;
@@ -109,8 +110,9 @@ namespace Toggle
             hubLevel = new HubLevel();
             houseLevel = new HouseLevel();
             schoolLevel = new SchoolLevel();
+            gateLevel = new GateLevel();
 
-            currentLevel = hubLevel;
+            currentLevel = gateLevel;
 
             inventory = new Inventory(300, 300);
             player = new Player(currentLevel.getPlayerStartingX(), currentLevel.getPlayerStartingY(), inventory, this);
@@ -189,6 +191,10 @@ namespace Toggle
                     if (c.getHitBox().Intersects(hitBoxOther))
                     {
                         c.reportCollision(p);
+                        if (p is Button)
+                        {
+                            p.onTrigger();
+                        }
                     }
                 }
             }
