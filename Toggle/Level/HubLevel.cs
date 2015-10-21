@@ -34,5 +34,6 @@ namespace Toggle
                 ft.setDefendTileBad(26,4 + i);
             }
         }
+
     }
 }

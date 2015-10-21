@@ -68,9 +68,9 @@ namespace Toggle
             //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            //graphics.PreferredBackBufferWidth = 1400;
-            //graphics.PreferredBackBufferHeight = 800;
-           // graphics.ApplyChanges();
+            graphics.PreferredBackBufferWidth = 1400;
+            graphics.PreferredBackBufferHeight = 800;
+            //graphics.ApplyChanges();
             
           
         }
@@ -128,7 +128,7 @@ namespace Toggle
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
             MediaPlayer.Play(song);
-            gameState = "start";
+            gameState = "play";
             //MediaPlayer.IsRepeating = true;
         }
         protected override void UnloadContent()
@@ -466,7 +466,7 @@ namespace Toggle
                         if (r.Contains(cursorPosition))
                         {
                             string tip = i.getItemTip();
-                            spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
+                            //spriteBatch.DrawString(sf, tip, new Vector2(r.X, r.Y + 70), Color.Black);
 
                         }
                     }
@@ -475,7 +475,7 @@ namespace Toggle
             }
 
 
-            spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+           // spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             if (!worldState)
                 drawDarkTiles(spriteBatch);
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);

@@ -54,6 +54,7 @@
     <Compile Include="Object\Item\BatteryGoo.cs" />
     <Compile Include="Object\Miscellanious\Button.cs" />
     <Compile Include="Object\Miscellanious\Gate.cs" />
+    <Compile Include="Object\Item\Lamp.cs" />
     <Compile Include="Object\Miscellanious\Strawberry.cs" />
     <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />
@@ -113,6 +114,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\itemblock.png" />
+    <Content Include="Content\lampoff.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\lampon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\moveableVineBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
