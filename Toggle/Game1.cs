@@ -60,7 +60,7 @@ namespace Toggle
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
 
-        Texture2D rect, rectTop, rectBottom;
+        
 
         private string currentLevelString;
         private float blackScreenAlpha;
@@ -685,7 +685,7 @@ namespace Toggle
         }
         public void drawShiftCD()
         {
-            
+            Texture2D rect;
             int rectWidth = (int)((1 - (double)shiftCooldown/maxShiftCooldown) * 124 + 0.5);
             Vector2 shiftCDLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 10);
             Rectangle r = new Rectangle(0, 0, (int)(rectWidth+ 0.5), 12);
@@ -703,7 +703,7 @@ namespace Toggle
                 Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
                 spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
             }
-            rect.Dispose();
+            //rect.Dispose();
 
 
 
@@ -712,7 +712,7 @@ namespace Toggle
 
         public void drawHealthBar()
         {
-
+            Texture2D rectTop, rectBottom = new Texture2D(graphics.GraphicsDevice, 1, 1);
             Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height/2 + 32);
             int rectHeight = (int)(player.getProportion() * healthBar.Height);
             Color bottomColor;
@@ -754,8 +754,9 @@ namespace Toggle
             spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
 
 
-            rectBottom.Dispose();
-            rectTop.Dispose();
+            //if(rectBottom != null)
+            //rectBottom.Dispose();
+           // rectTop.Dispose();
         }
 
         public void inventoryUpdate()
