@@ -45,7 +45,7 @@ namespace Toggle
             //ft = new FlowerTentacles(500, 400, worldState);
             //creatures.Add(ft);
 
-            BatteryGoo battery = new BatteryGoo(32 * 2, 32 * 2);
+            BatteryGoo battery = new BatteryGoo(32 * 54, 32 * 22);
             Game1.items.Add(battery);
 
             Lamp mylamp = new Lamp(32 * 20, 32 * 2);
@@ -82,7 +82,7 @@ namespace Toggle
             int startX = 39;
             int startY = 22;
             int endX = 54;
-            int endY = 36;
+            int endY = 37;
          
 
             for(int x = startX; x <= endX; x++)
