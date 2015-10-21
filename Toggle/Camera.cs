@@ -71,27 +71,13 @@ namespace Toggle
 
         public void changeRoom()
         {
-            /*
-            x = (screenWidth / 2);
-            y = (screenHeight / 2);
-            int targetX = camFocus.getX();
-            int targetY = camFocus.getY();
-            while ((x < targetX + (screenWidth/2)) && (x < boundX - (screenWidth/2)))
-            {
-                x++;
-            }
-            while ((y < targetY + (screenHeight/2)) && (y < boundY - (screenHeight/2)))
-            {
-                y++;
-            }
-            */
             x = camFocus.getX();
             y = camFocus.getY();
-            while (x < 0)
+            while (x < (screenWidth/2))
             {
                 x++;
             }
-            while (y < 0)
+            while (y < (screenHeight/2))
             {
                 y++;
             }
@@ -105,7 +91,7 @@ namespace Toggle
             }
             x = -x;
             y = -y;
-            camMatrix = Matrix.CreateTranslation(x + (screenWidth / 2), y + (screenHeight / 2), 0);
+            camMatrix = Matrix.CreateTranslation(x,y, 0);
         }
         public Matrix getMatrix()
         {
