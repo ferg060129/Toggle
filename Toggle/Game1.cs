@@ -81,7 +81,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+           // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -586,11 +586,14 @@ namespace Toggle
 
             drawShiftCD();
             drawHealthBar();
-            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * (((float)Math.Sin(time * 3.14529 / 180) / 4) + .5f));
-            //rays of light juice
-            if ((worldState) && (currentLevel.Equals(houseLevel) == false))
+            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * .8f);
+            //rays of light juice and darkness for dark world
+            if (worldState)
             {
+                if (currentLevel.Equals(houseLevel) == false)
+                {
                 spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 4));
+                }
             }
             else
             {
