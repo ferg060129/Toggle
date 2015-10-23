@@ -28,13 +28,17 @@ namespace Toggle
             ft.setDefendTileGood(14, 4);
             ft.setDefendTileBad(14, 12);
             Game1.creatures.Add(ft);
-            Strawberry sb = new Strawberry(9 * 32, 7 * 32);
+            Strawberry sb = new Strawberry(8 * 32, 7 * 32);
+            Game1.miscObjects.Add(sb);
+            sb = new Strawberry(9 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
             sb = new Strawberry(10 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
             sb = new Strawberry(11 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
             sb = new Strawberry(12 * 32, 7 * 32);
+            Game1.miscObjects.Add(sb);
+            sb = new Strawberry(13 * 32, 7 * 32);
             Game1.miscObjects.Add(sb);
             //level tiles
             levelTiles.Add(new LevelTile(2 * 32, 4 * 32, "blackBlock", "blackBlock", "gate2Level"));

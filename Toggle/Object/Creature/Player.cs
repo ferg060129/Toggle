@@ -150,7 +150,7 @@ namespace Toggle
 
             if(o.getSolid())
             {
-                currentlyMove = false;
+                //currentlyMove = false;
             }
 
             base.reportCollision(o);

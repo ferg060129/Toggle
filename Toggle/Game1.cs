@@ -526,18 +526,12 @@ namespace Toggle
             else if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
             {
                 reloadLevel();
+                cam.update();
             }
-
-
-
-            oldKeyBoardState = newKeyBoardState;
-
-
             oldKeyBoardState = newKeyBoardState;
         }
         public void playDraw()
         {
-
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
