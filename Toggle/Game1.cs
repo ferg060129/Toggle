@@ -586,13 +586,13 @@ namespace Toggle
 
             drawShiftCD();
             drawHealthBar();
-            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * .8f);
+            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White *  0.7f);
             //rays of light juice and darkness for dark world
             if (worldState)
             {
-                if (currentLevel.Equals(houseLevel) == false)
+                if (currentLevel.getIndoors() == false)
                 {
-                spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 4));
+                spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time/2 * 3.14529 / 180) / 4));
                 }
             }
             else

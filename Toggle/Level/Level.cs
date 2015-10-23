@@ -15,10 +15,11 @@ namespace Toggle
         protected int playerStartingX;
         protected int playerStartingY;
         protected ArrayList levelTiles = new ArrayList();
+        protected bool indoors;
 
         public Level()
         {
-
+            indoors = false;
         }
 
 
@@ -150,6 +151,10 @@ namespace Toggle
         public int getPlayerStartingY()
         {
             return playerStartingY;
+        }
+        public bool getIndoors()
+        {
+            return indoors;
         }
 
     }

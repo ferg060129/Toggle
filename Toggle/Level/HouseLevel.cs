@@ -15,6 +15,7 @@ namespace Toggle
         public HouseLevel() : base()
         {
             map = "home.txt";
+            indoors = true;
             playerStartingX = 24 * 32;
             playerStartingY = 16 * 32;
         }

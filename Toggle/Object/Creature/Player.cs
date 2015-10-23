@@ -92,7 +92,11 @@ namespace Toggle
             imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
             hitBox = new Rectangle(x, y, width, height);
 
-
+            //used for "health".  Hourglass decrements faster if its more than half
+            if (proportion > 0.5)
+            {
+                proportion -= 0.001;
+            }
             proportion -= 0.0001;
 
         }
