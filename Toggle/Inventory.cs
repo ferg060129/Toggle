@@ -128,6 +128,8 @@ namespace Toggle
                         {
                             if(items[x, y].combineItems(i))
                                 removeItem(i);
+                            else
+                                returnItemToSlot(i);
                         }
                         
                         return;
