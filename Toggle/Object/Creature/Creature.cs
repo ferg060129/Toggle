@@ -87,6 +87,7 @@ namespace Toggle
                     x = previousHitBox.X;
                     y = previousHitBox.Y;
                 }
+               
             }
             if (o is Creature)
             {
@@ -186,6 +187,7 @@ namespace Toggle
                     y = previousHitBox.Y;
                 }
             }
+            hitBox = new Rectangle(x, y, width, height);
 
         }
         public int getDirection()

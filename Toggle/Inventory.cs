@@ -14,16 +14,13 @@ namespace Toggle
         InventoryItem[,] items;
         Rectangle[,] itemRectangles;
         Texture2D inventoryGraphic;
-        Object center;
-        int xLocation, yLocation;
+        private int x,y;
         
-        public Inventory(int xLoc, int yLoc)
+        public Inventory()
         {
             items = new InventoryItem[2,7];
             initializeItemRectangles();
             inventoryGraphic = Textures.textures["inventory2"];
-            xLocation = xLoc;
-            yLocation = yLoc;
         }
 
 
@@ -47,6 +44,7 @@ namespace Toggle
                    xpos += 36;
                 }
                 ypos += 36;
+                xpos = 3;
             }
         }
 
@@ -62,22 +60,22 @@ namespace Toggle
                     itemRectangles[x, y] = new Rectangle(xpos, ypos, 32, 32);
                     xpos += 36;
                 }
-                
-                ypos += 36; 
+                ypos += 36;
+                xpos = 3;
             }
         }
 
-        public void drawInventory(SpriteBatch sb, int xx, int yy)
+        public void drawInventory(SpriteBatch sb)
         {
-            sb.Draw(inventoryGraphic, new Vector2(xx, yy), Color.White);
+            sb.Draw(inventoryGraphic, new Vector2(this.x, this.y), Color.White);
             for (int x = 0; x < items.GetLength(0); x++)
             {
                 for (int y = 0; y < items.GetLength(1); y++)
                 {
                     if (items[x, y] != null)
                     {
-                        sb.Draw(items[x, y].getGraphic(), new Vector2(items[x, y].getX() + xx, items[x, y].getY() + yy), new Rectangle(0, 0, 32, 32), Color.White);
-                        items[x, y].setHitBox(new Rectangle(items[x, y].getX() + xx, items[x, y].getY() + yy, 32, 32));
+                        sb.Draw(items[x, y].getGraphic(), new Vector2(items[x, y].getX() + this.x, items[x, y].getY() + this.y), new Rectangle(0, 0, 32, 32), Color.White);
+                        items[x, y].setHitBox(new Rectangle(items[x, y].getX() + this.x, items[x, y].getY() + this.y, 32, 32));
                     }
                 }
             }
@@ -190,5 +188,11 @@ namespace Toggle
             return null;
         }
 
+
+
+        public int getX(){return x; }
+        public int getY(){return y; }
+        public void setX(int x) { this.x = x; }
+        public void setY(int y) { this.y = y; }
     }
 }

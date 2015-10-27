@@ -77,11 +77,13 @@ namespace Toggle
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
 
+
+
         public Game1()
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-           // graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -139,7 +141,7 @@ namespace Toggle
 
             currentLevel = hubLevel;
 
-            inventory = new Inventory(300, 300);
+            inventory = new Inventory();
             player = new Player(13*32, 25*32, inventory, this);
 
            
@@ -506,6 +508,7 @@ namespace Toggle
 
 
             cam.update();
+            inventoryUpdate();
 
             if (shiftCooldown > 0)
             {
@@ -517,7 +520,7 @@ namespace Toggle
                 IsMouseVisible = true;
             }
 
-            inventoryUpdate();
+            
 
             if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
             {
@@ -557,11 +560,21 @@ namespace Toggle
             }
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             //if (!worldState)
-                drawDarkTiles(spriteBatch);
+            drawDarkTiles(spriteBatch);
+           
+
+
+            //spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+
+            //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
+
+            drawShiftCD();
+            drawHealthBar();
+
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
-                inventory.drawInventory(spriteBatch, -cam.getX(), -cam.getY());
-                Vector2 cursorPosition = new Vector2(mouseState.X - cam.getX() - width / 2, mouseState.Y - cam.getY() - height / 2);
+                inventory.drawInventory(spriteBatch);
+                Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
                 foreach (InventoryItem i in inventory.getItems())
                 {
                     if (i != null)
@@ -572,20 +585,13 @@ namespace Toggle
                         if (r.Contains(cursorPosition))
                         {
                             string tip = i.getItemTip();
-                            spriteBatch.DrawString(sf, tip, new Vector2(-cam.getX(), -cam.getY() + 70), Color.Black);
+                            spriteBatch.DrawString(sf, tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
                         }
                     }
                 }
                 spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
             }
 
-
-            //spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
-
-            //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
-
-            drawShiftCD();
-            drawHealthBar();
             spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White *  0.7f);
             //rays of light juice and darkness for dark world
             if (worldState)
@@ -646,7 +652,7 @@ namespace Toggle
                     
                     currentLevel = hubLevel;
                     currentLevel.loadLevel();
-                    inventory = new Inventory(300, 300);
+                    inventory = new Inventory();
                     player = new Player(13*32, 25*32, inventory, this);
                     creatures.Add(player);
                     cam = new Camera(player, width, height);
@@ -657,9 +663,6 @@ namespace Toggle
                     Exit();
                 }
             }
-
-            
-
 
 
         }
@@ -687,89 +690,60 @@ namespace Toggle
                 playDraw();
             }
         }
+
+
         public void drawShiftCD()
         {
-            Texture2D rect;
-            int rectWidth = (int)((1 - (double)shiftCooldown/maxShiftCooldown) * 124 + 0.5);
-            Vector2 shiftCDLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 10);
-            Rectangle r = new Rectangle(0, 0, (int)(rectWidth+ 0.5), 12);
-            if(rectWidth > 0)
-            {
-                rect = new Texture2D(graphics.GraphicsDevice, r.Width, r.Height);
-                Color[] data = new Color[r.Width * r.Height];
-                for (int i = 0; i < data.Length; ++i) data[i] = Color.Purple;
-                rect.SetData(data);
-                spriteBatch.Draw(rect, new Vector2(shiftCDLocation.X + 2, shiftCDLocation.Y + 2), Color.White);
-            }
+            int rectWidth = (int)((1 - (double)shiftCooldown / maxShiftCooldown) * 124 + 0.5);
+            Vector2 shiftCDLocation = new Vector2(getTopLeft().X + 10, getTopLeft().Y + 10);
+
+
+            Rectangle r = new Rectangle(0, 0, rectWidth, 12);
+
+            spriteBatch.Draw(Textures.textures["shiftCooldownBar"], new Vector2(shiftCDLocation.X + 2, shiftCDLocation.Y + 2), r,Color.White);
             spriteBatch.Draw(Textures.textures["shiftCooldown"], shiftCDLocation, Color.White);
             if(player.isLocked())
             {
                 Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
                 spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
             }
-            //rect.Dispose();
-
-
-
         }
 
 
         public void drawHealthBar()
         {
-            Texture2D rectTop, rectBottom = new Texture2D(graphics.GraphicsDevice, 1, 1);
+            Texture2D rectTop, rectBottom = null;
             Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height/2 + 32);
             int rectHeight = (int)(player.getProportion() * healthBar.Height);
-            Color bottomColor;
-            Color topColor;
 
             if (worldState)
             {
-                bottomColor = Color.White;
-                topColor = Color.Gray;
+                rectTop = Textures.textures["grayblock"];
+                rectBottom = Textures.textures["whiteblock"];
             }
-               
             else
             {
-                bottomColor = Color.Gray;
-                topColor = Color.White;
+                rectTop = Textures.textures["whiteblock"];
+                rectBottom = Textures.textures["grayblock"];
             }
-
-
-
-
-            rectTop = new Texture2D(graphics.GraphicsDevice, healthBar.Width, healthBar.Height - rectHeight);
-            Color[] data = new Color[healthBar.Width * (healthBar.Height - rectHeight)];
-            for (int i = 0; i < data.Length; ++i) data[i] = topColor;
-            rectTop.SetData(data);
-
+            spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), Color.White);
+            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), Color.White);
            
-
-            if (rectHeight > 0)
-            {
-                rectBottom = new Texture2D(graphics.GraphicsDevice, healthBar.Width, rectHeight);
-                data = new Color[healthBar.Width * (rectHeight)];
-                for (int i = 0; i < data.Length; ++i) data[i] = bottomColor;
-                rectBottom.SetData(data);
-                spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), Color.White);
-            }
-            spriteBatch.Draw(rectTop, healthBarLocation, Color.White);
-           
-
             spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
-
-
-            //if(rectBottom != null)
-            //rectBottom.Dispose();
-           // rectTop.Dispose();
         }
 
         public void inventoryUpdate()
         {
+            Texture2D tex = Textures.textures["inventory2"];
+            inventory.setX(getTopRight().X - tex.Width - 10);
+            inventory.setY(getTopLeft().Y + 10);
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
                 MouseState mouseState = Mouse.GetState();
-                Vector2 inventoryPosition = new Vector2(-cam.getX(), -cam.getY());
-                Vector2 cursorPosition = new Vector2(mouseState.X - cam.getX() - width / 2, mouseState.Y - cam.getY() - height / 2);
+                Vector2 inventoryPosition = new Vector2(inventory.getX(), inventory.getY());
+
+
+                Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
                 foreach (InventoryItem i in inventory.getItems())
                 {
                     if (i != null)
@@ -809,20 +783,6 @@ namespace Toggle
         }
 
 
-
-        /*
-        public void drawHollowRectangle(Rectangle r, Vector2 position, int thickness, Color color)
-        {
-
-            var t = new Texture2D(graphics.GraphicsDevice, 1, 1);
-            t.SetData(new[] { Color.White });
-            spriteBatch.Draw(t, position, new Rectangle(0, 0, thickness, r.Height), color); // Left
-            spriteBatch.Draw(t, position, new Rectangle(r.Width, 0, thickness, r.Height), color); // Right
-            spriteBatch.Draw(t, position, new Rectangle(0, 0, r.Width, thickness), color); // Top
-            spriteBatch.Draw(t, position, new Rectangle(0, r.Height, r.Width, thickness), color); // Bottom
-        }
-        */
-
         public void setShiftCD()
         {
             shiftCooldown = maxShiftCooldown;
@@ -831,9 +791,27 @@ namespace Toggle
         {
             return shiftCooldown;
         }
+
+
+
+        public Point getCenter()
+        {
+            return new Point(-cam.getX(), -cam.getY());
+        }
+
+        public Point getTopLeft()
+        {
+            Point center = getCenter();
+            return new Point(center.X - width / 2, center.Y - height / 2);
+        }
+
+        public Point getTopRight()
+        {
+            Point center = getCenter();
+            return new Point(center.X + width / 2, center.Y - height / 2);
+        }
+
     }
-
-
 
     enum GameState
     {
