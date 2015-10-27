@@ -74,13 +74,14 @@
     <Compile Include="Object\Miscellanious\Miscellanious.cs" />
     <Compile Include="Object\Object.cs" />
     <Compile Include="Object\Miscellanious\Pushable\Pushable.cs" />
-    <Compile Include="Object\Tile\BadTile.cs" />
+    <Compile Include="Object\Tile\Player Activate Tile\BadTile.cs" />
     <Compile Include="Object\Tile\DarkTile.cs" />
-    <Compile Include="Object\Tile\GoodTile.cs" />
+    <Compile Include="Object\Tile\Player Activate Tile\GoodTile.cs" />
     <Compile Include="Object\Tile\LevelTile.cs" />
-    <Compile Include="Object\Tile\LockTile.cs" />
+    <Compile Include="Object\Tile\Player Activate Tile\LockTile.cs" />
+    <Compile Include="Object\Tile\Player Activate Tile\PlayerActivateTile.cs" />
+    <Compile Include="Object\Tile\Player Activate Tile\UnlockTile.cs" />
     <Compile Include="Object\Tile\Tile.cs" />
-    <Compile Include="Object\Tile\UnlockTile.cs" />
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,6 +96,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Tile\AngryButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tile\AngryButtonPressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\animals.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -108,6 +115,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\BigPicture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BoxDark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\BoxLight.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\buttonHDown.png">
@@ -137,6 +150,12 @@
     <Content Include="Content\grayblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tile\HappyButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tile\HappyButtonPressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\hourglass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -144,6 +163,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\itemblock.png" />
+    <Content Include="Content\Tile\KeyButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Tile\KeyButtonPressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\lampoff.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

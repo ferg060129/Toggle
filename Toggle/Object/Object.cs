@@ -50,7 +50,7 @@ namespace Toggle
             state = !state;
         }
 
-        public Texture2D getGraphic()
+        public virtual Texture2D getGraphic()
         {
             if (state)
                 return goodGraphic;

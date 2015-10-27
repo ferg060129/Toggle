@@ -9,8 +9,8 @@ namespace Toggle
     {
         public VineMoveBlock(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
-            goodGraphic = Textures.textures["moveableVineBlock"];
-            badGraphic = Textures.textures["vineBlock"];
+            goodGraphic = Textures.textures["BoxLight"];
+            badGraphic = Textures.textures["BoxDark"];
         }
     }
 }

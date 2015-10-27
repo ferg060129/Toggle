@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Toggle
 {
-    class BadTile : Tile
+    class LockTile : PlayerActivateTile
     {
-        public BadTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
+        public LockTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {
         }

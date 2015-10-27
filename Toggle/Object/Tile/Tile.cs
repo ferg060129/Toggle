@@ -10,8 +10,9 @@ namespace Toggle
 {
     class Tile : Object
     {
-        bool wall;
-        public Tile(int xLocation, int yLocation, String gGraphic, String bGraphic) : base(xLocation, yLocation)
+        bool wall, pressed;
+        public Tile(int xLocation, int yLocation, String gGraphic, String bGraphic)
+            : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures[gGraphic];
             badGraphic = Textures.textures[bGraphic];
@@ -21,27 +22,5 @@ namespace Toggle
             height = 32;
             //charToCollision(fileCharacter);
         }
-
-        /*
-        //When loading a map, use chars from it to determine if this tile is collidable
-        public void charToCollision(char input)
-        {
-            bool isWall = false;
-            switch (input)
-            {
-                default:
-                    break;
-                case '!':
-                case '#':
-                case '$':
-                case '%':
-                case '5':
-                case '6':
-                    isWall = true;
-                    break;
-            }
-            collidable = isWall;
-        }
-         * */
     }
 }

@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 
+
 namespace Toggle
 {
-    class LockTile : Tile
+    class BadTile : PlayerActivateTile
     {
-        public LockTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
+        public BadTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {
         }
+
+
+
     }
 }

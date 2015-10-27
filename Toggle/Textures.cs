@@ -11,13 +11,14 @@ namespace Toggle
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static string[] graphicNames = { "kitten", "zombie", "player", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
-                                               "moveableVineBlock","vineBlock","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","gateOpen","gateClose",
+                                               "BoxDark","BoxLight","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","gateOpen","gateClose",
                                                "lampoff","lampon","shiftCooldown","hourglass","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen2","lostScreen","blackScreen","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
-                                           "woodenwallvertical","woodenwallhorizontal1","frown","smile","locktile","unlocktile", "stone","blackBlock","woodfloor","darkwoodfloor"};
+                                           "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","locktile",
+                                           "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
@@ -31,14 +32,14 @@ namespace Toggle
                 {'%', "woodenwalltoprightcorner,stone,w"},
                 {'|', "woodenwallvertical,stone,w"},
                 {'-', "woodenwallhorizontal1,stone,w"},
-                {'f', "frown,frown,"},
-                {'s',"smile,smile,"},
-                {'l',"locktile,locktile,"},
+                {'f', "AngryButtonPressed,AngryButton,"},
+                {'s', "HappyButtonPressed,HappyButton,"},
+                {'l', "locktile,locktile,"},
                 {'a', "blackBlock,blackBlock,"},    //takes you to homelevel
                 {'b', "blackBlock,blackBlock,"},
                 {'c', "blackBlock,blackBlock,"},
-                {'u',"unlocktile,unlocktile,"},
-                {'+',"woodfloor,darkwoodfloor,"}
+                {'u', "KeyButtonPressed,KeyButton,"},
+                {'+', "woodfloor,darkwoodfloor,"}
 
             };
 

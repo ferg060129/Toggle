@@ -5,11 +5,15 @@ using System.Text;
 
 namespace Toggle
 {
-    class GoodTile : Tile
+    class UnlockTile : PlayerActivateTile
     {
-        public GoodTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
+        public UnlockTile(int xLocation, int yLocation, String gGraphic, String bGraphic)
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {
+
+
+
+
         }
     }
 }

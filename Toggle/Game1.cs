@@ -83,7 +83,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+           // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
@@ -250,13 +250,19 @@ namespace Toggle
                 }
             }
 
-            foreach(Tile t in playerActivateTiles)
+            foreach(PlayerActivateTile t in playerActivateTiles)
             {
                 Rectangle hitBox = t.getHitBox();
-                if(player.getHitBox().Intersects(hitBox))
+                if (player.getHitBox().Intersects(hitBox))
                 {
                     player.reportCollision(t);
+                    t.setPressed(true);
                 }
+                else
+                {
+                    t.setPressed(false);
+                }
+                
             }
             checkLevelTileCollision();
         }
