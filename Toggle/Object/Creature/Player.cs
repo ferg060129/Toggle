@@ -23,8 +23,16 @@ namespace Toggle
 
         public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
-            goodGraphic = Textures.textures["sprites"];
-            badGraphic = Textures.textures["sprites"];
+            animations.Add("idleDown",  new int[] { 0, 2 });
+            animations.Add("idleUp",    new int[] { 1, 2 });
+            animations.Add("idleRight", new int[] { 2, 2 });
+            animations.Add("idleLeft",  new int[] { 3, 2 });
+            animations.Add("moveDown",  new int[] { 4, 4 });
+            animations.Add("moveUp",    new int[] { 5, 4 });
+            animations.Add("moveRight", new int[] { 6, 2 });
+            animations.Add("moveLeft",  new int[] { 7, 2 });
+            goodGraphic = Textures.textures["protagsheet"];
+            badGraphic = Textures.textures["protagsheet"];
 
             row = 7;
             imageBoundingRectangle = new Rectangle(32 * row, 32, 32, 32);
@@ -54,26 +62,50 @@ namespace Toggle
                 if (newKeyBoardState.IsKeyDown(Keys.Up))
                 {
                     direction = 1;
+                    setAnimation("moveUp");
                     currentlyMove = true;
                 }
                 else if (newKeyBoardState.IsKeyDown(Keys.Down))
                 {
                     direction = 3;
+                    setAnimation("moveDown");
                     currentlyMove = true;
                 }
                 else if (newKeyBoardState.IsKeyDown(Keys.Left))
                 {
                     direction = 0;
+                    setAnimation("moveLeft");
                     currentlyMove = true;
                 }
                 else if (newKeyBoardState.IsKeyDown(Keys.Right))
                 {
                     direction = 2;
+                    setAnimation("moveRight");
                     currentlyMove = true;
                 }
                 else
                 {
                     moving = false;
+                }
+            }
+            if ((moving == false) && (currentlyMove == false))
+            {
+                switch (direction)
+                {
+                    default:
+                        break;
+                    case 0:
+                        setAnimation("idleLeft");
+                        break;
+                    case 1:
+                        setAnimation("idleUp");
+                        break;
+                    case 2:
+                        setAnimation("idleRight");
+                        break;
+                    case 3:
+                        setAnimation("idleDown");
+                        break;
                 }
             }
             if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
@@ -89,7 +121,8 @@ namespace Toggle
             oldKeyBoardState = newKeyBoardState;
 
             //Get next image for sprite
-            imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
+            //imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
+            animate();
             hitBox = new Rectangle(x, y, width, height);
 
             //used for "health".  Hourglass decrements faster if its more than half
@@ -150,7 +183,7 @@ namespace Toggle
 
             if(o.getSolid())
             {
-                currentlyMove = false;
+                //currentlyMove = false;
             }
 
             base.reportCollision(o);
