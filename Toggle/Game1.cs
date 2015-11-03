@@ -590,9 +590,6 @@ namespace Toggle
 
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
 
-            drawShiftCD();
-            drawHealthBar();
-
             if (Keyboard.GetState().IsKeyDown(Keys.I))
             {
                 inventory.drawInventory(spriteBatch);
@@ -627,8 +624,10 @@ namespace Toggle
             {
                 spriteBatch.Draw(Textures.textures["darkHaze"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 2f));
             }
+            //gui drawn last
+            drawShiftCD();
+            drawHealthBar();
             spriteBatch.End();
-
         }
 
         public void pauseUpdate()
@@ -750,8 +749,15 @@ namespace Toggle
             }
             spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), Color.White);
             spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), Color.White);
-           
-            spriteBatch.Draw(Textures.textures["hourglass"], healthBarLocation, Color.White);
+            
+            if ((player.getProportion() < 0.25) && (time % 50 >= 45))
+            { 
+                spriteBatch.Draw(Textures.textures["hourglass2"], healthBarLocation, Color.White);
+            }
+            else
+            {
+                spriteBatch.Draw(Textures.textures["hourglass2"], healthBarLocation, Color.Black);
+            }
         }
 
         public void inventoryUpdate()
