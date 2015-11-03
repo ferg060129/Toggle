@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -38,6 +37,7 @@ namespace Toggle
 
         public static bool worldState = true;
         public static bool[,] wallArray;
+        public static double[,] darkTileArray;
 
         HubLevel hubLevel;
         HouseLevel houseLevel;
@@ -52,8 +52,8 @@ namespace Toggle
         int height;
         Player player;
         Camera cam;
-        Song song;
-        Song song2;
+        //Song song;
+        //Song song2;
         Inventory inventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState;
@@ -76,6 +76,8 @@ namespace Toggle
 
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
+        private SoundEffectInstance banditKing;
+        
 
 
 
@@ -87,6 +89,7 @@ namespace Toggle
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //graphics.PreferredBackBufferWidth = 1400;
+
             //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
             
@@ -139,19 +142,27 @@ namespace Toggle
             gate2Level = new Gate2Level();
             complex1Level = new Complex1();
 
-            currentLevel = hubLevel;
+            currentLevel = houseLevel;
 
             inventory = new Inventory();
-            player = new Player(13*32, 25*32, inventory, this);
-
+            //player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(30 * 32, 9 * 32, inventory, this);
            
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
             sf = Content.Load<SpriteFont>("kooten");
 
-            song = Content.Load<Song>("whitesky");
-            song2 = Content.Load<Song>("climbing_up_the_walls");
+
+
+            //song = Content.Load<Song>("banditKing2");
+
+            SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
+            banditKing = banditKing_s.CreateInstance();
+
+            //banditKing.Pitch = -1;
+
+            //song2 = Content.Load<Song>("climbing_up_the_walls");
 
             currentLevel.loadLevel();
             //add level transfer tiles from current level to the array list of tiles
@@ -159,7 +170,8 @@ namespace Toggle
             levelTiles.AddRange(currentLevel.getLevelTiles());
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
-            MediaPlayer.Play(song);
+            //MediaPlayer.Play(song);
+            banditKing.Play();
             gameState = "start";
             //MediaPlayer.IsRepeating = true;
         }
@@ -331,6 +343,7 @@ namespace Toggle
                     }
                 }
             }
+            /*
             if (worldState)
             {
                 MediaPlayer.Stop();
@@ -340,7 +353,7 @@ namespace Toggle
             {
                 MediaPlayer.Stop();
                 MediaPlayer.Play(song2);
-            }
+            }*/
 
             InventoryItem[,] inventoryItems = inventory.getItems();
             for(int x = 0; x < inventoryItems.GetLength(0);x++)
@@ -372,7 +385,7 @@ namespace Toggle
         {
             foreach (DarkTile t in darkTiles)
             {
-
+                float opacity = 1.0f;
                 int xLoc = t.getX();
                 int yLoc = t.getY();
                 if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
@@ -383,10 +396,13 @@ namespace Toggle
                     {
                         double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
                         t.addLampLight(distance);
+                        
                     }
-
-                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), new Color(Color.White, t.getOpacity()));
+                    opacity = t.getOpacity();
+                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), new Color(Color.White, opacity));
                 }
+
+                darkTileArray[yLoc / 32, xLoc / 32] = 1 - opacity;
             }
         }
 
@@ -565,12 +581,12 @@ namespace Toggle
                 spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
             }
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
-            //if (!worldState)
+            if (!worldState)
             drawDarkTiles(spriteBatch);
            
 
 
-            //spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
 
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
 
@@ -762,14 +778,14 @@ namespace Toggle
                             {
                                 inventory.setNewIndex(i);
                             }
-                            i.setSelected(false);
+                            inventory.setSelectedItem(i, false);
                         }
 
                         if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
                         {
                             if (r.Contains(cursorPosition.X, cursorPosition.Y))
                             {
-                                i.setSelected(true);
+                                inventory.setSelectedItem(i, true);
                             }
                         }
                         if (i.isSelected())
@@ -797,7 +813,6 @@ namespace Toggle
         {
             return shiftCooldown;
         }
-
 
 
         public Point getCenter()

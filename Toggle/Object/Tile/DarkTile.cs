@@ -43,5 +43,10 @@ namespace Toggle
                 lit = true;
             }
         }
+
+        public bool isLit()
+        {
+            return lit;
+        }
     }
 }

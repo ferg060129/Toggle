@@ -27,7 +27,7 @@ namespace Toggle
             BatteryGoo battery = new BatteryGoo(32 * 5, 32 * 3);
             Game1.items.Add(battery);
 
-            Strawberry sb = new Strawberry(32 * 8, 32 * 3);
+            Strawberry sb = new Strawberry(32 * 38, 32 * 9);
             Game1.miscObjects.Add(sb);
 
             FlowerTentacles ft = new FlowerTentacles(2 * 32, 8 * 32);
@@ -69,11 +69,11 @@ namespace Toggle
             Game1.items.Add(gb);
 
 
-            /*
-            DogBoogieman dbm = new DogBoogieman(32 * 45, 32 * 30);
+            
+            DogBoogieman dbm = new DogBoogieman(32 * 49, 32 * 10, new Point(39,1), new Point(54,16));
             Game1.creatures.Add(dbm);
-            dbm.setDefendTileGood(45, 30);
-            dbm.setAttackTarget(ref player);*/
+            dbm.setDefendTileGood(49, 10);
+            //dbm.setAttackTarget(ref player);
            // vm = new VineMoveBlock(32 * 18, 32 * 8);
            // Game1.miscObjects.Add(vm);
 
@@ -86,7 +86,8 @@ namespace Toggle
             int startY = 1;
             int endX = 54;
             int endY = 16;
-         
+
+            
 
             for(int x = startX; x <= endX; x++)
             {

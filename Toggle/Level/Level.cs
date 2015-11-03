@@ -57,6 +57,7 @@ namespace Toggle
             mapSizeX = lines[0].Length * 32;
             mapSizeY = lines.Length * 32;
             Game1.wallArray = new bool[lines.GetLength(0), lines[0].Length];
+            Game1.darkTileArray = new double[lines.GetLength(0), lines[0].Length];
             foreach (string line in lines)
             {
 

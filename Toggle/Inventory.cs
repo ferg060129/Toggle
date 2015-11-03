@@ -14,6 +14,7 @@ namespace Toggle
         InventoryItem[,] items;
         Rectangle[,] itemRectangles;
         Texture2D inventoryGraphic;
+        InventoryItem selectedItem;
         private int x,y;
         
         public Inventory()
@@ -68,6 +69,9 @@ namespace Toggle
         public void drawInventory(SpriteBatch sb)
         {
             sb.Draw(inventoryGraphic, new Vector2(this.x, this.y), Color.White);
+
+
+            
             for (int x = 0; x < items.GetLength(0); x++)
             {
                 for (int y = 0; y < items.GetLength(1); y++)
@@ -79,6 +83,9 @@ namespace Toggle
                     }
                 }
             }
+            //Draw the selected item last so it is on bottom.
+            if(selectedItem != null)
+            sb.Draw(selectedItem.getGraphic(), new Vector2(selectedItem.getX() + this.x, selectedItem.getY() + this.y), new Rectangle(0, 0, 32, 32), Color.White);
         }
 
         
@@ -194,5 +201,17 @@ namespace Toggle
         public int getY(){return y; }
         public void setX(int x) { this.x = x; }
         public void setY(int y) { this.y = y; }
+        public void setSelectedItem(InventoryItem i, bool b)
+        {
+            if(b)
+            {
+                selectedItem = i;
+            }
+            if(i.isSelected() && !b)
+            {
+                selectedItem = null;
+            }
+            i.setSelected(b);
+        }
     }
 }

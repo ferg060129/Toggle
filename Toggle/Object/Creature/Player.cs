@@ -147,7 +147,13 @@ namespace Toggle
         }
         public override void reportCollision(Object o)
         {
-
+            if (o is DogBoogieman)
+            {
+                if (!o.getState())
+                {
+                    proportion = 0;
+                }
+            }
             if(o.getSolid())
             {
                 currentlyMove = false;
@@ -191,6 +197,7 @@ namespace Toggle
                     engine.setLevel(((LevelTile)o).getLevel());
                 }
             }
+
         }
 
 

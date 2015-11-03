@@ -252,7 +252,7 @@ namespace Toggle
 
 
 
-        public int getNextPathDirection(int currentTileX, int currentTileY, int desiredTileX, int desiredTileY)
+        public virtual int getNextPathDirection(int currentTileX, int currentTileY, int desiredTileX, int desiredTileY)
         {
 
             if (currentTileX == desiredTileX && currentTileY == desiredTileY)
