@@ -18,7 +18,7 @@ namespace Toggle
             //if tile is grass, have a chance to give it random variation
             if (gGraphic == "grass5")
             {
-                switch (Game1.random.Next(0,9))
+                switch (Game1.random.Next(0,10))
                 {
                     default:
                         break;

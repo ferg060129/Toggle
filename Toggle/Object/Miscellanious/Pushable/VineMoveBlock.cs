@@ -12,5 +12,11 @@ namespace Toggle
             goodGraphic = Textures.textures["BoxLight"];
             badGraphic = Textures.textures["BoxDark"];
         }
+
+        public override void onShift()
+        {
+            base.onShift();
+            isPushable = Game1.worldState;
+        }
     }
 }

@@ -500,7 +500,7 @@ namespace Toggle
         public void startDraw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Textures.textures["titleScreen2"], new Vector2(0,0), Color.White);
+            spriteBatch.Draw(Textures.textures["titleScreen3"], new Vector2(0,0), Color.White);
             spriteBatch.Draw(Textures.textures["start"], startButtonPosition,  Color.White);
             spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition,  Color.White);
             spriteBatch.End();
@@ -570,7 +570,6 @@ namespace Toggle
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
-            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
@@ -614,10 +613,9 @@ namespace Toggle
                     }
                 }
                 spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
-            }
-
-            
+            }   
             //rays of light juice and darkness for dark world
+            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
             if (worldState)
             {
                 if (currentLevel.getIndoors() == false)

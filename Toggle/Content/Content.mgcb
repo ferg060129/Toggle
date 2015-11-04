@@ -477,7 +477,6 @@
 /processorParam:TextureFormat=Color
 /build:shadowScreen.png
 
-
 #begin banditKing2.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -549,4 +548,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Tile/grass8.png
+
+#begin titleScreen3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:titleScreen3.png
 

@@ -9,9 +9,11 @@ namespace Toggle
 {
     class Pushable : Miscellanious
     {
+        protected bool isPushable;
         public Pushable(int xLocation, int yLocation)
             : base(xLocation, yLocation)
         {
+            isPushable = true;
             isSolid = true;
         }
 
@@ -39,7 +41,7 @@ namespace Toggle
       
         public bool push(int direction, int amount)
         {
-            if(!Game1.worldState)
+            if(!isPushable)
             {
                 return false;
             }

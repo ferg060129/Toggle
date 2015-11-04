@@ -176,7 +176,6 @@ namespace Toggle
             proportion -= 0.1;
         }
         
-
         public void pickUp(Item i)
         {
             inventory.addInventoryItem(i.pickUpItem());

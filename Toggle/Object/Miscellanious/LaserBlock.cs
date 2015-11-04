@@ -43,6 +43,9 @@ namespace Toggle
                         }
                         if (zapCreature)
                         {
+                            //should probably change this to be zap(c);, where zap is defined as a method
+                            //of Laser block.  This way you don't have only one "zap" affect for a player, and
+                            //can easily make different types of zaps (damage variance, world shifting, etc)
                             c.zap();
                         }
                     }

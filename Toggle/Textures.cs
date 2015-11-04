@@ -13,7 +13,7 @@ namespace Toggle
         public static string[] graphicNames = { "kitten", "zombie", "player", "protagsheet", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
                                                "BoxDark","BoxLight","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","gateOpen","gateClose",
                                                "lampoff","lampon","shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
-                                               "titleScreen2","lostScreen","blackScreen","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
+                                               "titleScreen3","lostScreen","blackScreen","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
