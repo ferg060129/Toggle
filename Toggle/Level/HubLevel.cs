@@ -22,6 +22,9 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 13, 32 * 19);
             Game1.miscObjects.Add(vm);
+            LaserBlock ls = new LaserBlock(32 * 5, 32 * 5);
+            Game1.miscObjects.Add(ls);
+
 
           
             GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);

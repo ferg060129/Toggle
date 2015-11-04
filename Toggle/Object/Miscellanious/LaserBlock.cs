@@ -12,16 +12,44 @@ namespace Toggle
         ArrayList laserDetectors;
         public LaserBlock(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
+            goodGraphic = Textures.textures["BoxLight"];
+            badGraphic = Textures.textures["BoxDark"];
             updatePeriod = 0;
         }
 
         public override void onUpdate()
         {
+            bool zapCreature = false;
             updatePeriod++;
-            if (updatePeriod % 32 == 0)
+            if (updatePeriod > 0)
             {
-                LaserDetector left = new LaserDetector(x, y);
+                foreach (Creature c in Game1.creatures)
+                {
+                    if (c.getX() == x)
+                    {
+                        zapCreature = true;
+                        foreach (Miscellanious m in Game1.miscObjects)
+                        {
+                            if (m != this)
+                            {
+                                if (m.getX() == x)
+                                {
+                                    if (Math.Abs(m.getY()) < Math.Abs(c.getY()))
+                                    {
+                                        zapCreature = false;
+                                    }
+                                }
+                            }
+                        }
+                        if (zapCreature)
+                        {
+                            c.zap();
+                        }
+                    }
+                }
             }
+
+
         }
     }
 }

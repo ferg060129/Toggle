@@ -24,6 +24,7 @@ namespace Toggle
         public static ArrayList tiles = new ArrayList();
         public static ArrayList solidTiles = new ArrayList();
         public static ArrayList darkTiles = new ArrayList();
+        public static Random random = new Random();
 
         //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
@@ -519,7 +520,10 @@ namespace Toggle
             {
                 GraphicsDevice.Clear(Color.Black);
             }
-
+            foreach (Miscellanious m in miscObjects)
+            {
+                m.onUpdate();
+            }
             foreach (Creature c in creatures)
             {
                 c.move();
@@ -566,6 +570,7 @@ namespace Toggle
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
+            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
@@ -611,7 +616,7 @@ namespace Toggle
                 spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
             }
 
-            spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White *  0.7f);
+            
             //rays of light juice and darkness for dark world
             if (worldState)
             {
@@ -750,7 +755,7 @@ namespace Toggle
             spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), Color.White);
             spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), Color.White);
             
-            if ((player.getProportion() < 0.25) && (time % 50 >= 45))
+            if ((player.getProportion() < 0.20) && (time % 50 >= 45))
             { 
                 spriteBatch.Draw(Textures.textures["hourglass2"], healthBarLocation, Color.White);
             }

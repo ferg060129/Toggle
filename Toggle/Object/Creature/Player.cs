@@ -171,7 +171,10 @@ namespace Toggle
             hitBox = new Rectangle(x, y, width, height);
         }
 
-
+        public override void zap()
+        {
+            proportion -= 0.1;
+        }
         
 
         public void pickUp(Item i)

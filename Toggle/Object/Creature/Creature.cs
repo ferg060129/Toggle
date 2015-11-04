@@ -353,6 +353,11 @@ namespace Toggle
             attackTarget = o;
         }
 
+        public virtual void zap()
+        {
+
+        }
+
 
 
 

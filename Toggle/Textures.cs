@@ -15,17 +15,17 @@ namespace Toggle
                                                "lampoff","lampon","shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen2","lostScreen","blackScreen","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar"};
-        public static string[] tileNames = { "grass", "grass4", "grass2", "grass3", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
+        public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","locktile",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
-                {'.', "grass,darkgrass,"},
-                {'`', "grass2,darkgrass2,"},
-                {',', "grass3,darkgrass3,"},
-                {'*', "grass4,darkgrass4,"},
+                {'.', "grass5,darkgrass,"},
+                {'`', "grass6,darkgrass2,"},
+                {',', "grass7,darkgrass3,"},
+                {'*', "grass8,darkgrass4,"},
                 {'!', "woodenwallbottomleftcorner,stone,w"},
                 {'#', "woodenwallbottomrightcorner,stone,w"},
                 {'$', "woodenwalltopleftcorner,stone,w"},
