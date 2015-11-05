@@ -112,6 +112,9 @@ namespace Toggle
 
         public Player getPlayer()
         {
+            return (Player)Game1.creatures[0];
+            
+                /*
             foreach (Creature c in Game1.creatures)
             {
                 if (c is Player)
@@ -120,6 +123,7 @@ namespace Toggle
                 }
             }
             return null;
+                 * */
         }
 
         bool playerInBounds(){

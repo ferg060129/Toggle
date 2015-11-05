@@ -52,6 +52,7 @@ namespace Toggle
         int width;
         int height;
         Player player;
+        //public static List<Game1> game = new List<Game1>();
         Camera cam;
         //Song song;
         //Song song2;
@@ -89,6 +90,7 @@ namespace Toggle
            // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            //game.Add(this);
             //graphics.PreferredBackBufferWidth = 1400;
 
             //graphics.PreferredBackBufferHeight = 800;
@@ -148,7 +150,6 @@ namespace Toggle
             inventory = new Inventory();
             //player = new Player(13*32, 25*32, inventory, this);
             player = new Player(30 * 32, 9 * 32, inventory, this);
-           
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
@@ -446,14 +447,14 @@ namespace Toggle
             {
                 currentLevel = complex1Level;
             }
-
+            creatures.Add(player);
             currentLevel.loadLevel();
             //add level transfer tiles from current level to the array list of tiles
             tiles.AddRange(currentLevel.getLevelTiles());
             levelTiles.AddRange(currentLevel.getLevelTiles());
             player.setX(currentLevel.getPlayerStartingX());
             player.setY(currentLevel.getPlayerStartingY());
-            creatures.Add(player);
+            
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();
         }

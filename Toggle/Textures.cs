@@ -35,7 +35,7 @@ namespace Toggle
                 {'f', "AngryButtonPressed,AngryButton,"},
                 {'s', "HappyButtonPressed,HappyButton,"},
                 {'l', "locktile,locktile,"},
-                {'a', "blackBlock,blackBlock,"},    //takes you to homelevel
+                {'a', "blackBlock,blackBlock,"},    //takes you to glevel
                 {'b', "blackBlock,blackBlock,"},
                 {'c', "blackBlock,blackBlock,"},
                 {'u', "KeyButtonPressed,KeyButton,"},

@@ -99,6 +99,7 @@
     <Content Include="Content\banditKing2.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Tiles\stone.png" />
     <Content Include="Content\Tile\AngryButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -247,9 +248,7 @@
     <Content Include="Content\Tile\locktile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tile\stone.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\Tile\stone.png" />
     <Content Include="Content\Tile\unlocktile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -305,6 +304,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\maze.txt" />
     <Content Include="Map Files\hub.txt" />
     <Content Include="Map Files\practice.txt" />
     <Content Include="Map Files\laser.txt" />
