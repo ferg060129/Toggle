@@ -173,7 +173,7 @@ namespace Toggle
 
         public override void zap()
         {
-            proportion -= 0.1;
+            proportion -= 0.01;
         }
         
         public void pickUp(Item i)

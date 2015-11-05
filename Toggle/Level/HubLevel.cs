@@ -22,8 +22,16 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 13, 32 * 19);
             Game1.miscObjects.Add(vm);
-            LaserBlock ls = new LaserBlock(32 * 5, 32 * 5);
+            LaserBlock ls = new LaserBlock(32 * 20, 32 * 20);
             Game1.miscObjects.Add(ls);
+            Game1.miscObjects.Add(new LaserBlock(32 * 21, 32 * 20,false));
+            Game1.miscObjects.Add(new LaserBlock(32 * 22, 32 * 20,true));
+            Game1.miscObjects.Add(new LaserBlock(32 * 23, 32 * 20,false));
+            Game1.miscObjects.Add(new LaserBlock(32 * 24, 32 * 20,true));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 25, 32 * 20));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 25));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 20));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 15));
 
 
           

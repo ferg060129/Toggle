@@ -564,6 +564,23 @@ namespace Toggle
 
             oldKeyBoardState = newKeyBoardState;
         }
+
+        public void playDebugDraw()
+        {
+            /*int [] tempArray = new int[4];
+            foreach (Miscellanious l in miscObjects)
+            {
+                if (l is LaserBlock)
+                {
+                    tempArray = ((LaserBlock)l).getLaserEnds();
+                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[0], l.getY()));
+                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[1], l.getY()));
+                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[2]));
+                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[3]));
+                }
+            }*/
+        }
+
         public void playDraw()
         {
 
@@ -591,7 +608,7 @@ namespace Toggle
 
 
             spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
-
+            playDebugDraw();
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
