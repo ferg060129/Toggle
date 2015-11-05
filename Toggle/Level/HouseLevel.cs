@@ -23,11 +23,13 @@ namespace Toggle
 
         public override void loadLevelObjects()
         {
-            
-            BatteryGoo battery = new BatteryGoo(32 * 5, 32 * 3);
+           
+            BatteryGoo battery = new BatteryGoo(32 * 53, 32 * 16);
             Game1.items.Add(battery);
 
-            Strawberry sb = new Strawberry(32 * 38, 32 * 9);
+            Strawberry sb = new Strawberry(32 * 53, 32 * 15);
+            Game1.miscObjects.Add(sb);
+            sb = new Strawberry(32 * 31, 32 * 7);
             Game1.miscObjects.Add(sb);
 
             FlowerTentacles ft = new FlowerTentacles(2 * 32, 8 * 32);
@@ -57,7 +59,7 @@ namespace Toggle
             ft.setDefendTileBad(9, 9);
 
 
-            Gate myGate = new Gate(32 * 3, 32 * 15);
+            Gate myGate = new Gate(32 * 5, 32 * 10);
             Game1.miscObjects.Add(myGate);
             Button myButton = new Button(32 * 9, 32 * 8, myGate);
             Game1.miscObjects.Add(myButton);
@@ -65,27 +67,52 @@ namespace Toggle
             Lamp mylamp = new Lamp(32 * 1, 32 * 8);
             Game1.items.Add(mylamp);
 
-            GreenBlock gb = new GreenBlock(32 * 48, 32 * 11);
+            GreenBlock gb = new GreenBlock(32 * 42, 32 * 16);
             Game1.items.Add(gb);
 
 
             
-            DogBoogieman dbm = new DogBoogieman(32 * 49, 32 * 10, new Point(39,1), new Point(54,16));
+            DogBoogieman dbm = new DogBoogieman(32 * 20, 32 * 4, new Point(1,1), new Point(54,5));
             Game1.creatures.Add(dbm);
-            dbm.setDefendTileGood(49, 10);
-            //dbm.setAttackTarget(ref player);
-           // vm = new VineMoveBlock(32 * 18, 32 * 8);
-           // Game1.miscObjects.Add(vm);
+            dbm.setDefendTileGood(20, 4);
+            
+             //dbm.setAttackTarget(ref player);
+            VineMoveBlock vm = new VineMoveBlock(32 * 41, 32 * 5);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 51, 32 * 14);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 52, 32 * 11);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 52, 32 * 8);
+            Game1.miscObjects.Add(vm);
+
+            vm = new VineMoveBlock(32 * 6, 32 * 10);
+            Game1.miscObjects.Add(vm);
+            vm = new VineMoveBlock(32 * 20, 32 * 10);
+            Game1.miscObjects.Add(vm);
+
+            myGate = new Gate(32 * 51, 32 * 13);
+            Game1.miscObjects.Add(myGate);
+
+            myButton = new Button(32 * 52, 32 * 7, myGate);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
+
+            myGate = new Gate(32 * 42, 32 * 15);
+            Game1.miscObjects.Add(myGate);
+            myButton = new Button(32 * 43, 32 * 15, myGate);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
 
         }
 
         public override void addDarkTiles()
         {
             //int darkZone
-            int startX = 39;
+            int startX = 1;
             int startY = 1;
             int endX = 54;
-            int endY = 16;
+            int endY = 5;
 
             
 
