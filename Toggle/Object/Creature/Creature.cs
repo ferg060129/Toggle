@@ -277,25 +277,25 @@ namespace Toggle
                 TileNode next = q.Dequeue();
                 if (next.X!=end.X || next.Y!=end.Y)
                 {
-                    if (next.X + 1 < xTiles && !visited[next.Y, next.X + 1] && !Game1.wallArray[next.Y, next.X + 1])
+                    if (next.X + 1 < xTiles && !visited[next.Y, next.X + 1] && !Game1.wallArray[next.Y, next.X + 1] && !tileIsOccupied(next.X + 1, next.Y))
                     {
                         TileNode temp = new TileNode(next.X + 1, next.Y, next);
                         visited[next.Y, next.X + 1] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.X - 1 >= 0 && !visited[next.Y, next.X - 1] && !Game1.wallArray[next.Y, next.X - 1])
+                    if (next.X - 1 >= 0 && !visited[next.Y, next.X - 1] && !Game1.wallArray[next.Y, next.X - 1] && !tileIsOccupied(next.X - 1, next.Y))
                     {
                         TileNode temp = new TileNode(next.X - 1, next.Y, next);
                         visited[next.Y, next.X - 1] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.Y + 1 < yTiles && !visited[next.Y + 1, next.X] && !Game1.wallArray[next.Y + 1, next.X])
+                    if (next.Y + 1 < yTiles && !visited[next.Y + 1, next.X] && !Game1.wallArray[next.Y + 1, next.X] && !tileIsOccupied(next.X, next.Y + 1))
                     {
                         TileNode temp = new TileNode(next.X, next.Y + 1, next);
                         visited[next.Y + 1, next.X] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.Y - 1 >= 0 && !visited[next.Y - 1, next.X] && !Game1.wallArray[next.Y - 1, next.X])
+                    if (next.Y - 1 >= 0 && !visited[next.Y - 1, next.X] && !Game1.wallArray[next.Y - 1, next.X] && !tileIsOccupied(next.X, next.Y - 1))
                     {
                         TileNode temp = new TileNode(next.X, next.Y - 1, next);
                         visited[next.Y - 1, next.X] = true;
@@ -359,6 +359,32 @@ namespace Toggle
         }
 
 
+        bool tileIsOccupied(int tx, int ty)
+        {
+            Rectangle r = new Rectangle(tx*32,ty*32,32,32);
+
+            foreach (Creature c in Game1.creatures)
+            {
+                if(c.getHitBox().Intersects(r) && !(c is Player))
+                {
+                    return true;
+                }
+
+            }
+            foreach (Miscellanious m in Game1.miscObjects)
+            {
+                if (m.getHitBox().Intersects(r))
+                {
+                    if (m is Pushable && m.getState())
+                    {
+                        continue;
+                    }
+                    return true;
+                }
+            }
+            return false;
+
+        }
 
 
         public class TileNode

@@ -23,7 +23,26 @@ namespace Toggle
 
         public override void loadLevelObjects()
         {
-           
+            Gate myGate = new Gate(32 * 5, 32 * 10);
+            Game1.miscObjects.Add(myGate);
+            Button myButton = new Button(32 * 9, 32 * 8, myGate);
+            Game1.miscObjects.Add(myButton);
+
+
+            myGate = new Gate(32 * 51, 32 * 13);
+            Game1.miscObjects.Add(myGate);
+
+            myButton = new Button(32 * 52, 32 * 7, myGate);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
+
+            myGate = new Gate(32 * 42, 32 * 15);
+            Game1.miscObjects.Add(myGate);
+            myButton = new Button(32 * 43, 32 * 15, myGate);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
+
+
             BatteryGoo battery = new BatteryGoo(32 * 53, 32 * 16);
             Game1.items.Add(battery);
 
@@ -59,10 +78,7 @@ namespace Toggle
             ft.setDefendTileBad(9, 9);
 
 
-            Gate myGate = new Gate(32 * 5, 32 * 10);
-            Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 9, 32 * 8, myGate);
-            Game1.miscObjects.Add(myButton);
+            
 
             Lamp mylamp = new Lamp(32 * 1, 32 * 8);
             Game1.items.Add(mylamp);
@@ -91,18 +107,6 @@ namespace Toggle
             vm = new VineMoveBlock(32 * 20, 32 * 10);
             Game1.miscObjects.Add(vm);
 
-            myGate = new Gate(32 * 51, 32 * 13);
-            Game1.miscObjects.Add(myGate);
-
-            myButton = new Button(32 * 52, 32 * 7, myGate);
-            myButton.setHeavyButton(true);
-            Game1.miscObjects.Add(myButton);
-
-            myGate = new Gate(32 * 42, 32 * 15);
-            Game1.miscObjects.Add(myGate);
-            myButton = new Button(32 * 43, 32 * 15, myGate);
-            myButton.setHeavyButton(true);
-            Game1.miscObjects.Add(myButton);
 
             
 
