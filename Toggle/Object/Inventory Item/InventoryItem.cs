@@ -63,5 +63,12 @@ namespace Toggle
         {
             return false;
         }
+        public virtual Texture2D getGraphic()
+        {
+            if (state)
+                return goodGraphic;
+            else
+                return badGraphic;
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Toggle
 {
@@ -24,6 +25,13 @@ namespace Toggle
             if(inventoryItem==null)
                 makeInventoryItem();
             return inventoryItem;
+        }
+        public virtual Texture2D getGraphic()
+        {
+            if (state)
+                return goodGraphic;
+            else
+                return badGraphic;
         }
 
 

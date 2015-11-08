@@ -104,6 +104,8 @@ namespace Toggle
             myButton.setHeavyButton(true);
             Game1.miscObjects.Add(myButton);
 
+            
+
         }
 
         public override void addDarkTiles()

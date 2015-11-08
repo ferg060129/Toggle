@@ -11,13 +11,13 @@ namespace Toggle
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static string[] graphicNames = { "kitten", "zombie", "player", "protagsheet", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
-                                               "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","gateOpen","gateClose",
-                                               "lampoff","lampon","shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
+                                               "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","OpenGate","ClosedGate",
+                                               "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen3","lostScreen","blackScreen","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
-                                                "shiftCooldownBar"};
+                                                "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
-                                           "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","locktile",
+                                           "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
@@ -34,7 +34,7 @@ namespace Toggle
                 {'-', "woodenwallhorizontal1,stone,w"},
                 {'f', "AngryButtonPressed,AngryButton,"},
                 {'s', "HappyButtonPressed,HappyButton,"},
-                {'l', "locktile,locktile,"},
+                {'l', "HoleTilePressed,HoleTile,"},
                 {'a', "blackBlock,blackBlock,"},    //takes you to glevel
                 {'b', "blackBlock,blackBlock,"},
                 {'c', "blackBlock,blackBlock,"},

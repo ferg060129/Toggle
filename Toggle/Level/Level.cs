@@ -40,6 +40,7 @@ namespace Toggle
             Game1.miscObjects.Clear();
             Game1.levelTiles.Clear();
             Game1.darkTiles.Clear();
+            Game1.visuals.Clear();
         }
 
         public virtual void loadLevelObjects()

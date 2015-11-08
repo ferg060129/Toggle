@@ -37,6 +37,9 @@ namespace Toggle
           
             GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);
             Game1.items.Add(gb);
+
+            House house = new House(6 * 32, 3 * 32);
+            Game1.visuals.Add(house);
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);

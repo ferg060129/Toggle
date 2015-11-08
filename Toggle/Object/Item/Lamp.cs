@@ -12,8 +12,8 @@ namespace Toggle
     {
         public Lamp(int xLocation, int yLocation): base(xLocation, yLocation)
         {
-            goodGraphic = Textures.textures["lampoff"];
-            badGraphic = Textures.textures["lampoff"];
+            goodGraphic = Textures.textures["UnlitLantern"];
+            badGraphic = Textures.textures["BustedLantern"];
             width = 32;
             height = 32;
             imageBoundingRectangle = new Rectangle(0, 0, width, height);

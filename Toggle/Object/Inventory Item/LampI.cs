@@ -12,8 +12,8 @@ namespace Toggle
         public LampI()
             : base()
         {
-            goodGraphic = Textures.textures["lampoff"];
-            badGraphic = Textures.textures["lampoff"];
+            goodGraphic = Textures.textures["UnlitLantern"];
+            badGraphic = Textures.textures["BustedLantern"];
             width = 32;
             height = 32;
             itemTipGood = "Batteries not included";
@@ -28,8 +28,8 @@ namespace Toggle
                 batteries = true;
                 itemTipGood = "I am bright as the sun";
                 itemTipBad = "I am bright as the sun";
-                goodGraphic = Textures.textures["lampon"];
-                badGraphic = Textures.textures["lampon"];
+                goodGraphic = Textures.textures["LitLantern"];
+                badGraphic = Textures.textures["LitLantern"];
                 return true;
             }
             return false;

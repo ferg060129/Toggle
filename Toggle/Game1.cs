@@ -24,6 +24,9 @@ namespace Toggle
         public static ArrayList tiles = new ArrayList();
         public static ArrayList solidTiles = new ArrayList();
         public static ArrayList darkTiles = new ArrayList();
+        public static ArrayList visuals = new ArrayList();
+        
+
         public static Random random = new Random();
 
         //public static ArrayList collidableTiles = new ArrayList();
@@ -345,6 +348,10 @@ namespace Toggle
                     }
                 }
             }
+            foreach (Visual v in visuals)
+            {
+                v.setState(worldState);
+            }
             /*
             if (worldState)
             {
@@ -597,11 +604,18 @@ namespace Toggle
             {
                 spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White);
             }
-
             foreach (Miscellanious m in miscObjects)
             {
                 spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
             }
+            foreach (Visual v in visuals)
+            {
+                spriteBatch.Draw(v.getGraphic(), new Vector2(v.getX(), v.getY()), v.getImageBoundingRectangle(), Color.White);
+            }
+            
+
+           
+
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             if (!worldState)
             drawDarkTiles(spriteBatch);
