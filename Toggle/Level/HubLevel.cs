@@ -43,6 +43,8 @@ namespace Toggle
 
             School school = new School(30 * 32, 3 * 32);
             Game1.visuals.Add(school);
+            Lake lake = new Lake(29 * 32, 22 * 32);
+            Game1.visuals.Add(lake);
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);
