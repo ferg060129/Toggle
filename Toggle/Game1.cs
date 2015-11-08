@@ -575,18 +575,30 @@ namespace Toggle
 
         public void playDebugDraw()
         {
-            /*int [] tempArray = new int[4];
+            int [] tempArray = new int[4];
             foreach (Miscellanious l in miscObjects)
             {
                 if (l is LaserBlock)
                 {
                     tempArray = ((LaserBlock)l).getLaserEnds();
-                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[0], l.getY()));
-                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[1], l.getY()));
-                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[2]));
-                    spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[3]));
+                    spriteBatch.Draw(Textures.textures["shiftlocked"], 
+                        new Rectangle(
+                            l.getX(), 
+                            l.getY(),
+                            tempArray[0],
+                            32
+                            ),
+                            null,
+                            Color.Red,
+                            (float)Math.PI,
+                            new Vector2(0,0),
+                            SpriteEffects.None,
+                            0);
+                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[1], l.getY()));
+                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[2]));
+                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[3]));
                 }
-            }*/
+            }
         }
 
         public void playDraw()
