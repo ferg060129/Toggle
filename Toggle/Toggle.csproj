@@ -84,6 +84,7 @@
     <Compile Include="Object\Tile\Tile.cs" />
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Object\Visual\House.cs" />
+    <Compile Include="Object\Visual\School.cs" />
     <Compile Include="Object\Visual\Visual.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -136,6 +137,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\OpenGate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\schooldark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\school.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tiles\stone.png" />

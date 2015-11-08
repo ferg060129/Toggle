@@ -40,6 +40,9 @@ namespace Toggle
 
             House house = new House(6 * 32, 3 * 32);
             Game1.visuals.Add(house);
+
+            School school = new School(30 * 32, 3 * 32);
+            Game1.visuals.Add(school);
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);
@@ -48,6 +51,7 @@ namespace Toggle
 
             //level tiles
             levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level"));
+            levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "gate1Level"));
         }
 
     }

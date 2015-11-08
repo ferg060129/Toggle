@@ -148,11 +148,11 @@ namespace Toggle
             gate2Level = new Gate2Level();
             complex1Level = new Complex1();
 
-            currentLevel = houseLevel;
+            currentLevel = hubLevel;
 
             inventory = new Inventory();
-            //player = new Player(13*32, 25*32, inventory, this);
-            player = new Player(30 * 32, 9 * 32, inventory, this);
+            player = new Player(13*32, 25*32, inventory, this);
+            //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
