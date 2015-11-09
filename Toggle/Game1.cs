@@ -25,7 +25,7 @@ namespace Toggle
         public static ArrayList solidTiles = new ArrayList();
         public static ArrayList darkTiles = new ArrayList();
         public static ArrayList visuals = new ArrayList();
-        
+        public static ArrayList boats = new ArrayList();
 
         public static Random random = new Random();
 
@@ -33,6 +33,7 @@ namespace Toggle
         public static ArrayList miscObjects = new ArrayList();
         public static ArrayList playerActivateTiles = new ArrayList();
         public static ArrayList levelTiles = new ArrayList();
+        
 
         string gameState;
 
@@ -64,6 +65,7 @@ namespace Toggle
         MouseState oldMouseState;
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
+        float fadeTransparency = 0.0f;
 
         
 
@@ -208,6 +210,12 @@ namespace Toggle
                 case "lost":
                     lostUpdate();
                     break;
+                case "winfade":
+                    winFadeUpdate();
+                    break;
+                case "credits":
+                    creditsUpdate();
+                    break;
             }
             base.Update(gameTime);
 
@@ -281,6 +289,15 @@ namespace Toggle
                 }
                 
             }
+            foreach (Boat b in boats)
+            {
+                Rectangle hitBox = b.getHitBox();
+                if (player.getHitBox().Intersects(hitBox))
+                {
+                    player.reportCollision(b);
+                    gameState = "winfade";
+                }
+            }
             checkLevelTileCollision();
         }
 
@@ -301,7 +318,7 @@ namespace Toggle
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(Color.Black);
             
             switch (gameState)
             {
@@ -316,6 +333,12 @@ namespace Toggle
                     break;
                 case "lost":
                     lostDraw();
+                    break;
+                case "winfade":
+                    winFadeDraw();
+                    break;
+                case "credits":
+                    creditsDraw();
                     break;
             }
             base.Draw(gameTime);
@@ -536,7 +559,12 @@ namespace Toggle
             {
                 c.move();
             }
+            foreach(Boat b in boats)
+            {
+                b.move();
+            }
             player.moveUpdate();
+            
 
             checkCollisions();
 
@@ -669,7 +697,10 @@ namespace Toggle
             {
                 spriteBatch.Draw(v.getGraphic(), new Vector2(v.getX(), v.getY()), v.getImageBoundingRectangle(), Color.White);
             }
-            
+            foreach(Boat b in boats)
+            {
+                spriteBatch.Draw(b.getGraphic(), new Vector2(b.getX(), b.getY()), b.getImageBoundingRectangle(), Color.White);
+            }
 
            
 
@@ -820,6 +851,43 @@ namespace Toggle
                 Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
                 spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
             }
+        }
+
+        public void winFadeUpdate()
+        {
+            playUpdate();
+            
+            if(fadeTransparency < 1)
+            {
+                fadeTransparency += 0.01f;
+            }
+            else
+            {
+                gameState = "credits";
+            }
+            
+        }
+
+        public void winFadeDraw()
+        {
+            
+            playDraw();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
+            spriteBatch.Draw(Textures.textures["whiteScreen"], new Vector2(getTopLeft().X, getTopLeft().Y), new Rectangle(0, 0, width, height), new Color(Color.Black, fadeTransparency));
+            spriteBatch.End();
+        }
+
+        public void creditsUpdate()
+        {
+
+        }
+
+        public void creditsDraw()
+        {
+            
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
+            spriteBatch.DrawString(sf, "Isaac and Merle and Kevin and Mayris", new Vector2(getTopLeft().X, getTopLeft().Y), Color.Blue);
+            spriteBatch.End();
         }
 
 

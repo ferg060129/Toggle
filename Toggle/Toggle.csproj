@@ -57,6 +57,7 @@
     <Compile Include="Object\Inventory Item\BatteryGooI.cs" />
     <Compile Include="Object\Inventory Item\LampI.cs" />
     <Compile Include="Object\Item\BatteryGoo.cs" />
+    <Compile Include="Object\Miscellanious\Boat.cs" />
     <Compile Include="Object\Miscellanious\Button.cs" />
     <Compile Include="Object\Miscellanious\LaserDetector.cs" />
     <Compile Include="Object\Miscellanious\LaserBlock.cs" />
@@ -103,6 +104,9 @@
     <Content Include="Content\banditKing2.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\boat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\BustedLantern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -140,13 +144,15 @@
     <Content Include="Content\OpenGate.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\rays.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\schooldark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\school.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Tiles\stone.png" />
     <Content Include="Content\Tile\AngryButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -365,6 +371,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\whiteblock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\whiteScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\whitesky.mp3">
