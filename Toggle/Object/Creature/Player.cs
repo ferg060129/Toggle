@@ -16,8 +16,10 @@ namespace Toggle
         Game1 engine;
         bool stateLocked = false;
         bool currentlyMove = false;
+        bool onBoat = false;
         int distanceTraveled = 0;
         double proportion = 0;
+        Boat myBoat = null;
 
 
 
@@ -55,6 +57,14 @@ namespace Toggle
             //Variables to keep track of animation sprite.
             int oldDirection = direction; 
             moving = true;
+
+            if(onBoat)
+            {
+                myBoat.setX(myBoat.getX() + myBoat.getVelocity());
+                direction = myBoat.getDirection();
+                velocity = myBoat.getVelocity();
+                return;
+            }
 
             if (currentlyMove == false)
             {
@@ -137,6 +147,14 @@ namespace Toggle
         public void moveUpdate()
         {
             int oldDirection = direction;
+
+            if(onBoat)
+            {
+                this.x = myBoat.getX();
+                this.y = myBoat.getY();
+                return;
+            }
+
             if (currentlyMove)
             {
                 switch (direction)
@@ -182,6 +200,13 @@ namespace Toggle
         }
         public override void reportCollision(Object o)
         {
+            if (o is Boat && !onBoat)
+            {
+                onBoat = true;
+                myBoat = (Boat)o;
+                myBoat.setMotion(2);
+            }
+
             if (o is DogBoogieman)
             {
                 if (!o.getState())
@@ -233,6 +258,7 @@ namespace Toggle
                 }
             }
 
+          
         }
 
 
@@ -262,6 +288,11 @@ namespace Toggle
         public bool isLocked()
         {
             return stateLocked;
+        }
+
+        public bool isOnBoat()
+        {
+            return onBoat;
         }
 
         
