@@ -20,8 +20,8 @@ namespace Toggle
         int distanceTraveled = 0;
         double proportion = 0;
         Boat myBoat = null;
-
-
+        int hitInvulnTime = 0;
+        int hitInvulnMax = 120;
 
         public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
@@ -141,7 +141,15 @@ namespace Toggle
                 proportion -= 0.001;
             }
             proportion -= 0.0001;
-
+            if (hitInvulnTime > 0)
+            {
+                hitInvulnTime--;
+                //flash the player while in hit invuln
+                if (hitInvulnTime % 6 >= 3)
+                {
+                    imageBoundingRectangle = new Rectangle(0, 0, 0, 0);
+                }
+            }
         }
 
         public void moveUpdate()
@@ -191,7 +199,7 @@ namespace Toggle
 
         public override void zap()
         {
-            proportion -= 0.01;
+            damageProportion(0.3, 40);
         }
         
         public void pickUp(Item i)
@@ -213,6 +221,10 @@ namespace Toggle
                 {
                     proportion = 0;
                 }
+            }
+            if ((o is Ghost) && (!o.getState()))
+            {
+                damageProportion(0.3);
             }
             if(o.getSolid())
             {
@@ -265,6 +277,26 @@ namespace Toggle
         public double getProportion()
         {
             return proportion;
+        }
+
+        public void damageProportion(double damage)
+        {
+            if (hitInvulnTime == 0)
+            {
+                proportion -= damage;
+                hitInvulnTime = hitInvulnMax;
+            }
+            
+        }
+
+        public void damageProportion(double damage, int setInvuln)
+        {
+            if (hitInvulnTime == 0)
+            {
+                proportion -= damage;
+                hitInvulnTime = setInvuln;
+            }
+
         }
 
 
