@@ -10,10 +10,10 @@ namespace Toggle
         int updatePeriod;
         bool direction; //true is horizontal, false is verticle
         int[] laserEnds = new int[4]; //end points, (left x, right x, top y, bottom y)
-        ArrayList laserSegments;
-        ArrayList laserDetectors;
+        int phaseOffset;    //changes time that lasers fade in and out
         public LaserBlock(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
+            phaseOffset = Game1.random.Next(0, 180);
             direction = true;
             updateGraphic();
             updatePeriod = 0;
@@ -22,6 +22,7 @@ namespace Toggle
         public LaserBlock(int xLocation, int yLocation,bool dirIn)
             : base(xLocation, yLocation)
         {
+            phaseOffset = Game1.random.Next(0, 180);
             direction = dirIn;
             updateGraphic();
             updatePeriod = 0;
@@ -56,6 +57,11 @@ namespace Toggle
         public bool getDirection()
         {
             return direction;
+        }
+
+        public int getPhaseOffset()
+        {
+            return phaseOffset;
         }
 
         public void calcLaserEnds()
@@ -145,7 +151,7 @@ namespace Toggle
                         //should probably change this to be zap(c);, where zap is defined as a method
                         //of Laser block.  This way you don't have only one "zap" affect for a player, and
                         //can easily make different types of zaps (damage variance, world shifting, etc)
-                        //c.zap();
+                        c.zap();
                     }
                     
                 }

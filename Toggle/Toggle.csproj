@@ -46,10 +46,13 @@
     <Compile Include="Level\Gate1Level.cs" />
     <Compile Include="Level\GateLevel.cs" />
     <Compile Include="Level\HouseLevel.cs" />
+    <Compile Include="Level\GhostTestLevel.cs" />
+    <Compile Include="Level\LaserTestLevel.cs" />
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
+    <Compile Include="Object\Creature\Ghost.cs" />
     <Compile Include="Object\Creature\DogBoogieman.cs" />
     <Compile Include="Object\Creature\FlowerTentacles.cs" />
     <Compile Include="Object\Creature\KittenZombie.cs" />

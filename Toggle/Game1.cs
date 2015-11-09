@@ -52,6 +52,8 @@ namespace Toggle
         Gate1Level gate1Level;
         Gate2Level gate2Level;
         Complex1 complex1Level;
+        GhostTestLevel ghostTestLevel;
+        LaserTestLevel laserTestLevel;
         int time;
         int width;
         int height;
@@ -149,6 +151,8 @@ namespace Toggle
             gate1Level = new Gate1Level();
             gate2Level = new Gate2Level();
             complex1Level = new Complex1();
+            ghostTestLevel = new GhostTestLevel();
+            laserTestLevel = new LaserTestLevel();
 
             currentLevel = hubLevel;
 
@@ -351,6 +355,7 @@ namespace Toggle
             foreach (Creature c in creatures)
             {
                 c.setState(worldState);
+                c.onShift();
             }
             foreach (Item i in items)
             {
@@ -477,6 +482,14 @@ namespace Toggle
             {
                 currentLevel = complex1Level;
             }
+            else if (level.Equals("ghostTestLevel"))
+            {
+                currentLevel = ghostTestLevel;
+            }
+            else if (level.Equals("laserTestLevel"))
+            {
+                currentLevel = laserTestLevel;
+            }
             creatures.Add(player);
             currentLevel.loadLevel();
             //add level transfer tiles from current level to the array list of tiles
@@ -601,75 +614,39 @@ namespace Toggle
             oldKeyBoardState = newKeyBoardState;
         }
 
-        public void playDebugDraw()
+        public void playLaserDraw()
         {
             int [] tempArray = new int[4];
+            int po = 0;
             foreach (Miscellanious l in miscObjects)
             {
                 if (l is LaserBlock)
                 {
+                    po = ((LaserBlock)l).getPhaseOffset();
                     tempArray = ((LaserBlock)l).getLaserEnds();
+                    //this would look really nice in a for loop
                     if (((LaserBlock)l).getDirection() == true)
                     {
                         spriteBatch.Draw(Textures.textures["laser"],
-                            new Rectangle(
-                                l.getX(),
-                                l.getY() + 16,
-                                Math.Abs(tempArray[0] - l.getX()),
-                                3
-                                ),
-                                null,
-                                Color.Red,
-                                (float)Math.PI,
-                                new Vector2(0, 0),
-                                SpriteEffects.None,
-                                0);
+                            new Rectangle(l.getX(), l.getY() + 24, Math.Abs(tempArray[0] - l.getX()), 16),
+                                null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + po) * 3.14529 / 180))),
+                                (float)Math.PI, new Vector2(0, 0), SpriteEffects.None, 0);
                         spriteBatch.Draw(Textures.textures["laser"],
-                            new Rectangle(
-                                l.getX() + 32,
-                                l.getY() + 13,
-                                Math.Abs(tempArray[1] - l.getX()),
-                                3
-                                ),
-                                null,
-                                Color.Red,
-                                0,
-                                new Vector2(0, 0),
-                                SpriteEffects.None,
-                                0);
+                            new Rectangle(l.getX() + 32, l.getY() + 8, Math.Abs(tempArray[1] - l.getX()), 16), null,
+                                Color.White * (1.5f - Math.Abs((float)Math.Sin((time + 40 + po) * 3.14529 / 180))),
+                                0, new Vector2(0, 0), SpriteEffects.None, 0);
                     }
                     else
                     {
                         spriteBatch.Draw(Textures.textures["laser"],
-                            new Rectangle(
-                                l.getX() + 19,
-                                l.getY() + 32,
-                                Math.Abs(tempArray[3] - l.getY()),
-                                3
-                                ),
-                                null,
-                                Color.Red,
-                                (float)Math.PI / 2,
-                                new Vector2(0, 0),
-                                SpriteEffects.None,
-                                0);
+                            new Rectangle(l.getX() + 24, l.getY() + 32, Math.Abs(tempArray[3] - l.getY()), 16),
+                                null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + po) * 3.14529 / 180))),
+                                (float)Math.PI / 2, new Vector2(0, 0), SpriteEffects.None,0);
                         spriteBatch.Draw(Textures.textures["laser"],
-                            new Rectangle(
-                                l.getX() + 16,
-                                l.getY(),
-                                Math.Abs(tempArray[2] - l.getY()),
-                                3
-                                ),
-                                null,
-                                Color.Red,
-                                (float)Math.PI * 3 / 2,
-                                new Vector2(0, 0),
-                                SpriteEffects.None,
-                                0);
+                            new Rectangle(l.getX() + 8, l.getY(), Math.Abs(tempArray[2] - l.getY()),16 ),
+                                null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + 40 + po) * 3.14529 / 180))),
+                                (float)Math.PI * 3 / 2, new Vector2(0, 0), SpriteEffects.None, 0);
                     }
-                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[1], l.getY()));
-                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[2]));
-                    //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[3]));
                 }
             }
         }
@@ -680,6 +657,7 @@ namespace Toggle
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
+            playLaserDraw();
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
@@ -687,7 +665,7 @@ namespace Toggle
 
             foreach (Creature c in creatures)
             {
-                spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White);
+                spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White * c.getAlpha());
             }
             foreach (Miscellanious m in miscObjects)
             {
@@ -711,7 +689,6 @@ namespace Toggle
 
 
             spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
-            playDebugDraw();
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
 
             if (Keyboard.GetState().IsKeyDown(Keys.I))
@@ -763,6 +740,7 @@ namespace Toggle
 
 
 
+
             oldKeyBoardState = newKeyBoardState;
         }
         public void pauseDraw()
@@ -773,6 +751,12 @@ namespace Toggle
         }
         public void lostUpdate()
         {
+            newKeyBoardState = Keyboard.GetState();
+            if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
+            {
+                reloadLevel();
+                gameState = "play";
+            }
             MouseState m = Mouse.GetState();
             if (m.LeftButton == ButtonState.Pressed)
             {
