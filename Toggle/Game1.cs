@@ -68,6 +68,7 @@ namespace Toggle
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
         float fadeTransparency = 0.0f;
+        int creditsOffset = 0;
 
         
 
@@ -94,7 +95,7 @@ namespace Toggle
         {
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-           // graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //game.Add(this);
@@ -868,10 +869,26 @@ namespace Toggle
 
         public void creditsDraw()
         {
-            
+            int length;
+            string str;
+
+
+
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
-            spriteBatch.DrawString(sf, "Isaac and Merle and Kevin and Mayris", new Vector2(getTopLeft().X, getTopLeft().Y), Color.Blue);
+            str = "Isaac";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length/2, getCenter().Y - creditsOffset), Color.Blue);
+            str = "Merle";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 12), Color.Blue);
+            str = "Kevin";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 24), Color.Blue);
+            str = "Mayris";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 36), Color.Blue);
             spriteBatch.End();
+            creditsOffset++;
         }
 
 
