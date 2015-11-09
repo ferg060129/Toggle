@@ -581,19 +581,64 @@ namespace Toggle
                 if (l is LaserBlock)
                 {
                     tempArray = ((LaserBlock)l).getLaserEnds();
-                    spriteBatch.Draw(Textures.textures["shiftlocked"], 
-                        new Rectangle(
-                            l.getX(), 
-                            l.getY(),
-                            tempArray[0],
-                            32
-                            ),
-                            null,
-                            Color.Red,
-                            (float)Math.PI,
-                            new Vector2(0,0),
-                            SpriteEffects.None,
-                            0);
+                    if (((LaserBlock)l).getDirection() == true)
+                    {
+                        spriteBatch.Draw(Textures.textures["laser"],
+                            new Rectangle(
+                                l.getX(),
+                                l.getY() + 16,
+                                Math.Abs(tempArray[0] - l.getX()),
+                                3
+                                ),
+                                null,
+                                Color.Red,
+                                (float)Math.PI,
+                                new Vector2(0, 0),
+                                SpriteEffects.None,
+                                0);
+                        spriteBatch.Draw(Textures.textures["laser"],
+                            new Rectangle(
+                                l.getX() + 32,
+                                l.getY() + 13,
+                                Math.Abs(tempArray[1] - l.getX()),
+                                3
+                                ),
+                                null,
+                                Color.Red,
+                                0,
+                                new Vector2(0, 0),
+                                SpriteEffects.None,
+                                0);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(Textures.textures["laser"],
+                            new Rectangle(
+                                l.getX() + 19,
+                                l.getY() + 32,
+                                Math.Abs(tempArray[3] - l.getY()),
+                                3
+                                ),
+                                null,
+                                Color.Red,
+                                (float)Math.PI / 2,
+                                new Vector2(0, 0),
+                                SpriteEffects.None,
+                                0);
+                        spriteBatch.Draw(Textures.textures["laser"],
+                            new Rectangle(
+                                l.getX() + 16,
+                                l.getY(),
+                                Math.Abs(tempArray[2] - l.getY()),
+                                3
+                                ),
+                                null,
+                                Color.Red,
+                                (float)Math.PI * 3 / 2,
+                                new Vector2(0, 0),
+                                SpriteEffects.None,
+                                0);
+                    }
                     //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(tempArray[1], l.getY()));
                     //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[2]));
                     //spriteBatch.Draw(Textures.textures["shiftlocked"], new Vector2(l.getX(), tempArray[3]));

@@ -8,7 +8,7 @@ namespace Toggle
     class LaserBlock : Pushable
     {
         int updatePeriod;
-        bool direction;
+        bool direction; //true is horizontal, false is verticle
         int[] laserEnds = new int[4]; //end points, (left x, right x, top y, bottom y)
         ArrayList laserSegments;
         ArrayList laserDetectors;
@@ -53,32 +53,37 @@ namespace Toggle
             return laserEnds;
         }
 
+        public bool getDirection()
+        {
+            return direction;
+        }
+
         public void calcLaserEnds()
         {
             ArrayList toIterate = new ArrayList();
             toIterate.AddRange(Game1.miscObjects);
             toIterate.AddRange(Game1.solidTiles);
             laserEnds[0] = 0;
-            laserEnds[1] = 999;
+            laserEnds[1] = 999999;
             laserEnds[2] = 0;
-            laserEnds[3] = 999;
+            laserEnds[3] = 999999;
             foreach (Object m in toIterate)
             {
                 if ((m != this) && (m.getX() == x))
                 {
                     //calc laser end points
                     if ((m.getY() > y) && (m.getY() < laserEnds[3]))
-                        laserEnds[3] = m.getY();
+                        laserEnds[3] = m.getY() - 32;
                     if ((m.getY() < y) && (m.getY() > laserEnds[2]))
-                        laserEnds[2] = m.getY();
+                        laserEnds[2] = m.getY() + 32;
                 }
                 if ((m != this) && (m.getY() == y))
                 {
                     //calc laser end points
                     if ((m.getX() > x) && (m.getX() < laserEnds[1]))
-                        laserEnds[1] = m.getX();
+                        laserEnds[1] = m.getX() - 32;
                     if ((m.getX() < x) && (m.getX() > laserEnds[0]))
-                        laserEnds[0] = m.getX();
+                        laserEnds[0] = m.getX() + 32;
                 }
             }
         }
