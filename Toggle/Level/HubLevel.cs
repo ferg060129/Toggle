@@ -23,11 +23,6 @@ namespace Toggle
             Game1.miscObjects.Add(vm);
             vm = new VineMoveBlock(32 * 13, 32 * 19);
             Game1.miscObjects.Add(vm);
-            /*Game1.miscObjects.Add(new LaserBlock(32 * 20, 32 * 20));
-            Game1.miscObjects.Add(new LaserBlock(32 * 21, 32 * 20,false));
-            Game1.miscObjects.Add(new LaserBlock(32 * 22, 32 * 20,true));
-            Game1.miscObjects.Add(new LaserBlock(32 * 23, 32 * 20,false));
-            Game1.miscObjects.Add(new LaserBlock(32 * 24, 32 * 20,true));*/
             Game1.miscObjects.Add(new VineMoveBlock(32 * 25, 32 * 20));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 25));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 20));
@@ -58,7 +53,7 @@ namespace Toggle
             //level tiles
             levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level"));
             levelTiles.Add(new LevelTile(17 * 32, 3 * 32, "blackBlock", "blackBlock", "ghostTestLevel"));
-            levelTiles.Add(new LevelTile(23 * 32, 3 * 32, "blackBlock", "blackBlock", "laserTestLevel"));
+            levelTiles.Add(new LevelTile(21 * 32, 3 * 32, "blackBlock", "blackBlock", "laserTestLevel"));
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "gate1Level"));
         }
 
