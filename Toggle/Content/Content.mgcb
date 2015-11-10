@@ -262,12 +262,6 @@
 /processorParam:TextureFormat=Color
 /build:baditemblock.png
 
-#begin kooten.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:kooten.spritefont
-
 #begin berry.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -636,4 +630,16 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
 /build:Tile/darkgrass8.png
+
+#begin arial12.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:arial12.spritefont
+
+#begin mistral16.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:mistral16.spritefont
 

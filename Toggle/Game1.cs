@@ -15,9 +15,6 @@ namespace Toggle
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        SpriteFont sf;
-
-        //SpriteFont
         //Make sure all arrays are cleared in Level.unloadLevel
         public static ArrayList creatures = new ArrayList();
         public static ArrayList items = new ArrayList();
@@ -31,6 +28,7 @@ namespace Toggle
 
         //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
+        public static ArrayList updateMiscObjects = new ArrayList();
         public static ArrayList playerActivateTiles = new ArrayList();
         public static ArrayList levelTiles = new ArrayList();
         
@@ -87,6 +85,11 @@ namespace Toggle
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
         private SoundEffectInstance banditKing;
+
+        bool draw = true;
+
+
+        Chalkboard chalk;
         
 
 
@@ -145,6 +148,13 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
+
+            for (int x = 0; x < Textures.spritefonts.Length; x++)
+            {
+                Textures.fonts.Add(Textures.spritefonts[x], Content.Load<SpriteFont>(Textures.spritefonts[x]));
+            }
+
+
             hubLevel = new HubLevel();
             houseLevel = new HouseLevel();
             schoolLevel = new SchoolLevel();
@@ -163,9 +173,7 @@ namespace Toggle
             cam = new Camera(player, width, height);
             creatures.Add(player);
 
-            sf = Content.Load<SpriteFont>("kooten");
-
-
+           
 
             //song = Content.Load<Song>("banditKing2");
 
@@ -186,6 +194,7 @@ namespace Toggle
             banditKing.Play();
             gameState = "start";
             //MediaPlayer.IsRepeating = true;
+            chalk = new Chalkboard(32, 32);
         }
 
         public void reloadLevel()
@@ -294,12 +303,13 @@ namespace Toggle
                 }
                 
             }
-            foreach (Boat b in boats)
+            foreach (UpdateMiscellanious u in updateMiscObjects)
             {
-                Rectangle hitBox = b.getHitBox();
+                Rectangle hitBox = u.getHitBox();
                 if (player.getHitBox().Intersects(hitBox))
                 {
-                    player.reportCollision(b);
+                    player.reportCollision(u);
+                    if(u is Boat)
                     gameState = "winfade";
                 }
             }
@@ -409,6 +419,11 @@ namespace Toggle
         }
         public void drawMap(SpriteBatch sb)
         {
+            if(!draw)
+            {
+                draw = true;
+                return;
+            }
             foreach(Tile t in tiles){
                 int xLoc = t.getX();
                 int yLoc = t.getY();
@@ -573,12 +588,11 @@ namespace Toggle
             {
                 c.move();
             }
-            foreach(Boat b in boats)
+            foreach(UpdateMiscellanious i in updateMiscObjects)
             {
-                b.move();
+                i.move();
             }
             player.moveUpdate();
-            
 
             checkCollisions();
 
@@ -596,13 +610,13 @@ namespace Toggle
                 IsMouseVisible = true;
             }
 
-            
 
-            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
+
+            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P) && !player.isReadingChalkboard())
             {
                 gameState = "pause";
             }
-            else if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
+            else if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R) && !player.isReadingChalkboard())
             {
                 reloadLevel();
             }
@@ -676,9 +690,21 @@ namespace Toggle
             {
                 spriteBatch.Draw(v.getGraphic(), new Vector2(v.getX(), v.getY()), v.getImageBoundingRectangle(), Color.White);
             }
-            foreach(Boat b in boats)
+            foreach (UpdateMiscellanious i in updateMiscObjects)
             {
-                spriteBatch.Draw(b.getGraphic(), new Vector2(b.getX(), b.getY()), b.getImageBoundingRectangle(), Color.White);
+                if(i is Chalkboard)
+                {
+                    if (player.isReadingChalkboard())
+                    {
+                        Chalkboard ch = (Chalkboard)i;
+                        spriteBatch.Draw(i.getGraphic(), new Vector2(getCenter().X - i.getImageBoundingRectangle().Width / 2, getCenter().Y - i.getImageBoundingRectangle().Height / 2), i.getImageBoundingRectangle(), Color.White);
+                        spriteBatch.DrawString(ch.getFont(), ch.getAnswer(), new Vector2(getCenter().X - ch.getAnswerWidth() / 2, getCenter().Y), Color.Black);
+                    }
+                }
+                else
+                {
+                    spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
+                }
             }
 
            
@@ -689,10 +715,10 @@ namespace Toggle
            
 
 
-            spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(sf, player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
             {
                 inventory.drawInventory(spriteBatch);
                 Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
@@ -706,7 +732,7 @@ namespace Toggle
                         if (r.Contains(cursorPosition))
                         {
                             string tip = i.getItemTip();
-                            spriteBatch.DrawString(sf, tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
+                            spriteBatch.DrawString(inventory.getFont(), tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
                         }
                     }
                 }
@@ -725,6 +751,8 @@ namespace Toggle
             {
                 spriteBatch.Draw(Textures.textures["darkHaze"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 2f));
             }
+
+           
             //gui drawn last
             drawShiftCD();
             drawHealthBar();
@@ -738,10 +766,6 @@ namespace Toggle
             {
                 gameState = "play";
             }
-
-
-
-
             oldKeyBoardState = newKeyBoardState;
         }
         public void pauseDraw()
@@ -873,7 +897,7 @@ namespace Toggle
             string str;
 
 
-
+            /*
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             str = "Isaac";
             length = str.Length * 12;
@@ -889,6 +913,7 @@ namespace Toggle
             spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 36), Color.Blue);
             spriteBatch.End();
             creditsOffset++;
+             * */
         }
 
 
@@ -926,7 +951,7 @@ namespace Toggle
             Texture2D tex = Textures.textures["inventory2"];
             inventory.setX(getTopRight().X - tex.Width - 10);
             inventory.setY(getTopLeft().Y + 10);
-            if (Keyboard.GetState().IsKeyDown(Keys.I))
+            if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
             {
                 MouseState mouseState = Mouse.GetState();
                 Vector2 inventoryPosition = new Vector2(inventory.getX(), inventory.getY());

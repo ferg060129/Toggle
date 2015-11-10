@@ -20,6 +20,10 @@ namespace Toggle
         int distanceTraveled = 0;
         double proportion = 0;
         Boat myBoat = null;
+        bool readingChalkboard = false;
+        Chalkboard playerChalkboard;
+        ChalkboardTop collideChalkboard;
+        
 
 
 
@@ -51,6 +55,13 @@ namespace Toggle
 
         public override void move()
         {
+            if (readingChalkboard && !hitBox.Intersects(collideChalkboard.getHitBox()))
+            {
+                readingChalkboard = false;
+                Game1.updateMiscObjects.Remove(playerChalkboard);
+            }
+
+
             previousHitBox = new Rectangle(x, y, width, height);
             KeyboardState newKeyBoardState = Keyboard.GetState();
 
@@ -69,6 +80,7 @@ namespace Toggle
             if (currentlyMove == false)
             {
                 distanceTraveled = 0;
+                
                 if (newKeyBoardState.IsKeyDown(Keys.Up))
                 {
                     direction = 1;
@@ -116,6 +128,7 @@ namespace Toggle
                     case 3:
                         setAnimation("idleDown");
                         break;
+
                 }
             }
             if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
@@ -141,6 +154,7 @@ namespace Toggle
                 proportion -= 0.001;
             }
             proportion -= 0.0001;
+            
 
         }
 
@@ -214,6 +228,20 @@ namespace Toggle
                     proportion = 0;
                 }
             }
+            if(o is ChalkboardTop)
+            {
+                
+                if(!readingChalkboard)
+                {
+                    playerChalkboard = new Chalkboard(0, 0);
+                    Game1.updateMiscObjects.Add(playerChalkboard);
+                    collideChalkboard = (ChalkboardTop)o;
+                }
+                readingChalkboard = true;
+                
+            }
+
+
             if(o.getSolid())
             {
                 //currentlyMove = false;
@@ -293,6 +321,11 @@ namespace Toggle
         public bool isOnBoat()
         {
             return onBoat;
+        }
+
+        public bool isReadingChalkboard()
+        {
+            return readingChalkboard;
         }
 
         

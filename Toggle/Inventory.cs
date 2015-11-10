@@ -16,12 +16,14 @@ namespace Toggle
         Texture2D inventoryGraphic;
         InventoryItem selectedItem;
         private int x,y;
+        SpriteFont sf;
         
         public Inventory()
         {
             items = new InventoryItem[2,7];
             initializeItemRectangles();
             inventoryGraphic = Textures.textures["inventory2"];
+            sf = Textures.fonts["arial12"];
         }
 
 
@@ -212,6 +214,11 @@ namespace Toggle
                 selectedItem = null;
             }
             i.setSelected(b);
+        }
+
+        public SpriteFont getFont()
+        {
+            return sf;
         }
     }
 }

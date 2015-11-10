@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Toggle
 {
-    class Boat : Miscellanious
+    class Boat : UpdateMiscellanious
     {
         int direction = -1;
         int velocity = 1;
@@ -34,7 +34,7 @@ namespace Toggle
             return velocity;
         }
 
-        public void move()
+        public override void move()
         {
             if(!moving)
             {

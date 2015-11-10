@@ -79,6 +79,8 @@
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
+    <Compile Include="Object\Update Miscellanious\UpdateMiscellanious.cs" />
+    <Compile Include="Object\Update Miscellanious\Chalkboard.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
     <Compile Include="Object\Creature\Ghost.cs" />
     <Compile Include="Object\Creature\DogBoogieman.cs" />
@@ -88,7 +90,7 @@
     <Compile Include="Object\Inventory Item\BatteryGooI.cs" />
     <Compile Include="Object\Inventory Item\LampI.cs" />
     <Compile Include="Object\Item\BatteryGoo.cs" />
-    <Compile Include="Object\Miscellanious\Boat.cs" />
+    <Compile Include="Object\Update Miscellanious\Boat.cs" />
     <Compile Include="Object\Miscellanious\Button.cs" />
     <Compile Include="Object\Miscellanious\LaserDetector.cs" />
     <Compile Include="Object\Miscellanious\LaserBlock.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="Object\Tile\Player Activate Tile\UnlockTile.cs" />
     <Compile Include="Object\Tile\Tile.cs" />
     <Compile Include="Object\Tile\Wall.cs" />
+    <Compile Include="Object\Miscellanious\ChalkboardTop.cs" />
     <Compile Include="Object\Visual\House.cs" />
     <Compile Include="Object\Visual\School.cs" />
     <Compile Include="Object\Visual\Visual.cs" />
@@ -145,6 +148,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\buttonUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\chalkboard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\chalkboardtop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\ClosedGate.png">
@@ -428,8 +437,11 @@
     </MonoGameContentReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\arial12.spritefont">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Content\font.ttf" />
-    <None Include="Content\kooten.spritefont">
+    <None Include="Content\mistral16.spritefont">
       <SubType>Designer</SubType>
     </None>
     <None Include="Toggle_TemporaryKey.pfx" />
@@ -456,6 +468,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
