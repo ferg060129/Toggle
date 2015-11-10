@@ -15,6 +15,7 @@ namespace Toggle
             map = "testingLevel.txt";
             playerStartingX = 9 * 32;
             playerStartingY = 9 * 32;
+            playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
         public override void loadLevelObjects()
         {

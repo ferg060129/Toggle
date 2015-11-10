@@ -18,6 +18,7 @@ namespace Toggle
             indoors = true;
             playerStartingX = 24 * 32;
             playerStartingY = 16 * 32;
+            playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
 
 

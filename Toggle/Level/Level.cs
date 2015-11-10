@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
@@ -17,6 +18,7 @@ namespace Toggle
         protected ArrayList levelTiles = new ArrayList();
         protected bool indoors;
         protected ArrayList levelItems;
+        protected Point playerStartLocation;
 
         public Level()
         {
@@ -159,6 +161,16 @@ namespace Toggle
         public int getPlayerStartingY()
         {
             return playerStartingY;
+        }
+        public Point getPlayerStart()
+        {
+            return playerStartLocation;
+        }
+        public void setPlayerStart(Point loc)
+        {
+            playerStartLocation = loc;
+            playerStartingX = loc.X;
+            playerStartingY = loc.Y;
         }
         public bool getIndoors()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
@@ -14,6 +15,7 @@ namespace Toggle
             map = "laser.txt";
             playerStartingX = 15*32;
             playerStartingY = 16*32;
+            playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
 
 

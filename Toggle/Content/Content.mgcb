@@ -631,6 +631,28 @@
 /processorParam:TextureFormat=Color
 /build:Tile/darkgrass8.png
 
+#begin controls1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:controls1.png
+
+#begin controls2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:controls2.png
+
 #begin arial12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -642,4 +664,5 @@
 /processor:FontDescriptionProcessor
 /processorParam:TextureFormat=Compressed
 /build:mistral16.spritefont
+
 
