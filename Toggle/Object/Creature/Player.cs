@@ -244,9 +244,9 @@ namespace Toggle
                 
                 if(!readingChalkboard)
                 {
-                    playerChalkboard = new Chalkboard(0, 0);
-                    Game1.updateMiscObjects.Add(playerChalkboard);
                     collideChalkboard = (ChalkboardTop)o;
+                    playerChalkboard = new Chalkboard(0, 0, collideChalkboard.getGate());
+                    Game1.updateMiscObjects.Add(playerChalkboard);
                 }
                 readingChalkboard = true;
                 

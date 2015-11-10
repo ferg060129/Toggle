@@ -21,7 +21,9 @@ namespace Toggle
         int backSpaceCtr = 0;
         int backSpaceWait = 0;
 
-        public Chalkboard(int xLoc, int yLoc) : base(xLoc,yLoc)
+        Gate myGate;
+
+        public Chalkboard(int xLoc, int yLoc, Gate g) : base(xLoc,yLoc)
         {
             goodGraphic = Textures.textures["chalkboard"];
             badGraphic = Textures.textures["chalkboard"];
@@ -29,6 +31,7 @@ namespace Toggle
             height = 384;
             imageBoundingRectangle = new Rectangle(0, 0, width, height);
             sf = Textures.fonts["mistral16"];
+            myGate = g;
         }
 
         public override void move()
@@ -87,6 +90,7 @@ namespace Toggle
                     else if(k.Equals(Keys.Enter))
                     {
                         submitAnswer();
+                        currentAnswer = "";
                     }
                 }
             }
@@ -137,7 +141,12 @@ namespace Toggle
 
         public void submitAnswer()
         {
-            Game1.chalkboardCommand(currentAnswer);
+            //Game1.chalkboardCommand(currentAnswer);
+
+            if(currentAnswer.Equals("BANANA"))
+            {
+                myGate.onButton();
+            }
         }
     }
 }

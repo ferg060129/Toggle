@@ -16,10 +16,14 @@ namespace Toggle
         protected int playerStartingY;
         protected ArrayList levelTiles = new ArrayList();
         protected bool indoors;
+        protected ArrayList levelItems;
 
         public Level()
         {
             indoors = false;
+            levelItems = new ArrayList();
+            addInitialLevelItems();
+            
         }
 
 
@@ -27,6 +31,7 @@ namespace Toggle
         {
             makeMapFromFile(map);
             loadLevelObjects();
+            loadItemsToGameArray();
             addDarkTiles();
         }
 
@@ -158,6 +163,25 @@ namespace Toggle
         public bool getIndoors()
         {
             return indoors;
+        }
+
+        public void loadItemsToGameArray()
+        {
+            foreach(Item i in levelItems)
+            {
+                Game1.items.Add(i);
+            }
+        }
+
+        public virtual void addInitialLevelItems()
+        {
+            
+        }
+
+        public void removeItem(Item i)
+        {
+            levelItems.Remove(i);
+
         }
 
     }

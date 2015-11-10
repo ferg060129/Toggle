@@ -282,7 +282,9 @@ namespace Toggle
                 {
                     //If inventory is not full
                     player.reportCollision((Item)items[ii]);
+                    currentLevel.removeItem((Item)items[ii]);
                     items.RemoveAt(ii);
+                    
                 }
             }
 

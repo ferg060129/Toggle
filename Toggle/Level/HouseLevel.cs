@@ -43,8 +43,7 @@ namespace Toggle
             Game1.miscObjects.Add(myButton);
 
 
-            BatteryGoo battery = new BatteryGoo(32 * 53, 32 * 16);
-            Game1.items.Add(battery);
+           
 
             Strawberry sb = new Strawberry(32 * 53, 32 * 15);
             Game1.miscObjects.Add(sb);
@@ -80,11 +79,7 @@ namespace Toggle
 
             
 
-            Lamp mylamp = new Lamp(32 * 1, 32 * 8);
-            Game1.items.Add(mylamp);
 
-            GreenBlock gb = new GreenBlock(32 * 42, 32 * 16);
-            Game1.items.Add(gb);
 
 
             
@@ -131,6 +126,17 @@ namespace Toggle
                 }
             }
 
+        }
+         public override void addInitialLevelItems()
+        {
+            BatteryGoo battery = new BatteryGoo(32 * 53, 32 * 16);
+            levelItems.Add(battery);
+
+            Lamp mylamp = new Lamp(32 * 1, 32 * 8);
+            levelItems.Add(mylamp);
+
+            GreenBlock gb = new GreenBlock(32 * 42, 32 * 16);
+            levelItems.Add(gb);
         }
 
     }

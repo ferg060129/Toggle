@@ -45,11 +45,12 @@ namespace Toggle
             VineMoveBlock vm = new VineMoveBlock(32 * 10, 32 * 5);
             Game1.miscObjects.Add(vm);
 
-            GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
-            Game1.items.Add(b);
+            
         }
 
-        
-
+        public override void addInitialLevelItems(){
+            GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
+            levelItems.Add(b);
+        }
     }
 }

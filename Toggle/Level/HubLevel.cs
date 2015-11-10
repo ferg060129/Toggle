@@ -18,6 +18,10 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
+
+            Gate myGate = new Gate(12 * 32, 2 * 32);
+            Game1.miscObjects.Add(myGate);
+
             FlowerTentacles ft = new FlowerTentacles(32 * 11, 32 * 4);
             VineMoveBlock vm = new VineMoveBlock(32 * 7, 32 * 25);
             Game1.miscObjects.Add(vm);
@@ -31,8 +35,7 @@ namespace Toggle
 
 
           
-            GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);
-            Game1.items.Add(gb);
+            
 
             House house = new House(6 * 32, 3 * 32);
             Game1.visuals.Add(house);
@@ -45,7 +48,7 @@ namespace Toggle
             Boat boat = new Boat(28 * 32, 28 * 32);
             Game1.updateMiscObjects.Add(boat);
 
-            ChalkboardTop ch = new ChalkboardTop(10 * 32, 0*32);
+            ChalkboardTop ch = new ChalkboardTop(10 * 32, 0*32, myGate);
             Game1.miscObjects.Add(ch);
 
             BoxTop boxTop = new BoxTop(20 * 32, 10 * 32);
@@ -63,5 +66,11 @@ namespace Toggle
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "gate1Level"));
         }
 
+
+        public override void addInitialLevelItems()
+        {
+            GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);
+            levelItems.Add(gb);
+        }
     }
 }
