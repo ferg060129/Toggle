@@ -16,12 +16,14 @@ namespace Toggle
         Texture2D inventoryGraphic;
         InventoryItem selectedItem;
         private int x,y;
+        SpriteFont sf;
         
         public Inventory()
         {
             items = new InventoryItem[2,7];
             initializeItemRectangles();
             inventoryGraphic = Textures.textures["inventory2"];
+            sf = Textures.fonts["arial12"];
         }
 
 
@@ -144,6 +146,36 @@ namespace Toggle
             returnItemToSlot(i);
         }
 
+        public bool addItemFromBox(InventoryItem i)
+        {
+            for (int x = 0; x < items.GetLength(0); x++)
+            {
+                for (int y = 0; y < items.GetLength(1); y++)
+                {
+                    Vector2 itemCenter = i.getCenter();
+                    itemCenter.X -= this.x;
+                    itemCenter.Y -= this.y;
+   
+                    if (itemRectangles[x, y].Contains(itemCenter) && (items[x, y] == null || (items[x, y] != null && !items[x, y].Equals(i))))
+                    {
+                        if (items[x, y] == null)
+                        {
+                            items[x, y] = i;
+                            i.setX(itemRectangles[x, y].X);
+                            i.setY(itemRectangles[x, y].Y);
+                            return true;
+                        }
+                        else
+                        {
+                        }
+
+                    }
+                }
+            }
+            return false;
+
+        }
+
         public void removeItem(InventoryItem i)
         {
             for (int x = 0; x < items.GetLength(0); x++)
@@ -212,6 +244,11 @@ namespace Toggle
                 selectedItem = null;
             }
             i.setSelected(b);
+        }
+
+        public SpriteFont getFont()
+        {
+            return sf;
         }
     }
 }

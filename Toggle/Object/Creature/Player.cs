@@ -23,6 +23,15 @@ namespace Toggle
         int hitInvulnTime = 0;
         int hitInvulnMax = 120;
 
+
+        bool readingChalkboard = false;
+        Chalkboard playerChalkboard;
+        ChalkboardTop collideChalkboard;
+
+        bool accessingBox = false;
+        Box playerBox;
+        BoxTop collideBoxtop;
+
         public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
             animations.Add("idleDown",  new int[] { 0, 2 });
@@ -51,6 +60,19 @@ namespace Toggle
 
         public override void move()
         {
+            if (readingChalkboard && !hitBox.Intersects(collideChalkboard.getHitBox()))
+            {
+                readingChalkboard = false;
+                Game1.updateMiscObjects.Remove(playerChalkboard);
+            }
+
+            if (accessingBox && !hitBox.Intersects(collideBoxtop.getHitBox()))
+            {
+                accessingBox = false;
+                Game1.updateMiscObjects.Remove(playerBox);
+            }
+
+
             previousHitBox = new Rectangle(x, y, width, height);
             KeyboardState newKeyBoardState = Keyboard.GetState();
 
@@ -69,6 +91,7 @@ namespace Toggle
             if (currentlyMove == false)
             {
                 distanceTraveled = 0;
+                
                 if (newKeyBoardState.IsKeyDown(Keys.Up))
                 {
                     direction = 1;
@@ -116,6 +139,7 @@ namespace Toggle
                     case 3:
                         setAnimation("idleDown");
                         break;
+
                 }
             }
             if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
@@ -141,6 +165,7 @@ namespace Toggle
                 proportion -= 0.001;
             }
             proportion -= 0.0001;
+
             if (hitInvulnTime > 0)
             {
                 hitInvulnTime--;
@@ -226,6 +251,32 @@ namespace Toggle
             {
                 damageProportion(0.3);
             }
+            if(o is ChalkboardTop)
+            {
+                
+                if(!readingChalkboard)
+                {
+                    playerChalkboard = new Chalkboard(0, 0);
+                    Game1.updateMiscObjects.Add(playerChalkboard);
+                    collideChalkboard = (ChalkboardTop)o;
+                }
+                readingChalkboard = true;
+                
+            }
+            if(o is BoxTop)
+            {
+                if(!accessingBox)
+                {
+                    playerBox = ((BoxTop)o).getBox();
+                    Game1.updateMiscObjects.Add(playerBox);
+                    collideBoxtop = (BoxTop)o;
+                    
+                }
+                accessingBox = true;
+            }
+
+
+
             if(o.getSolid())
             {
                 //currentlyMove = false;
@@ -327,6 +378,20 @@ namespace Toggle
             return onBoat;
         }
 
+        public bool isReadingChalkboard()
+        {
+            return readingChalkboard;
+        }
+
+        public bool isAccessingBox()
+        {
+            return accessingBox;
+        }
+
+        public Box getBox()
+        {
+            return playerBox;
+        }
         
     }
 }

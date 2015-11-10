@@ -44,7 +44,13 @@ namespace Toggle
             Game1.visuals.Add(lake);
 
             Boat boat = new Boat(28 * 32, 28 * 32);
-            Game1.boats.Add(boat);
+            Game1.updateMiscObjects.Add(boat);
+
+            ChalkboardTop ch = new ChalkboardTop(10 * 32, 0*32);
+            Game1.miscObjects.Add(ch);
+
+            BoxTop boxTop = new BoxTop(20 * 32, 10 * 32);
+            Game1.miscObjects.Add(boxTop);
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);

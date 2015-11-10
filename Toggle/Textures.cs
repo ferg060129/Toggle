@@ -10,16 +10,18 @@ namespace Toggle
     static class Textures
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        public static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
         public static string[] graphicNames = { "kitten", "zombie", "player", "protagsheet", "greenblock", "badgreenblock", "itemblock", "baditemblock", "inventory2", "BigPicture", "player_right", "sprites",
                                                "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","OpenGate","ClosedGate",
                                                "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen3","lostScreen","blackScreen","controls1","controls2","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser",
-                                              "water","water2","water3","water4", "boat", "whiteScreen","ghost","unghost"};
+                                              "water","water2","water3","water4", "boat", "whiteScreen","ghost","unghost","chalkboard", "chalkboardtop", "ItemBox", "boxInside"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor"};
+        public static string[] spritefonts = { "mistral16", "arial12" };
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
