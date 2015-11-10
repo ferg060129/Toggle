@@ -406,7 +406,7 @@ namespace Toggle
                 for (int y = 0; y < inventoryItems.GetLength(1);y++ )
                 {
                     if(inventoryItems[x,y] != null)
-                    inventoryItems[x, y].switchState();
+                    inventoryItems[x, y].setState(worldState);
                 }
             }
             foreach (Tile t in tiles)

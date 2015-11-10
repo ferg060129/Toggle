@@ -437,7 +437,6 @@
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
-    <Content Include="Map Files\school.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">
