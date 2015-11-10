@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
@@ -13,6 +14,7 @@ namespace Toggle
             map = "gatelevel.txt";
             playerStartingX = 21 * 32;
             playerStartingY = 21 * 32;
+            playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
         public override void loadLevelObjects()
         {

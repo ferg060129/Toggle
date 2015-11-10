@@ -82,6 +82,8 @@ namespace Toggle
 
         private Texture2D startButton;
         private Texture2D exitButton;
+        private Texture2D screenDisplayed;
+        private int titleScreenPhase;
 
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
@@ -92,6 +94,7 @@ namespace Toggle
 
         public Game1()
         {
+            titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
            // graphics.IsFullScreen = true;
@@ -144,6 +147,7 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
+            screenDisplayed = Textures.textures["titleScreen3"];
             hubLevel = new HubLevel();
             houseLevel = new HouseLevel();
             schoolLevel = new SchoolLevel();
@@ -505,48 +509,75 @@ namespace Toggle
         //For each game state
         public void startUpdate()
         {
-            MouseState mouseState = Mouse.GetState();
-            int mouseX, mouseY;
+            newKeyBoardState = Keyboard.GetState();
+            if (titleScreenPhase == 0)
+            {
+                MouseState mouseState = Mouse.GetState();
+                int mouseX, mouseY;
 
-            //Magic don't remove
-            if(graphics.IsFullScreen)
-            {
-                mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
-                mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
-            }
-            else
-            {
-                mouseX = mouseState.X;
-                mouseY = mouseState.Y;
-            }
-            if(mouseState.LeftButton == ButtonState.Pressed)
-            {
+                //Magic don't remove
+                if (graphics.IsFullScreen)
+                {
+                    mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                    mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                }
+                else
+                {
+                    mouseX = mouseState.X;
+                    mouseY = mouseState.Y;
+                }
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
 
-                
-                Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
-                                    (int)startButtonPosition.Y, 160, 64);
-                Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
-                                    (int)exitButtonPosition.Y, 160, 64);
-                
-                if(startButtonRect.Contains(new Vector2(mouseX,mouseY)))
+
+                    Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
+                                        (int)startButtonPosition.Y, 160, 64);
+                    Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
+                                        (int)exitButtonPosition.Y, 160, 64);
+
+                    if (startButtonRect.Contains(new Vector2(mouseX, mouseY)))
+                    {
+                        titleScreenPhase++;
+                        screenDisplayed = Textures.textures["controls1"];
+                    }
+
+                    else if (exitButtonRect.Contains(new Vector2(mouseX, mouseY)))
+                    {
+                        Exit();
+                    }
+                }
+            }
+            if (titleScreenPhase == 1)
+            {
+                if (newKeyBoardState.IsKeyDown(Keys.LeftShift) && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                {
+                    screenDisplayed = Textures.textures["controls2"];
+                    titleScreenPhase++;
+                    oldKeyBoardState = newKeyBoardState;
+                }
+            }
+            if (titleScreenPhase == 2)
+            {
+                if (newKeyBoardState.IsKeyDown(Keys.LeftShift) && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 {
                     gameState = "play";
                 }
-
-                else if (exitButtonRect.Contains(new Vector2(mouseX, mouseY)))
-                {
-                    Exit();
-                }
             }
-            
-           
+            if (newKeyBoardState.IsKeyUp(Keys.LeftShift))
+            {
+                oldKeyBoardState = new KeyboardState();
+            }
         }
+
         public void startDraw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Textures.textures["titleScreen3"], new Vector2(0,0), Color.White);
-            spriteBatch.Draw(Textures.textures["start"], startButtonPosition,  Color.White);
-            spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition,  Color.White);
+            spriteBatch.Draw(screenDisplayed, new Vector2(0,0), Color.White);
+            if (titleScreenPhase == 0)
+            {
+                spriteBatch.Draw(Textures.textures["start"], startButtonPosition, Color.White);
+                spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition, Color.White);
+            }
             spriteBatch.End();
         }
 

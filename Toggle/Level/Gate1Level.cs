@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
@@ -13,6 +14,7 @@ namespace Toggle
             map = "gate1level.txt";
             playerStartingX = 20 * 32;
             playerStartingY = 10 * 32;
+            playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
         public override void loadLevelObjects()
         {
@@ -38,6 +40,7 @@ namespace Toggle
             Game1.miscObjects.Add(sb);
             //level tiles
             levelTiles.Add(new LevelTile(2 * 32, 4 * 32, "blackBlock", "blackBlock", "gate2Level"));
+            levelTiles.Add(new LevelTile(2 * 32, 4 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(19 * 32, 5 * 32)));
         }
     }
 }
