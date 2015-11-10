@@ -79,6 +79,8 @@
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
+    <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Update Miscellanious\Box.cs" />
     <Compile Include="Object\Update Miscellanious\UpdateMiscellanious.cs" />
     <Compile Include="Object\Update Miscellanious\Chalkboard.cs" />
     <Compile Include="Object\Creature\Creature.cs" />
@@ -141,6 +143,9 @@
     <Content Include="Content\boat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\boxInside.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\BustedLantern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -177,7 +182,9 @@
     <Content Include="Content\house.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\ItemBox.png" />
+    <Content Include="Content\ItemBox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\LitLantern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -430,6 +437,7 @@
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
+    <Content Include="Map Files\school.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">

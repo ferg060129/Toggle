@@ -17,6 +17,10 @@ namespace Toggle
         SpriteFont sf;
         int maxAnswerLength = 15;
 
+        bool holdingBackspace = false;
+        int backSpaceCtr = 0;
+        int backSpaceWait = 0;
+
         public Chalkboard(int xLoc, int yLoc) : base(xLoc,yLoc)
         {
             goodGraphic = Textures.textures["chalkboard"];
@@ -33,8 +37,40 @@ namespace Toggle
 
             Keys[] pressedKeys = newKeyBoardState.GetPressedKeys();
             
+            if(!newKeyBoardState.IsKeyDown(Keys.Back))
+            {
+                holdingBackspace = false;
+                backSpaceCtr = 0;
+                backSpaceWait = 0;
+            }
+
             foreach (Keys k in pressedKeys)
             {
+                if(k.Equals(Keys.Back))
+                {
+                    if(!oldKeyBoardState.IsKeyDown(k) || holdingBackspace)
+                    {
+                        
+                        if (backSpaceWait == 0 && currentAnswer.Length > 0)
+                        {
+                            currentAnswer = currentAnswer.Substring(0, currentAnswer.Length - 1);
+                            backSpaceWait = 3;
+                        }
+                        backSpaceWait--;
+
+                        
+                    }
+                    else
+                    {
+                        backSpaceCtr++;
+                        if (backSpaceCtr >= 20)
+                        {
+                            holdingBackspace = true;
+                            backSpaceCtr = 0;
+                        }
+                    }
+                }
+
                 if(!oldKeyBoardState.IsKeyDown(k))
                 {
                     if (k.Equals(Keys.Space))
@@ -44,13 +80,13 @@ namespace Toggle
                             currentAnswer += " ";
                         }
                     }
-                    else if (k.Equals(Keys.Back) && currentAnswer.Length > 0)
-                    {
-                        currentAnswer = currentAnswer.Substring(0, currentAnswer.Length - 1);
-                    }
                     else if (maxAnswerLength >= currentAnswer.Length + 1 && k.ToString().Length == 1)
                     {
                         currentAnswer += k.ToString();
+                    }
+                    else if(k.Equals(Keys.Enter))
+                    {
+                        submitAnswer();
                     }
                 }
             }
@@ -97,6 +133,11 @@ namespace Toggle
         public int getAnswerHeight()
         {
             return (int)sf.MeasureString(currentAnswer).Y;
+        }
+
+        public void submitAnswer()
+        {
+            Game1.chalkboardCommand(currentAnswer);
         }
     }
 }

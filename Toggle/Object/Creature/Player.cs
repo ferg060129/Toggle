@@ -20,10 +20,15 @@ namespace Toggle
         int distanceTraveled = 0;
         double proportion = 0;
         Boat myBoat = null;
+
+
         bool readingChalkboard = false;
         Chalkboard playerChalkboard;
         ChalkboardTop collideChalkboard;
-        
+
+        bool accessingBox = false;
+        Box playerBox;
+        BoxTop collideBoxtop;
 
 
 
@@ -59,6 +64,12 @@ namespace Toggle
             {
                 readingChalkboard = false;
                 Game1.updateMiscObjects.Remove(playerChalkboard);
+            }
+
+            if (accessingBox && !hitBox.Intersects(collideBoxtop.getHitBox()))
+            {
+                accessingBox = false;
+                Game1.updateMiscObjects.Remove(playerBox);
             }
 
 
@@ -240,6 +251,17 @@ namespace Toggle
                 readingChalkboard = true;
                 
             }
+            if(o is BoxTop)
+            {
+                if(!accessingBox)
+                {
+                    playerBox = ((BoxTop)o).getBox();
+                    Game1.updateMiscObjects.Add(playerBox);
+                    collideBoxtop = (BoxTop)o;
+                    
+                }
+                accessingBox = true;
+            }
 
 
             if(o.getSolid())
@@ -328,6 +350,15 @@ namespace Toggle
             return readingChalkboard;
         }
 
+        public bool isAccessingBox()
+        {
+            return accessingBox;
+        }
+
+        public Box getBox()
+        {
+            return playerBox;
+        }
         
     }
 }
