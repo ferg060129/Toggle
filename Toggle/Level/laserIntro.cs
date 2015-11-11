@@ -18,6 +18,7 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
+            Game1.miscObjects.Add(new LaserBlock(15 * 32, 13 * 32, true));
             //level tiles
             levelTiles.Add(new LevelTile(5 * 32, 5 * 32, "blackBlock", "blackBlock", "hubLevel",new Point(9 * 32, 9 * 32)));
             levelTiles.Add(new LevelTile(27 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(9 * 32, 9 * 32)));

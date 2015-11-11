@@ -168,6 +168,7 @@ namespace Toggle
             complex1Level = new Complex1();
             ghostTestLevel = new GhostTestLevel();
             laserTestLevel = new LaserTestLevel();
+            laserIntroLevel = new LaserIntro();
 
             currentLevel = hubLevel;
 
@@ -511,6 +512,10 @@ namespace Toggle
             else if (currentLevelString.Equals("laserTestLevel"))
             {
                 currentLevel = laserTestLevel;
+            }
+            else if (currentLevelString.Equals("laserIntro"))
+            {
+                currentLevel = laserIntroLevel;
             }
             creatures.Add(player);
             currentLevel.loadLevel();

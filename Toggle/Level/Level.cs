@@ -117,6 +117,13 @@ namespace Toggle
                         Game1.playerActivateTiles.Add(t);
                         Game1.tiles.Add(t);
                     }
+                    else if (c == 'g')
+                    {
+                        Grate t = new Grate(xposition, yposition, images[0], images[1]);
+                        Game1.solidTiles.Add(t);
+                        Game1.tiles.Add(t);
+                        Game1.wallArray[yposition / 32, xposition / 32] = true;
+                    }
                     else if (!solid)
                     {
                         Tile t = new Tile(xposition, yposition, images[0], images[1]);
