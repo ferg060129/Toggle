@@ -170,10 +170,13 @@ namespace Toggle
             laserTestLevel = new LaserTestLevel();
             laserIntroLevel = new LaserIntro();
 
-            currentLevel = hubLevel;
+            //normal is hubLevel, change only to test
+            currentLevel = schoolLevel;
 
             inventory = new Inventory();
-            player = new Player(13*32, 25*32, inventory, this);
+            //13 x 25 for hub level start
+            //player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
@@ -529,6 +532,7 @@ namespace Toggle
             
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();
+            cam.update();
         }
 
         //For each game state
@@ -674,7 +678,7 @@ namespace Toggle
         {
             int [] tempArray = new int[4];
             int po = 0;
-            if (worldState)
+            if (!worldState)
             {
                 laserColor = Textures.textures["laser"];
             }
@@ -717,7 +721,6 @@ namespace Toggle
 
         public void playDraw()
         {
-
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
@@ -847,6 +850,7 @@ namespace Toggle
             if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
             {
                 reloadLevel();
+                player.setPropotion(0.5);
                 gameState = "play";
             }
             MouseState m = Mouse.GetState();

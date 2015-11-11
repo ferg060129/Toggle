@@ -107,7 +107,7 @@ namespace Toggle
                     {
                         toIterate.AddRange(Game1.miscObjects);
                         toIterate.AddRange(Game1.solidTiles);
-                        if ((c.getX() == x) && (!direction))
+                        if ((c.getX() >= x) && (c.getX() < x + 32) && (!direction))
                         {
                             zapCreature = true;
                             foreach (Object m in toIterate)
@@ -126,7 +126,7 @@ namespace Toggle
                                 }
                             }
                         }
-                        if ((c.getY() == y) && (direction))
+                        if ((c.getY() >= y) && (c.getY() < y + 32) && (direction))
                         {
                             zapCreature = true;
                             foreach (Object m in toIterate)

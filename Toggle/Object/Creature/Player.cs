@@ -223,8 +223,9 @@ namespace Toggle
         }
 
         public override void zap()
-        {
-            damageProportion(0.3, 40);
+        {   
+            //instakill for now
+            damageProportion(1, 40);
         }
         
         public void pickUp(Item i)
@@ -328,6 +329,11 @@ namespace Toggle
         public double getProportion()
         {
             return proportion;
+        }
+
+        public void setPropotion(double input)
+        {
+            proportion = input;
         }
 
         public void damageProportion(double damage)
