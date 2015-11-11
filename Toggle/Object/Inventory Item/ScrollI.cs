@@ -14,8 +14,8 @@ namespace Toggle
             badGraphic = Textures.textures["baditemblock"];
             width = 32;
             height = 32;
-            itemTipGood = "Avoid the frowns";
-            itemTipBad = "He's afraid of the light";
+            itemTipGood = tipG;
+            itemTipBad = tipB;
         }
     }
 }

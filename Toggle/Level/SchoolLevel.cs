@@ -60,6 +60,21 @@ namespace Toggle
             ChalkboardTop ch = new ChalkboardTop(5 * 32, 0 * 32, myGate);
             Game1.miscObjects.Add(ch);
 
+            Gate gate2 = new Gate(2 * 32, 17 * 32);
+            Game1.miscObjects.Add(gate2);
+            Button myButton = new Button(32 * 2, 32 * 16, gate2);
+            myButton.setHeavyButton(true);
+            Game1.miscObjects.Add(myButton);
+
+            Gate gate3 = new Gate(16 * 32, 22 * 32);
+            Game1.miscObjects.Add(gate3);
+            myButton = new Button(32 * 1, 32 * 22, gate3);
+            Game1.miscObjects.Add(myButton);
+
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 18));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 19));
+            
+
             FlowerTentacles ft = new FlowerTentacles(32 * 4, 32 * 6);
             Game1.creatures.Add(ft);
             ft.setDefendTileGood(4, 6);
@@ -74,27 +89,51 @@ namespace Toggle
             Game1.creatures.Add(ft);
             ft.setDefendTileGood(8, 6);
             ft.setDefendTileBad(10, 3);
-            /*
-            ft = new FlowerTentacles(32 * 11, 32 * 11);
+
+
+            ft = new FlowerTentacles(32 * 3, 32 * 25);
             Game1.creatures.Add(ft);
-            ft.setDefendTileGood(11, 11);
-            ft.setDefendTileBad(12, 8);
+            ft.setDefendTileGood(3, 25);
+            ft.setDefendTileBad(3, 22);
 
-            //ft = new FlowerTentacles(500, 400, worldState);
-            //creatures.Add(ft);
 
-            VineMoveBlock vm = new VineMoveBlock(32 * 10, 32 * 5);
-            Game1.miscObjects.Add(vm);
-            */
+            for (int i = 38; i <= 59; i++ )
+            {
+                for(int j = 16; j<=25; j++)
+                {
+                    if(i!=59 || j!=25)
+                    {
+                        Game1.miscObjects.Add(new Strawberry(i * 32, j * 32));
+                    }
+                }
+            }
 
-            //leveltiles
-            levelTiles.Add(new LevelTile(34 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(9 * 32, 9 * 32)));
+
+                /*
+                ft = new FlowerTentacles(32 * 11, 32 * 11);
+                Game1.creatures.Add(ft);
+                ft.setDefendTileGood(11, 11);
+                ft.setDefendTileBad(12, 8);
+
+                //ft = new FlowerTentacles(500, 400, worldState);
+                //creatures.Add(ft);
+
+                VineMoveBlock vm = new VineMoveBlock(32 * 10, 32 * 5);
+                Game1.miscObjects.Add(vm);
+                */
+
+                //leveltiles
+                levelTiles.Add(new LevelTile(34 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(9 * 32, 9 * 32)));
             
         }
 
         public override void addInitialLevelItems(){
-            Scroll b = new Scroll(32 * 12, 32 * 7, "Bananaphone", "ring ring ring");
-            levelItems.Add(b);
+            levelItems.Clear();
+            //Scroll b = new Scroll(32 * 12, 32 * 7, "Bananaphone", "ring ring ring");
+            //levelItems.Add(b);
+            levelItems.Add(new Scroll(32 * 15, 32 * 25, "The word you seek has eight letters", "Unscramble the word demurrer"));
+            levelItems.Add(new Scroll(32 * 59, 32 * 25, "Three syllables", "The third is -er"));
+            levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Don't let the r's touch"));
         }
     }
 }

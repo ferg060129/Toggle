@@ -93,6 +93,7 @@ namespace Toggle
 
         bool draw = true;
 
+        InventoryItem[,] backUpInventory;
         
 
 
@@ -102,7 +103,7 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //game.Add(this);
@@ -176,6 +177,7 @@ namespace Toggle
             inventory = new Inventory();
             //13 x 25 for hub level start
             player = new Player(13*32, 25*32, inventory, this);
+            //player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
@@ -205,6 +207,9 @@ namespace Toggle
 
         public void reloadLevel()
         {
+            player.setLocked(false);
+            currentLevel.addInitialLevelItems();
+            inventory.setInventoryItems(backUpInventory);
             setLevel(lastEnteredLevelTile);
         }
         protected override void UnloadContent()
@@ -474,6 +479,7 @@ namespace Toggle
 
         public void setLevel(LevelTile level)
         {
+            backUpInventory = inventory.getItemsCopy();
             lastEnteredLevelTile = level;
             Console.WriteLine(level.getLevel());
             currentLevelString = level.getLevel();
@@ -882,6 +888,9 @@ namespace Toggle
                     creatures.Add(player);
                     cam = new Camera(player, width, height);
                     cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
+                    currentLevel.unloadLevel();
+                    player.setPropotion(0.5);
+                    gameState = "play";
                 }
                 if (exitButtonRect.Contains(new Vector2(m.X, m.Y)))
                 {

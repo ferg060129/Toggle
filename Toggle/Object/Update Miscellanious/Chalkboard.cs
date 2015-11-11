@@ -143,7 +143,7 @@ namespace Toggle
         {
             //Game1.chalkboardCommand(currentAnswer);
 
-            if(currentAnswer.Equals("BANANA"))
+            if(currentAnswer.Equals("MURDERER"))
             {
                 myGate.onButton();
             }
