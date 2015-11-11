@@ -22,6 +22,9 @@ namespace Toggle
         {
             this.level = level;
             playerStartLocation = loc;
+            //make em all doors?!?
+            goodGraphic = Textures.textures["door"];
+            badGraphic = Textures.textures["doorDark"];
         }
 
         public string getLevel()

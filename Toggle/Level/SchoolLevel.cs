@@ -13,6 +13,7 @@ namespace Toggle
             : base()
         {
             map = "school.txt";
+            indoors = true;
             playerStartingX = 15*32;
             playerStartingY = 16*32;
             playerStartLocation = new Point(playerStartingX, playerStartingY);
@@ -30,6 +31,11 @@ namespace Toggle
                 }
             }
             //laser puzzle objects
+            Gate laserGate = new Gate(55 * 32, 5 * 32);
+            Button bt = new Button(50 * 32, 5 * 32, laserGate);
+            bt.setHeavyButton(true);
+            Game1.miscObjects.Add(bt);
+            Game1.miscObjects.Add(laserGate);
             bool lasDir = false;
             for (int i = 21; i < 59; i ++)
             {
@@ -48,11 +54,6 @@ namespace Toggle
             }
             Game1.miscObjects.Add(new LaserBlock(49 * 32, 5 * 32,true));
             Game1.miscObjects.Add(new VineMoveBlock(30 * 32, 5 * 32));
-            Gate laserGate = new Gate(55 * 32, 5 * 32);
-            Button bt = new Button(50 * 32, 5 * 32,laserGate);
-            bt.setHeavyButton(true);
-            Game1.miscObjects.Add(bt);
-            Game1.miscObjects.Add(laserGate);
             //end laser puzzle
             Gate myGate = new Gate(2 * 32, 4 * 32);
             Game1.miscObjects.Add(myGate);

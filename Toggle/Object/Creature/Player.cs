@@ -22,6 +22,8 @@ namespace Toggle
         Boat myBoat = null;
         int hitInvulnTime = 0;
         int hitInvulnMax = 120;
+        //prevent shifting for a short while at start of game
+        int initialShiftCD = 10;
 
 
         bool readingChalkboard = false;
@@ -142,7 +144,11 @@ namespace Toggle
 
                 }
             }
-            if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+            if (initialShiftCD > 0)
+            {
+                initialShiftCD--;
+            }
+            else if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
                 if(!stateLocked && engine.getShiftCD() == 0)

@@ -171,12 +171,11 @@ namespace Toggle
             laserIntroLevel = new LaserIntro();
 
             //normal is hubLevel, change only to test
-            currentLevel = schoolLevel;
+            currentLevel = hubLevel;
 
             inventory = new Inventory();
             //13 x 25 for hub level start
-            //player = new Player(13*32, 25*32, inventory, this);
-            player = new Player(15*32, 2*32, inventory, this);
+            player = new Player(13*32, 25*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
@@ -516,7 +515,7 @@ namespace Toggle
             {
                 currentLevel = laserTestLevel;
             }
-            else if (currentLevelString.Equals("laserIntro"))
+            else if (currentLevelString.Equals("laserIntroLevel"))
             {
                 currentLevel = laserIntroLevel;
             }
@@ -578,7 +577,8 @@ namespace Toggle
             }
             if (titleScreenPhase == 1)
             {
-                if (newKeyBoardState.IsKeyDown(Keys.LeftShift) && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
                     screenDisplayed = Textures.textures["controls2"];
                     titleScreenPhase++;
@@ -587,12 +587,13 @@ namespace Toggle
             }
             if (titleScreenPhase == 2)
             {
-                if (newKeyBoardState.IsKeyDown(Keys.LeftShift) && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
                     gameState = "play";
                 }
             }
-            if (newKeyBoardState.IsKeyUp(Keys.LeftShift))
+            if (newKeyBoardState.IsKeyUp(Keys.LeftShift) && newKeyBoardState.IsKeyUp(Keys.RightShift))
             {
                 oldKeyBoardState = new KeyboardState();
             }

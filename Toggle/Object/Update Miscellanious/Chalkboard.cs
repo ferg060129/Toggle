@@ -25,8 +25,8 @@ namespace Toggle
 
         public Chalkboard(int xLoc, int yLoc, Gate g) : base(xLoc,yLoc)
         {
-            goodGraphic = Textures.textures["chalkboard"];
-            badGraphic = Textures.textures["chalkboard"];
+            goodGraphic = Textures.textures["chalkboard2"];
+            badGraphic = Textures.textures["chalkboard3"];
             width = 576;
             height = 384;
             imageBoundingRectangle = new Rectangle(0, 0, width, height);

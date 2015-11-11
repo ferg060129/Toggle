@@ -75,7 +75,7 @@ namespace Toggle
             laserEnds[3] = 999999;
             foreach (Object m in toIterate)
             {
-                if ((m != this) && (m.getX() == x) && (!(m is Grate)))
+                if ((m != this) && (m.getX() == x) && (!(m is Grate)) && (m.getSolid() == true))
                 {
                     //calc laser end points
                     if ((m.getY() > y) && (m.getY() < laserEnds[3]))
@@ -83,7 +83,7 @@ namespace Toggle
                     if ((m.getY() < y) && (m.getY() > laserEnds[2]))
                         laserEnds[2] = m.getY() + 32;
                 }
-                if ((m != this) && (m.getY() == y) && (!(m is Grate)))
+                if ((m != this) && (m.getY() == y) && (!(m is Grate)) && (m.getSolid() == true))
                 {
                     //calc laser end points
                     if ((m.getX() > x) && (m.getX() < laserEnds[1]))
@@ -112,7 +112,7 @@ namespace Toggle
                             zapCreature = true;
                             foreach (Object m in toIterate)
                             {
-                                if ((m != this) && (m.getX() == x) && (!(m is Grate)))
+                                if ((m != this) && (m.getX() == x) && (!(m is Grate)) && (m.getSolid() == true))
                                 {
                                     //creature below laser case,then above laser case
                                     if (((m.getY() < c.getY()) && (m.getY() > y)) && (c.getY() > y))
@@ -131,7 +131,7 @@ namespace Toggle
                             zapCreature = true;
                             foreach (Object m in toIterate)
                             {
-                                if ((m != this) && (m.getY() == y) && (!(m is Grate)))
+                                if ((m != this) && (m.getY() == y) && (!(m is Grate)) && (m.getSolid() == true))
                                 {
                                     //creature right laser case,then left laser case
                                     if (((m.getX() < c.getX()) && (m.getX() > x)) && (c.getX() > x))
