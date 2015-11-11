@@ -16,7 +16,6 @@ namespace Toggle
         Game1 engine;
         bool stateLocked = false;
         bool currentlyMove = false;
-        bool onBoat = false;
         int distanceTraveled = 0;
         double proportion = 0;
         Boat myBoat = null;
