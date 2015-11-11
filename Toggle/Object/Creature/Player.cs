@@ -317,7 +317,7 @@ namespace Toggle
             {
                 if(this.x == o.getX() && this.y == o.getY())
                 {
-                    engine.setLevel(((LevelTile)o).getLevel());
+                    engine.setLevel(((LevelTile)o));
                 }
             }
 

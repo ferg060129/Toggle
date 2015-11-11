@@ -60,7 +60,8 @@ namespace Toggle
             vb = new VineMoveBlock(12 * 32, 7 * 32);
             Game1.miscObjects.Add(vb);
             //level tiles
-            levelTiles.Add(new LevelTile(12 * 32, 3 * 32, "blackBlock", "blackBlock", "complex1Level"));
+            levelTiles.Add(new LevelTile(12 * 32, 3 * 32, "blackBlock", "blackBlock", "complex1Level",new Point(2 * 32, 4 * 32)));
+            levelTiles.Add(new LevelTile(4 * 32, 6 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(2 * 32, 8 * 32)));
         }
     }
 }

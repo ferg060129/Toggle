@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 namespace Toggle
 {
-    class Object
+    public class Object
     {
         protected int x, y;
         protected int width, height;

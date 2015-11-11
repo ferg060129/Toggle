@@ -15,7 +15,7 @@ namespace Toggle
                                                "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor", "animals","battery","goo","berry","berryRot", "start","exit","buttonUp","buttonDown","OpenGate","ClosedGate",
                                                "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen3","lostScreen","blackScreen","controls1","controls2","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
-                                                "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser",
+                                                "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser","laserB",
                                               "water","water2","water3","water4", "boat", "whiteScreen","ghost","unghost","chalkboard", "chalkboardtop", "ItemBox", "boxInside"};
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
-    class LevelTile : Tile
+    public class LevelTile : Tile
     {
         Point playerStartLocation; 
         string level;
@@ -29,7 +29,7 @@ namespace Toggle
             return level;
         }
 
-        public Point getLoc()
+        public Point getPlayerStart()
         {
             return playerStartLocation;
         }

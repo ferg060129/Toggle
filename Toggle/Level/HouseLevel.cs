@@ -103,6 +103,9 @@ namespace Toggle
             vm = new VineMoveBlock(32 * 20, 32 * 10);
             Game1.miscObjects.Add(vm);
 
+            //leveltiles
+            levelTiles.Add(new LevelTile(24 * 32, 17 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(9 * 32, 9 * 32)));
+
 
             
 

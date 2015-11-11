@@ -69,6 +69,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\LaserIntro.cs" />
     <Compile Include="Level\Gate2Level.cs" />
     <Compile Include="Level\Complex1.cs" />
     <Compile Include="Level\Gate1Level.cs" />

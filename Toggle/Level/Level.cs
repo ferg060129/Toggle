@@ -75,25 +75,25 @@ namespace Toggle
                     string image = Textures.charToFileName[c];
                     string[] images = image.Split(',');
                     bool solid = (images[2].Length > 0);
-                    if(c == 'a')
+                    /*if(c == 'a')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel");
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "schoolLevel",new Point(9 * 32, 9 * 32));
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }
                     else if (c == 'b')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel");
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "houseLevel", new Point(9 * 32, 9 * 32));
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
                     }
                     else if (c == 'c')
                     {
-                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "hubLevel");
+                        LevelTile t = new LevelTile(xposition, yposition, images[0], images[1], "hubLevel", new Point(9 * 32, 9 * 32));
                         Game1.levelTiles.Add(t);
                         Game1.tiles.Add(t);
-                    }
-                    else if (c == 'f')
+                    }*/
+                    if (c == 'f')
                     {
                         BadTile t = new BadTile(xposition, yposition, images[0], images[1]);
                         Game1.playerActivateTiles.Add(t);
