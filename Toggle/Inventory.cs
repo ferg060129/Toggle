@@ -17,13 +17,15 @@ namespace Toggle
         InventoryItem selectedItem;
         private int x,y;
         SpriteFont sf;
+        Game1 engine;
         
-        public Inventory()
+        public Inventory(Game1 eng)
         {
             items = new InventoryItem[2,7];
             initializeItemRectangles();
             inventoryGraphic = Textures.textures["inventory2"];
             sf = Textures.fonts["arial12"];
+            engine = eng;
         }
 
 
@@ -114,11 +116,12 @@ namespace Toggle
         //Called when an item is dragged and released
         public void setNewIndex(InventoryItem i)
         {
+            Vector2 itemCenter = i.getCenter();
             for(int x = 0; x < items.GetLength(0); x++)
             {
                 for(int y = 0; y < items.GetLength(1); y++)
                 {
-                    Vector2 itemCenter = i.getCenter();
+                    
                     //int itemX = (int)(itemCenter.X + 0.5);
                     //int itemY = (int)(itemCenter.Y + 0.5);
                     //Blame merle. He'll fix this later.
@@ -143,7 +146,15 @@ namespace Toggle
                     }
                 }
             }
-            returnItemToSlot(i);
+
+            if(itemCenter.X > 0 && itemCenter.X < inventoryGraphic.Width && itemCenter.Y > 0 && itemCenter.Y < inventoryGraphic.Height)
+            {
+                returnItemToSlot(i);
+            }
+            else{
+                dropItem(i);
+            }
+            
         }
 
         public bool addItemFromBox(InventoryItem i)
@@ -275,6 +286,21 @@ namespace Toggle
                     items[x, y] = inv[x, y];
                 }
             }
+        }
+
+        public void dropItem(InventoryItem i)
+        {
+            removeItem(i);
+            Player p = (Player)(Game1.creatures[0]);
+            int xLoc = (int)((int)p.getCenter().X / 32);
+           int yLoc = (int)((int)p.getCenter().Y / 32);
+            Item item = i.getItem();
+            engine.addItemToCurrentLevel(item);
+            Game1.items.Add(item);
+            item.setPosition(new Vector2(xLoc * 32, yLoc * 32));
+            item.setItemPickupCD();
+            
+
         }
     }
 }

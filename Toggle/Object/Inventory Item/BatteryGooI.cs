@@ -14,8 +14,8 @@ namespace Toggle
         Texture2D goo0 = Textures.textures["GoopFrame1"];
         Texture2D goo1 = Textures.textures["GoopFrame2"];
         Texture2D goo2 = Textures.textures["GoopFrame3"];
-        public BatteryGooI()
-            : base()
+        public BatteryGooI(Item i)
+            : base(i)
         {
             goodGraphic = Textures.textures["battery"];
             badGraphic = Textures.textures["GoopFrame1"];

@@ -9,16 +9,18 @@ namespace Toggle
 {
 
     //Maybe this shouldn't inherit from object
-    class InventoryItem : Object
+    public class InventoryItem : Object
     {
         protected string itemTipGood = "Banana";
         protected string itemTipBad = "Rotten banana :c";
         protected bool hovered = false;
         protected bool selected = false;
-        public InventoryItem() : base()
+        protected Item myItem = null;
+        public InventoryItem(Item i) : base()
         {
             width = 32;
             height = 32;
+            myItem = i;
         }
 
         public void setHitBox(Rectangle r)
@@ -69,6 +71,11 @@ namespace Toggle
                 return goodGraphic;
             else
                 return badGraphic;
+        }
+
+        public Item getItem()
+        {
+            return myItem;
         }
     }
 }

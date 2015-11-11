@@ -9,8 +9,8 @@ namespace Toggle
     {
 
         bool batteries = false;
-        public LampI()
-            : base()
+        public LampI(Item i)
+            : base(i)
         {
             goodGraphic = Textures.textures["UnlitLantern"];
             badGraphic = Textures.textures["BustedLantern"];

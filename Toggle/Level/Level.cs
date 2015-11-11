@@ -205,5 +205,10 @@ namespace Toggle
 
         }
 
+        public void addLevelItem(Item i)
+        {
+            levelItems.Add(i);
+        }
+
     }
 }

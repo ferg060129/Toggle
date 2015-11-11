@@ -107,7 +107,7 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            graphics.IsFullScreen = true;
+            //graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //game.Add(this);
@@ -178,7 +178,7 @@ namespace Toggle
             //normal is hubLevel, change only to test
             currentLevel = hubLevel;
 
-            inventory = new Inventory();
+            inventory = new Inventory(this);
             //13 x 25 for hub level start
             player = new Player(13*32, 25*32, inventory, this);
             //player = new Player(15*32, 2*32, inventory, this);
@@ -217,7 +217,8 @@ namespace Toggle
         public void reloadLevel()
         {
             player.setLocked(false);
-            currentLevel.addInitialLevelItems();
+
+            //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
             setLevel(lastEnteredLevelTile);
         }
@@ -305,8 +306,12 @@ namespace Toggle
                 {
                     //If inventory is not full
                     player.reportCollision((Item)items[ii]);
-                    currentLevel.removeItem((Item)items[ii]);
-                    items.RemoveAt(ii);
+                    if (((Item)items[ii]).canPickUp())
+                    {
+                        currentLevel.removeItem((Item)items[ii]);
+                        items.RemoveAt(ii);
+                    }
+                  
                     
                 }
             }
@@ -906,7 +911,7 @@ namespace Toggle
                     
                     currentLevel = hubLevel;
                     currentLevel.loadLevel();
-                    inventory = new Inventory();
+                    inventory = new Inventory(this);
                     player = new Player(13*32, 25*32, inventory, this);
                     creatures.Add(player);
                     cam = new Camera(player, width, height);
@@ -1211,8 +1216,14 @@ namespace Toggle
                 Console.WriteLine("It's true! I am a banana!");
             }
         }
+        public void addItemToCurrentLevel(Item i)
+        {
+            currentLevel.addLevelItem(i);
 
+        }
     }
+
+ 
 
     enum GameState
     {

@@ -6,9 +6,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Toggle
 {
-    class Item : Object
+    public class Item : Object
     {
         protected InventoryItem inventoryItem;
+        protected int itemPickupCD = 0;
         public Item(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
 
@@ -17,7 +18,7 @@ namespace Toggle
 
         public virtual void makeInventoryItem()
         {
-            inventoryItem = new InventoryItem();
+            inventoryItem = new InventoryItem(this);
         }
 
         public InventoryItem pickUpItem()
@@ -28,13 +29,24 @@ namespace Toggle
         }
         public virtual Texture2D getGraphic()
         {
+            if(itemPickupCD >0)
+            itemPickupCD--;
             if (state)
                 return goodGraphic;
             else
                 return badGraphic;
+            
         }
 
+        public bool canPickUp()
+        {
+            return itemPickupCD == 0;
+        }
 
+        public void setItemPickupCD()
+        {
+            itemPickupCD = 150;
+        }
 
 
     }

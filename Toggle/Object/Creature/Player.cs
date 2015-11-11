@@ -236,6 +236,7 @@ namespace Toggle
         
         public void pickUp(Item i)
         {
+            if(i.canPickUp())
             inventory.addInventoryItem(i.pickUpItem());
         }
         public override void reportCollision(Object o)
