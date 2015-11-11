@@ -398,6 +398,9 @@ namespace Toggle
         {
             return playerBox;
         }
-        
+        public void setLocked(bool b)
+        {
+            stateLocked = b;
+        }   
     }
 }

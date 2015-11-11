@@ -20,8 +20,8 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, width, height);
             hitBox = new Rectangle(xLocation, yLocation, width, height);
 
-            tipG = itemTipGood;
-            tipB = itemTipBad;
+            itemTipGood = tipG;
+             itemTipBad = tipB;
         }
 
         public override void makeInventoryItem()

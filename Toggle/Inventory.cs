@@ -263,10 +263,15 @@ namespace Toggle
 
         public void setInventoryItems(InventoryItem[,] inv)
         {
+            if(inv == null)
+            {
+                return;
+            }
             for (int x = 0; x < items.GetLength(0); x++)
             {
                 for (int y = 0; y < items.GetLength(1); y++)
                 {
+                    
                     items[x, y] = inv[x, y];
                 }
             }
