@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Collections;
@@ -63,6 +64,7 @@ namespace Toggle
         //Song song;
         //Song song2;
         Inventory inventory;
+        bool showInventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState, oldMouseState2;
         int shiftCooldown = 0;
@@ -90,6 +92,8 @@ namespace Toggle
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
         private SoundEffectInstance banditKing;
+        private SoundEffectInstance zone1good;
+        private SoundEffectInstance zone1bad;
 
         bool draw = true;
 
@@ -129,7 +133,7 @@ namespace Toggle
             blackScreenAlpha = 0;
             currentLevelString = "hub";
             lastEnteredLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
-            
+            showInventory = false;
         }
 
         protected override void LoadContent()
@@ -189,6 +193,9 @@ namespace Toggle
             SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
             banditKing = banditKing_s.CreateInstance();
 
+            zone1good = Content.Load<SoundEffect>("zone1good").CreateInstance();
+            zone1bad = Content.Load<SoundEffect>("zone1bad").CreateInstance();
+
             //banditKing.Pitch = -1;
 
             //song2 = Content.Load<Song>("climbing_up_the_walls");
@@ -200,9 +207,11 @@ namespace Toggle
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             
             //MediaPlayer.Play(song);
-            banditKing.Play();
+            //banditKing.Play();
+
             gameState = "start";
             //MediaPlayer.IsRepeating = true;
+            zone1bad.Volume = 0;
         }
 
         public void reloadLevel()
@@ -375,6 +384,16 @@ namespace Toggle
         {
             cam.shake(10);
             worldState = !worldState;
+            if (worldState)
+            {
+                zone1bad.Volume = 0;
+                zone1good.Volume = .7f;
+            }
+            else
+            {
+                zone1good.Volume = 0;
+                zone1bad.Volume = 1;
+            }
 
             foreach (Creature c in creatures)
             {
@@ -619,7 +638,11 @@ namespace Toggle
 
         public void playUpdate()
         {
-
+            if (zone1good.State != SoundState.Playing && zone1bad.State != SoundState.Playing)
+            {
+                zone1good.Play();
+                zone1bad.Play();
+            }
             time++;
             newKeyBoardState = Keyboard.GetState();
             IsMouseVisible = false;
@@ -673,11 +696,10 @@ namespace Toggle
             {
                 reloadLevel();
             }
-
-
-            oldKeyBoardState = newKeyBoardState;
-
-
+            else if (newKeyBoardState.IsKeyDown(Keys.I) && !oldKeyBoardState.IsKeyDown(Keys.I) && !player.isReadingChalkboard())
+            {
+                showInventory =! showInventory;
+            }
             oldKeyBoardState = newKeyBoardState;
         }
 
@@ -731,12 +753,11 @@ namespace Toggle
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
-            playLaserDraw();
+            
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
             }
-
             foreach (Creature c in creatures)
             {
                 spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White * c.getAlpha());
@@ -745,6 +766,7 @@ namespace Toggle
             {
                 spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
             }
+            playLaserDraw();
             foreach (Visual v in visuals)
             {
                 spriteBatch.Draw(v.getGraphic(), new Vector2(v.getX(), v.getY()), v.getImageBoundingRectangle(), Color.White);
@@ -759,10 +781,10 @@ namespace Toggle
 
 
             //Debug, draw player coords
-            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
-            if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
+            if (showInventory && !player.isReadingChalkboard())
             {
                 inventory.drawInventory(spriteBatch);
                 
@@ -811,11 +833,12 @@ namespace Toggle
                     spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
+            if (showInventory && !player.isReadingChalkboard())
             {
                 spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
             }
-            //rays of light juice and darkness for dark world
+
+            //rays of light juice and darkness for dark world/any other effects to draw over everything
             spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
             if (worldState)
             {
@@ -1048,7 +1071,7 @@ namespace Toggle
 
                 if (mouseState.LeftButton == ButtonState.Released)
                 {
-                    if (box.isItemSelected() && Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
+                    if (box.isItemSelected() && showInventory && !player.isReadingChalkboard())
                     {
                         if (inventory.addItemFromBox(box.getStoredItem()))
                         {
@@ -1084,7 +1107,7 @@ namespace Toggle
             Texture2D tex = Textures.textures["inventory2"];
             inventory.setX(getTopRight().X - tex.Width - 10);
             inventory.setY(getTopLeft().Y + 10);
-            if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
+            if (showInventory && !player.isReadingChalkboard())
             {
                 MouseState mouseState = Mouse.GetState();
                 Vector2 inventoryPosition = new Vector2(inventory.getX(), inventory.getY());

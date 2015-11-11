@@ -742,3 +742,27 @@
 /processorParam:TextureFormat=Color
 /build:chalkboard3.png
 
+#begin zone1bad.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:zone1bad.mp3
+
+#begin zone1good.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:zone1good.mp3
+
+#begin zone2bad.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:zone2bad.mp3
+
+#begin zone2good.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:zone2good.mp3
+
