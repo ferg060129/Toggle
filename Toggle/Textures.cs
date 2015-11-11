@@ -21,7 +21,7 @@ namespace Toggle
         public static string[] tileNames = { "grass", "grass4", "grass2", "grass3","grass5","grass6","grass7","grass8", "darkgrass", "darkgrass4", "darkgrass2", "darkgrass3","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
-                                           "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor"};
+                                           "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust"};
         public static string[] spritefonts = { "mistral16", "arial12" };
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
@@ -42,6 +42,7 @@ namespace Toggle
                 {'a', "blackBlock,blackBlock,"},    //takes you to glevel
                 {'b', "blackBlock,blackBlock,"},
                 {'c', "blackBlock,blackBlock,"},
+                {'g', "grate,grateRust,w"},
                 {'u', "KeyButtonPressed,KeyButton,"},
                 {'+', "woodfloor,darkwoodfloor,"},
                 {'d', "desk,deskBad,w"}

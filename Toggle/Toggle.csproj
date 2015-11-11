@@ -81,6 +81,7 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Tile\Grate.cs" />
     <Compile Include="Object\Miscellanious\Desk.cs" />
     <Compile Include="Object\Update Miscellanious\Box.cs" />
     <Compile Include="Object\Update Miscellanious\UpdateMiscellanious.cs" />

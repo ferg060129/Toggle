@@ -75,7 +75,7 @@ namespace Toggle
             laserEnds[3] = 999999;
             foreach (Object m in toIterate)
             {
-                if ((m != this) && (m.getX() == x))
+                if ((m != this) && (m.getX() == x) && (!(m is Grate)))
                 {
                     //calc laser end points
                     if ((m.getY() > y) && (m.getY() < laserEnds[3]))
@@ -83,7 +83,7 @@ namespace Toggle
                     if ((m.getY() < y) && (m.getY() > laserEnds[2]))
                         laserEnds[2] = m.getY() + 32;
                 }
-                if ((m != this) && (m.getY() == y))
+                if ((m != this) && (m.getY() == y) && (!(m is Grate)))
                 {
                     //calc laser end points
                     if ((m.getX() > x) && (m.getX() < laserEnds[1]))
@@ -107,12 +107,12 @@ namespace Toggle
                     {
                         toIterate.AddRange(Game1.miscObjects);
                         toIterate.AddRange(Game1.solidTiles);
-                        if ((c.getX() == x) && (!direction))
+                        if ((c.getX() >= x) && (c.getX() < x + 32) && (!direction))
                         {
                             zapCreature = true;
                             foreach (Object m in toIterate)
                             {
-                                if ((m != this) && (m.getX() == x))
+                                if ((m != this) && (m.getX() == x) && (!(m is Grate)))
                                 {
                                     //creature below laser case,then above laser case
                                     if (((m.getY() < c.getY()) && (m.getY() > y)) && (c.getY() > y))
@@ -126,12 +126,12 @@ namespace Toggle
                                 }
                             }
                         }
-                        if ((c.getY() == y) && (direction))
+                        if ((c.getY() >= y) && (c.getY() < y + 32) && (direction))
                         {
                             zapCreature = true;
                             foreach (Object m in toIterate)
                             {
-                                if ((m != this) && (m.getY() == y))
+                                if ((m != this) && (m.getY() == y) && (!(m is Grate)))
                                 {
                                     //creature right laser case,then left laser case
                                     if (((m.getX() < c.getX()) && (m.getX() > x)) && (c.getX() > x))

@@ -29,6 +29,31 @@ namespace Toggle
                     Game1.miscObjects.Add(d);
                 }
             }
+            //laser puzzle objects
+            bool lasDir = false;
+            for (int i = 21; i < 59; i ++)
+            {
+                for (int j = 2; j < 9; j ++)
+                {
+                    if (((i % 12) == 0) && ((j - 3) % 4 == 0))
+                    {
+                        Game1.miscObjects.Add(new LaserBlock(i * 32, j * 32, lasDir));
+                        lasDir = !lasDir;
+                    }
+                }
+                if ((i % 12) == 0)
+                {
+                    lasDir = !lasDir;
+                }
+            }
+            Game1.miscObjects.Add(new LaserBlock(49 * 32, 5 * 32,true));
+            Game1.miscObjects.Add(new VineMoveBlock(30 * 32, 5 * 32));
+            Gate laserGate = new Gate(55 * 32, 5 * 32);
+            Button bt = new Button(50 * 32, 5 * 32,laserGate);
+            bt.setHeavyButton(true);
+            Game1.miscObjects.Add(bt);
+            Game1.miscObjects.Add(laserGate);
+            //end laser puzzle
             Gate myGate = new Gate(2 * 32, 4 * 32);
             Game1.miscObjects.Add(myGate);
             ChalkboardTop ch = new ChalkboardTop(5 * 32, 0 * 32, myGate);
