@@ -110,7 +110,7 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             //game.Add(this);
@@ -214,6 +214,7 @@ namespace Toggle
 
             gameState = "start";
             //MediaPlayer.IsRepeating = true;
+            zone1good.Volume = .7f;
             zone1bad.Volume = 0;
         }
 
@@ -708,7 +709,6 @@ namespace Toggle
             cam.update();
             boxUpdate();
             inventoryUpdate();
-            
 
             if (shiftCooldown > 0)
             {
@@ -833,7 +833,7 @@ namespace Toggle
 
 
             //Debug, draw player coords
-            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
