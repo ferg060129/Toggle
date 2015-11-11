@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Toggle
 {
-    class GreenBlock : Item 
+    class Scroll : Item 
     {
-
-        public GreenBlock(int xLocation, int yLocation): base(xLocation, yLocation)
+        private string itemTipGood;
+        private string itemTipBad;
+        public Scroll(int xLocation, int yLocation, string tipG, string tipB): base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["itemblock"];
             badGraphic = Textures.textures["baditemblock"];
@@ -18,11 +19,14 @@ namespace Toggle
             height = 32;
             imageBoundingRectangle = new Rectangle(0, 0, width, height);
             hitBox = new Rectangle(xLocation, yLocation, width, height);
+
+            tipG = itemTipGood;
+            tipB = itemTipBad;
         }
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new GreenBlockI();
+            inventoryItem = new ScrollI(itemTipGood, itemTipBad);
         }
 
 

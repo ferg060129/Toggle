@@ -54,6 +54,9 @@ namespace Toggle
 
             BoxTop boxTop = new BoxTop(20 * 32, 10 * 32);
             Game1.miscObjects.Add(boxTop);
+
+            Desk d = new Desk(20 * 32, 11 * 32);
+            Game1.miscObjects.Add(d);
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);
@@ -62,7 +65,7 @@ namespace Toggle
 
             //level tiles
             levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level"));
-            levelTiles.Add(new LevelTile(17 * 32, 3 * 32, "blackBlock", "blackBlock", "ghostTestLevel"));
+            levelTiles.Add(new LevelTile(17 * 32, 3 * 32, "blackBlock", "blackBlock", "schoolLevel"));
             levelTiles.Add(new LevelTile(21 * 32, 3 * 32, "blackBlock", "blackBlock", "laserTestLevel"));
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "gate1Level"));
         }
@@ -70,7 +73,7 @@ namespace Toggle
 
         public override void addInitialLevelItems()
         {
-            GreenBlock gb = new GreenBlock(12 * 32, 25 * 32);
+            Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
             levelItems.Add(gb);
         }
     }

@@ -12,7 +12,7 @@ namespace Toggle
         public SchoolLevel()
             : base()
         {
-            map = "laser.txt";
+            map = "school.txt";
             playerStartingX = 15*32;
             playerStartingY = 16*32;
             playerStartLocation = new Point(playerStartingX, playerStartingY);
@@ -21,21 +21,34 @@ namespace Toggle
 
         public override void loadLevelObjects()
         {
-            FlowerTentacles ft = new FlowerTentacles(32 * 11, 32 * 4);
-            Game1.creatures.Add(ft);
-            ft.setDefendTileGood(11, 4);
-            ft.setDefendTileBad(11, 7);
+            for(int i = 3; i <= 9; i+=2)
+            {
+                for(int j = 5; j<= 7; j+=2)
+                {
+                    Desk d = new Desk(i * 32, j * 32);
+                    Game1.miscObjects.Add(d);
+                }
+            }
+            Gate myGate = new Gate(2 * 32, 4 * 32);
+            Game1.miscObjects.Add(myGate);
+            ChalkboardTop ch = new ChalkboardTop(5 * 32, 0 * 32, myGate);
+            Game1.miscObjects.Add(ch);
 
-            ft = new FlowerTentacles(32 * 12, 32 * 4);
+            FlowerTentacles ft = new FlowerTentacles(32 * 4, 32 * 6);
             Game1.creatures.Add(ft);
-            ft.setDefendTileGood(12, 4);
-            ft.setDefendTileBad(12, 6);
+            ft.setDefendTileGood(4, 6);
+            ft.setDefendTileBad(3, 4);
 
-            ft = new FlowerTentacles(32 * 12, 32 * 11);
+            ft = new FlowerTentacles(32 * 6, 32 * 6);
             Game1.creatures.Add(ft);
-            ft.setDefendTileGood(12, 11);
-            ft.setDefendTileBad(13, 7);
+            ft.setDefendTileGood(6, 6);
+            ft.setDefendTileBad(9, 3);
 
+            ft = new FlowerTentacles(32 * 8, 32 * 6);
+            Game1.creatures.Add(ft);
+            ft.setDefendTileGood(8, 6);
+            ft.setDefendTileBad(10, 3);
+            /*
             ft = new FlowerTentacles(32 * 11, 32 * 11);
             Game1.creatures.Add(ft);
             ft.setDefendTileGood(11, 11);
@@ -46,12 +59,12 @@ namespace Toggle
 
             VineMoveBlock vm = new VineMoveBlock(32 * 10, 32 * 5);
             Game1.miscObjects.Add(vm);
-
+            */
             
         }
 
         public override void addInitialLevelItems(){
-            GreenBlock b = new GreenBlock(32 * 12, 32 * 7);
+            Scroll b = new Scroll(32 * 12, 32 * 7, "Bananaphone", "ring ring ring");
             levelItems.Add(b);
         }
     }

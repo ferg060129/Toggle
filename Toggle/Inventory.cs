@@ -246,6 +246,11 @@ namespace Toggle
             i.setSelected(b);
         }
 
+        public InventoryItem getSelectedItem()
+        {
+            return selectedItem;
+        }
+
         public SpriteFont getFont()
         {
             return sf;

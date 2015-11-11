@@ -21,7 +21,6 @@ namespace Toggle
             playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
 
-
         public override void loadLevelObjects()
         {
             Gate myGate = new Gate(32 * 5, 32 * 10);
@@ -107,6 +106,7 @@ namespace Toggle
             
 
         }
+      
 
         public override void addDarkTiles()
         {
@@ -136,9 +136,9 @@ namespace Toggle
             Lamp mylamp = new Lamp(32 * 1, 32 * 8);
             levelItems.Add(mylamp);
 
-            GreenBlock gb = new GreenBlock(32 * 42, 32 * 16);
+            Scroll gb = new Scroll(32 * 42, 32 * 16, "cowboys", "aliens");
             levelItems.Add(gb);
-        }
+        }   
 
     }
 }
