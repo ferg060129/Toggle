@@ -52,6 +52,8 @@ namespace Toggle
         Complex1 complex1Level;
         GhostTestLevel ghostTestLevel;
         LaserTestLevel laserTestLevel;
+        LaserIntro laserIntroLevel;
+        LevelTile lastEnteredLevelTile;
         int time;
         int width;
         int height;
@@ -82,6 +84,7 @@ namespace Toggle
         private Texture2D startButton;
         private Texture2D exitButton;
         private Texture2D screenDisplayed;
+        private Texture2D laserColor;
         private int titleScreenPhase;
 
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
@@ -124,6 +127,7 @@ namespace Toggle
             fadeDirection = false;
             blackScreenAlpha = 0;
             currentLevelString = "hub";
+            lastEnteredLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
             
         }
 
@@ -198,7 +202,7 @@ namespace Toggle
 
         public void reloadLevel()
         {
-            setLevel(currentLevelString);
+            setLevel(lastEnteredLevelTile);
         }
         protected override void UnloadContent()
         {
@@ -465,51 +469,54 @@ namespace Toggle
             return worldState;
         }
 
-        public void setLevel(string level)
+        public void setLevel(LevelTile level)
         {
-            currentLevelString = level;
-            levelTiles.Clear();
+            lastEnteredLevelTile = level;
+            Console.WriteLine(level.getLevel());
+            currentLevelString = level.getLevel();
             //Eventually turn level strings into global constants
             if(currentLevel != null)
             {
                 currentLevel.unloadLevel();
             }
 
-            if(level.Equals("hubLevel"))
+            if (currentLevelString.Equals("hubLevel"))
             {
                 currentLevel = hubLevel;
             }
-            else if(level.Equals("houseLevel"))
+            else if (currentLevelString.Equals("houseLevel"))
             {
                 currentLevel = houseLevel;
             }
-            else if(level.Equals("schoolLevel"))
+            else if (currentLevelString.Equals("schoolLevel"))
             {
                 currentLevel = schoolLevel;
             }
-            else if (level.Equals("gate1Level"))
+            else if (currentLevelString.Equals("gate1Level"))
             {
                 currentLevel = gate1Level;
             }
-            else if (level.Equals("gate2Level"))
+            else if (currentLevelString.Equals("gate2Level"))
             {
                 currentLevel = gate2Level;
             }
-            else if (level.Equals("complex1Level"))
+            else if (currentLevelString.Equals("complex1Level"))
             {
                 currentLevel = complex1Level;
             }
-            else if (level.Equals("ghostTestLevel"))
+            else if (currentLevelString.Equals("ghostTestLevel"))
             {
                 currentLevel = ghostTestLevel;
             }
-            else if (level.Equals("laserTestLevel"))
+            else if (currentLevelString.Equals("laserTestLevel"))
             {
                 currentLevel = laserTestLevel;
             }
             creatures.Add(player);
             currentLevel.loadLevel();
+            currentLevel.setPlayerStart(level.getPlayerStart());
             //add level transfer tiles from current level to the array list of tiles
+            levelTiles.Clear();
             tiles.AddRange(currentLevel.getLevelTiles());
             levelTiles.AddRange(currentLevel.getLevelTiles());
             player.setX(currentLevel.getPlayerStartingX());
@@ -662,6 +669,14 @@ namespace Toggle
         {
             int [] tempArray = new int[4];
             int po = 0;
+            if (worldState)
+            {
+                laserColor = Textures.textures["laser"];
+            }
+            else
+            {
+                laserColor = Textures.textures["laserB"];
+            }
             foreach (Miscellanious l in miscObjects)
             {
                 if (l is LaserBlock)
@@ -671,22 +686,22 @@ namespace Toggle
                     //this would look really nice in a for loop
                     if (((LaserBlock)l).getDirection() == true)
                     {
-                        spriteBatch.Draw(Textures.textures["laser"],
+                        spriteBatch.Draw(laserColor,
                             new Rectangle(l.getX(), l.getY() + 24, Math.Abs(tempArray[0] - l.getX()), 16),
                                 null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + po) * 3.14529 / 180))),
                                 (float)Math.PI, new Vector2(0, 0), SpriteEffects.None, 0);
-                        spriteBatch.Draw(Textures.textures["laser"],
+                        spriteBatch.Draw(laserColor,
                             new Rectangle(l.getX() + 32, l.getY() + 8, Math.Abs(tempArray[1] - l.getX()), 16), null,
                                 Color.White * (1.5f - Math.Abs((float)Math.Sin((time + 40 + po) * 3.14529 / 180))),
                                 0, new Vector2(0, 0), SpriteEffects.None, 0);
                     }
                     else
                     {
-                        spriteBatch.Draw(Textures.textures["laser"],
+                        spriteBatch.Draw(laserColor,
                             new Rectangle(l.getX() + 24, l.getY() + 32, Math.Abs(tempArray[3] - l.getY()), 16),
                                 null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + po) * 3.14529 / 180))),
                                 (float)Math.PI / 2, new Vector2(0, 0), SpriteEffects.None,0);
-                        spriteBatch.Draw(Textures.textures["laser"],
+                        spriteBatch.Draw(laserColor,
                             new Rectangle(l.getX() + 8, l.getY(), Math.Abs(tempArray[2] - l.getY()),16 ),
                                 null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + 40 + po) * 3.14529 / 180))),
                                 (float)Math.PI * 3 / 2, new Vector2(0, 0), SpriteEffects.None, 0);
@@ -728,8 +743,8 @@ namespace Toggle
             drawDarkTiles(spriteBatch);
 
 
-
-            spriteBatch.DrawString(Textures.fonts["arial12"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //Debug, draw player coords
+            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
             if (Keyboard.GetState().IsKeyDown(Keys.I) && !player.isReadingChalkboard())
@@ -773,7 +788,7 @@ namespace Toggle
 
 
 
-
+                    
                     //spriteBatch.DrawString(box.getFont(), box.getAnswer(), new Vector2(getCenter().X - box.getAnswerWidth() / 2, getCenter().Y), Color.White);
                 }
                 else

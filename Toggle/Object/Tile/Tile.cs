@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Toggle
 {
-    class Tile : Object
+    public class Tile : Object
     {
         bool wall, pressed;
         public Tile(int xLocation, int yLocation, String gGraphic, String bGraphic)
