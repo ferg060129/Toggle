@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Toggle 
 {
-    class GreenBlockI : InventoryItem
+    class ScrollI : InventoryItem
     {
-        public GreenBlockI() : base(){
+        public ScrollI(string tipG, string tipB)
+            : base()
+        {
             goodGraphic = Textures.textures["itemblock"];
             badGraphic = Textures.textures["baditemblock"];
             width = 32;

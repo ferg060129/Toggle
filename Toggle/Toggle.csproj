@@ -82,6 +82,7 @@
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
     <Compile Include="Object\Tile\Grate.cs" />
+    <Compile Include="Object\Miscellanious\Desk.cs" />
     <Compile Include="Object\Update Miscellanious\Box.cs" />
     <Compile Include="Object\Update Miscellanious\UpdateMiscellanious.cs" />
     <Compile Include="Object\Update Miscellanious\Chalkboard.cs" />
@@ -105,9 +106,9 @@
     <Compile Include="Object\Miscellanious\Pushable\VineMoveBlock.cs" />
     <Compile Include="Object\Destructable\CrumblingBlock.cs" />
     <Compile Include="Object\Destructable\Destructable.cs" />
-    <Compile Include="Object\Inventory Item\GreenBlockI.cs" />
+    <Compile Include="Object\Inventory Item\ScrollI.cs" />
     <Compile Include="Object\Inventory Item\InventoryItem.cs" />
-    <Compile Include="Object\Item\GreenBlock.cs" />
+    <Compile Include="Object\Item\Scroll.cs" />
     <Compile Include="Object\Item\Item.cs" />
     <Compile Include="Object\Miscellanious\Miscellanious.cs" />
     <Compile Include="Object\Object.cs" />
@@ -164,6 +165,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\ClosedGate.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\deskBad.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\desk.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GoopFrame1.png">
@@ -439,6 +446,7 @@
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
+    <Content Include="Map Files\school.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">

@@ -746,7 +746,7 @@ namespace Toggle
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             if (!worldState)
             drawDarkTiles(spriteBatch);
-           
+
 
             //Debug, draw player coords
             spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
@@ -763,7 +763,7 @@ namespace Toggle
                         Rectangle r = i.getHitBox();
 
                         //var mousePosition = new Point();
-                        if (r.Contains(cursorPosition))
+                        if (r.Contains(cursorPosition) && (inventory.getSelectedItem() == null ||inventory.getSelectedItem().Equals(i)))
                         {
                             string tip = i.getItemTip();
                             spriteBatch.DrawString(inventory.getFont(), tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
