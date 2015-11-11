@@ -43,14 +43,27 @@ namespace Toggle
             Lake lake = new Lake(29 * 32, 22 * 32);
             Game1.visuals.Add(lake);
 
-            Boat boat = new Boat(28 * 32, 28 * 32);
-            Game1.updateMiscObjects.Add(boat);
-
+            /*
             BoxTop boxTop = new BoxTop(20 * 32, 10 * 32);
             Game1.miscObjects.Add(boxTop);
-
+            
             Desk d = new Desk(20 * 32, 11 * 32);
             Game1.miscObjects.Add(d);
+            */
+
+            LanternPlatform lp = new LanternPlatform(25 * 32, 30 * 32);
+            Game1.platforms.Add(lp);
+
+            KnifePlatform kp = new KnifePlatform(25 * 32, 26 * 32);
+            Game1.platforms.Add(kp);
+
+
+            if (Game1.isBoatSpawned())
+            {
+                Boat boat = new Boat(28 * 32, 28 * 32);
+                Game1.updateMiscObjects.Add(boat);
+            }
+
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
            gb = new GreenBlock(10 * 32, 25 * 32);

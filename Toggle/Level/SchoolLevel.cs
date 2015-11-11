@@ -73,6 +73,8 @@ namespace Toggle
 
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 18));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 19));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 13, 32 * 12));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 3));
             
 
             FlowerTentacles ft = new FlowerTentacles(32 * 4, 32 * 6);
@@ -123,7 +125,7 @@ namespace Toggle
                 */
 
                 //leveltiles
-                levelTiles.Add(new LevelTile(34 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(9 * 32, 9 * 32)));
+                levelTiles.Add(new LevelTile(34 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(35 * 32, 9 * 32)));
             
         }
 
@@ -134,6 +136,7 @@ namespace Toggle
             levelItems.Add(new Scroll(32 * 15, 32 * 25, "The word you seek has eight letters", "Unscramble the word demurrer"));
             levelItems.Add(new Scroll(32 * 59, 32 * 25, "Three syllables", "The third is -er"));
             levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Don't let the r's touch"));
+            levelItems.Add(new Knife(32 * 1, 32 * 8));
         }
     }
 }

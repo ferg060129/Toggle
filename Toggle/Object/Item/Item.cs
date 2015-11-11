@@ -10,9 +10,10 @@ namespace Toggle
     {
         protected InventoryItem inventoryItem;
         protected int itemPickupCD = 0;
+        protected bool pickupAble = true;  
         public Item(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
-
+            
 
         }
 
@@ -40,12 +41,17 @@ namespace Toggle
 
         public bool canPickUp()
         {
-            return itemPickupCD == 0;
+            return itemPickupCD == 0 && pickupAble;
         }
 
         public void setItemPickupCD()
         {
             itemPickupCD = 150;
+        }
+
+        public void setPickupAble(bool b)
+        {
+            pickupAble = b;
         }
 
 

@@ -24,6 +24,7 @@ namespace Toggle
         public static ArrayList darkTiles = new ArrayList();
         public static ArrayList visuals = new ArrayList();
         public static ArrayList boats = new ArrayList();
+        public static ArrayList platforms = new ArrayList();
 
         public static Random random = new Random();
 
@@ -71,6 +72,8 @@ namespace Toggle
         int maxShiftCooldown = 10 * 5;
         float fadeTransparency = 0.0f;
         int creditsOffset = 0;
+
+        public static bool boatSpawned = false;
 
         
 
@@ -340,6 +343,17 @@ namespace Toggle
                     gameState = "winfade";
                 }
             }
+            foreach(Platform p in platforms)
+            {
+                Rectangle hitBox = p.getHitBox();
+                foreach(Item i in items)
+                {
+                    if(hitBox.Intersects(i.getHitBox()))
+                    {
+                        p.reportCollision(i);
+                    }
+                }
+            }
             checkLevelTileCollision();
         }
 
@@ -427,6 +441,10 @@ namespace Toggle
             foreach (Visual v in visuals)
             {
                 v.setState(worldState);
+            }
+            foreach (UpdateMiscellanious um in updateMiscObjects)
+            {
+                um.setState(worldState);
             }
             /*
             if (worldState)
@@ -705,6 +723,18 @@ namespace Toggle
             {
                 showInventory =! showInventory;
             }
+
+            if (winCondition() && !boatSpawned)
+            {
+                boatSpawned = true;
+
+                Boat boat = new Boat(28 * 32, 28 * 32);
+                Game1.updateMiscObjects.Add(boat);
+                //hubLevel.addLevelItem(boat);
+            }
+
+
+
             oldKeyBoardState = newKeyBoardState;
         }
 
@@ -759,6 +789,12 @@ namespace Toggle
             MouseState mouseState = Mouse.GetState();
             drawMap(spriteBatch);
             
+            foreach(Platform p in platforms)
+            {
+                spriteBatch.Draw(p.getGraphic(), new Vector2(p.getX(), p.getY()), p.getImageBoundingRectangle(), Color.White);
+                
+            }
+
             foreach (Item i in items)
             {
                 spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
@@ -786,7 +822,7 @@ namespace Toggle
 
 
             //Debug, draw player coords
-            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
@@ -997,32 +1033,33 @@ namespace Toggle
 
         public void creditsUpdate()
         {
-
+            creditsOffset++;
         }
 
         public void creditsDraw()
         {
             int length;
             string str;
+            SpriteFont sf = Textures.fonts["mistral16"];
 
-
-            /*
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             str = "Isaac";
             length = str.Length * 12;
             spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length/2, getCenter().Y - creditsOffset), Color.Blue);
             str = "Merle";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 12), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 15), Color.Blue);
             str = "Kevin";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 24), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 30), Color.Blue);
             str = "Mayris";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 36), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 39), Color.Blue);
+            str = "Dreamshift";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 300), Color.Blue);
             spriteBatch.End();
             creditsOffset++;
-             * */
         }
 
 
@@ -1221,6 +1258,28 @@ namespace Toggle
             currentLevel.addLevelItem(i);
 
         }
+
+        public bool winCondition()
+        {
+            if(platforms.Count <= 0)
+            {
+                return false;
+            }
+            foreach(Platform p in platforms)
+            {
+                if(!p.isItemOnPlatform())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool isBoatSpawned()
+        {
+            return boatSpawned;
+        }
+
     }
 
  

@@ -80,7 +80,12 @@
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
+    <Compile Include="Object\Inventory Item\KnifeI.cs" />
+    <Compile Include="Object\Item\Knife.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Platform\KnifePlatform.cs" />
+    <Compile Include="Object\Platform\LanternPlatform.cs" />
+    <Compile Include="Object\Platform\Platform.cs" />
     <Compile Include="Object\Tile\Grate.cs" />
     <Compile Include="Object\Miscellanious\Desk.cs" />
     <Compile Include="Object\Update Miscellanious\Box.cs" />
@@ -192,6 +197,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\ItemBox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\knife.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\knifePlatformComplete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\knifePlatform.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\lanternPlatformComplete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\lanternPlatform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\LitLantern.png">
