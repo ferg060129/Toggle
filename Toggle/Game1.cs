@@ -300,6 +300,17 @@ namespace Toggle
                         }
                     }
                 }
+                foreach (Visual v in visuals)
+                {
+                    Rectangle hitBoxOther = v.getHitBox();
+                    if (v is Lake)
+                    {
+                        if (c.getHitBox().Intersects(hitBoxOther))
+                        {
+                            c.reportCollision(v);
+                        }
+                    }
+                }
             }
 
             for (int ii = items.Count - 1; ii >= 0; ii--)

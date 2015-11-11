@@ -21,6 +21,8 @@ namespace Toggle
             goodGraphic = Textures.textures["water"];
             badGraphic = Textures.textures["water"];
             imageBoundingRectangle = new Rectangle(0, 0, 448, 320);
+            collidable = true;
+            hitBox = new Rectangle(xLocation, yLocation, 448, 320);
         }
 
         public override Texture2D getGraphic()

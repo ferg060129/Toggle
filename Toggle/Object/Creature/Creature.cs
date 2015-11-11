@@ -64,7 +64,7 @@ namespace Toggle
 
         public virtual void reportCollision(Object o)
         {
-            if (o is Wall)
+            if ((o is Wall) || (o is Lake))
             {
                 Rectangle hBO = o.getHitBox(); //hitBoxOther
                 if (direction == 0)
