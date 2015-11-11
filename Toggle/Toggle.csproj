@@ -81,7 +81,9 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
+    <Compile Include="Object\Inventory Item\RopeI.cs" />
     <Compile Include="Object\Item\Knife.cs" />
+    <Compile Include="Object\Item\Rope.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
     <Compile Include="Object\Platform\KnifePlatform.cs" />
     <Compile Include="Object\Platform\LanternPlatform.cs" />
@@ -163,6 +165,9 @@
     <Content Include="Content\buttonUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\chain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\chalkboard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -221,6 +226,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\rays.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\rope.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\schooldark.png">

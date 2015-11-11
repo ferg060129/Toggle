@@ -137,6 +137,7 @@ namespace Toggle
             levelItems.Add(new Scroll(32 * 59, 32 * 25, "Three syllables", "The third is -er"));
             levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Don't let the r's touch"));
             levelItems.Add(new Knife(32 * 1, 32 * 8));
+            levelItems.Add(new Rope(32 * 1, 32 * 17));
         }
     }
 }
