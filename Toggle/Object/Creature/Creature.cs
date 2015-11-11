@@ -269,6 +269,10 @@ namespace Toggle
                 return -1;
             }
 
+            if(tileIsOccupied(desiredTileX, desiredTileY))
+            {
+                return -1;
+            }
             int yTiles = Game1.wallArray.GetLength(0);
             int xTiles = Game1.wallArray.GetLength(1);
 
@@ -280,6 +284,8 @@ namespace Toggle
             TileNode end = new TileNode(desiredTileX, desiredTileY);
             q.Enqueue(start);
             visited[start.Y, start.X] = true;
+
+
 
             while(q.Count != 0)
             {
