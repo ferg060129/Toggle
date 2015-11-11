@@ -212,6 +212,11 @@ namespace Toggle
             return items;
         }
 
+        public InventoryItem[,] getItemsCopy()
+        {
+            return (InventoryItem[,])items.Clone();
+        }
+
         public LampI getLamp()
         {
             for (int x = 0; x < items.GetLength(0); x++)
@@ -254,6 +259,17 @@ namespace Toggle
         public SpriteFont getFont()
         {
             return sf;
+        }
+
+        public void setInventoryItems(InventoryItem[,] inv)
+        {
+            for (int x = 0; x < items.GetLength(0); x++)
+            {
+                for (int y = 0; y < items.GetLength(1); y++)
+                {
+                    items[x, y] = inv[x, y];
+                }
+            }
         }
     }
 }

@@ -93,6 +93,7 @@ namespace Toggle
 
         bool draw = true;
 
+        InventoryItem[,] backUpInventory;
         
 
 
@@ -169,10 +170,11 @@ namespace Toggle
             ghostTestLevel = new GhostTestLevel();
             laserTestLevel = new LaserTestLevel();
 
-            currentLevel = hubLevel;
+            currentLevel = schoolLevel;
 
             inventory = new Inventory();
-            player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(34 * 32, 18 * 32, inventory, this);
+            //player = new Player(13*32, 25*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
@@ -202,6 +204,8 @@ namespace Toggle
 
         public void reloadLevel()
         {
+            currentLevel.addInitialLevelItems();
+            inventory.setInventoryItems(backUpInventory);
             setLevel(lastEnteredLevelTile);
         }
         protected override void UnloadContent()
@@ -471,6 +475,7 @@ namespace Toggle
 
         public void setLevel(LevelTile level)
         {
+            backUpInventory = inventory.getItemsCopy();
             lastEnteredLevelTile = level;
             Console.WriteLine(level.getLevel());
             currentLevelString = level.getLevel();

@@ -19,6 +19,7 @@ namespace Toggle
         protected bool indoors;
         protected ArrayList levelItems;
         protected Point playerStartLocation;
+        
 
         public Level()
         {
@@ -179,6 +180,7 @@ namespace Toggle
 
         public void loadItemsToGameArray()
         {
+            
             foreach(Item i in levelItems)
             {
                 Game1.items.Add(i);
