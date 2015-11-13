@@ -139,7 +139,7 @@ namespace Toggle
             Lamp mylamp = new Lamp(32 * 1, 32 * 8);
             levelItems.Add(mylamp);
 
-            Scroll gb = new Scroll(32 * 42, 32 * 16, "cowboys", "aliens");
+            Scroll gb = new Scroll(32 * 42, 32 * 16, "You didn't need to get this", "Trololollool");
             levelItems.Add(gb);
         }   
 
