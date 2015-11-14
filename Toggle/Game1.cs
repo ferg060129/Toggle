@@ -27,7 +27,7 @@ namespace Toggle
         public static ArrayList platforms = new ArrayList();
 
         public static Random random = new Random();
-
+        
         //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
         public static ArrayList updateMiscObjects = new ArrayList();
@@ -59,6 +59,8 @@ namespace Toggle
         int time;
         int width;
         int height;
+        int screenWidth;
+        int screenHeight;
         Player player;
         //public static List<Game1> game = new List<Game1>();
         Camera cam;
@@ -68,6 +70,7 @@ namespace Toggle
         bool showInventory;
         KeyboardState newKeyBoardState, oldKeyBoardState;
         MouseState oldMouseState, oldMouseState2;
+        int oldMouseX, oldMouseY;
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
         float fadeTransparency = 0.0f;
@@ -113,6 +116,7 @@ namespace Toggle
             graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
             //game.Add(this);
             //graphics.PreferredBackBufferWidth = 1400;
 
@@ -148,6 +152,8 @@ namespace Toggle
 
             width = GraphicsDevice.PresentationParameters.Bounds.Width;
             height = GraphicsDevice.PresentationParameters.Bounds.Height;
+            screenWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            screenHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -254,6 +260,9 @@ namespace Toggle
                     break;
                 case "credits":
                     creditsUpdate();
+                    break;
+                case "about":
+                    aboutUpdate();
                     break;
             }
             base.Update(gameTime);
@@ -407,6 +416,9 @@ namespace Toggle
                     break;
                 case "credits":
                     creditsDraw();
+                    break;
+                case "about":
+                    aboutDraw();
                     break;
             }
             base.Draw(gameTime);
@@ -606,6 +618,7 @@ namespace Toggle
                 //Magic don't remove
                 if (graphics.IsFullScreen)
                 {
+
                     mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
                     mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
                 }
@@ -726,6 +739,10 @@ namespace Toggle
             {
                 gameState = "pause";
             }
+            else if(newKeyBoardState.IsKeyDown(Keys.A) && !oldKeyBoardState.IsKeyDown(Keys.A) && !player.isReadingChalkboard())
+            {
+                gameState = "about";
+            }
             else if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R) && !player.isReadingChalkboard())
             {
                 reloadLevel();
@@ -798,6 +815,9 @@ namespace Toggle
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             MouseState mouseState = Mouse.GetState();
+            int mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+            int mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+            Console.WriteLine(mouseX+" "+mouseY);           
             drawMap(spriteBatch);
             
             foreach(Platform p in platforms)
@@ -831,11 +851,10 @@ namespace Toggle
             if (!worldState)
             drawDarkTiles(spriteBatch);
 
-
             //Debug, draw player coords
             //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
-            Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
+            Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
             {
                 inventory.drawInventory(spriteBatch);
@@ -887,7 +906,7 @@ namespace Toggle
             }
             if (showInventory && !player.isReadingChalkboard())
             {
-                spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 32, 32), Color.White);
+                spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 4, 4), Color.White);
             }
 
             //rays of light juice and darkness for dark world/any other effects to draw over everything
@@ -926,6 +945,23 @@ namespace Toggle
             spriteBatch.Draw(Textures.textures["pause"], new Vector2(0, 0), new Rectangle(0, 0, 800, 640), Color.White);
             spriteBatch.End();
         }
+        public void aboutUpdate()
+        {
+            newKeyBoardState = Keyboard.GetState();
+            if (newKeyBoardState.IsKeyDown(Keys.A) && !oldKeyBoardState.IsKeyDown(Keys.A))
+            {
+                gameState = "play";
+            }
+            oldKeyBoardState = newKeyBoardState;
+        }
+        public void aboutDraw()
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(Textures.textures["aboutScreen"], new Vector2(0, 0), Color.White);
+            spriteBatch.End();
+        }
+        
+        
         public void lostUpdate()
         {
             newKeyBoardState = Keyboard.GetState();
@@ -1163,10 +1199,13 @@ namespace Toggle
             if (showInventory && !player.isReadingChalkboard())
             {
                 MouseState mouseState = Mouse.GetState();
+                int mouseX = (int)(mouseState.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                int mouseY = (int)(mouseState.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+
                 Vector2 inventoryPosition = new Vector2(inventory.getX(), inventory.getY());
 
 
-                Vector2 cursorPosition = new Vector2(mouseState.X + getTopLeft().X, mouseState.Y + getTopLeft().Y);
+                Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
                 foreach (InventoryItem i in inventory.getItems())
                 {
                     if (i != null)
@@ -1218,14 +1257,19 @@ namespace Toggle
                             int curX = i.getX();
                             int curY = i.getY();
 
-                            int deltaX = mouseState.X - oldMouseState.X;
-                            int deltaY = mouseState.Y - oldMouseState.Y;
+                            int deltaX = mouseX - oldMouseX;
+                            int deltaY = mouseY - oldMouseY;
+
+                           
                             i.setX(curX + deltaX);
                             i.setY(curY + deltaY);
+                            
                         }
                     }
                 }
                 oldMouseState = mouseState;
+                oldMouseX = mouseX;
+                oldMouseY = mouseY;
             }
         }
 
