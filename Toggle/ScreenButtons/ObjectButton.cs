@@ -41,6 +41,10 @@ namespace Toggle
 
         public string getDescription()
         {
+            if(!seen)
+            {
+                return "";
+            }
             if(state)
             {
                 return goodDescription;

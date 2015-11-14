@@ -19,14 +19,25 @@ namespace Toggle
 
         private string[] buttonInfo = {"Button|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
                                       "Desk|desk|deskBad|This is a desk|whoooo hooo",
-                                      "Ghost|ghost|unghost|cute|spooky"
-                                      
+                                      "Ghost|ghost|unghost|cute|spooky",
+                                      "VineMoveBlock|BoxLight|BoxDark|This is a pushable object\nNote, enemies can push these too|This object is not pushable",
+                                      "Gate|ClosedGate|ClosedGate|This is an impassable gate opened\noften by utilizing a button|This is an impassable gate opened\noften by utilizing a button",
+                                      "LaserBlock|lasBoxHori|lasBoxVert|This is a laser which cannot be touched\nShifting causes the laser to rotate\nand change colors|This is a laser which cannot be touched\nShifting causes the laser to rotate\nand change colors",
+                                      "Strawberry|berry|berryRot|This is not passable|This is passable",
+                                      "KnifePlatform|knifePlatform|knifePlatform|place knife here|place knife here",
+                                      "LanternPlatform|lanternPlatform|lanternPlatform|place lantern here|place lantern here",
+                                      "Boat|boat|boat|Hop aboard to win the game|Hop aboard to win the game",
+                                      "BadTile|AngryButton|AngryButton|Stepping on this shifts to the bad world|Stepping on this shifts to the bad world",
+                                      "GoodTile|HappyButton|HappyButton|Stepping on this shifts to the good world|Stepping on this shifts to the good world",
+                                      "LockTile|HoleTile|HoleTile|Stepping on this locks your ability\nto shift|Stepping on this locks your ability\nto shift",
+                                      "UnlockTile|KeyButton|KeyButton|Stepping on this unlocks your ability\nto shift|Stepping on this unlocks your ability\nto shift",
+                                      "Grate|grate|grateRust|Lasers can pass through, but you can't|Lasers can pass through, but you can't"
                                       };
 
 
         public AboutScreen(Game1 eng) : base(eng)
         {
-            int xCtr = 32, yCtr = 32;
+            int xCtr = 32, yCtr = 64;
             foreach(string s in buttonInfo)
             {
                 string[]fields =  s.Split('|');
@@ -34,10 +45,10 @@ namespace Toggle
                 stringToButton.Add(fields[0], b);
                 buttons.Add(b);
                 xCtr += 64;
-                if(xCtr >= 300)
+                if(xCtr >= 448)
                 {
-                    xCtr = 0;
-                    yCtr += 32;
+                    xCtr = 32;
+                    yCtr += 64;
                 }
             }
 

@@ -511,7 +511,13 @@ namespace Toggle
                 if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
                     ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
                 {
-                    spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
+                    if (isOnScreen(t.getHitBox()))
+                    {
+                        spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
+                        if(t is PlayerActivateTile)
+                        aboutScreen.addSeenObject(t);
+                    }
+                    
                 }
             }
         }
