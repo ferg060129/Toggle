@@ -104,6 +104,8 @@ namespace Toggle
         bool draw = true;
 
         InventoryItem[,] backUpInventory;
+
+        private AboutScreen aboutScreen;
         
 
 
@@ -183,6 +185,8 @@ namespace Toggle
             ghostTestLevel = new GhostTestLevel();
             laserTestLevel = new LaserTestLevel();
             laserIntroLevel = new LaserIntro();
+
+            aboutScreen = new AboutScreen(this);
 
             //normal is hubLevel, change only to test
             currentLevel = hubLevel;
@@ -948,6 +952,7 @@ namespace Toggle
         public void aboutUpdate()
         {
             newKeyBoardState = Keyboard.GetState();
+            aboutScreen.checkButtonHovers();
             if (newKeyBoardState.IsKeyDown(Keys.A) && !oldKeyBoardState.IsKeyDown(Keys.A))
             {
                 gameState = "play";
@@ -957,7 +962,9 @@ namespace Toggle
         public void aboutDraw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Textures.textures["aboutScreen"], new Vector2(0, 0), Color.White);
+            //spriteBatch.Draw(Textures.textures["aboutScreen"], new Vector2(0, 0), Color.White);
+
+            aboutScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
         
@@ -1334,6 +1341,25 @@ namespace Toggle
         {
             return boatSpawned;
         }
+
+        public Point convertCursorLocation(MouseState m)
+        {
+            int xLoc, yLoc;
+            if (graphics.IsFullScreen)
+            {
+                xLoc = (int)(m.X / GraphicsDevice.Viewport.AspectRatio + 0.5);
+                yLoc = (int)(m.Y / GraphicsDevice.Viewport.AspectRatio + 0.5);
+            }
+            else
+            {
+                xLoc = (int)(m.X + 0.5);
+                yLoc = (int)(m.Y + 0.5);
+            }
+
+            return new Point(xLoc, yLoc);
+        }
+
+
 
     }
 
