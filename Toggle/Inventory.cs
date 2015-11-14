@@ -282,8 +282,30 @@ namespace Toggle
             {
                 for (int y = 0; y < items.GetLength(1); y++)
                 {
-                    
-                    items[x, y] = inv[x, y];
+
+                        if(items[x,y]!= null && !containsItem(inv,items[x,y]))
+                        {
+                            //Remove batteries from lamp if necessary
+                            if (items[x, y].getItem() is Lamp)
+                            {
+                                ((Lamp)items[x, y].getItem()).setBatteries(false);
+                            }
+
+                            setSelectedItem(items[x,y], false);
+                            //engine.addItemToCurrentLevel(items[x,y].getItem());
+                        }
+
+                        /*
+                        if(inv[x,y] == null)
+                        {
+                            engine.addItemToCurrentLevel(items[x, y].getItem());
+                        }
+                        else if()
+                        */
+
+
+
+                        items[x, y] = inv[x, y];
                 }
             }
         }
@@ -301,6 +323,18 @@ namespace Toggle
             item.setItemPickupCD();
             
 
+        }
+
+        public bool containsItem(InventoryItem [,] i, InventoryItem it)
+        {
+            foreach(InventoryItem itt in i)
+            {
+                if(it.Equals(itt))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

@@ -141,7 +141,7 @@ namespace Toggle
 
             Scroll gb = new Scroll(32 * 42, 32 * 16, "You didn't need to get this", "trololololol");
             levelItems.Add(gb);
-        }   
+        }
 
     }
 }

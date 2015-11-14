@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Toggle
 {
     class LampI : InventoryItem
     {
 
-        bool batteries = false;
+
         public LampI(Item i)
             : base(i)
         {
@@ -25,20 +26,33 @@ namespace Toggle
         {
             if(i is BatteryGooI && i.getState())
             {
-                batteries = true;
+                ((Lamp)myItem).setBatteries(true);
                 itemTipGood = "I am bright as the sun";
                 itemTipBad = "I am bright as the sun";
-                goodGraphic = Textures.textures["LitLantern"];
-                badGraphic = Textures.textures["LitLantern"];
+                //goodGraphic = Textures.textures["LitLantern"];
+                //badGraphic = Textures.textures["LitLantern"];
                 return true;
             }
             return false;
         }
 
-        public bool hasBatteries()
+        public override Texture2D getGraphic()
         {
-            return batteries;
+            if(((Lamp)myItem).hasBatteries())
+            {
+                return Textures.textures["LitLantern"];
+            }
+            if (state)
+            {
+
+                return goodGraphic;
+            }
+                
+            else
+                return badGraphic;
         }
+
+        
     }
  
 }

@@ -211,5 +211,15 @@ namespace Toggle
             levelItems.Add(i);
         }
 
+        public ArrayList getLevelItems()
+        {
+            return levelItems;
+        }
+
+        public void setLevelItems(ArrayList arr)
+        {
+            levelItems = arr;
+        }
+
     }
 }

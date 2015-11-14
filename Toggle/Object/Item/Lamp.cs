@@ -10,6 +10,7 @@ namespace Toggle
 {
     class Lamp : Item
     {
+        bool batteries = false;
         public Lamp(int xLocation, int yLocation): base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["UnlitLantern"];
@@ -23,6 +24,27 @@ namespace Toggle
         public override void makeInventoryItem()
         {
             inventoryItem = new LampI(this);
+        }
+
+        public bool hasBatteries()
+        {
+            return batteries;
+        }
+
+        public void setBatteries(bool b)
+        {
+            batteries = b;
+            if(b)
+            {
+                goodGraphic = Textures.textures["LitLantern"];
+                badGraphic = Textures.textures["LitLantern"];
+            }
+            else
+            {
+                goodGraphic = Textures.textures["UnlitLantern"];
+                badGraphic = Textures.textures["BustedLantern"];
+            }
+            
         }
     }
 }

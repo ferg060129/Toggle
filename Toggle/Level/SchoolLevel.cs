@@ -36,6 +36,16 @@ namespace Toggle
             bt.setHeavyButton(true);
             Game1.miscObjects.Add(bt);
             Game1.miscObjects.Add(laserGate);
+
+
+            Gate gate4 = new Gate(40 * 32, 23 * 32);
+            Button bt2 = new Button(52 * 32, 16 * 32, gate4);
+            bt2.setHeavyButton(true);
+            Game1.miscObjects.Add(bt2);
+            Game1.miscObjects.Add(gate4);
+
+
+
             bool lasDir = false;
             for (int i = 21; i < 59; i ++)
             {
@@ -99,18 +109,16 @@ namespace Toggle
             ft.setDefendTileBad(3, 22);
 
 
-            for (int i = 38; i <= 59; i++ )
-            {
-                for(int j = 16; j<=25; j++)
-                {
-                    if(i!=59 || j!=25)
-                    {
-                        Game1.miscObjects.Add(new Strawberry(i * 32, j * 32));
-                    }
-                }
-            }
+        
+            Game1.miscObjects.Add(new Strawberry(40 * 32,19 * 32));
+            //Game1.miscObjects.Add(new Strawberry(44 * 32, 19 * 32));
 
 
+            Game1.miscObjects.Add(new VineMoveBlock(44 * 32, 23 * 32));
+            Game1.miscObjects.Add(new VineMoveBlock(48 * 32, 23 * 32));
+            Game1.miscObjects.Add(new VineMoveBlock(56 * 32, 19 * 32));
+            Game1.miscObjects.Add(new VineMoveBlock(56 * 32, 15 * 32));
+            Game1.miscObjects.Add(new VineMoveBlock(48 * 32, 19 * 32));
                 /*
                 ft = new FlowerTentacles(32 * 11, 32 * 11);
                 Game1.creatures.Add(ft);
@@ -134,7 +142,7 @@ namespace Toggle
             //Scroll b = new Scroll(32 * 12, 32 * 7, "Bananaphone", "ring ring ring");
             //levelItems.Add(b);
             levelItems.Add(new Scroll(32 * 15, 32 * 25, "The word you seek has eight letters", "Unscramble the word demurrer"));
-            levelItems.Add(new Scroll(32 * 59, 32 * 25, "Three syllables", "The third is -er"));
+            levelItems.Add(new Scroll(32 * 56, 32 * 18, "Three syllables", "The third is -er"));
             levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Don't let the r's touch"));
             levelItems.Add(new Knife(32 * 1, 32 * 8));
             levelItems.Add(new Rope(32 * 1, 32 * 17));

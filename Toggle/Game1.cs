@@ -104,6 +104,7 @@ namespace Toggle
         bool draw = true;
 
         InventoryItem[,] backUpInventory;
+        ArrayList backUpItems;
 
         private AboutScreen aboutScreen;
         
@@ -232,6 +233,7 @@ namespace Toggle
 
             //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
+            currentLevel.setLevelItems(backUpItems);
             setLevel(lastEnteredLevelTile);
         }
         protected override void UnloadContent()
@@ -532,7 +534,7 @@ namespace Toggle
                     ((yLoc > player.getY() - height - 32) && (yLoc < player.getY() + height)))
                 {
                     LampI lamp = inventory.getLamp();
-                    if(lamp!= null && lamp.hasBatteries())
+                    if(lamp!= null && ((Lamp)lamp.getItem()).hasBatteries())
                     {
                         double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
                         t.addLampLight(distance);
@@ -554,6 +556,7 @@ namespace Toggle
         public void setLevel(LevelTile level)
         {
             backUpInventory = inventory.getItemsCopy();
+            
             lastEnteredLevelTile = level;
             Console.WriteLine(level.getLevel());
             currentLevelString = level.getLevel();
@@ -601,6 +604,9 @@ namespace Toggle
             }
             creatures.Add(player);
             currentLevel.loadLevel();
+
+            backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
+
             currentLevel.setPlayerStart(level.getPlayerStart());
             //add level transfer tiles from current level to the array list of tiles
             levelTiles.Clear();
@@ -869,7 +875,7 @@ namespace Toggle
             drawDarkTiles(spriteBatch);
 
             //Debug, draw player coords
-            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
