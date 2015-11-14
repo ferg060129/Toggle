@@ -22,7 +22,7 @@ namespace Toggle
 
         }
 
-        public void onClick()
+        public virtual void onClick()
         {
 
         }

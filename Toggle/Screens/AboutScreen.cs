@@ -13,10 +13,39 @@ namespace Toggle
     {
 
         //public ObjectButton hoveredButton;
-        Vector2 drawHoveredLoc = new Vector2(500, 300);
+        Vector2 drawHoveredLoc = new Vector2(640, 84);
+        Vector2 descriptionLoc = new Vector2(525, 224);
+        Dictionary<string, ScreenButton> stringToButton = new Dictionary<string, ScreenButton>();
+
+        private string[] buttonInfo = {"Button|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
+                                      "Desk|desk|deskBad|This is a desk|whoooo hooo",
+                                      "Ghost|ghost|unghost|cute|spooky"
+                                      
+                                      };
+
+
         public AboutScreen(Game1 eng) : base(eng)
         {
-            buttons.Add(new ObjectButton(3, 3, "buttonUp", "buttonUp", "This is a thingy you should step on", "This is still a tihngy"));
+            int xCtr = 32, yCtr = 32;
+            foreach(string s in buttonInfo)
+            {
+                string[]fields =  s.Split('|');
+                ObjectButton b = new ObjectButton(xCtr, yCtr, fields[1], fields[2], fields[3], fields[4]);
+                stringToButton.Add(fields[0], b);
+                buttons.Add(b);
+                xCtr += 64;
+                if(xCtr >= 300)
+                {
+                    xCtr = 0;
+                    yCtr += 32;
+                }
+            }
+
+
+
+            
+            
+            
         }
 
         public override void drawScreen(SpriteBatch sb)
@@ -25,10 +54,20 @@ namespace Toggle
             base.drawScreen(sb);
 
             if(hoveredButton != null)
+            { 
                 sb.Draw(hoveredButton.getGraphic(), drawHoveredLoc, hoveredButton.getImageBoundingRectangle(), Color.White);
+                sb.DrawString(Textures.fonts["arial12"], ((ObjectButton)hoveredButton).getDescription(), descriptionLoc, Color.Black);
+            }
 
         }
 
+        //Add extra condition for blue button
+        public void addSeenObject(Object o)
+        {
+            string s = o.GetType().Name;
+            if (stringToButton.ContainsKey(s))
+            ((ObjectButton)stringToButton[s]).setSeen(true);
+        }
 
     }
 }

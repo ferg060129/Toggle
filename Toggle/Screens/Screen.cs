@@ -25,17 +25,19 @@ namespace Toggle
         public void checkButtonClicks()
         {
             MouseState mouseState = Mouse.GetState();
+            Point cursorLocation = engine.convertCursorLocation(mouseState);
             if(mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
             {
                 foreach(ScreenButton sb in buttons)
                 {
-                    Point cursorLocation = engine.convertCursorLocation(mouseState);
+                    
                     if(sb.getClickBox().Contains(cursorLocation))
                     {
                         sb.onClick();
                     }
                 }
             }
+            oldMouseState = mouseState;
         }
 
         public void checkButtonHovers()

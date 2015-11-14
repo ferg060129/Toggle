@@ -236,6 +236,9 @@
     <Content Include="Content\OpenGate.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\questionBox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\rays.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
