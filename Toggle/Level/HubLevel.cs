@@ -12,7 +12,7 @@ namespace Toggle
         public HubLevel()
             : base()
         {
-            map = "out.txt";
+            map = "hub.txt";
             playerStartingX = 9 * 32;
             playerStartingY = 9 * 32;
             playerStartLocation = new Point(playerStartingX, playerStartingY);
