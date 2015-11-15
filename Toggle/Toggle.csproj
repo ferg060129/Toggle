@@ -140,6 +140,7 @@
     <Compile Include="ScreenButtons\ObjectButton.cs" />
     <Compile Include="ScreenButtons\ScreenButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
+    <Compile Include="Screens\DanceScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="StartScreen.cs" />
     <Compile Include="Textures.cs" />
@@ -165,6 +166,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\berry.png" />
+    <Content Include="Content\blocks.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\cursor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

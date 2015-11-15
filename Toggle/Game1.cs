@@ -107,7 +107,7 @@ namespace Toggle
         ArrayList backUpItems;
 
         private AboutScreen aboutScreen;
-        
+        private DanceScreen danceScreen;
 
 
 
@@ -186,12 +186,14 @@ namespace Toggle
             laserIntroLevel = new LaserIntro();
 
             aboutScreen = new AboutScreen(this);
-
+            danceScreen = new DanceScreen(this);
             //normal is hubLevel, change only to test
             currentLevel = hubLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
+
+            //player = new Player(5 * 32, 32 * 5, inventory, this);
             player = new Player(13*32, 25*32, inventory, this);
             //player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
@@ -1093,6 +1095,8 @@ namespace Toggle
             else
             {
                 gameState = "credits";
+                player.setX(width / 32 - 16);
+                player.setY(height / 32 - 16);
             }
             
         }
@@ -1109,32 +1113,44 @@ namespace Toggle
         public void creditsUpdate()
         {
             creditsOffset++;
+            player.playerOtherMove();
+            if (zone1good.State != SoundState.Playing && zone1bad.State != SoundState.Playing)
+            {
+                zone1good.Play();
+                zone1bad.Play();
+            }
         }
 
         public void creditsDraw()
         {
+            
             int length;
             string str;
             SpriteFont sf = Textures.fonts["mistral16"];
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
+            spriteBatch.Begin();
+
+            danceScreen.drawDanceSreen(spriteBatch);
+            spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             str = "Isaac";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length/2, getCenter().Y - creditsOffset), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset), Color.Blue);
             str = "Merle";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 15), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 400), Color.Blue);
             str = "Kevin";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 30), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 800), Color.Blue);
             str = "Mayris";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 39), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1200), Color.Blue);
             str = "Dreamshift";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(getCenter().X - length / 2, getCenter().Y - creditsOffset + 300), Color.Blue);
-            spriteBatch.End();
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1800), Color.Blue);
             creditsOffset++;
+
+
+             spriteBatch.End();
         }
 
 
@@ -1395,6 +1411,14 @@ namespace Toggle
 
         }
 
+        public int getScreenWidth()
+        {
+            return width;
+        }
+        public int getScreenHeight()
+        {
+            return height;
+        }
 
 
     }

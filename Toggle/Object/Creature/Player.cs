@@ -182,6 +182,88 @@ namespace Toggle
             }
         }
 
+
+        public void playerOtherMove()
+        {
+            previousHitBox = new Rectangle(x, y, width, height);
+            KeyboardState newKeyBoardState = Keyboard.GetState();
+
+            //Variables to keep track of animation sprite.
+            int oldDirection = direction;
+            moving = true;
+
+            if (currentlyMove == false)
+            {
+                distanceTraveled = 0;
+
+                if (newKeyBoardState.IsKeyDown(Keys.Up))
+                {
+                    direction = 1;
+                    setAnimation("moveUp");
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Down))
+                {
+                    direction = 3;
+                    setAnimation("moveDown");
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Left))
+                {
+                    direction = 0;
+                    setAnimation("moveLeft");
+                    currentlyMove = true;
+                }
+                else if (newKeyBoardState.IsKeyDown(Keys.Right))
+                {
+                    direction = 2;
+                    setAnimation("moveRight");
+                    currentlyMove = true;
+                }
+                else
+                {
+                    moving = false;
+                }
+            }
+            if ((moving == false) && (currentlyMove == false))
+            {
+                switch (direction)
+                {
+                    default:
+                        break;
+                    case 0:
+                        setAnimation("idleLeft");
+                        break;
+                    case 1:
+                        setAnimation("idleUp");
+                        break;
+                    case 2:
+                        setAnimation("idleRight");
+                        break;
+                    case 3:
+                        setAnimation("idleDown");
+                        break;
+
+                }
+            }
+            if(x > engine.getScreenWidth() -32)
+            {
+                x = engine.getScreenWidth() - 32;
+            }
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if(y > engine.getScreenHeight() - 32)
+            {
+                y = engine.getScreenHeight() - 32;
+            }
+            oldKeyBoardState = newKeyBoardState;
+            moveUpdate();
+            //Get next image for sprite
+            //imageBoundingRectangle = getNextImageRectangle(direction, oldDirection, moving);
+            animate();
+            hitBox = new Rectangle(x, y, width, height);
+        }
+
         public void moveUpdate()
         {
             int oldDirection = direction;
