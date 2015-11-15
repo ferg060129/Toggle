@@ -41,7 +41,8 @@ namespace Toggle
             ft.setDefendTileBad(16, 4);
             Game1.creatures.Add(ft);
             //level tiles
-            levelTiles.Add(new LevelTile(23 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(19 * 32, 7 * 32)));
+            levelTiles.Add(new LevelTile(23 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(26 * 32, 6 * 32)));
+            //levelTiles.Add(new LevelTile(23 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(19 * 32, 7 * 32)));
         }
     }
 }

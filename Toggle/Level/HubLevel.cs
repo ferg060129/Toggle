@@ -29,6 +29,7 @@ namespace Toggle
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 25));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 20));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 15));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 34, 32 * 13));
             Game1.creatures.Add(new Ghost(32 * 23, 32 * 3, new Point(1, 1), new Point(54, 5)));
 
 
@@ -72,10 +73,25 @@ namespace Toggle
 
             //level tiles
 
-            levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level",new Point(20 * 32, 10 * 32)));
+
+            for (int x = 24; x <= 42; x++)
+            {
+                if(x != 34)
+                Game1.miscObjects.Add(new Fence(32 * x, 32 * 13, "barbedHor"));
+            }
+            Game1.miscObjects.Add(new Fence(32 * 23, 32 * 13, "barbedBottomLeft"));
+
+            for (int y = 1; y < 13; y++ )
+            {
+                Game1.miscObjects.Add(new Fence(32 * 23, 32 * y, "barbedVertical1"));
+            }
+
+
+                levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(20 * 32, 10 * 32)));
             //levelTiles.Add(new LevelTile(17 * 32, 3 * 32, "blackBlock", "blackBlock", "schoolLevel",new Point(9 * 32, 10 * 32)));
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "schoolLevel",new Point(34 * 32, 24 * 32)));
             levelTiles.Add(new LevelTile(9 * 32, 8 * 32, "blackBlock", "blackBlock", "houseLevel", new Point(24 * 32, 16 * 32)));
+            levelTiles.Add(new LevelTile(26 * 32, 5 * 32, "blackBlock", "blackBlock", "complex1Level", new Point(22 * 32, 12 * 32)));
         }
 
 

@@ -85,6 +85,7 @@
     <Compile Include="Object\Item\Knife.cs" />
     <Compile Include="Object\Item\Rope.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Miscellanious\Fence.cs" />
     <Compile Include="Object\Platform\KnifePlatform.cs" />
     <Compile Include="Object\Platform\LanternPlatform.cs" />
     <Compile Include="Object\Platform\Platform.cs" />
@@ -157,6 +158,13 @@
     <Content Include="Content\aboutScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\barbedBottomLeft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\barbedVertical1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\berry.png" />
     <Content Include="Content\cursor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -191,6 +199,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\desk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\barbedHor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GoopFrame1.png">
@@ -279,6 +290,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\grayblock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\fence.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tile\HappyButton.png">

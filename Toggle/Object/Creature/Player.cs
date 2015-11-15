@@ -150,7 +150,7 @@ namespace Toggle
             else if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
-                if(!stateLocked && engine.getShiftCD() == 0)
+                if (!stateLocked && engine.getShiftCD() == 0 && !standingOnStateTile())
                 {
                     engine.setShiftCD();
                     engine.switchStates();
@@ -407,6 +407,21 @@ namespace Toggle
         public void setLocked(bool b)
         {
             stateLocked = b;
-        }   
+        }
+
+        public bool standingOnStateTile()
+        {
+            foreach(PlayerActivateTile t in Game1.playerActivateTiles)
+            {
+                if(t is GoodTile || t is BadTile)
+                {
+                    if(t.getHitBox().Intersects(hitBox))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
