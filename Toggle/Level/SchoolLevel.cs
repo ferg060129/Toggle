@@ -133,7 +133,7 @@ namespace Toggle
                 */
 
                 //leveltiles
-                levelTiles.Add(new LevelTile(34 * 32, 25 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(35 * 32, 9 * 32)));
+                levelTiles.Add(new LevelTile(34 * 32, 26 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(35 * 32, 9 * 32)));
             
         }
 
