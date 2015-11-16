@@ -18,9 +18,9 @@ namespace Toggle
         ArrayList points = new ArrayList();
         int screenWidth;
         int screenHeight;
+        Player player;
 
-
-        public DanceScreen(Game1 eng)
+        public DanceScreen(Game1 eng, Player p)
         {
             engine = eng;
             screenWidth = engine.getScreenWidth();
@@ -42,6 +42,7 @@ namespace Toggle
             }
             makePoints();
             addPointOffset();
+            player = p;
         }
 
         public void makePoints()
@@ -204,21 +205,21 @@ namespace Toggle
         public void changeColors(){
             
 
-            if(ctr == 0)
-            {
+            //if(ctr == 0)
+            //{
                 foreach(Point p in points)
                 {
                     int temp = rand.Next(2);
                     tiles[p.X, p.Y].setColor(temp);
                 }
-            }
+            //}
             for (int x = 0; x < tiles.GetLength(0); x++)
             {
                 for (int y = 0; y < tiles.GetLength(1); y++)
                 {
                     if (!containsPoint(x,y))
                     {
-                        int temp = rand.Next(2) + 2;
+                        int temp = rand.Next(2)+2;
                         tiles[x, y] = new Tile(temp, x, y);
                     }
                     
@@ -235,20 +236,25 @@ namespace Toggle
         {
 
             changeColors();
-
+            Rectangle r = new Rectangle(player.getX(), player.getY(), 32, 32);
             foreach(Tile t in tiles)
             {
-
-                sb.Draw(Textures.textures["blocks"], new Vector2(t.getX() * 32, t.getY() * 32), new Rectangle(t.getColor() * 32, 0, t.getColor() * 32 + 32, 32), Color.White);
-                /*if(ctr == 0)
+                /*
+                if(r.Intersects(new Rectangle(t.getX()*32,t.getY()*32,32,32)))
                 {
+                    sb.Draw(Textures.textures["blocks"], new Vector2(t.getX() * 32, t.getY() * 32), new Rectangle(1 * 32, 0, 1 * 32 + 32, 32), Color.White);
+                }
+                else{*/
                     sb.Draw(Textures.textures["blocks"], new Vector2(t.getX() * 32, t.getY() * 32), new Rectangle(t.getColor() * 32, 0, t.getColor() * 32 + 32, 32), Color.White);
-                }*/
+                //}
+                
+                
 
             }
+            //sb.Draw(Textures.textures["blocks"], new Vector2((player.getX() / 32) * 32, (player.getY() / 32) * 32), new Rectangle(0 * 32, 0, 0 * 32 + 32, 32), Color.White);
             if(ctr == 0)
             {
-                ctr = 5;
+                ctr = 10;
             }
             else{
                 ctr--;

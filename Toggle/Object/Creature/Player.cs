@@ -472,6 +472,15 @@ namespace Toggle
             return onBoat;
         }
 
+        public void setOnBoat(bool b)
+        {
+            onBoat = b;
+            if(!onBoat)
+            {
+                velocity = 4;
+            }
+        }
+
         public bool isReadingChalkboard()
         {
             return readingChalkboard;

@@ -116,7 +116,7 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
@@ -185,8 +185,7 @@ namespace Toggle
             laserTestLevel = new LaserTestLevel();
             laserIntroLevel = new LaserIntro();
 
-            aboutScreen = new AboutScreen(this);
-            danceScreen = new DanceScreen(this);
+           
             //normal is hubLevel, change only to test
             currentLevel = hubLevel;
 
@@ -195,6 +194,8 @@ namespace Toggle
 
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             player = new Player(13*32, 25*32, inventory, this);
+            aboutScreen = new AboutScreen(this);
+            danceScreen = new DanceScreen(this, player);
             //player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
@@ -698,6 +699,7 @@ namespace Toggle
                 zone1good.Play();
                 zone1bad.Play();
             }
+            
             time++;
             newKeyBoardState = Keyboard.GetState();
             IsMouseVisible = false;
@@ -876,7 +878,7 @@ namespace Toggle
             drawDarkTiles(spriteBatch);
 
             //Debug, draw player coords
-            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
@@ -1094,8 +1096,8 @@ namespace Toggle
             else
             {
                 gameState = "credits";
-                player.setX(width / 32 - 16);
-                player.setY(height / 32 - 16);
+                player.setOnBoat(false);
+                player.setPosition(new Vector2((width / 64) * 32, (height / 64) * 32));
             }
             
         }
