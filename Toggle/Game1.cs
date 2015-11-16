@@ -231,8 +231,6 @@ namespace Toggle
 
         public void reloadLevel()
         {
-            player.setLocked(false);
-
             //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
@@ -557,6 +555,7 @@ namespace Toggle
 
         public void setLevel(LevelTile level)
         {
+            player.setLocked(false);
             backUpInventory = inventory.getItemsCopy();
             
             lastEnteredLevelTile = level;
