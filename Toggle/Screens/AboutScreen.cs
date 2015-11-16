@@ -61,7 +61,7 @@ namespace Toggle
 
         public override void drawScreen(SpriteBatch sb)
         {
-            sb.Draw(Textures.textures["aboutScreen"], new Vector2(0, 0), Color.White);
+            sb.Draw(Textures.textures["aboutScreen2"], new Vector2(0, 0), Color.White);
             base.drawScreen(sb);
 
             if(hoveredButton != null)
