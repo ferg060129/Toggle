@@ -22,7 +22,7 @@ namespace Toggle
         }
 
 
-        public void checkButtonClicks()
+        public virtual void checkButtonClicks()
         {
             MouseState mouseState = Mouse.GetState();
             Point cursorLocation = engine.convertCursorLocation(mouseState);

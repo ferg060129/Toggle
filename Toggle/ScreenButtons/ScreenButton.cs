@@ -42,6 +42,7 @@ namespace Toggle
         {
             return imageBoundingRectangle;
         }
+
         public Rectangle getClickBox()
         {
             return clickBox;
