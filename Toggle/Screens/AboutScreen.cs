@@ -80,5 +80,37 @@ namespace Toggle
             ((ObjectButton)stringToButton[s]).setSeen(true);
         }
 
+        //Add extra condition for blue button
+        public void addSeenObject(string s)
+        {
+            if (stringToButton.ContainsKey(s))
+                ((ObjectButton)stringToButton[s]).setSeen(true);
+        }
+
+
+        //seenObjects is an arraylist of strings storing the file names of the objects which were seen during last play.
+        public void setSeenObjectsContinue(ArrayList seenObjects)
+        {
+            foreach(string s in seenObjects)
+            {
+                if (stringToButton.ContainsKey(s))
+                    ((ObjectButton)stringToButton[s]).setSeen(true);
+            }
+        }
+
+        public ArrayList getSeenObjects()
+        {
+            ArrayList strs = new ArrayList();
+            foreach(string s in stringToButton.Keys)
+            {
+                if (((ObjectButton)stringToButton[s]).wasSeen())
+                {
+                    strs.Add(s);
+                }
+            }
+            return strs;
+        }
+
+
     }
 }

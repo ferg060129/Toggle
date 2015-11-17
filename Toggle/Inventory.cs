@@ -156,7 +156,7 @@ namespace Toggle
             }
             
         }
-
+        /*
         public bool addItemFromBox(InventoryItem i)
         {
             for (int x = 0; x < items.GetLength(0); x++)
@@ -185,7 +185,7 @@ namespace Toggle
             }
             return false;
 
-        }
+        }*/
 
         public void removeItem(InventoryItem i)
         {
@@ -286,10 +286,6 @@ namespace Toggle
                         if(items[x,y]!= null && !containsItem(inv,items[x,y]))
                         {
                             //Remove batteries from lamp if necessary
-                            if (items[x, y].getItem() is Lamp)
-                            {
-                                ((Lamp)items[x, y].getItem()).setBatteries(false);
-                            }
 
                             setSelectedItem(items[x,y], false);
                             //engine.addItemToCurrentLevel(items[x,y].getItem());
@@ -316,12 +312,7 @@ namespace Toggle
             Player p = (Player)(Game1.creatures[0]);
             int xLoc = (int)((int)p.getCenter().X / 32);
            int yLoc = (int)((int)p.getCenter().Y / 32);
-            Item item = i.getItem();
-            engine.addItemToCurrentLevel(item);
-            Game1.items.Add(item);
-            item.setPosition(new Vector2(xLoc * 32, yLoc * 32));
-            item.setItemPickupCD();
-            
+           // engine.addItemToCurrentLevel(item);
 
         }
 
@@ -335,6 +326,13 @@ namespace Toggle
                 }
             }
             return false;
+        }
+
+        public void setInventoryItem(InventoryItem ii, int x, int y)
+        {
+            ii.setX(itemRectangles[x, y].X);
+            ii.setY(itemRectangles[x, y].Y);
+            items[x, y] = ii;
         }
     }
 }

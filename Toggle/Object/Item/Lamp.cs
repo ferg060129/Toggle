@@ -23,7 +23,7 @@ namespace Toggle
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new LampI(this);
+            inventoryItem = new LampI();
         }
 
         public bool hasBatteries()

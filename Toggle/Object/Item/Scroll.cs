@@ -26,7 +26,7 @@ namespace Toggle
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new ScrollI(this, itemTipGood, itemTipBad);
+            inventoryItem = new ScrollI(itemTipGood, itemTipBad);
         }
 
 

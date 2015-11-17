@@ -23,7 +23,7 @@ namespace Toggle
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new RopeI(this);
+            inventoryItem = new RopeI();
         }
     }
 }

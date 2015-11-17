@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Toggle
 {
-    class Level
+    public class Level
     {
 
         protected string map = "";
@@ -18,6 +18,7 @@ namespace Toggle
         protected ArrayList levelTiles = new ArrayList();
         protected bool indoors;
         protected ArrayList levelItems;
+        protected ArrayList removedItems;
         protected Point playerStartLocation;
         
 
@@ -25,7 +26,9 @@ namespace Toggle
         {
             indoors = false;
             levelItems = new ArrayList();
+            removedItems = new ArrayList();
             addInitialLevelItems();
+
             
         }
 
@@ -206,13 +209,13 @@ namespace Toggle
         public void removeItem(Item i)
         {
             levelItems.Remove(i);
-
+            removedItems.Add(i);
         }
-
+        /*
         public void addLevelItem(Item i)
         {
             levelItems.Add(i);
-        }
+        }*/
 
         public ArrayList getLevelItems()
         {
@@ -223,6 +226,81 @@ namespace Toggle
         {
             levelItems = arr;
         }
+
+        //For continue
+        /*
+        public Array getLevelItemNames()
+        {
+            Array string myArray[] = new Array string [i.]
+            foreach(Item i in levelItems)
+            {
+                i.GetType().Name
+            }
+        }*/
+        //Actually just get the removed items
+        public string[] getRemovedLevelItems()
+        {
+            string[] myArray = new string [removedItems.Count];
+            for(int x = 0; x < myArray.Length; x++)
+            {
+                myArray[x] = removedItems[x].GetType().Name;
+                int xL = ((Item)removedItems[x]).getX()/32;
+                int yL = ((Item)removedItems[x]).getY()/32;
+                string xx = (xL+"").PadLeft(3,'0');
+                string yy = (yL+"").PadLeft(3,'0');
+
+                myArray[x] += xx + yy;
+            }
+            return myArray;
+        }
+
+        public void removeLevelItems(string[] itemStrings)
+        {
+            foreach(string s in itemStrings)
+            {
+                Item i = findItemGivenString(s);
+                if (i != null)
+                {
+                    removedItems.Add(i);
+                    for (int x = levelItems.Count - 1; x >= 0; x-- )
+                    { 
+                        Item iii = (Item)levelItems[x];
+                        /*
+                        if (iii is Lamp)
+                        {
+                            int temp = 0;
+                        }*/
+                        if (i.GetType().Name.Equals(iii.GetType().Name) && i.getX() == iii.getX() && i.getY() == iii.getY())
+                        {
+                            levelItems.Remove(iii);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        public Item findItemGivenString(string str)
+        {
+            if (str.Equals("")) return null;
+
+
+            string itemName = str.Substring(0, str.Length - 6);
+            string xx = str.Substring(str.Length - 6, 3);
+            string yy = str.Substring(str.Length - 3, 3);
+            int xlocation = Int32.Parse(xx) * 32;
+            int ylocation = Int32.Parse(yy) * 32;
+            foreach(Item i in levelItems)
+            {
+                if(i.GetType().Name.Equals(itemName) && i.getX() == xlocation && i.getY() == ylocation)
+                {
+                    return i;
+                }
+            }
+            //shouldn't happen
+            return null;
+        }
+
 
     }
 }

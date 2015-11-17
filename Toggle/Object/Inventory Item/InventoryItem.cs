@@ -15,12 +15,10 @@ namespace Toggle
         protected string itemTipBad = "Rotten banana :c";
         protected bool hovered = false;
         protected bool selected = false;
-        protected Item myItem = null;
-        public InventoryItem(Item i) : base()
+        public InventoryItem() : base()
         {
             width = 32;
             height = 32;
-            myItem = i;
         }
 
         public void setHitBox(Rectangle r)
@@ -73,9 +71,15 @@ namespace Toggle
                 return badGraphic;
         }
 
-        public Item getItem()
+
+        public string getGoodItemTip()
         {
-            return myItem;
+            return itemTipGood;
+        }
+
+        public string getBadItemTip()
+        {
+            return itemTipBad;
         }
     }
 }

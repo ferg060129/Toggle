@@ -9,9 +9,9 @@ namespace Toggle
     class LampI : InventoryItem
     {
 
-
-        public LampI(Item i)
-            : base(i)
+        private bool batteries = false;
+        public LampI()
+            : base()
         {
             goodGraphic = Textures.textures["UnlitLantern"];
             badGraphic = Textures.textures["BustedLantern"];
@@ -26,7 +26,7 @@ namespace Toggle
         {
             if(i is BatteryGooI && i.getState())
             {
-                ((Lamp)myItem).setBatteries(true);
+                batteries = true;
                 itemTipGood = "I am bright as the sun";
                 itemTipBad = "I am bright as the sun";
                 //goodGraphic = Textures.textures["LitLantern"];
@@ -38,7 +38,7 @@ namespace Toggle
 
         public override Texture2D getGraphic()
         {
-            if(((Lamp)myItem).hasBatteries())
+            if (batteries)
             {
                 return Textures.textures["LitLantern"];
             }
@@ -50,6 +50,16 @@ namespace Toggle
                 
             else
                 return badGraphic;
+        }
+
+        public bool hasBatteries()
+        {
+            return batteries;
+        }
+
+        public void setBatteries(bool b)
+        {
+            batteries = b;
         }
 
         

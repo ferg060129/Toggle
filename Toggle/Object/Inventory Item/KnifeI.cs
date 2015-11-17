@@ -8,8 +8,8 @@ namespace Toggle
     class KnifeI : InventoryItem
     {
 
-        public KnifeI(Item i)
-            : base(i)
+        public KnifeI()
+            : base()
         {
             goodGraphic = Textures.textures["knife"];
             badGraphic = Textures.textures["knife"];

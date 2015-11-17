@@ -28,7 +28,7 @@ namespace Toggle
 
         public override void makeInventoryItem()
         {
-            inventoryItem = new BatteryGooI(this);
+            inventoryItem = new BatteryGooI();
         }
 
         public override Texture2D getGraphic()

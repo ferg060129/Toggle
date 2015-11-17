@@ -19,7 +19,7 @@ namespace Toggle
 
         public virtual void makeInventoryItem()
         {
-            inventoryItem = new InventoryItem(this);
+            inventoryItem = new InventoryItem();
         }
 
         public InventoryItem pickUpItem()

@@ -7,8 +7,8 @@ namespace Toggle
 {
     class RopeI : InventoryItem
     {
-        public RopeI(Item i)
-            : base(i)
+        public RopeI()
+            : base()
         {
             goodGraphic = Textures.textures["rope"];
             badGraphic = Textures.textures["chain"];

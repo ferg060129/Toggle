@@ -7,8 +7,8 @@ namespace Toggle
 {
     class ScrollI : InventoryItem
     {
-        public ScrollI(Item i, string tipG, string tipB)
-            : base(i)
+        public ScrollI(string tipG, string tipB)
+            : base()
         {
             goodGraphic = Textures.textures["itemblock"];
             badGraphic = Textures.textures["baditemblock"];
