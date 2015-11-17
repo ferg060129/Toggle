@@ -109,7 +109,9 @@ namespace Toggle
 
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
-        
+
+        private PauseScreen pauseScreen;
+
 
 
 
@@ -198,6 +200,7 @@ namespace Toggle
             player = new Player(13*32, 25*32, inventory, this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
+            pauseScreen = new PauseScreen(this);
             //player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
@@ -251,6 +254,7 @@ namespace Toggle
             switch(gameState)
             {
                 case "start":
+                case "help":
                     startUpdate();
                     break;
                 case "play":
@@ -405,6 +409,7 @@ namespace Toggle
             switch (gameState)
             {
                 case "start":
+                case "help":
                     startDraw();
                     break;
                 case "play":
@@ -691,6 +696,13 @@ namespace Toggle
 
         public void startDraw()
         {
+            MouseState mouseState = Mouse.GetState();
+            int mouseX, mouseY;
+            Point p = convertCursorLocation(mouseState);
+            mouseX = p.X;
+            mouseY = p.Y;
+            Vector2 cursorPosition = new Vector2(mouseX, mouseY);
+
             spriteBatch.Begin();
             spriteBatch.Draw(screenDisplayed, new Vector2(0,0), Color.White);
             if (titleScreenPhase == 0)
@@ -698,6 +710,8 @@ namespace Toggle
                 spriteBatch.Draw(Textures.textures["start"], startButtonPosition, Color.White);
                 spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition, Color.White);
             }
+           
+            spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 16, 16), Color.White);
             spriteBatch.End();
         }
 
@@ -941,7 +955,7 @@ namespace Toggle
             }
             if (showInventory && !player.isReadingChalkboard())
             {
-                spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 4, 4), Color.White);
+                spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 16, 16), Color.White);
             }
 
             //rays of light juice and darkness for dark world/any other effects to draw over everything
@@ -968,6 +982,8 @@ namespace Toggle
         public void pauseUpdate()
         {
             newKeyBoardState = Keyboard.GetState();
+            pauseScreen.checkButtonHovers();
+            pauseScreen.checkButtonClicks();
             if(newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
             {
                 gameState = "play";
@@ -978,6 +994,7 @@ namespace Toggle
         {
             spriteBatch.Begin();
             spriteBatch.Draw(Textures.textures["pause"], new Vector2(0, 0), new Rectangle(0, 0, 800, 640), Color.White);
+            pauseScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
         public void aboutUpdate()
@@ -1431,6 +1448,19 @@ namespace Toggle
             return height;
         }
 
+        public void setState(string state)
+        {
+            gameState = state;
+            if (gameState == "start")
+            {
+                titleScreenPhase = 0;
+                screenDisplayed = Textures.textures["titleScreen3"];
+            }
+            if (gameState == "help")
+            {
+                titleScreenPhase = 2;
+            }
+        }
 
         public void saveGame(LevelTile level)
         {

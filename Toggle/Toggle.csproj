@@ -139,10 +139,12 @@
     <Compile Include="Object\Visual\Lake.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenButtons\MenuButton.cs" />
     <Compile Include="ScreenButtons\ObjectButton.cs" />
     <Compile Include="ScreenButtons\ScreenButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
+    <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="StartScreen.cs" />
     <Compile Include="Textures.cs" />
