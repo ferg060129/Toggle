@@ -122,7 +122,7 @@ namespace Toggle
             graphics = new GraphicsDeviceManager(this);
            // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
             
 
             //game.Add(this);
@@ -233,6 +233,10 @@ namespace Toggle
             //MediaPlayer.IsRepeating = true;
             zone1good.Volume = .7f;
             zone1bad.Volume = 0;
+
+
+            backUpInventory = inventory.getItemsCopy();
+            backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
         }
 
         public void reloadLevel()
@@ -1466,7 +1470,7 @@ namespace Toggle
         {
             //write into file
 
-            StreamWriter saveFile = new StreamWriter(@"C:/Users/Merle/Desktop/bananas.txt");
+            StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
 
             //Remove specified items from particular levels
             foreach(Level l in levels)
@@ -1580,7 +1584,7 @@ namespace Toggle
         {
             string line;
 
-            StreamReader saveFile = new StreamReader(@"C:/Users/Merle/Desktop/bananas.txt");
+            StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
             foreach (Level l in levels)
             {
                 line = saveFile.ReadLine();
