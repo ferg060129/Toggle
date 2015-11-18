@@ -10,7 +10,7 @@ namespace Toggle
         public LanternPlatform(int xLocation, int yLocation)
             : base(xLocation, yLocation)
         {
-          itemType = new Lamp(0, 0).GetType();
+            itemType = new LampI().GetType();
           goodGraphic = Textures.textures["lanternPlatform"];
           badGraphic = Textures.textures["lanternPlatform"];
         }

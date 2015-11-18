@@ -1,5 +1,4 @@
-Scroll012025
-Lamp001008,BatteryGoo043016,Diary033016
+Scroll012025,Knife011025,Diary010025
 
 
 
@@ -8,9 +7,12 @@ Lamp001008,BatteryGoo043016,Diary033016
 
 
 
-Button,VineMoveBlock,Gate,Strawberry,KnifePlatform,LanternPlatform,BadTile,GoodTile,LockTile,UnlockTile
-ScrollI|0|0|I am a paper|What are u?,LampI|0|1|T|,DiaryI|0|2||,
 
-houseLevel
-768
-512
+VineMoveBlock,KnifePlatform,BadTile,LockTile,UnlockTile
+
+
+hubLevel
+416
+800
+F
+F

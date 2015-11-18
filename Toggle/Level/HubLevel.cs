@@ -8,7 +8,8 @@ namespace Toggle
 {
     class HubLevel : Level
     {
-
+        DiaryPlatform dp = null;
+        KnifePlatform kp = null;
         public HubLevel()
             : base()
         {
@@ -53,11 +54,19 @@ namespace Toggle
             Game1.miscObjects.Add(d);
             */
 
-            LanternPlatform lp = new LanternPlatform(25 * 32, 30 * 32);
-            Game1.platforms.Add(lp);
 
-            KnifePlatform kp = new KnifePlatform(25 * 32, 26 * 32);
+            if(dp == null)
+            {
+                dp = new DiaryPlatform(25 * 32, 30 * 32);
+            }
+            Game1.platforms.Add(dp);
+            if(kp == null)
+            {
+                kp = new KnifePlatform(25 * 32, 26 * 32);
+            }
             Game1.platforms.Add(kp);
+
+            
 
 
             if (Game1.isBoatSpawned())
@@ -100,6 +109,11 @@ namespace Toggle
         {
             Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
             levelItems.Add(gb);
+            /*
+            Knife kn = new Knife(11 * 32, 25 * 32);
+            levelItems.Add(kn);
+            Diary di = new Diary(10 * 32, 25 * 32);
+            levelItems.Add(di);*/
         }
     }
 }

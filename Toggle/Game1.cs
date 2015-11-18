@@ -106,6 +106,7 @@ namespace Toggle
 
         InventoryItem[,] backUpInventory;
         ArrayList backUpItems;
+        bool[] backUpPlatformFilled;
 
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
@@ -237,6 +238,8 @@ namespace Toggle
 
             backUpInventory = inventory.getItemsCopy();
             backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
+            backUpPlatformFilled = new bool[2];
+            loadBackupPlatforms();
         }
 
         public void reloadLevel()
@@ -244,7 +247,20 @@ namespace Toggle
             //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
+            for (int x = 0; x < backUpPlatformFilled.Length; x++)
+            {
+                ((Platform)platforms[x]).setItemOnPlatform(backUpPlatformFilled[x]);
+                //remove boat if item is now missing from platform
+                if (!backUpPlatformFilled[x])
+                {
+                    boatSpawned = false;
+                }
+            }
+            
             setLevel(lastEnteredLevelTile);
+            
+
+
         }
         protected override void UnloadContent()
         {
@@ -377,17 +393,6 @@ namespace Toggle
                     gameState = "winfade";
                 }
             }
-            foreach(Platform p in platforms)
-            {
-                Rectangle hitBox = p.getHitBox();
-                foreach(Item i in items)
-                {
-                    if(hitBox.Intersects(i.getHitBox()))
-                    {
-                        p.reportCollision(i);
-                    }
-                }
-            }
             checkLevelTileCollision();
         }
 
@@ -483,6 +488,10 @@ namespace Toggle
             foreach (UpdateMiscellanious um in updateMiscObjects)
             {
                 um.setState(worldState);
+            }
+            foreach (Platform p in platforms)
+            {
+                p.setState(worldState);
             }
             /*
             if (worldState)
@@ -631,6 +640,7 @@ namespace Toggle
             cam.changeRoom();
             cam.update();
             //if (!level.getLevel().Equals("hubLevel"))
+            loadBackupPlatforms();
                 saveGame(level);
         }
 
@@ -1575,6 +1585,19 @@ namespace Toggle
 
             saveFile.WriteLine(level.getPlayerStart().X);
             saveFile.WriteLine(level.getPlayerStart().Y);
+            foreach(Platform p in platforms)
+            {
+                if(((Platform)p).isItemOnPlatform())
+                {
+                    saveFile.WriteLine("T");
+                }
+                else
+                {
+                    saveFile.WriteLine("F");
+                }
+            }
+            
+
 
 
             saveFile.Close();
@@ -1653,12 +1676,36 @@ namespace Toggle
             line = saveFile.ReadLine();
             playerY = Int32.Parse(line);
 
+            foreach(Platform p in platforms)
+            {
+                line = saveFile.ReadLine();
+                if(line.Equals("T"))
+                {
+                    ((Platform)p).setItemOnPlatform(true);
+                }
+            }
+
             //InventoryItem[,] inventoryItems = inventory.getItems();
             LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", lvl, new Point(playerX, playerY));
             saveFile.Close();
             gameState = "play";
             setLevel(lv);
             
+        }
+
+        public void loadBackupPlatforms()
+        {
+            for (int x = 0; x < backUpPlatformFilled.Length; x++)
+            {
+                if (((Platform)platforms[x]).isItemOnPlatform())
+                {
+                    backUpPlatformFilled[x] = true;
+                }
+                else
+                {
+                    backUpPlatformFilled[x] = false;
+                }
+            }
         }
         /*
         inventory.setInventoryItems(backUpInventory);

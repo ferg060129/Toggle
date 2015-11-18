@@ -152,7 +152,21 @@ namespace Toggle
                 returnItemToSlot(i);
             }
             else{
-                dropItem(i);
+                Player p = (Player)(Game1.creatures[0]);
+                Rectangle rect = p.getHitBox();
+                foreach(Platform plat in Game1.platforms)
+                {
+                    if(p.getX() == plat.getX() && p.getY() == plat.getY())
+                    {
+                        bool added = plat.addItemToPlatform(i);
+                        if(added)
+                        {
+                            removeItem(i);
+                            return;
+                        }
+                    }
+                }
+                returnItemToSlot(i);
             }
             
         }
@@ -308,16 +322,6 @@ namespace Toggle
                         items[x, y] = inv[x, y];
                 }
             }
-        }
-
-        public void dropItem(InventoryItem i)
-        {
-            removeItem(i);
-            Player p = (Player)(Game1.creatures[0]);
-            int xLoc = (int)((int)p.getCenter().X / 32);
-           int yLoc = (int)((int)p.getCenter().Y / 32);
-           // engine.addItemToCurrentLevel(item);
-
         }
 
         public bool containsItem(InventoryItem [,] i, InventoryItem it)
