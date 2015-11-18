@@ -316,10 +316,7 @@ namespace Toggle
                         }
                         else if()
                         */
-
-
-
-                        items[x, y] = inv[x, y];
+                    setInventoryItem(inv[x, y],x,y);
                 }
             }
         }
@@ -338,6 +335,7 @@ namespace Toggle
 
         public void setInventoryItem(InventoryItem ii, int x, int y)
         {
+            if (ii == null) return;
             ii.setX(itemRectangles[x, y].X);
             ii.setY(itemRectangles[x, y].Y);
             items[x, y] = ii;

@@ -247,13 +247,16 @@ namespace Toggle
             //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
-            for (int x = 0; x < backUpPlatformFilled.Length; x++)
+            if(currentLevel.Equals(hubLevel))
             {
-                ((Platform)platforms[x]).setItemOnPlatform(backUpPlatformFilled[x]);
-                //remove boat if item is now missing from platform
-                if (!backUpPlatformFilled[x])
+                for (int x = 0; x < backUpPlatformFilled.Length; x++)
                 {
-                    boatSpawned = false;
+                    ((Platform)platforms[x]).setItemOnPlatform(backUpPlatformFilled[x]);
+                    //remove boat if item is now missing from platform
+                    if (!backUpPlatformFilled[x])
+                    {
+                        boatSpawned = false;
+                    }
                 }
             }
             
@@ -639,9 +642,9 @@ namespace Toggle
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();
             cam.update();
-            //if (!level.getLevel().Equals("hubLevel"))
+            if (level.getLevel().Equals("hubLevel"))
             loadBackupPlatforms();
-                saveGame(level);
+            saveGame(level);
         }
 
         //For each game state
@@ -1481,7 +1484,8 @@ namespace Toggle
             //write into file
 
             StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
-
+            //StreamWriter saveFile = new StreamWriter(@System.IO.Directory.GetCurrentDirectory() + "/Map Files/bananas.txt");
+            
             //Remove specified items from particular levels
             foreach(Level l in levels)
             {
@@ -1608,6 +1612,8 @@ namespace Toggle
             string line;
 
             StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
+            //StreamReader saveFile = new StreamReader(@System.IO.Directory.GetCurrentDirectory() + "/Map Files/bananas.txt");
+
             foreach (Level l in levels)
             {
                 line = saveFile.ReadLine();
