@@ -40,7 +40,7 @@ namespace Toggle
             oldMouseState = mouseState;
         }
 
-        public void checkButtonHovers()
+        public virtual void checkButtonHovers()
         {
             MouseState mouseState = Mouse.GetState();
             foreach (ScreenButton sb in buttons)
@@ -49,11 +49,12 @@ namespace Toggle
                 if (sb.getClickBox().Contains(cursorLocation))
                 {
                     sb.onHover();
-                    hoveredButton = sb;
-                    return;
+                }
+                else
+                {
+                    sb.setHover(false);
                 }
             }
-            hoveredButton = null;
         }
 
         public virtual void drawScreen(SpriteBatch sb)

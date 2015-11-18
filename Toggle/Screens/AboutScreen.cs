@@ -31,7 +31,8 @@ namespace Toggle
                                       "GoodTile|HappyButton|HappyButton|Stepping on this shifts to the good world|Stepping on this shifts to the good world",
                                       "LockTile|HoleTile|HoleTile|Stepping on this locks your ability\nto shift|Stepping on this locks your ability\nto shift",
                                       "UnlockTile|KeyButton|KeyButton|Stepping on this unlocks your ability\nto shift|Stepping on this unlocks your ability\nto shift",
-                                      "Grate|grate|grateRust|Lasers can pass through, but you can't|Lasers can pass through, but you can't"
+                                      "Grate|grate|grateRust|Lasers can pass through, but you can't|Lasers can pass through, but you can't",
+                                      "DiaryPlatform|diaryPlatformG|diaryPlatformB|Place your diary here|Place you diary here"
                                       };
 
 
@@ -111,6 +112,21 @@ namespace Toggle
             return strs;
         }
 
+        public override void checkButtonHovers()
+        {
+            MouseState mouseState = Mouse.GetState();
+            foreach (ScreenButton sb in buttons)
+            {
+                Point cursorLocation = engine.convertCursorLocation(mouseState);
+                if (sb.getClickBox().Contains(cursorLocation))
+                {
+                    sb.onHover();
+                    hoveredButton = sb;
+                    return;
+                }
+            }
+            hoveredButton = null;
+        }
 
     }
 }

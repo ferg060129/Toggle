@@ -11,13 +11,14 @@ namespace Toggle
         protected int x,y;
         protected Rectangle imageBoundingRectangle;
         protected Rectangle clickBox;
+        protected bool isHovered;
         public ScreenButton()
         {
 
 
         }
 
-        public void onHover()
+        public virtual void onHover()
         {
 
         }
@@ -46,6 +47,11 @@ namespace Toggle
         public Rectangle getClickBox()
         {
             return clickBox;
+        }
+
+        public void setHover(bool b)
+        {
+            isHovered = b;
         }
     }
 }

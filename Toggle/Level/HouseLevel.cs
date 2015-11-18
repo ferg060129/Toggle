@@ -197,6 +197,9 @@ namespace Toggle
 
             Diary gb = new Diary(32 * 33, 32 * 16);
             levelItems.Add(gb);
+
+            Scroll s = new Scroll(32 * 25, 32 * 8, "He's afraid of the light.","Don't let him touch you.");
+            levelItems.Add(s);
         }
 
     }

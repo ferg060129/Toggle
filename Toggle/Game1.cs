@@ -7,13 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime;
+using System.Diagnostics;
 namespace Toggle
 {
 
     public class Game1 : Game
     {
-        
-        //banana world
+
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -84,8 +88,6 @@ namespace Toggle
         private string currentLevelString;
         private float blackScreenAlpha;
         private bool fadeDirection;
-        private Vector2 startButtonPosition;
-        private Vector2 exitButtonPosition;
 
         private Vector2 exitButton2Position;
         private Vector2 restartButtonPosition;
@@ -108,10 +110,12 @@ namespace Toggle
         ArrayList backUpItems;
         bool[] backUpPlatformFilled;
 
+        private StartScreen startScreen;
+        private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
-
-        private PauseScreen pauseScreen;
+        
+        
 
 
 
@@ -136,8 +140,6 @@ namespace Toggle
 
         protected override void Initialize()
         {
-            startButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 300);
-            exitButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
             exitButton2Position = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
             restartButtonPosition = new Vector2((GraphicsDevice.Viewport.Width / 2) + 160, 400);
             base.Initialize();
@@ -148,6 +150,8 @@ namespace Toggle
             currentLevelString = "hub";
             lastEnteredLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
             showInventory = false;
+            AllowAccessibilityShortcutKeys(false);
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
         }
 
         protected override void LoadContent()
@@ -199,6 +203,7 @@ namespace Toggle
 
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             player = new Player(13*32, 25*32, inventory, this);
+            startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
             pauseScreen = new PauseScreen(this);
@@ -666,6 +671,9 @@ namespace Toggle
                 }
 
 
+                startScreen.checkButtonHovers();
+                startScreen.checkButtonClicks();
+                /*
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
@@ -686,6 +694,7 @@ namespace Toggle
                         Exit();
                     }
                 }
+                 * */
             }
             if (titleScreenPhase == 1)
             {
@@ -724,8 +733,7 @@ namespace Toggle
             spriteBatch.Draw(screenDisplayed, new Vector2(0,0), Color.White);
             if (titleScreenPhase == 0)
             {
-                spriteBatch.Draw(Textures.textures["start"], startButtonPosition, Color.White);
-                spriteBatch.Draw(Textures.textures["exit"], exitButtonPosition, Color.White);
+                startScreen.drawScreen(spriteBatch);
             }
            
             spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 16, 16), Color.White);
@@ -1483,8 +1491,18 @@ namespace Toggle
         {
             //write into file
 
-            StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
-            //StreamWriter saveFile = new StreamWriter(@System.IO.Directory.GetCurrentDirectory() + "/Map Files/bananas.txt");
+            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
+            StreamWriter saveFile = new StreamWriter("bananas.txt");
+           // string dir = System.IO.Path.GetDirectoryName(
+//System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            //string file = dir + @"/bananas.txt";
+
+            //FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
+
+
+
+            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
             
             //Remove specified items from particular levels
             foreach(Level l in levels)
@@ -1589,15 +1607,18 @@ namespace Toggle
 
             saveFile.WriteLine(level.getPlayerStart().X);
             saveFile.WriteLine(level.getPlayerStart().Y);
-            foreach(Platform p in platforms)
+            if (levels.Equals("hubLevel"))
             {
-                if(((Platform)p).isItemOnPlatform())
+                foreach (Platform p in platforms)
                 {
-                    saveFile.WriteLine("T");
-                }
-                else
-                {
-                    saveFile.WriteLine("F");
+                    if (((Platform)p).isItemOnPlatform())
+                    {
+                        saveFile.WriteLine("T");
+                    }
+                    else
+                    {
+                        saveFile.WriteLine("F");
+                    }
                 }
             }
             
@@ -1611,9 +1632,15 @@ namespace Toggle
         {
             string line;
 
-            StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
-            //StreamReader saveFile = new StreamReader(@System.IO.Directory.GetCurrentDirectory() + "/Map Files/bananas.txt");
+            //StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
+            //StreamReader saveFile = new StreamReader(@System.IO.Directory.GetCurrentDirectory() + "/bananas.txt");
+            //string dir = System.IO.Path.GetDirectoryName(
+//System.Reflection.Assembly.GetExecutingAssembly().Location);
 
+            //string file = dir + @"/bananas.txt";
+           // StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
+            StreamReader saveFile = new StreamReader("bananas.txt");
+            
             foreach (Level l in levels)
             {
                 line = saveFile.ReadLine();
@@ -1682,14 +1709,18 @@ namespace Toggle
             line = saveFile.ReadLine();
             playerY = Int32.Parse(line);
 
-            foreach(Platform p in platforms)
+            if(levels.Equals("hubLevel"))
             {
-                line = saveFile.ReadLine();
-                if(line.Equals("T"))
+                foreach(Platform p in platforms)
                 {
-                    ((Platform)p).setItemOnPlatform(true);
+                    line = saveFile.ReadLine();
+                    if(line.Equals("T"))
+                    {
+                        ((Platform)p).setItemOnPlatform(true);
+                    }
                 }
             }
+            
 
             //InventoryItem[,] inventoryItems = inventory.getItems();
             LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", lvl, new Point(playerX, playerY));
@@ -1713,13 +1744,93 @@ namespace Toggle
                 }
             }
         }
-        /*
-        inventory.setInventoryItems(backUpInventory);
-            currentLevel.setLevelItems(backUpItems);
-            setLevel(lastEnteredLevelTile);
-         gamestate play
-         * setplayer location
-         */
+ 
+        public void buttonCommand(string command)
+        {
+            if(command.Equals("play"))
+            {
+                setState("play");
+            }
+            if(command.Equals("continue"))
+            {
+                //Do a try catch block to return to start screen if it fails
+                continueGame();
+            }
+            if(command.Equals("exit"))
+            {
+                Exit();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        //--------------------------------------STICKY KEYS BLOCK--------------------------------------------
+        //Sticky keys disabling code. Credit goes to user x4000 at http://stackoverflow.com/questions/734618/disabling-accessibility-shortcuts-in-net-application
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo", SetLastError = false)]
+        private static extern bool SystemParametersInfo(uint action, uint param,
+            ref SKEY vparam, uint init);
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo", SetLastError = false)]
+        private static extern bool SystemParametersInfo(uint action, uint param,
+            ref FILTERKEY vparam, uint init);
+        private const uint SPI_GETSTICKYKEYS = 0x003A;
+        private const uint SPI_SETSTICKYKEYS = 0x003B;
+        private static bool StartupAccessibilitySet = false;
+        private static SKEY StartupStickyKeys;
+        private const uint SKF_STICKYKEYSON = 0x00000001;
+        private const uint SKF_CONFIRMHOTKEY = 0x00000008;
+        private const uint SKF_HOTKEYACTIVE = 0x00000004;
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct SKEY
+        {
+            public uint cbSize;
+            public uint dwFlags;
+        }
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+        public struct FILTERKEY
+        {
+            public uint cbSize;
+            public uint dwFlags;
+            public uint iWaitMSec;
+            public uint iDelayMSec;
+            public uint iRepeatMSec;
+            public uint iBounceMSec;
+        }
+        private static uint SKEYSize = sizeof(uint) * 2;
+        public static void AllowAccessibilityShortcutKeys(bool bAllowKeys)
+        {
+            if (!StartupAccessibilitySet)
+            {
+                StartupStickyKeys.cbSize = SKEYSize;
+                SystemParametersInfo(SPI_GETSTICKYKEYS, SKEYSize, ref StartupStickyKeys, 0);
+                StartupAccessibilitySet = true;
+            }
+            if (bAllowKeys)
+            {
+                SystemParametersInfo(SPI_SETSTICKYKEYS, SKEYSize, ref StartupStickyKeys, 0);
+            }
+            else
+            {
+                SKEY skOff = StartupStickyKeys;
+                if ((skOff.dwFlags & SKF_STICKYKEYSON) == 0)
+                {
+                    skOff.dwFlags &= ~SKF_HOTKEYACTIVE;
+                    skOff.dwFlags &= ~SKF_CONFIRMHOTKEY;
+                    SystemParametersInfo(SPI_SETSTICKYKEYS, SKEYSize, ref skOff, 0);
+                }
+            }
+        }
+        static void OnProcessExit(object sender, EventArgs e)
+        {
+            AllowAccessibilityShortcutKeys(true);
+        }
+        //--------------------------------------END STICKY KEYS BLOCK--------------------------------------------
 
 
     }

@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>20</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -145,11 +145,12 @@
     <Compile Include="ScreenButtons\MenuButton.cs" />
     <Compile Include="ScreenButtons\ObjectButton.cs" />
     <Compile Include="ScreenButtons\ScreenButton.cs" />
+    <Compile Include="ScreenButtons\StartScreenButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
-    <Compile Include="StartScreen.cs" />
+    <Compile Include="Screens\StartScreen.cs" />
     <Compile Include="Textures.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +175,9 @@
     </Content>
     <Content Include="Content\berry.png" />
     <Content Include="Content\blocks.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\continueHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\cursor.png">
@@ -233,6 +237,9 @@
     <Content Include="Content\diaryBad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\exitHover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\GoopFrame1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -289,6 +296,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\school.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\continue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\startHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tile\AngryButton.png">
@@ -425,6 +438,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\bananas.txt" />
     <Content Include="Map Files\maze.txt" />
     <Content Include="Map Files\hub.txt" />
     <Content Include="Map Files\practice.txt" />

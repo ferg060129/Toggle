@@ -335,7 +335,11 @@ namespace Toggle
 
         public void setInventoryItem(InventoryItem ii, int x, int y)
         {
-            if (ii == null) return;
+            if (ii == null)
+            {
+                items[x, y] = null;
+                return;
+            }
             ii.setX(itemRectangles[x, y].X);
             ii.setY(itemRectangles[x, y].Y);
             items[x, y] = ii;

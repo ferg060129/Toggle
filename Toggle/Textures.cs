@@ -12,7 +12,8 @@ namespace Toggle
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
         public static string[] graphicNames = { "protagsheet", "itemblock", "baditemblock", "inventory2", "sprites",
-                                               "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor","battery","berry","berryRot", "start","exit","buttonUp","buttonDown","OpenGate","ClosedGate",
+                                               "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor","battery","berry","berryRot", "start","startHover","continue","continueHover","exit","exitHover",
+                                               "buttonUp","buttonDown","OpenGate","ClosedGate",
                                                "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen3","lostScreen","blackScreen","controls1","controls2","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser","laserB",
