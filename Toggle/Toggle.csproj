@@ -81,8 +81,10 @@
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
+    <Compile Include="Object\Inventory Item\DiaryI.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
     <Compile Include="Object\Inventory Item\RopeI.cs" />
+    <Compile Include="Object\Item\Diary.cs" />
     <Compile Include="Object\Item\Knife.cs" />
     <Compile Include="Object\Item\Rope.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
@@ -210,6 +212,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\barbedHor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\diary.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\diaryBad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GoopFrame1.png">

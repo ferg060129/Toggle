@@ -286,6 +286,10 @@ namespace Toggle
                         if(items[x,y]!= null && !containsItem(inv,items[x,y]))
                         {
                             //Remove batteries from lamp if necessary
+                            if(items[x,y] is LampI)
+                            {
+                                ((LampI)items[x, y]).setBatteries(false);
+                            }
 
                             setSelectedItem(items[x,y], false);
                             //engine.addItemToCurrentLevel(items[x,y].getItem());

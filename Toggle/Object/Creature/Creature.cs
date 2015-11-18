@@ -373,8 +373,8 @@ namespace Toggle
 
         }
 
-
-        bool tileIsOccupied(int tx, int ty)
+        //Boogieman has a slight modification of this function. Change both if change either
+        public virtual bool tileIsOccupied(int tx, int ty)
         {
             Rectangle r = new Rectangle(tx*32,ty*32,32,32);
 

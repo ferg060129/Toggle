@@ -17,7 +17,7 @@ namespace Toggle
         {
             goodGraphic = Textures.textures["sprites"];
             badGraphic = Textures.textures["sprites"];
-            row = 3;
+            row = 1;
 
            // imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
 
@@ -32,8 +32,8 @@ namespace Toggle
 
         public override void goodMove()
         {
-            if (row == 6) row = 3;
-
+            if (row == 0) row = 1;
+            /*
             if (x % 32 == 0 && y % 32 == 0)
                 direction = getNextPathDirection((int)x / 32, (int)y / 32, defendTileGoodX, defendTileGoodY);
 
@@ -55,12 +55,13 @@ namespace Toggle
                 default:
                     moving = false;
                     break;
-            }
+            }*/
+            moving = false;
         }
 
         public override void badMove()
         {
-            if (row == 3) row = 6;
+            if (row == 1) row = 0;
 
             if (x % 32 == 0 && y % 32 == 0)
             {
@@ -84,6 +85,10 @@ namespace Toggle
                     {
                         direction = temp;
                     }
+                }
+                else
+                {
+                    direction = -1;
                 }
                 
             }
@@ -131,7 +136,7 @@ namespace Toggle
             int py = getPlayer().getY()/32;
             
             //Player is in bounds, so is in room
-            if(px > boundTopLeft.X && px < boundBottomRight.X && py > boundTopLeft.Y && py < boundBottomRight.Y)
+            if(px >= boundTopLeft.X && px <= boundBottomRight.X && py >= boundTopLeft.Y && py <= boundBottomRight.Y)
             {
                 return true;
             }
@@ -146,6 +151,9 @@ namespace Toggle
             Queue<TileNode> q = new Queue<TileNode>();
 
             TileNode start = new TileNode(currentTileX, currentTileY);
+
+            Player p = getPlayer();
+            bool playerIsObstacle =  Game1.darkTileArray[ p.getY() / 32, p.getX() / 32] != 0;
             //TileNode end = new TileNode(desiredTileX, desiredTileY);
 
             if (Game1.darkTileArray[currentTileY, currentTileX] == 0)
@@ -164,25 +172,25 @@ namespace Toggle
                 TileNode next = q.Dequeue();
                 if (Game1.darkTileArray[next.Y, next.X] != 0)
                 {
-                    if (next.X + 1 < xTiles && !visited[next.Y, next.X + 1] && !Game1.wallArray[next.Y, next.X + 1])
+                    if (next.X + 1 < xTiles && !visited[next.Y, next.X + 1] && !Game1.wallArray[next.Y, next.X + 1] && !tileIsOccupied(next.X + 1, next.Y, playerIsObstacle))
                     {
                         TileNode temp = new TileNode(next.X + 1, next.Y, next);
                         visited[next.Y, next.X + 1] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.X - 1 >= 0 && !visited[next.Y, next.X - 1] && !Game1.wallArray[next.Y, next.X - 1])
+                    if (next.X - 1 >= 0 && !visited[next.Y, next.X - 1] && !Game1.wallArray[next.Y, next.X - 1] && !tileIsOccupied(next.X - 1, next.Y, playerIsObstacle))
                     {
                         TileNode temp = new TileNode(next.X - 1, next.Y, next);
                         visited[next.Y, next.X - 1] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.Y + 1 < yTiles && !visited[next.Y + 1, next.X] && !Game1.wallArray[next.Y + 1, next.X])
+                    if (next.Y + 1 < yTiles && !visited[next.Y + 1, next.X] && !Game1.wallArray[next.Y + 1, next.X] && !tileIsOccupied(next.X, next.Y + 1, playerIsObstacle))
                     {
                         TileNode temp = new TileNode(next.X, next.Y + 1, next);
                         visited[next.Y + 1, next.X] = true;
                         q.Enqueue(temp);
                     }
-                    if (next.Y - 1 >= 0 && !visited[next.Y - 1, next.X] && !Game1.wallArray[next.Y - 1, next.X])
+                    if (next.Y - 1 >= 0 && !visited[next.Y - 1, next.X] && !Game1.wallArray[next.Y - 1, next.X] && !tileIsOccupied(next.X, next.Y - 1, playerIsObstacle))
                     {
                         TileNode temp = new TileNode(next.X, next.Y - 1, next);
                         visited[next.Y - 1, next.X] = true;
@@ -247,7 +255,33 @@ namespace Toggle
             
         }
 
+        //Slight modification of creature function. Change both if change either
+        public bool tileIsOccupied(int tx, int ty, bool playerIsObstacle)
+        {
+            Rectangle r = new Rectangle(tx * 32, ty * 32, 32, 32);
 
+            foreach (Creature c in Game1.creatures)
+            {
+                if (c.getHitBox().Intersects(r) && (!(c is Player) || playerIsObstacle))
+                {
+                    return true;
+                }
+
+            }
+            foreach (Miscellanious m in Game1.miscObjects)
+            {
+                if (m.getHitBox().Intersects(r))
+                {
+                    if (m is Pushable && m.getState())
+                    {
+                        continue;
+                    }
+                    return true;
+                }
+            }
+            return false;
+
+        }
 
 
     }

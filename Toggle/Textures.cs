@@ -18,7 +18,8 @@ namespace Toggle
                                                 "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser","laserB",
                                               "water","water2","water3","water4", "boat", "whiteScreen","ghost","unghost","chalkboard2","chalkboard3", "chalkboardtop", "ItemBox", "boxInside",
                                               "desk","deskBad","door","doorDark","knife","knifePlatform","lanternPlatform","knifePlatformComplete","lanternPlatformComplete", "rope","chain",
-                                              "aboutScreen2", "questionBox","fence", "barbedBottomLeft","barbedHor","barbedVertical1","blocks","goodBlob","badBlob","title","help"};
+                                              "aboutScreen2", "questionBox","fence", "barbedBottomLeft","barbedHor","barbedVertical1","blocks","goodBlob","badBlob","title","help",
+                                              "diary","diaryBad"};
         public static string[] tileNames = {"grass5","grass6","grass7","grass8","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",

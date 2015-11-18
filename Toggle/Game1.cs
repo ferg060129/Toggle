@@ -905,7 +905,7 @@ namespace Toggle
             drawDarkTiles(spriteBatch);
 
             //Debug, draw player coords
-            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
@@ -1623,6 +1623,9 @@ namespace Toggle
                             break;
                         case "KnifeI":
                             inventory.setInventoryItem(new KnifeI(), xLocation, yLocation);
+                            break;
+                        case "DiaryI":
+                            inventory.setInventoryItem(new DiaryI(), xLocation, yLocation);
                             break;
                         case "LampI":
                             LampI lamp = new LampI();
