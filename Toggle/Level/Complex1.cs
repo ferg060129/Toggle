@@ -19,7 +19,7 @@ namespace Toggle
         {
             Gate myGate = new Gate(12 * 32, 9 * 32);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(12 * 32, 12 * 32, myGate);
+            Button myButton = new ButtonPlayer(12 * 32, 12 * 32, myGate);
             Game1.miscObjects.Add(myButton);
             Strawberry sb = new Strawberry(15 * 32, 8 * 32);
             Game1.miscObjects.Add(sb);

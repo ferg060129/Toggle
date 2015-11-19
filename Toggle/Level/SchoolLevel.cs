@@ -32,15 +32,13 @@ namespace Toggle
             }
             //laser puzzle objects
             Gate laserGate = new Gate(55 * 32, 5 * 32);
-            Button bt = new Button(50 * 32, 5 * 32, laserGate);
-            bt.setHeavyButton(true);
+            Button bt = new ButtonHeavy(50 * 32, 5 * 32, laserGate);
             Game1.miscObjects.Add(bt);
             Game1.miscObjects.Add(laserGate);
 
 
             Gate gate4 = new Gate(40 * 32, 23 * 32);
-            Button bt2 = new Button(52 * 32, 16 * 32, gate4);
-            bt2.setHeavyButton(true);
+            Button bt2 = new ButtonHeavy(52 * 32, 16 * 32, gate4);
             Game1.miscObjects.Add(bt2);
             Game1.miscObjects.Add(gate4);
 
@@ -72,13 +70,12 @@ namespace Toggle
 
             Gate gate2 = new Gate(2 * 32, 17 * 32);
             Game1.miscObjects.Add(gate2);
-            Button myButton = new Button(32 * 2, 32 * 16, gate2);
-            myButton.setHeavyButton(true);
+            Button myButton = new ButtonHeavy(32 * 2, 32 * 16, gate2);
             Game1.miscObjects.Add(myButton);
 
             Gate gate3 = new Gate(16 * 32, 22 * 32);
             Game1.miscObjects.Add(gate3);
-            myButton = new Button(32 * 1, 32 * 22, gate3);
+            myButton = new ButtonPlayer(32 * 1, 32 * 22, gate3);
             Game1.miscObjects.Add(myButton);
 
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 18));

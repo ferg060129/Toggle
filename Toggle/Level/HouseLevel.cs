@@ -25,28 +25,25 @@ namespace Toggle
         {
             Gate myGate = new Gate(32 * 5, 32 * 10);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 9, 32 * 8, myGate);
+            Button myButton = new ButtonPlayer(32 * 9, 32 * 8, myGate);
             Game1.miscObjects.Add(myButton);
 
 
             myGate = new Gate(32 * 41, 32 * 13);
             Game1.miscObjects.Add(myGate);
 
-            myButton = new Button(32 * 42, 32 * 7, myGate);
-            myButton.setHeavyButton(true);
+            myButton = new ButtonHeavy(32 * 42, 32 * 7, myGate);
             Game1.miscObjects.Add(myButton);
 
             myGate = new Gate(32 * 33, 32 * 15);
             Game1.miscObjects.Add(myGate);
-            myButton = new Button(32 * 34, 32 * 15, myGate);
-            myButton.setHeavyButton(true);
+            myButton = new ButtonHeavy(32 * 34, 32 * 15, myGate);
             Game1.miscObjects.Add(myButton);
 
 
             myGate = new Gate(32 * 33, 32 * 5);
             Game1.miscObjects.Add(myGate);
-            myButton = new Button(32 * 25, 32 * 1, myGate);
-            myButton.setHeavyButton(true);
+            myButton = new ButtonHeavy(32 * 25, 32 * 1, myGate);
             Game1.miscObjects.Add(myButton);
 
 

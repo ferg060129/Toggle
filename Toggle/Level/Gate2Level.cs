@@ -21,13 +21,11 @@ namespace Toggle
             //gates and buttons
             Gate myGate = new Gate(10 * 32, 7 * 32);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(12 * 32, 12 * 32, myGate);
-            myButton.setHeavyButton(true);
+            Button myButton = new ButtonHeavy(12 * 32, 12 * 32, myGate);
             Game1.miscObjects.Add(myButton);
             myGate = new Gate(13 * 32, 7 * 32);
             Game1.miscObjects.Add(myGate);
-            myButton = new Button(12 * 32, 12 * 32, myGate);
-            myButton.setHeavyButton(true);
+            myButton = new ButtonHeavy(12 * 32, 12 * 32, myGate);
             Game1.miscObjects.Add(myButton);
             //blocks
             VineMoveBlock vb = new VineMoveBlock(7 * 32, 4 * 32);

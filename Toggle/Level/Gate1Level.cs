@@ -20,7 +20,7 @@ namespace Toggle
         {
             Gate myGate = new Gate(32 * 2, 32 * 6);
             Game1.miscObjects.Add(myGate);
-            Button myButton = new Button(32 * 14, 32 * 13, myGate);
+            Button myButton = new ButtonPlayer(32 * 14, 32 * 13, myGate);
             Game1.miscObjects.Add(myButton);
             FlowerTentacles ft = new FlowerTentacles(7 * 32, 4 * 32);
             ft.setDefendTileGood(7, 4);

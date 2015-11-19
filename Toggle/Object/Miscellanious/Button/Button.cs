@@ -8,16 +8,13 @@ namespace Toggle
     class Button : Miscellanious
     {
         //heavy buttons are only pressable by pushable objects
-        bool heavyButton;
+        protected bool heavyButton;
         //When you press the button, link does something
-        Miscellanious link;
+        protected Miscellanious link;
          public Button(int xLocation, int yLocation, Miscellanious linked)
             : base(xLocation, yLocation)
         {
-            goodGraphic = Textures.textures["buttonUp"];
-            badGraphic = Textures.textures["buttonUp"];
-            link = linked;
-            heavyButton = false;
+
         }
     
         public override void onTrigger()
@@ -38,6 +35,8 @@ namespace Toggle
         {
             return heavyButton;
         }
+
+
         public void setHeavyButton(bool status)
         {
             heavyButton = status;

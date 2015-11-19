@@ -20,9 +20,8 @@ namespace Toggle
         {
             Gate gate1 = new Gate(4 * 32, 5 * 32);
             Gate gate2 = new Gate(4 * 32, 6 * 32);
-            Button btn1 = new Button(10 * 32, 8 * 32, gate2);
-            Button btn2 = new Button(4 * 32, 7 * 32, gate1);
-            btn2.setHeavyButton(true);
+            Button btn1 = new ButtonPlayer(10 * 32, 8 * 32, gate2);
+            Button btn2 = new ButtonHeavy(4 * 32, 7 * 32, gate1);
             Game1.miscObjects.Add(btn1);
             Game1.miscObjects.Add(btn2);
             Game1.miscObjects.Add(gate1);

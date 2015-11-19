@@ -17,7 +17,8 @@ namespace Toggle
         Vector2 descriptionLoc = new Vector2(525, 224);
         Dictionary<string, ScreenButton> stringToButton = new Dictionary<string, ScreenButton>();
 
-        private string[] buttonInfo = {"Button|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
+        private string[] buttonInfo = {"ButtonPlayer|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
+                                      "ButtonHeavy|buttonHUp|buttonHUp|You'll need to push a heavier object \nonto this|You'll need to push a heavier object \nonto this",
                                       "Desk|desk|deskBad|This is a desk|whoooo hooo",
                                       "Ghost|ghost|unghost|cute|spooky",
                                       "VineMoveBlock|BoxLight|BoxDark|This is a pushable object\nNote, enemies can push these too|This object is not pushable",
