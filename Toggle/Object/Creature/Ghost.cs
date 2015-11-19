@@ -71,7 +71,7 @@ namespace Toggle
         public override void goodMove()
         {
             velocity = 1;
-            if (x % 32 == 0 && y % 32 == 0)
+            if ((x % 32 == 0 && y % 32 == 0) && Function.distanceTo(this,getPlayer()) > 96)
             {
                 defendTileGoodX = (int)(getPlayer().getCenter().X / 32);
                 defendTileGoodY = (int)(getPlayer().getCenter().Y / 32);
