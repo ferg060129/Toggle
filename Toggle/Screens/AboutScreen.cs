@@ -69,6 +69,7 @@ namespace Toggle
             if(hoveredButton != null)
             { 
                 sb.Draw(hoveredButton.getGraphic(), drawHoveredLoc, hoveredButton.getImageBoundingRectangle(), Color.White);
+                sb.Draw(Textures.textures["glow32"], new Vector2(hoveredButton.getLocation().X - 3, hoveredButton.getLocation().Y - 3), new Rectangle(0, 0, 38, 38), Color.White);;
                 sb.DrawString(Textures.fonts["arial12"], ((ObjectButton)hoveredButton).getDescription(), descriptionLoc, Color.Black);
             }
 
