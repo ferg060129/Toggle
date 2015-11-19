@@ -83,7 +83,6 @@ namespace Toggle
 
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 18));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 19));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 13, 32 * 12));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 3));
             
 

@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>28</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -438,15 +438,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
-    <Content Include="Map Files\bananas.txt" />
+    <Content Include="Map Files\cir.txt" />
+    <Content Include="Map Files\complex1.txt" />
+    <Content Include="Map Files\gate1level.txt" />
+    <Content Include="Map Files\gate2level.txt" />
+    <Content Include="Map Files\gatelevel.txt" />
+    <Content Include="Map Files\laserIntro.txt" />
     <Content Include="Map Files\maze.txt" />
     <Content Include="Map Files\hub.txt" />
+    <Content Include="Map Files\out.txt" />
     <Content Include="Map Files\practice.txt" />
     <Content Include="Map Files\laser.txt" />
     <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
     <Content Include="Map Files\map.txt" />
     <Content Include="Map Files\school.txt" />
+    <Content Include="Map Files\testingLevel.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">

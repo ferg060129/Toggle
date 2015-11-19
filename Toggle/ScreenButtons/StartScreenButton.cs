@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 namespace Toggle
 {
     class StartScreenButton : ScreenButton
@@ -12,6 +12,7 @@ namespace Toggle
         private Texture2D graphic;
         private Texture2D graphicHover;
         private string action;
+        private SoundEffectInstance beep;
         public StartScreenButton(int xLoc, int yLoc, string gra1, string gra2, string actionin)
         {
             graphic = Textures.textures[gra1];
@@ -21,6 +22,7 @@ namespace Toggle
             action = actionin;
             imageBoundingRectangle = new Rectangle(0, 0, graphic.Width, graphic.Height);
             clickBox = new Rectangle(x, y, graphic.Width, graphic.Height);
+            beep = Textures.sounds["beep"];
         }
 
         public override Texture2D getGraphic()
@@ -39,8 +41,11 @@ namespace Toggle
 
         public override void onHover()
         {
-            setHover(true);
-            //play sound?
+            if(!isHovered)
+            {
+                setHover(true);
+                beep.Play();
+            }
         }
 
 

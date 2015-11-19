@@ -67,14 +67,9 @@ namespace Toggle
             int yposition = 0;
 
             //This directory navigation might have to change for the final product, or even sooner
-            string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
-            //Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
-            //string dir = System.IO.Path.GetDirectoryName(
-//System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-            //string file = dir + @"/Map Files/";
+            string[] lines = System.IO.File.ReadAllLines(@"../../../Map Files/" + filename);
             //string[] lines = System.IO.File.ReadAllLines(@System.IO.Directory.GetCurrentDirectory() + "/Map Files/" + filename);
-            //string[] lines = System.IO.File.ReadAllLines(file + filename);
             
             
 

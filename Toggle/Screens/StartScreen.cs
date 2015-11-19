@@ -13,12 +13,13 @@ namespace Toggle
         StartScreenButton start;
         StartScreenButton continueB;
         StartScreenButton exit;
-
+        private SoundEffectInstance beep;
         public StartScreen(Game1 eng) : base(eng)
         {
-            buttons.Add(start = new StartScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start","startHover","play"));
+            buttons.Add(start = new StartScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start", "startHover", "play"));
             buttons.Add(continueB = new StartScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 350, "continue", "continueHover", "continue"));
             buttons.Add(exit = new StartScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 400, "exit", "exitHover", "exit"));
+           
         }
 
 

@@ -103,6 +103,7 @@ namespace Toggle
         private SoundEffectInstance banditKing;
         private SoundEffectInstance zone1good;
         private SoundEffectInstance zone1bad;
+        private SoundEffectInstance beep;
 
         bool draw = true;
 
@@ -184,6 +185,11 @@ namespace Toggle
                 Textures.fonts.Add(Textures.spritefonts[x], Content.Load<SpriteFont>(Textures.spritefonts[x]));
             }
 
+            for (int x = 0; x < Textures.soundsNames.Length; x++)
+            {
+                Textures.sounds.Add(Textures.soundsNames[x], Content.Load<SoundEffect>(Textures.soundsNames[x]).CreateInstance());
+            }
+
             levels.Add(hubLevel = new HubLevel());
             levels.Add(houseLevel = new HouseLevel());
             levels.Add(schoolLevel = new SchoolLevel());
@@ -200,7 +206,7 @@ namespace Toggle
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
-
+            //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             player = new Player(13*32, 25*32, inventory, this);
             startScreen = new StartScreen(this);
@@ -221,6 +227,7 @@ namespace Toggle
 
             zone1good = Content.Load<SoundEffect>("zone1good").CreateInstance();
             zone1bad = Content.Load<SoundEffect>("zone1bad").CreateInstance();
+          
 
             //banditKing.Pitch = -1;
 
@@ -665,12 +672,6 @@ namespace Toggle
                 mouseX = p.X;
                 mouseY = p.Y;
 
-                if (newKeyBoardState.IsKeyDown(Keys.C) && oldKeyBoardState.IsKeyUp(Keys.C))
-                {
-                    continueGame();
-                }
-
-
                 startScreen.checkButtonHovers();
                 startScreen.checkButtonClicks();
                 /*
@@ -926,7 +927,7 @@ namespace Toggle
             drawDarkTiles(spriteBatch);
 
             //Debug, draw player coords
-            spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
+            //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
             //spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
@@ -1749,7 +1750,8 @@ namespace Toggle
         {
             if(command.Equals("play"))
             {
-                setState("play");
+                titleScreenPhase = 1;
+                screenDisplayed = Textures.textures["controls1"];
             }
             if(command.Equals("continue"))
             {

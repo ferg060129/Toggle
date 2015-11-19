@@ -5,12 +5,14 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 namespace Toggle
 {
     static class Textures
     {
         public static Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
         public static Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
+        public static Dictionary<string, SoundEffectInstance> sounds = new Dictionary<string, SoundEffectInstance>();
         public static string[] graphicNames = { "protagsheet", "itemblock", "baditemblock", "inventory2", "sprites",
                                                "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor","battery","berry","berryRot", "start","startHover","continue","continueHover","exit","exitHover",
                                                "buttonUp","buttonDown","OpenGate","ClosedGate",
@@ -26,6 +28,7 @@ namespace Toggle
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust"};
         public static string[] spritefonts = { "mistral16", "arial12" };
+        public static string[] soundsNames = { "beep" };
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {

@@ -644,3 +644,9 @@
 /processorParam:TextureFormat=Color
 /build:title.png
 
+#begin beep.wma
+/importer:WmaImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:beep.wma
+
