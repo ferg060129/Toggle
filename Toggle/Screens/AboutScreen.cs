@@ -53,12 +53,6 @@ namespace Toggle
                     yCtr += 64;
                 }
             }
-
-
-
-            
-            
-            
         }
 
         public override void drawScreen(SpriteBatch sb)

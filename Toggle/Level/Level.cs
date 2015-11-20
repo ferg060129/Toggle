@@ -36,6 +36,7 @@ namespace Toggle
         public void loadLevel()
         {
             makeMapFromFile(map);
+            //calcLevelTileGraphics();
             loadLevelObjects();
             loadItemsToGameArray();
             addDarkTiles();
@@ -150,6 +151,68 @@ namespace Toggle
                 }
                 xposition = 0;
                 yposition += 32;
+            }
+        }
+
+        public void calcLevelTileGraphics()
+        {
+            
+            int horiWallCount = 0;
+            int vertWallCount = 0;
+            foreach (Tile w in Game1.solidTiles)
+            {
+                //help
+                if ((w.getX() >= 32 && w.getY() >= 32) && (w.getX() <= ((Game1.wallArray.GetLength(1) * 32) - 64)) && (w.getY() <= ((Game1.wallArray.GetLength(0) * 32) - 64)))
+                {
+                    Console.Out.Write("HELP");
+                    w.setGraphic("WoodenWall");
+                    w.setImageRectangle(new Rectangle(0, 0, 0, 0));
+                    int y = (w.getY() / 32);
+                    int x = (w.getX() / 32);
+                    if (Game1.wallArray[y + 1, x] == true)
+                        vertWallCount++;
+                    if (Game1.wallArray[y - 1, x] == true)
+                        vertWallCount++;
+                    if (Game1.wallArray[y, x + 1] == true)
+                        horiWallCount++;
+                    if (Game1.wallArray[y, x - 1] == true)
+                        horiWallCount++;
+                    Console.Out.Write(horiWallCount);
+                    if (vertWallCount >= 1)
+                    {
+                        w.setGraphic("woodenWallL");
+                        if (Game1.wallArray[y, x + 1] == true)
+                        {
+                            w.setImageRectangle(new Rectangle(32, 0, 32, 32));
+                            w.setGraphic("woodenWallL");
+                        }
+                        else if (Game1.wallArray[y, x - 1] == true)
+                        {
+                            w.setImageRectangle(new Rectangle(96, 0, 32, 32));
+                            w.setGraphic("woodenWallR");
+                        }
+                    }
+                    if (horiWallCount == 2)
+                    {
+                        w.setGraphic("woodenWallD");
+                        if (Game1.wallArray[y + 1, x] == true)
+                        {
+                            w.setImageRectangle(new Rectangle(0, 0, 32, 32));
+                            w.setGraphic("woodenWallU");
+                        }
+                        else if (Game1.wallArray[y - 1, x] == true)
+                        {
+                            w.setImageRectangle(new Rectangle(64, 0, 32, 32));
+                            w.setGraphic("woodenWallD");
+                        }
+                    }
+                    if ((vertWallCount == 2) && (horiWallCount == 2))
+                    {
+                        w.setGraphic("blackBlock");
+                    }
+                    vertWallCount = 0;
+                    horiWallCount = 0;
+                }
             }
         }
 

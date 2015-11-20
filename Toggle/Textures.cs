@@ -26,7 +26,7 @@ namespace Toggle
         public static string[] tileNames = {"grass5","grass6","grass7","grass8","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
-                                           "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust"};
+                                           "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust","WoodenWall","woodenWallR","woodenWallU","woodenWallD","woodenWallL",};
         public static string[] spritefonts = { "mistral16", "arial12" };
         public static string[] soundsNames = { "beep" };
 

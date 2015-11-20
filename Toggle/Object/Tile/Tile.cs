@@ -44,5 +44,15 @@ namespace Toggle
             height = 32;
             //charToCollision(fileCharacter);
         }
+        public void setGraphic(string name)
+        {
+            goodGraphic = Textures.textures[name];
+            badGraphic = Textures.textures[name];
+        }
+
+        public void setImageRectangle(Rectangle rect)
+        {
+            imageBoundingRectangle = rect;
+        }
     }
 }

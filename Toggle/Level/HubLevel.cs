@@ -30,7 +30,7 @@ namespace Toggle
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 25));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 20));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 15));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 34, 32 * 13));
+            //Game1.miscObjects.Add(new VineMoveBlock(32 * 34, 32 * 13));
             //Game1.creatures.Add(new Ghost(32 * 23, 32 * 3, new Point(1, 1), new Point(54, 5)));
             Game1.miscObjects.Add(new AngerBlob(32 * 22, 32 * 20));
 

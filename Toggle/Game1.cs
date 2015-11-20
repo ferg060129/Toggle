@@ -47,8 +47,9 @@ namespace Toggle
 
         public static bool worldState = true;
         public static bool[,] wallArray;
+        public static int[,] wallTileArray;
         public static double[,] darkTileArray;
-
+        
         HubLevel hubLevel;
         HouseLevel houseLevel;
         SchoolLevel schoolLevel;
@@ -256,6 +257,7 @@ namespace Toggle
 
         public void reloadLevel()
         {
+            worldState = true;
             //currentLevel.addInitialLevelItems();
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
@@ -1772,7 +1774,7 @@ namespace Toggle
 
 
 
-
+        
         //--------------------------------------STICKY KEYS BLOCK--------------------------------------------
         //Sticky keys disabling code. Credit goes to user x4000 at http://stackoverflow.com/questions/734618/disabling-accessibility-shortcuts-in-net-application
         [DllImport("user32.dll", EntryPoint = "SystemParametersInfo", SetLastError = false)]
