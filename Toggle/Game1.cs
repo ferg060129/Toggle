@@ -49,7 +49,8 @@ namespace Toggle
         public static bool[,] wallArray;
         public static int[,] wallTileArray;
         public static double[,] darkTileArray;
-        
+
+        TutorialLevel tutorialLevel;
         HubLevel hubLevel;
         HouseLevel houseLevel;
         SchoolLevel schoolLevel;
@@ -191,6 +192,7 @@ namespace Toggle
                 Textures.sounds.Add(Textures.soundsNames[x], Content.Load<SoundEffect>(Textures.soundsNames[x]).CreateInstance());
             }
 
+            levels.Add(tutorialLevel = new TutorialLevel());
             levels.Add(hubLevel = new HubLevel());
             levels.Add(houseLevel = new HouseLevel());
             levels.Add(schoolLevel = new SchoolLevel());
@@ -252,6 +254,7 @@ namespace Toggle
             backUpInventory = inventory.getItemsCopy();
             backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
             backUpPlatformFilled = new bool[2];
+            if(currentLevel.Equals(hubLevel))
             loadBackupPlatforms();
         }
 
@@ -434,6 +437,8 @@ namespace Toggle
             
             switch (gameState)
             {
+                case "tutorial":
+                    break;
                 case "start":
                 case "help":
                     startDraw();

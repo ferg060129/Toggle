@@ -54,16 +54,6 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>0765F07E9AA7016169A2407C8FA7A55A29249B3C</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Toggle_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera.cs" />
@@ -81,6 +71,7 @@
     <Compile Include="Level\HubLevel.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
+    <Compile Include="Level\TutorialLevel.cs" />
     <Compile Include="Object\Inventory Item\DiaryI.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
     <Compile Include="Object\Inventory Item\RopeI.cs" />
@@ -413,6 +404,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\titleScreen2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\treespritesheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UnlitLantern.png">
