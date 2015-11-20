@@ -252,6 +252,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image1.png" />
+    <Content Include="Content\screen_pics\fallasleep.png" />
+    <Content Include="Content\screen_pics\hourglass.png" />
+    <Content Include="Content\screen_pics\inventorytutorial.png" />
     <Content Include="Content\ItemBox.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -294,6 +297,7 @@
     <Content Include="Content\continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\screen_pics\inventorybutton.png" />
     <Content Include="Content\startHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
