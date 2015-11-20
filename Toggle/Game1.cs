@@ -49,6 +49,7 @@ namespace Toggle
         public static bool[,] wallArray;
         public static double[,] darkTileArray;
 
+        TutorialLevel tutorialLevel;
         HubLevel hubLevel;
         HouseLevel houseLevel;
         SchoolLevel schoolLevel;
@@ -190,6 +191,7 @@ namespace Toggle
                 Textures.sounds.Add(Textures.soundsNames[x], Content.Load<SoundEffect>(Textures.soundsNames[x]).CreateInstance());
             }
 
+            levels.Add(tutorialLevel = new TutorialLevel());
             levels.Add(hubLevel = new HubLevel());
             levels.Add(houseLevel = new HouseLevel());
             levels.Add(schoolLevel = new SchoolLevel());
@@ -202,13 +204,13 @@ namespace Toggle
             levels.Add(laserIntroLevel = new LaserIntro());
            
             //normal is hubLevel, change only to test
-            currentLevel = hubLevel;
+            currentLevel = tutorialLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
-            //player = new Player(5 * 32, 32 * 5, inventory, this);
-            player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(5 * 32, 32 * 5, inventory, this);
+            //player = new Player(13*32, 25*32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -251,6 +253,7 @@ namespace Toggle
             backUpInventory = inventory.getItemsCopy();
             backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
             backUpPlatformFilled = new bool[2];
+            if(currentLevel.Equals(hubLevel))
             loadBackupPlatforms();
         }
 
@@ -432,6 +435,8 @@ namespace Toggle
             
             switch (gameState)
             {
+                case "tutorial":
+                    break;
                 case "start":
                 case "help":
                     startDraw();
