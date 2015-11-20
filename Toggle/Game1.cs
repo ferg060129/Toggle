@@ -204,13 +204,13 @@ namespace Toggle
             levels.Add(laserIntroLevel = new LaserIntro());
            
             //normal is hubLevel, change only to test
-            currentLevel = tutorialLevel;
+            currentLevel = hubLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
-            player = new Player(5 * 32, 32 * 5, inventory, this);
-            //player = new Player(13*32, 25*32, inventory, this);
+            //player = new Player(5 * 32, 32 * 5, inventory, this);
+            player = new Player(13*32, 25*32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
