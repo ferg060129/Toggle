@@ -406,6 +406,7 @@
     <Content Include="Content\titleScreen2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\treespritesheet.png" />
     <Content Include="Content\UnlitLantern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
