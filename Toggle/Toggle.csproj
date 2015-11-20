@@ -406,7 +406,9 @@
     <Content Include="Content\titleScreen2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\treespritesheet.png" />
+    <Content Include="Content\treespritesheet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\UnlitLantern.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -448,7 +450,6 @@
     <Content Include="Map Files\map.txt" />
     <Content Include="Map Files\school.txt" />
     <Content Include="Map Files\testingLevel.txt" />
-    <Content Include="Map Files\tutorial.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb">
