@@ -263,7 +263,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image1.png" />
+    <Content Include="Content\screen_pics\diaryEntry.png" />
     <Content Include="Content\screen_pics\fallasleep.png" />
+    <Content Include="Content\screen_pics\findsDiary.png" />
     <Content Include="Content\screen_pics\hourglass.png" />
     <Content Include="Content\screen_pics\inventorytutorial.png" />
     <Content Include="Content\ItemBox.png">
