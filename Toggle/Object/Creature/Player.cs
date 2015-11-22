@@ -150,6 +150,7 @@ namespace Toggle
             else if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
+                engine.jitterLock();
                 if (!stateLocked && engine.getShiftCD() == 0 && !standingOnStateTile())
                 {
                     engine.setShiftCD();
@@ -396,11 +397,17 @@ namespace Toggle
             }
             if (o is LockTile)
             {
+                if (stateLocked == false)
+                    Textures.sounds["lock"].Play();
                 stateLocked = true;
+
             }
             if(o is UnlockTile)
             {
+                if (stateLocked == true)
+                    Textures.sounds["unlock"].Play();
                 stateLocked = false;
+                
             }
             if(o is LevelTile)
             {

@@ -716,3 +716,15 @@
 /processorParam:TextureFormat=Color
 /build:Tile/woodenWallU.png
 
+#begin unlock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:unlock.wav
+
+#begin lock.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:lock.wav
+

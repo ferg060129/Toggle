@@ -28,7 +28,7 @@ namespace Toggle
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust","WoodenWall","woodenWallR","woodenWallU","woodenWallD","woodenWallL",};
         public static string[] spritefonts = { "mistral16", "arial12" };
-        public static string[] soundsNames = { "beep" };
+        public static string[] soundsNames = { "beep","unlock","lock"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {

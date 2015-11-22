@@ -80,6 +80,10 @@ namespace Toggle
         int oldMouseX, oldMouseY;
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
+        float shiftLockScale = 1.0f;
+        float shiftLockAlpha = 0.0f;
+        int shiftLockFade = 0;
+        int shiftLockJitterTime = 0;
         float fadeTransparency = 0.0f;
         int creditsOffset = 0;
 
@@ -1139,9 +1143,72 @@ namespace Toggle
             spriteBatch.Draw(Textures.textures["shiftCooldown"], shiftCDLocation, Color.White);
             if(player.isLocked())
             {
-                Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
-                spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+                //Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
+                //spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+                shiftLockFade = 0;
+                drawShiftCDLock(true);
             }
+            else
+            {
+                if (shiftLockFade < 20)
+                {
+                    drawShiftCDLock(false);
+                    shiftLockFade += 2;
+                }
+                else
+                {
+                    shiftLockScale = 5.0f;
+                    shiftLockAlpha = 0.0f;
+                }
+            }
+        }
+
+        public void drawShiftCDLock(bool fadein)
+        {
+            if (fadein)
+            {
+                if (shiftLockAlpha < 1.0)
+                {
+                    shiftLockAlpha += 0.04f;
+                }
+            }
+            else
+            {
+                shiftLockAlpha -= 0.1f;
+            }
+                
+            if (shiftLockScale > 1.0)
+            {
+                shiftLockScale -= 0.5f;
+            }
+            else
+                shiftLockScale = 1.0f;
+            Vector2 shiftCDLocation = new Vector2(getTopLeft().X + 10, getTopLeft().Y + 10);
+            int jitterX = 0;
+            int jitterY = 0;
+            if (shiftLockJitterTime > 0)
+            {
+                shiftLockJitterTime--;
+                jitterX = random.Next(5) - 2;
+                jitterY = random.Next(5) - 2;
+            }
+            Vector2 loc;
+            if(player.isLocked())
+                loc = new Vector2(shiftCDLocation.X + 128 / 2 + jitterX, shiftCDLocation.Y + 8 + jitterY);
+            else
+                loc = new Vector2(shiftCDLocation.X + 128 / 2, shiftCDLocation.Y + 8 + shiftLockFade);
+            //spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+            spriteBatch.Draw(Textures.textures["shiftlocked"],
+                            loc, null,
+                                Color.White * shiftLockAlpha,
+                                0, new Vector2(14, 14), shiftLockScale, SpriteEffects.None, 0);
+
+        }
+
+        //called in player, to jitter on keypress
+        public void jitterLock()
+        {
+            shiftLockJitterTime = 15;
         }
 
         public void winFadeUpdate()
