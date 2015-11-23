@@ -262,8 +262,7 @@ namespace Toggle
             //hub start
             player = new Player(13*32, 25*32, inventory, this);
 
-           // playerGhost = new PlayerGhost(0, 0);
-
+            playerGhost = new PlayerGhost(0, 0);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
