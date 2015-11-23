@@ -20,7 +20,6 @@ namespace Toggle
 
         //Variables to keep track of animation sprite.
         protected int column = 1, columnGroup = 0, increment = 1, row = 0, waitCounter = 0, oldDirection = -1; protected bool moving = true;
-        protected float spriteAlpha = 1.0f;
         protected bool onBoat = false;
 
         public Creature(int xLocation, int yLocation) : base(xLocation, yLocation)
@@ -202,10 +201,6 @@ namespace Toggle
         public int getVelocity()
         {
             return velocity;
-        }
-        public float getAlpha()
-        {
-            return spriteAlpha;
         }
         public Rectangle getPreviousHitBox()
         {

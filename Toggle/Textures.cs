@@ -23,12 +23,12 @@ namespace Toggle
                                               "desk","deskBad","door","doorDark","knife","knifePlatform","lanternPlatform","knifePlatformComplete","lanternPlatformComplete", "rope","chain",
                                               "aboutScreen2", "questionBox","fence", "barbedBottomLeft","barbedHor","barbedVertical1","blocks","goodBlob","badBlob","title","help",
                                               "diary","diaryBad","diaryPlatformB","diaryPlatformG","diaryPlatformCompleteB","diaryPlatformCompleteG","glow32","hiddenArrow","nothing","ghostGate","buttonSUp",
-                                              "torchGood","torchBad","rose","rosePlatform","rosePlatformComplete"};
+                                              "torchGood","torchBad","rose","rosePlatform","rosePlatformComplete","playerGhost"};
         public static string[] tileNames = {"grass5","grass6","grass7","grass8","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust","WoodenWall","woodenWallR","woodenWallU","woodenWallD","woodenWallL",
-                                           "waterTile","waterTile2","waterTile3","waterTile4","waterTileBad","waterTileBad2","waterTileBad3","waterTileBad4",};
+                                           "waterTile","waterTile2","waterTile3","waterTile4","waterTileBad","waterTileBad2","waterTileBad3","waterTileBad4","muddytile1","muddytile2",};
         public static string[] spritefonts = { "mistral16", "arial12" };
         public static string[] soundsNames = { "beep","unlock","lock","hit","pickup","weakhit"};
 
@@ -54,7 +54,9 @@ namespace Toggle
                 {'u', "KeyButtonPressed,KeyButton,"},
                 {'+', "woodfloor,darkwoodfloor,"},
                 {'d', "desk,deskBad,w"},
-                {'w', "waterTile,waterTileBad,w"}
+                {'w', "waterTile,waterTileBad,w"},
+                {'m', "muddytile1,muddytile1, w"},
+                {'n', "muddytile2,muddytile2, w"}
             };
         
 

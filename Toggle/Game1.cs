@@ -30,6 +30,7 @@ namespace Toggle
         public static ArrayList visuals = new ArrayList();
         public static ArrayList boats = new ArrayList();
         public static ArrayList platforms = new ArrayList();
+        public static ArrayList particles = new ArrayList();
 
         public static Random random = new Random();
         
@@ -72,6 +73,7 @@ namespace Toggle
         int screenWidth;
         int screenHeight;
         Player player;
+        PlayerGhost playerGhost;
         //public static List<Game1> game = new List<Game1>();
         Camera cam;
         //Song song;
@@ -214,6 +216,9 @@ namespace Toggle
             levels.Add(marsh1Level = new Marsh1Level());
             levels.Add(marsh2Level = new Marsh2Level());
             levels.Add(marshFinalLevel = new MarshFinalLevel());
+           
+            //normal is hubLevel, change only to test
+            currentLevel = hubLevel;
 
             stringToLevel.Add("hubLevel", hubLevel);
             stringToLevel.Add("houseLevel", houseLevel);
@@ -256,7 +261,9 @@ namespace Toggle
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             //hub start
             player = new Player(13*32, 25*32, inventory, this);
-            //player = new Player(9 * 32, 44 * 32, inventory, this);
+
+           // playerGhost = new PlayerGhost(0, 0);
+
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -306,6 +313,8 @@ namespace Toggle
 
         public void reloadLevel()
         {
+            player.setPropotion(0.5);
+            playerGhost.reset();
             worldState = true;
             //currentLevel.addInitialLevelItems();
             
@@ -927,6 +936,20 @@ namespace Toggle
             {
                 i.move();
             }
+            //update particles and remove dead ones
+            ArrayList particlesToRemove = new ArrayList();
+            foreach (Particle p in particles)
+            {
+                p.update();
+                if (p.getLifetime() <= 0)
+                {
+                    particlesToRemove.Add(p);
+                }
+            }
+            foreach (Particle q in particlesToRemove)
+            {
+                particles.Remove(q);
+            }
             player.moveUpdate();
 
             checkCollisions();
@@ -942,10 +965,23 @@ namespace Toggle
             }
             if (player.isDead())
             {
+                if (!playerGhost.isActive())
+                {
+                    playerGhost.setX(player.getX());
+                    playerGhost.setY(player.getY());
+                    playerGhost.activate();
+                }
+                playerGhost.move();
+                //uncomment these two for standard no-animation death
+                //gameState = "lost";
+                //IsMouseVisible = true;
+            }
+
+            if (playerGhost.getTimeAlive() <= 0)
+            {
                 gameState = "lost";
                 IsMouseVisible = true;
             }
-
 
 
             if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P) && !player.isReadingChalkboard())
@@ -1073,6 +1109,10 @@ namespace Toggle
             {
                 spriteBatch.Draw(v.getGraphic(), new Vector2(v.getX(), v.getY()), v.getImageBoundingRectangle(), Color.White);
             }
+            foreach (Particle p in particles)
+            {
+                spriteBatch.Draw(p.getGraphic(), new Vector2(p.getX(), p.getY()), p.getImageBoundingRectangle(), Color.White * p.getAlpha());
+            }
             
 
            
@@ -1138,6 +1178,9 @@ namespace Toggle
             {
                 spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 16, 16), Color.White);
             }
+            //draw player ghost over most things on death
+            if (playerGhost.isActive())
+                spriteBatch.Draw(playerGhost.getGraphic(), new Vector2(playerGhost.getX(),playerGhost.getY()), new Rectangle(0, 0, 32, 32), Color.White * playerGhost.getAlpha());
 
             //rays of light juice and darkness for dark world/any other effects to draw over everything
             spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
@@ -1203,7 +1246,6 @@ namespace Toggle
             if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
             {
                 reloadLevel();
-                player.setPropotion(0.5);
                 gameState = "play";
             }
             MouseState m = Mouse.GetState();
@@ -1433,9 +1475,17 @@ namespace Toggle
 
         public void drawHealthBar()
         {
+            int rectHeight;
+            Color rectColor = Color.White;
             Texture2D rectTop, rectBottom = null;
             Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height/2 + 32);
-            int rectHeight = (int)(player.getProportion() * healthBar.Height);
+            if (!player.isDead())
+                rectHeight = (int)(player.getProportion() * healthBar.Height);
+            else
+            { 
+                rectHeight = 0;
+                rectColor = Color.Red;
+            }
 
             if (worldState)
             {
@@ -1447,10 +1497,10 @@ namespace Toggle
                 rectTop = Textures.textures["whiteblock"];
                 rectBottom = Textures.textures["grayblock"];
             }
-            spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), Color.White);
-            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), Color.White);
+            spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), rectColor);
+            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), rectColor);
             
-            if ((player.getProportion() < 0.20) && (time % 50 >= 45))
+            if ((player.getProportion() < 0.20) && (time % 50 >= 45) && (!player.isDead()))
             { 
                 spriteBatch.Draw(Textures.textures["hourglass2"], healthBarLocation, Color.White);
             }
