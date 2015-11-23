@@ -26,6 +26,7 @@ namespace Toggle
         protected Rectangle hitBox;
         protected Rectangle imageBoundingRectangle;
         protected bool isSolid = false;
+        protected bool projectileBlocks = true;
 
         public Object(int xLocation, int yLocation)
         {
@@ -132,6 +133,8 @@ namespace Toggle
         }
 
         public bool getCollision() {return collidable;}
+
+        public bool blocksProjectiles(){ return projectileBlocks;}
         public bool getState() { return state; }
         public int getX(){return x;}
         public int getY(){return y;}

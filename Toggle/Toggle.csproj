@@ -130,6 +130,7 @@
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Object\Miscellanious\ChalkboardTop.cs" />
     <Compile Include="Object\Visual\House.cs" />
+    <Compile Include="Object\Visual\HiddenArrow.cs" />
     <Compile Include="Object\Visual\School.cs" />
     <Compile Include="Object\Visual\Visual.cs" />
     <Compile Include="Object\Visual\Lake.cs" />

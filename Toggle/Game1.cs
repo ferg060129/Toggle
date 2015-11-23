@@ -1155,8 +1155,10 @@ namespace Toggle
                     drawShiftCDLock(false);
                     shiftLockFade += 2;
                 }
-                else
+                else if (shiftLockFade == 20)
                 {
+                    shiftLockFade += 2;
+                    shiftLockJitterTime = 0;
                     shiftLockScale = 5.0f;
                     shiftLockAlpha = 0.0f;
                 }
@@ -1208,7 +1210,11 @@ namespace Toggle
         //called in player, to jitter on keypress
         public void jitterLock()
         {
-            shiftLockJitterTime = 15;
+            if(player.isLocked())
+            {
+                shiftLockJitterTime = 15;
+            }
+
         }
 
         public void winFadeUpdate()

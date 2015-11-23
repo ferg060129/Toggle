@@ -11,6 +11,7 @@ namespace Toggle
             : base(xLocation, yLocation, gGraphic, bGraphic)
         {
             isSolid = true;
+            projectileBlocks = false;
         }
 
     }

@@ -37,6 +37,26 @@ namespace Toggle
                         break;
                 }
             }
+            if (gGraphic == "waterTile")
+            {
+                switch (Game1.random.Next(0, 10))
+                {
+                    default:
+                        break;
+                    case 7:
+                        goodGraphic = Textures.textures["waterTile2"];
+                        badGraphic = Textures.textures["waterTile2"];
+                        break;
+                    case 8:
+                        goodGraphic = Textures.textures["waterTile3"];
+                        badGraphic = Textures.textures["waterTile3"];
+                        break;
+                    case 9:
+                        goodGraphic = Textures.textures["waterTile4"];
+                        badGraphic = Textures.textures["waterTile4"];
+                        break;
+                }
+            }
            
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
             hitBox = new Rectangle(xLocation, yLocation, 32, 32);

@@ -375,11 +375,13 @@ namespace Toggle
             base.reportCollision(o);
             if(o is FlowerTentacles && !o.getState())
             {
-                proportion -= 0.001;
+                //proportion -= 0.001;
+                damageProportion(0.2);
             }
             if (o is Item)
             {
                 pickUp((Item)o);
+                Textures.sounds["pickup"].Play();
             }
             if (o is GoodTile)
             {
@@ -437,7 +439,9 @@ namespace Toggle
             {
                 proportion -= damage;
                 hitInvulnTime = hitInvulnMax;
+                Textures.sounds["hit"].Play();
             }
+           
             
         }
 
@@ -447,6 +451,7 @@ namespace Toggle
             {
                 proportion -= damage;
                 hitInvulnTime = setInvuln;
+                Textures.sounds["weakhit"].Play();
             }
 
         }

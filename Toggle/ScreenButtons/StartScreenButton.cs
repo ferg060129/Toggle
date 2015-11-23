@@ -22,7 +22,7 @@ namespace Toggle
             action = actionin;
             imageBoundingRectangle = new Rectangle(0, 0, graphic.Width, graphic.Height);
             clickBox = new Rectangle(x, y, graphic.Width, graphic.Height);
-            beep = Textures.sounds["unlock"];
+            beep = Textures.sounds["beep"];
         }
 
         public override Texture2D getGraphic()
