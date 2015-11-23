@@ -46,5 +46,10 @@ namespace Toggle
             }
             
         }
+
+        public override InventoryItem pickUpItem()
+        {
+            return new LampI();
+        }
     }
 }

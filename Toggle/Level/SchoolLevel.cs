@@ -76,7 +76,7 @@ namespace Toggle
 
             Gate gate3 = new Gate(16 * 32, 22 * 32);
             Game1.miscObjects.Add(gate3);
-            myButton = new ButtonPlayer(32 * 1, 32 * 22, gate3);
+            myButton = new ButtonPlayer(32 * 1, 32 * 23, gate3);
             Game1.miscObjects.Add(myButton);
 
             Game1.miscObjects.Add(new VineMoveBlock(32 * 3, 32 * 18));

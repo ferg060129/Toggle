@@ -38,7 +38,6 @@ namespace Toggle
         public static ArrayList updateMiscObjects = new ArrayList();
         public static ArrayList playerActivateTiles = new ArrayList();
         public static ArrayList levelTiles = new ArrayList();
-        
 
         string gameState;
 
@@ -125,9 +124,9 @@ namespace Toggle
         private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
-        
-        
 
+        public static Dictionary<string, Level> stringToLevel = new Dictionary<string, Level>();
+        public static Dictionary<Level, string> levelToString = new Dictionary<Level, string>();
 
 
 
@@ -215,17 +214,49 @@ namespace Toggle
             levels.Add(marsh1Level = new Marsh1Level());
             levels.Add(marsh2Level = new Marsh2Level());
             levels.Add(marshFinalLevel = new MarshFinalLevel());
-           
-            //normal is hubLevel, change only to test
-            currentLevel = marshFinalLevel;
 
+            stringToLevel.Add("hubLevel", hubLevel);
+            stringToLevel.Add("houseLevel", houseLevel);
+            stringToLevel.Add("schoolLevel", schoolLevel);
+            stringToLevel.Add("gateLevel", gateLevel);
+            stringToLevel.Add("gate1Level", gate1Level);
+            stringToLevel.Add("gate2Level", gate2Level);
+            stringToLevel.Add("complex1Level", complex1Level);
+            stringToLevel.Add("ghostTestLevel", ghostTestLevel);
+            stringToLevel.Add("laserTestLevel", laserTestLevel);
+            stringToLevel.Add("laserIntroLevel", laserIntroLevel);
+            stringToLevel.Add("marshEnterLevel", marshEnterLevel);
+            stringToLevel.Add("marsh1Level", marsh1Level);
+            stringToLevel.Add("marsh2Level", marsh2Level);
+            stringToLevel.Add("marshFinalLevel", marshFinalLevel);
+            stringToLevel.Add("tutorialLevel", tutorialLevel);
+            
+
+            levelToString.Add(hubLevel, "hubLevel");
+            levelToString.Add(houseLevel, "houseLevel");
+            levelToString.Add(schoolLevel, "schoolLevel");
+            levelToString.Add(gateLevel, "gateLevel");
+            levelToString.Add(gate1Level, "gate1Level");
+            levelToString.Add(gate2Level, "gate2Level");
+            levelToString.Add(complex1Level, "complex1Level");
+            levelToString.Add(ghostTestLevel, "ghostTestLevel");
+            levelToString.Add(laserTestLevel, "laserTestLevel");
+            levelToString.Add(laserIntroLevel, "laserIntroLevel");
+            levelToString.Add(marshEnterLevel, "marshEnterLevel");
+            levelToString.Add(marsh1Level, "marsh1Level");
+            levelToString.Add(marsh2Level, "marsh2Level");
+            levelToString.Add(marshFinalLevel, "marshFinalLevel");
+            levelToString.Add(tutorialLevel,"tutorialLevel");
+            //normal is hubLevel, change only to test
+           // currentLevel = marshFinalLevel;
+            currentLevel = hubLevel;
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             //hub start
-            //player = new Player(13*32, 25*32, inventory, this);
-            player = new Player(9 * 32, 44 * 32, inventory, this);
+            player = new Player(13*32, 25*32, inventory, this);
+            //player = new Player(9 * 32, 44 * 32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -277,6 +308,8 @@ namespace Toggle
         {
             worldState = true;
             //currentLevel.addInitialLevelItems();
+            
+            /*
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
             if(currentLevel.Equals(hubLevel))
@@ -293,8 +326,13 @@ namespace Toggle
             }
             
             setLevel(lastEnteredLevelTile);
-            
+            syncStates();
+             * */
 
+            inventory.clearInventory();
+            currentLevel.reloadLevelItems();
+            continueGame();
+            syncStates();
 
         }
         protected override void UnloadContent()
@@ -557,6 +595,84 @@ namespace Toggle
                 t.setState(worldState);
             }
         }
+
+        public void syncStates()
+        {
+            if (worldState)
+            {
+                zone1bad.Volume = 0;
+                zone1good.Volume = .7f;
+            }
+            else
+            {
+                zone1good.Volume = 0;
+                zone1bad.Volume = 1;
+            }
+
+            foreach (Creature c in creatures)
+            {
+                c.setState(worldState);
+                c.onShift();
+            }
+            foreach (Item i in items)
+            {
+                i.setState(worldState);
+            }
+            foreach (Miscellanious m in miscObjects)
+            {
+                m.setState(worldState);
+                m.onShift();
+                //Check if we are in a strawberry and snap into it
+                if ((worldState == true) && (m is Strawberry))
+                {
+                    if (player.checkOverlap(m))
+                    {
+                        player.setX(m.getX());
+                        player.setY(m.getY());
+                        player.updateHitbox();
+                    }
+                }
+            }
+            foreach (Visual v in visuals)
+            {
+                v.setState(worldState);
+            }
+            foreach (UpdateMiscellanious um in updateMiscObjects)
+            {
+                um.setState(worldState);
+            }
+            foreach (Platform p in platforms)
+            {
+                p.setState(worldState);
+            }
+            /*
+            if (worldState)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
+            }
+            else
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song2);
+            }*/
+
+            InventoryItem[,] inventoryItems = inventory.getItems();
+            for(int x = 0; x < inventoryItems.GetLength(0);x++)
+            {
+                for (int y = 0; y < inventoryItems.GetLength(1);y++ )
+                {
+                    if(inventoryItems[x,y] != null)
+                    inventoryItems[x, y].setState(worldState);
+                }
+            }
+            foreach (Tile t in tiles)
+            {
+                t.setState(worldState);
+            }
+        }
+
+
         public void drawMap(SpriteBatch sb)
         {
             if(!draw)
@@ -1598,43 +1714,39 @@ namespace Toggle
 
         public void saveGame(LevelTile level)
         {
-            //write into file
-
-            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
             StreamWriter saveFile = new StreamWriter("bananas.txt");
-           // string dir = System.IO.Path.GetDirectoryName(
-//System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            //string file = dir + @"/bananas.txt";
-
-            //FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
-
-
-
-            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
             
             //Remove specified items from particular levels
             foreach(Level l in levels)
             {
+                saveFile.WriteLine("L:"+levelToString[l]);
+
                 string[] itemStrings = l.getRemovedLevelItems();
-                for (int x = 0; x < itemStrings.Length;x++ )
+                
+                for (int x = 0; x < itemStrings.Length;x++)
                 {
-                    saveFile.Write(itemStrings[x]);
-                    if(x<itemStrings.Length - 1 )
-                        saveFile.Write(",");
+                    saveFile.WriteLine("I:"+itemStrings[x]);
                 }
-                saveFile.WriteLine("");
+
+                foreach(Platform p in platforms)
+                {
+                    string str = "F:"+p.GetType().Name;
+                    if(((Platform)p).isItemOnPlatform())
+                    {
+                        str+="|T";
+                    }
+                    else{
+                        str+="|F";
+                    }
+                }
             }
 
             //Load which objects have been seen and which haven't
             ArrayList seenObjects = aboutScreen.getSeenObjects();
             for (int x = 0; x < seenObjects.Count; x++)
             {
-                saveFile.Write(seenObjects[x]);
-                if (x < seenObjects.Count - 1)
-                    saveFile.Write(",");
+                saveFile.WriteLine("S:"+seenObjects[x]);
             }
-            saveFile.WriteLine("");
 
             //Load the inventory
             for (int x = 0; x < backUpInventory.GetLength(0); x++ )
@@ -1643,97 +1755,36 @@ namespace Toggle
                 {
                     if (backUpInventory[x, y] == null) continue;
 
-                    saveFile.Write(backUpInventory[x, y].GetType().Name);
-                    saveFile.Write("|"+x+"|"+y+"|");
+                    string str = backUpInventory[x, y].GetType().Name;
+                    str += "|" + x + "|" + y;
 
                     if (backUpInventory[x,y] is ScrollI)
                     {
-                        saveFile.Write(((ScrollI)backUpInventory[x, y]).getGoodItemTip() + "|" + ((ScrollI)backUpInventory[x, y]).getBadItemTip());
+                        str+="|"+((ScrollI)backUpInventory[x, y]).getGoodItemTip()+"|"+((ScrollI)backUpInventory[x, y]).getBadItemTip();
                     }
                     else if (backUpInventory[x, y] is LampI)
                     {
                         if (((LampI)backUpInventory[x, y]).hasBatteries())
                         {
-                            saveFile.Write("T|");
+                            str += "|T";
                         }
                         else
                         {
-                            saveFile.Write("F|");
+                            str += "|F";
                         }
                     }
-                    else
-                    {
-                        saveFile.Write("|");
-                    }
-                    if (y < backUpInventory.GetLength(1) - 1)
-                        saveFile.Write(",");
+                    saveFile.WriteLine("N:" + str);
                 }
-                saveFile.WriteLine("");
             }
 
-           // saveFile.WriteLine("");
-            //Load the current level
-            string currentLevelString = "";
-             if (currentLevel is HubLevel)
-            {
-                currentLevelString = "hubLevel";
-            }
-            else if (currentLevel is HouseLevel)
-            {
-                currentLevelString = "houseLevel";
-            }
-            else if (currentLevel is SchoolLevel)
-            {
-                currentLevelString = "schoolLevel";
-            }
-            else if (currentLevel is Gate1Level)
-            {
-                currentLevelString = "gate1Level";
-            }
-            else if (currentLevel is Gate2Level)
-            {
-                currentLevelString = "gate2Level";
-            }
-            else if (currentLevel is Complex1)
-            {
-                currentLevelString = "complex1Level";
-            }
-            else if (currentLevel is GhostTestLevel)
-            {
-                currentLevelString = "ghostTestLevel";
-            }
-            else if (currentLevel is LaserTestLevel)
-            {
-                currentLevelString = "laserTestLevel";
-            }
-            else if (currentLevel is LaserIntro)
-            {
-                currentLevelString = "laserIntroLevel";
-            }
-            else if (currentLevel is MarshEnterLevel)
-            {
-                currentLevelString = "marshEnterLevel";
-            }
-            else if (currentLevel is Marsh1Level)
-            {
-                 currentLevelString = "marsh1Level";
-            }
-            else if (currentLevel is Marsh2Level)
-            {
-                 currentLevelString = "marsh2Level";
-            }
-             else if (currentLevel is MarshFinalLevel)
-             {
-                 currentLevelString = "marshFinalLevel";
-             }
+            saveFile.WriteLine(levelToString[currentLevel]);
 
+            saveFile.WriteLine("P:" + level.getPlayerStart().X + "|" + level.getPlayerStart().Y);
 
-            saveFile.WriteLine(currentLevelString);
+            saveFile.WriteLine("C:" + levelToString[currentLevel]);
 
-            saveFile.WriteLine(level.getPlayerStart().X);
-            saveFile.WriteLine(level.getPlayerStart().Y);
-            if (levels.Equals("hubLevel"))
-            {
+           // if (level.Equals("hubLevel"))
+           // {
                 foreach (Platform p in platforms)
                 {
                     if (((Platform)p).isItemOnPlatform())
@@ -1745,7 +1796,7 @@ namespace Toggle
                         saveFile.WriteLine("F");
                     }
                 }
-            }
+          //  }
             
 
 
@@ -1755,104 +1806,83 @@ namespace Toggle
 
         public void continueGame()
         {
-            string line;
-
-            //StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
-            //StreamReader saveFile = new StreamReader(@System.IO.Directory.GetCurrentDirectory() + "/bananas.txt");
-            //string dir = System.IO.Path.GetDirectoryName(
-//System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            //string file = dir + @"/bananas.txt";
-           // StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
             StreamReader saveFile = new StreamReader("bananas.txt");
-            
-            foreach (Level l in levels)
+            string line;
+            Level currentReadLevel = null;
+            string tempLine = "";
+            int px = 0, py = 0;
+            string loadLevel = "";
+            while((line = saveFile.ReadLine()) != null)
             {
-                line = saveFile.ReadLine();
-                string[] excludeItems = line.Split(',');
-                l.removeLevelItems(excludeItems);
-            }
-            line = saveFile.ReadLine();
-
-            string[] seenObjects = line.Split(',');
-
-            for (int x = 0; x < seenObjects.Length; x++)
-            {
-                aboutScreen.addSeenObject(seenObjects[x]);
-            }
-
-            InventoryItem[,] inventoryItems = inventory.getItems();
-            for (int x = 0; x < inventoryItems.GetLength(0); x++)
-            {
-                line = saveFile.ReadLine();
-
-                string[] inventoryItemStrings = line.Split(',');
-                for (int y = 0; y < inventoryItems.GetLength(1); y++)
+                tempLine = line.Substring(2, line.Length - 2);
+                string[] args = tempLine.Split('|');
+                //complete
+                if(line[0] == 'L')
                 {
-                    if (y >= inventoryItemStrings.Length) break;
-                    if (inventoryItemStrings[y].Equals("")) continue;
-                    
-                    string[] thisItem = inventoryItemStrings[y].Split('|');
-                    if (thisItem.Length <= 1) continue;
-                    int xLocation = Int32.Parse(thisItem[1]);
-                    int yLocation = Int32.Parse(thisItem[2]);
-
-                    switch(thisItem[0])
+                    currentReadLevel = stringToLevel[tempLine];
+                }
+                if(line[0] == 'I')
+                {
+                    currentReadLevel.removeLevelItem(tempLine);
+                }
+                if(line[0] == 'P')
+                {
+                    //Add player at location
+                    px = Int32.Parse(args[0]);
+                    py = Int32.Parse(args[1]);
+                }
+                if(line[0] == 'N')
+                {
+                    int itemX = Int32.Parse(args[1]);
+                    int itemY = Int32.Parse(args[2]);
+                    switch(args[0])
                     {
                         case "BatteryGooI":
-                            inventory.setInventoryItem(new BatteryGooI(), xLocation,yLocation);
+                            inventory.setInventoryItem(new BatteryGooI(), itemX, itemY);
                             break;
                         case "KnifeI":
-                            inventory.setInventoryItem(new KnifeI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new KnifeI(), itemX, itemY);
                             break;
                         case "DiaryI":
-                            inventory.setInventoryItem(new DiaryI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new DiaryI(), itemX, itemY);
                             break;
                         case "LampI":
                             LampI lamp = new LampI();
-                            if(thisItem[3].Equals("T"))
+                            if (args[3].Equals("T"))
                             {
                                 lamp.setBatteries(true);
                             }
-                            inventory.setInventoryItem(lamp, xLocation, yLocation);
+                            inventory.setInventoryItem(lamp, itemX, itemY);
                             break;
                         case "RopeI":
-                            inventory.setInventoryItem(new RopeI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new RopeI(), itemX, itemY);
                             break;
                         case "ScrollI":
-                            inventory.setInventoryItem(new ScrollI(thisItem[3], thisItem[4]), xLocation, yLocation);
+                            inventory.setInventoryItem(new ScrollI(args[3], args[4]), itemX, itemY);
                             break;
                     }
-
                 }
-            }
-            line = saveFile.ReadLine();
-            string lvl = line;
-            int playerX = 0, playerY = 0, lvlidx = 0;
-            line = saveFile.ReadLine();
-            playerX = Int32.Parse(line);
-            line = saveFile.ReadLine();
-            playerY = Int32.Parse(line);
-
-            if(levels.Equals("hubLevel"))
-            {
-                foreach(Platform p in platforms)
+                if(line[0] == 'S')
                 {
-                    line = saveFile.ReadLine();
-                    if(line.Equals("T"))
-                    {
-                        ((Platform)p).setItemOnPlatform(true);
-                    }
+                    aboutScreen.addSeenObject(tempLine);
+                }
+                //complete
+                if(line[0] == 'F')
+                {
+                    bool platformComplete = (args[1].Equals("T"));
+
+                    findPlatformGivenString(args[0]).setItemOnPlatform(platformComplete);
+                }
+                if(line[0] == 'C')
+                {
+                    loadLevel = tempLine;
                 }
             }
-            
-
-            //InventoryItem[,] inventoryItems = inventory.getItems();
-            LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", lvl, new Point(playerX, playerY));
+            LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", loadLevel, new Point(px, py));
             saveFile.Close();
             gameState = "play";
             setLevel(lv);
-            
+  
         }
 
         public void loadBackupPlatforms()
@@ -1886,6 +1916,19 @@ namespace Toggle
             {
                 Exit();
             }
+        }
+
+        public Platform findPlatformGivenString(string str)
+        {
+            foreach(Platform p in platforms)
+            {
+                if(p.GetType().Name.Equals(str))
+                {
+                    return p;
+                }
+            }
+            //shouldn't happen
+            return null;
         }
 
 

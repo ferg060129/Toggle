@@ -181,12 +181,8 @@
     <Content Include="Content\blocks.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\chalkboard3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\chalkboard2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Content\chalkboard2.png" />
+    <Content Include="Content\chalkboard3.png" />
     <Content Include="Content\continueHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -344,5 +344,21 @@ namespace Toggle
             ii.setY(itemRectangles[x, y].Y);
             items[x, y] = ii;
         }
+
+        public void clearInventory()
+        {
+            for (int x = 0; x < items.GetLength(0); x++)
+            {
+                for (int y = 0; y < items.GetLength(1); y++)
+                {
+
+                    items[x, y] = null;
+                        
+                    
+
+                }
+
+            }
+        }
     }
 }
