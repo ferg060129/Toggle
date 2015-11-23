@@ -268,11 +268,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image1.png" />
-    <Content Include="Content\screen_pics\diaryEntry.png" />
-    <Content Include="Content\screen_pics\fallasleep.png" />
-    <Content Include="Content\screen_pics\findsDiary.png" />
-    <Content Include="Content\screen_pics\hourglass.png" />
-    <Content Include="Content\screen_pics\inventorytutorial.png" />
+    <Content Include="Content\diaryEntry.png" />
+    <Content Include="Content\fallasleep.png" />
+    <Content Include="Content\findsDiary.png" />
+    <Content Include="Content\hourglassscreen.png" />
+    <Content Include="Content\inventorytutorial.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\ItemBox.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -315,7 +317,9 @@
     <Content Include="Content\continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\screen_pics\inventorybutton.png" />
+    <Content Include="Content\inventorybutton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\startHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -512,7 +516,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\screen_pics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

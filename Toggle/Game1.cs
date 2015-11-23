@@ -122,6 +122,7 @@ namespace Toggle
         ArrayList backUpItems;
         bool[] backUpPlatformFilled;
 
+        private InventoryScreen inventoryScreen;
         private StartScreen startScreen;
         private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
@@ -263,6 +264,7 @@ namespace Toggle
             player = new Player(13*32, 25*32, inventory, this);
 
             playerGhost = new PlayerGhost(0, 0);
+            inventoryScreen = new InventoryScreen(this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -375,6 +377,9 @@ namespace Toggle
                     break;
                 case "about":
                     aboutUpdate();
+                    break;
+                case "inventory":
+                    inventoryScreenUpdate();
                     break;
             }
             base.Update(gameTime);
@@ -522,6 +527,9 @@ namespace Toggle
                     break;
                 case "about":
                     aboutDraw();
+                    break;
+                case "inventory":
+                    inventoryScreenDraw();
                     break;
             }
             base.Draw(gameTime);
@@ -875,7 +883,8 @@ namespace Toggle
                 if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
-                    gameState = "play";
+                    gameState = "inventory";
+                    screenDisplayed = Textures.textures["inventorytutorial"];
                 }
             }
             if (newKeyBoardState.IsKeyUp(Keys.LeftShift) && newKeyBoardState.IsKeyUp(Keys.RightShift))
@@ -1294,6 +1303,20 @@ namespace Toggle
         {
             spriteBatch.Begin();
             spriteBatch.Draw(Textures.textures["lostScreen"], new Vector2(0, 0), Color.White);
+            spriteBatch.End();
+        }
+
+        public void inventoryScreenUpdate()
+        {
+            startScreen.checkButtonHovers();
+            startScreen.checkButtonClicks();
+        }
+
+        public void inventoryScreenDraw()
+        {
+            //playDraw();
+            spriteBatch.Begin();
+            inventoryScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
 

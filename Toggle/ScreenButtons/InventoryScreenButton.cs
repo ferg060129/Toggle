@@ -30,8 +30,10 @@ namespace Toggle
 
         public new string onClick()
         {
+            ((InventoryScreen)parentScreen).nextString();
             //Set parent screen to next thingy
             return action;
+            
         }
     }
 }
