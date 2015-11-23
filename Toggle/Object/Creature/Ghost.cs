@@ -215,8 +215,8 @@ namespace Toggle
                     }
                     if (o is Ghost)
                     {
-                        x = Game1.random.Next(boundBottomRight.X / 32) * 32;
-                        y = Game1.random.Next(boundBottomRight.Y / 32) * 32;
+                        x = Game1.random.Next((boundBottomRight.X / 32) - 32) * 32;
+                        y = Game1.random.Next((boundBottomRight.Y / 32) - 32) * 32;
                     }
                 }
                 

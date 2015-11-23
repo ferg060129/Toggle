@@ -23,7 +23,7 @@ namespace Toggle
                                               "desk","deskBad","door","doorDark","knife","knifePlatform","lanternPlatform","knifePlatformComplete","lanternPlatformComplete", "rope","chain",
                                               "aboutScreen2", "questionBox","fence", "barbedBottomLeft","barbedHor","barbedVertical1","blocks","goodBlob","badBlob","title","help",
                                               "diary","diaryBad","diaryPlatformB","diaryPlatformG","diaryPlatformCompleteB","diaryPlatformCompleteG","glow32","hiddenArrow","nothing","ghostGate","buttonSUp",
-                                              "torchGood","torchBad","rose","rosePlatform","rosePlatformComplete"};
+                                              "torchGood","torchBad","rose","rosePlatform","rosePlatformComplete","playerGhost"};
         public static string[] tileNames = {"grass5","grass6","grass7","grass8","darkgrass5","darkgrass6","darkgrass7","darkgrass8",
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",

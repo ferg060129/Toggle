@@ -18,6 +18,7 @@ namespace Toggle
         protected int frame;
         protected int frameTick; //after x ticks, advance a frame so FPS
         protected bool animationPlay;
+        protected float spriteAlpha = 1.0f;
         //
         protected bool state;           //true good, false bad
         protected bool collidable;       //can things collide with this
@@ -27,6 +28,7 @@ namespace Toggle
         protected Rectangle imageBoundingRectangle;
         protected bool isSolid = false;
         protected bool projectileBlocks = true;
+
 
         public Object(int xLocation, int yLocation)
         {
@@ -145,6 +147,7 @@ namespace Toggle
         public Rectangle getImageBoundingRectangle() { return imageBoundingRectangle; }
         public Vector2 getPositionVector() { return new Vector2(x, y); }
         public Vector2 getPosition(){return new Vector2(x, y); }
+        public float getAlpha(){return spriteAlpha;}
         public virtual bool getSolid() { return isSolid; }
         public Vector2 getCenter() { return new Vector2(x + width/2.0f, y + height/2.0f); }
 

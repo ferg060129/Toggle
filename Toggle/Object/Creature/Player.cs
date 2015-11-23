@@ -61,6 +61,11 @@ namespace Toggle
 
         public override void move()
         {
+            //test particles
+            if (Game1.random.Next(0) <= 10)
+            {
+                Game1.particles.Add(new Particle(x, y, "knife"));
+            }
             if (readingChalkboard && !hitBox.Intersects(collideChalkboard.getHitBox()))
             {
                 readingChalkboard = false;
@@ -150,13 +155,15 @@ namespace Toggle
             else if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
-                engine.jitterLock();
-                if (!stateLocked && engine.getShiftCD() == 0 && !standingOnStateTile())
+                if (!isDead())
                 {
-                    engine.setShiftCD();
-                    engine.switchStates();
+                    engine.jitterLock();
+                    if (!stateLocked && engine.getShiftCD() == 0 && !standingOnStateTile())
+                    {
+                        engine.setShiftCD();
+                        engine.switchStates();
+                    }
                 }
-                    
             }
             oldKeyBoardState = newKeyBoardState;
 
@@ -180,6 +187,11 @@ namespace Toggle
                 {
                     imageBoundingRectangle = new Rectangle(0, 0, 0, 0);
                 }
+            }
+            if (isDead())
+            {
+                imageBoundingRectangle = new Rectangle(0, 0, 0, 0);
+                hitBox = previousHitBox;
             }
         }
 
