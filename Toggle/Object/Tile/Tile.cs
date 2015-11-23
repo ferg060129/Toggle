@@ -45,15 +45,15 @@ namespace Toggle
                         break;
                     case 7:
                         goodGraphic = Textures.textures["waterTile2"];
-                        badGraphic = Textures.textures["waterTile2"];
+                        badGraphic = Textures.textures["waterTileBad2"];
                         break;
                     case 8:
                         goodGraphic = Textures.textures["waterTile3"];
-                        badGraphic = Textures.textures["waterTile3"];
+                        badGraphic = Textures.textures["waterTileBad3"];
                         break;
                     case 9:
                         goodGraphic = Textures.textures["waterTile4"];
-                        badGraphic = Textures.textures["waterTile4"];
+                        badGraphic = Textures.textures["waterTileBad4"];
                         break;
                 }
             }

@@ -63,6 +63,7 @@ namespace Toggle
         LaserTestLevel laserTestLevel;
         LaserIntro laserIntroLevel;
         LevelTile lastEnteredLevelTile;
+        Marsh1Level marsh1Level;
         int time;
         int width;
         int height;
@@ -207,9 +208,10 @@ namespace Toggle
             levels.Add(ghostTestLevel = new GhostTestLevel());
             levels.Add(laserTestLevel = new LaserTestLevel());
             levels.Add(laserIntroLevel = new LaserIntro());
+            levels.Add(marsh1Level = new Marsh1Level());
            
             //normal is hubLevel, change only to test
-            currentLevel = hubLevel;
+            currentLevel = marsh1Level;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
@@ -232,8 +234,8 @@ namespace Toggle
             SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
             banditKing = banditKing_s.CreateInstance();
 
-            zone1good = Content.Load<SoundEffect>("zone1good").CreateInstance();
-            zone1bad = Content.Load<SoundEffect>("zone1bad").CreateInstance();
+            zone1good = Content.Load<SoundEffect>("zone4good").CreateInstance();
+            zone1bad = Content.Load<SoundEffect>("zone4bad").CreateInstance();
           
 
             //banditKing.Pitch = -1;
@@ -361,6 +363,7 @@ namespace Toggle
                             if (((Button)p).isHeavyButton() == false)
                             {
                                 p.onTrigger();
+                                Console.WriteLine("buttonpressed");
                             }
                         }
                     }
@@ -648,6 +651,10 @@ namespace Toggle
             else if (currentLevelString.Equals("laserIntroLevel"))
             {
                 currentLevel = laserIntroLevel;
+            }
+            else if (currentLevelString.Equals("marsh1Level"))
+            {
+                currentLevel = marsh1Level;
             }
             creatures.Add(player);
             currentLevel.loadLevel();
@@ -1681,6 +1688,10 @@ namespace Toggle
             else if (currentLevel is LaserIntro)
             {
                 currentLevelString = "laserIntroLevel";
+            }
+            else if (currentLevel is Marsh1Level)
+            {
+                 currentLevelString = "marsh1Level";
             }
 
 

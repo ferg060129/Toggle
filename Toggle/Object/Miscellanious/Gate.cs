@@ -16,6 +16,20 @@ namespace Toggle
             isSolid = true;
         }
 
+        public Gate(int xLocation, int yLocation, int graphic)
+            : base(xLocation, yLocation)
+        {
+            goodGraphic = Textures.textures["ClosedGate"];
+            badGraphic = Textures.textures["ClosedGate"];
+            if (graphic == 1)
+            {
+                goodGraphic = Textures.textures["ghostGate"];
+                badGraphic = Textures.textures["ghostGate"];
+            }
+            collidable = true;
+            isSolid = true;
+        }
+
         public override void onButton()
         {
             goodGraphic = Textures.textures["OpenGate"];

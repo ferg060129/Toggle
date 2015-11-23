@@ -60,6 +60,7 @@
     <Compile Include="Function.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\Marsh1Level.cs" />
     <Compile Include="Level\LaserIntro.cs" />
     <Compile Include="Level\Gate2Level.cs" />
     <Compile Include="Level\Complex1.cs" />
@@ -79,10 +80,12 @@
     <Compile Include="Object\Item\Knife.cs" />
     <Compile Include="Object\Item\Rope.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Miscellanious\Button\ButtonShadow.cs" />
     <Compile Include="Object\Miscellanious\Button\ButtonHeavy.cs" />
     <Compile Include="Object\Miscellanious\Button\ButtonPlayer.cs" />
     <Compile Include="Object\Miscellanious\Fence.cs" />
     <Compile Include="Object\Miscellanious\Pushable\AngerBlob.cs" />
+    <Compile Include="Object\Miscellanious\Torch.cs" />
     <Compile Include="Object\Platform\DiaryPlatform.cs" />
     <Compile Include="Object\Platform\KnifePlatform.cs" />
     <Compile Include="Object\Platform\LanternPlatform.cs" />
