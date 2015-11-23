@@ -35,12 +35,10 @@ namespace Toggle
             shadow.addPressPoint(21, 17);    
             shadow.addPressPoint(36, 45);
             shadow.addPressPoint(26, 19);
-            int gateGap = 0;
+            //place torches and link them to shadow queue
             for (int i = 0; i < 6; i++)
             {
                 Torch tempTor;
-                if (i == 3)
-                    gateGap = 1;
                 if (i % 2 == 0)
                     tempTor = new Torch((23 + i/2) * 32, 17 * 32,false);
                 else
