@@ -10,6 +10,7 @@ namespace Toggle
     {
 
         private bool batteries = false;
+        private bool batteriesBeforeReset = false;
         public LampI()
             : base()
         {
@@ -62,7 +63,16 @@ namespace Toggle
             batteries = b;
         }
 
-        
+        public bool hadBatteriesBeforeReset()
+        {
+            return batteriesBeforeReset;
+        }
+
+        public void setBatteriesBeforeReset(bool b)
+        {
+            batteriesBeforeReset = b;
+        }
+
     }
  
 }
