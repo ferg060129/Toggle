@@ -28,7 +28,7 @@ namespace Toggle
                                            "woodenwallbottomleftcorner","woodenwallbottomrightcorner","woodenwalltopleftcorner","woodenwalltoprightcorner",
                                            "woodenwallvertical","woodenwallhorizontal1","HappyButton","HappyButtonPressed","AngryButton","AngryButtonPressed","HoleTile", "HoleTilePressed",
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust","WoodenWall","woodenWallR","woodenWallU","woodenWallD","woodenWallL",
-                                           "waterTile","waterTile2","waterTile3","waterTile4","waterTileBad","waterTileBad2","waterTileBad3","waterTileBad4",};
+                                           "waterTile","waterTile2","waterTile3","waterTile4","waterTileBad","waterTileBad2","waterTileBad3","waterTileBad4","muddytile1","muddytile2",};
         public static string[] spritefonts = { "mistral16", "arial12" };
         public static string[] soundsNames = { "beep","unlock","lock","hit","pickup","weakhit"};
 
@@ -54,7 +54,9 @@ namespace Toggle
                 {'u', "KeyButtonPressed,KeyButton,"},
                 {'+', "woodfloor,darkwoodfloor,"},
                 {'d', "desk,deskBad,w"},
-                {'w', "waterTile,waterTileBad,w"}
+                {'w', "waterTile,waterTileBad,w"},
+                {'m', "muddytile1,muddytile1, w"},
+                {'n', "muddytile2,muddytile2, w"}
             };
         
 

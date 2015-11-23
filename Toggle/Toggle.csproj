@@ -270,10 +270,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image1.png" />
-    <Content Include="Content\muddytile2.png">
+    <Content Include="Content\Tile\muddytile2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\muddytile1.png">
+    <Content Include="Content\Tile\muddytile1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\screen_pics\diaryEntry.png" />
