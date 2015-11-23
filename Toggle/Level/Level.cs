@@ -135,6 +135,14 @@ namespace Toggle
                         Game1.tiles.Add(t);
                         Game1.wallArray[yposition / 32, xposition / 32] = true;
                     }
+                    else if (c == 'w')
+                    {
+                        Wall t = new Wall(xposition, yposition, images[0], images[1]);
+                        t.setProjectileBlock(false);
+                        Game1.solidTiles.Add(t);
+                        Game1.tiles.Add(t);
+                        //Game1.wallArray[yposition / 32, xposition / 32] = true;
+                    }
                     else if (!solid)
                     {
                         Tile t = new Tile(xposition, yposition, images[0], images[1]);

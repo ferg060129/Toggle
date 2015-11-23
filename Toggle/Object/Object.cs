@@ -133,7 +133,10 @@ namespace Toggle
         }
 
         public bool getCollision() {return collidable;}
-
+        public void setProjectileBlock(bool input)
+        {
+            projectileBlocks = input;
+        }
         public bool blocksProjectiles(){ return projectileBlocks;}
         public bool getState() { return state; }
         public int getX(){return x;}

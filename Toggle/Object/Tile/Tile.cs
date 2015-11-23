@@ -39,6 +39,7 @@ namespace Toggle
             }
             if (gGraphic == "waterTile")
             {
+                projectileBlocks = false;
                 switch (Game1.random.Next(0, 10))
                 {
                     default:

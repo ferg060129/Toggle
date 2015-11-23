@@ -63,7 +63,9 @@ namespace Toggle
         LaserTestLevel laserTestLevel;
         LaserIntro laserIntroLevel;
         LevelTile lastEnteredLevelTile;
+        MarshEnterLevel marshEnterLevel;
         Marsh1Level marsh1Level;
+        Marsh2Level marsh2Level;
         int time;
         int width;
         int height;
@@ -208,15 +210,18 @@ namespace Toggle
             levels.Add(ghostTestLevel = new GhostTestLevel());
             levels.Add(laserTestLevel = new LaserTestLevel());
             levels.Add(laserIntroLevel = new LaserIntro());
+            levels.Add(marshEnterLevel = new MarshEnterLevel());
             levels.Add(marsh1Level = new Marsh1Level());
+            levels.Add(marsh2Level = new Marsh2Level());
            
             //normal is hubLevel, change only to test
-            currentLevel = marsh1Level;
+            currentLevel = hubLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
+            //hub start
             player = new Player(13*32, 25*32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
@@ -226,6 +231,7 @@ namespace Toggle
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
+            cam.update();
 
            
 
@@ -652,9 +658,17 @@ namespace Toggle
             {
                 currentLevel = laserIntroLevel;
             }
+            else if (currentLevelString.Equals("marshEnterLevel"))
+            {
+                currentLevel = marshEnterLevel;
+            }
             else if (currentLevelString.Equals("marsh1Level"))
             {
                 currentLevel = marsh1Level;
+            }
+            else if (currentLevelString.Equals("marsh2Level"))
+            {
+                currentLevel = marsh2Level;
             }
             creatures.Add(player);
             currentLevel.loadLevel();
@@ -1689,9 +1703,17 @@ namespace Toggle
             {
                 currentLevelString = "laserIntroLevel";
             }
+            else if (currentLevel is MarshEnterLevel)
+            {
+                currentLevelString = "marshEnterLevel";
+            }
             else if (currentLevel is Marsh1Level)
             {
                  currentLevelString = "marsh1Level";
+            }
+            else if (currentLevel is Marsh2Level)
+            {
+                 currentLevelString = "marsh2Level";
             }
 
 

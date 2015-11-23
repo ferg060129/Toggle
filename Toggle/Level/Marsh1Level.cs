@@ -19,17 +19,13 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 10));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 15));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 5, 32 * 10));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 5));
             Game1.creatures.Add(new Ghost(32 * 13, 32 * 3, new Point(1, 1), new Point(49 * 32, 51 * 32)));
             Game1.creatures.Add(new Ghost(32 * 33, 32 * 31, new Point(1, 1), new Point(49 * 32, 51 * 32)));
             Game1.creatures.Add(new Ghost(32 * 13, 32 * 43, new Point(1, 1), new Point(49 * 32, 51 * 32)));
             Gate theGate = new Gate(26 * 32, 17 * 32,1);
             Game1.miscObjects.Add(theGate);
             ButtonShadow shadow = new ButtonShadow(4 * 32, 33 * 32,theGate,true);
-            shadow.addPressPoint(8, 31);          
+            shadow.addPressPoint(10, 24);          
             shadow.addPressPoint(39, 35);          
             shadow.addPressPoint(35, 22);       
             shadow.addPressPoint(21, 17);    
@@ -47,9 +43,11 @@ namespace Toggle
                 Game1.miscObjects.Add(tempTor);
             }
             Game1.miscObjects.Add(shadow);
-            
-
-                levelTiles.Add(new LevelTile(1 * 32, 33 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(35 * 32, 20 * 32)));
+            Game1.miscObjects.Add(new VineMoveBlock(31 * 32, 35 * 32));
+            //next level
+            levelTiles.Add(new LevelTile(26 * 32, 4 * 32, "blackBlock", "blackBlock", "marsh2Level", new Point(10 * 32, 13 * 32)));
+            //previous level
+            levelTiles.Add(new LevelTile(1 * 32, 33 * 32, "blackBlock", "blackBlock", "marshEnterLevel", new Point(40 * 32, 5 * 32)));
         }
 
     }

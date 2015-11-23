@@ -149,7 +149,7 @@ namespace Toggle
         {
             if (!state)
             {
-                if ((o is Wall) || ((o is Lake) && !onBoat))
+                if ((o is Wall) && o.blocksProjectiles())
                 {
                     Rectangle hBO = o.getHitBox(); //hitBoxOther
                     if (direction == 0)

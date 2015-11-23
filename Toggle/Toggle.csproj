@@ -60,6 +60,8 @@
     <Compile Include="Function.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\MarshEnterLevel.cs" />
+    <Compile Include="Level\Marsh2Level.cs" />
     <Compile Include="Level\Marsh1Level.cs" />
     <Compile Include="Level\LaserIntro.cs" />
     <Compile Include="Level\Gate2Level.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Level\TutorialLevel.cs" />
+    <Compile Include="Object\Creature\PlayerGhost.cs" />
     <Compile Include="Object\Inventory Item\DiaryI.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
     <Compile Include="Object\Inventory Item\RopeI.cs" />
