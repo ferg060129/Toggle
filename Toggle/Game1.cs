@@ -63,6 +63,10 @@ namespace Toggle
         LaserTestLevel laserTestLevel;
         LaserIntro laserIntroLevel;
         LevelTile lastEnteredLevelTile;
+        MarshEnterLevel marshEnterLevel;
+        Marsh1Level marsh1Level;
+        Marsh2Level marsh2Level;
+        MarshFinalLevel marshFinalLevel;
         int time;
         int width;
         int height;
@@ -80,6 +84,10 @@ namespace Toggle
         int oldMouseX, oldMouseY;
         int shiftCooldown = 0;
         int maxShiftCooldown = 10 * 5;
+        float shiftLockScale = 1.0f;
+        float shiftLockAlpha = 0.0f;
+        int shiftLockFade = 0;
+        int shiftLockJitterTime = 0;
         float fadeTransparency = 0.0f;
         int creditsOffset = 0;
 
@@ -203,15 +211,21 @@ namespace Toggle
             levels.Add(ghostTestLevel = new GhostTestLevel());
             levels.Add(laserTestLevel = new LaserTestLevel());
             levels.Add(laserIntroLevel = new LaserIntro());
+            levels.Add(marshEnterLevel = new MarshEnterLevel());
+            levels.Add(marsh1Level = new Marsh1Level());
+            levels.Add(marsh2Level = new Marsh2Level());
+            levels.Add(marshFinalLevel = new MarshFinalLevel());
            
             //normal is hubLevel, change only to test
-            currentLevel = hubLevel;
+            currentLevel = marshFinalLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
-            player = new Player(13*32, 25*32, inventory, this);
+            //hub start
+            //player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(9 * 32, 44 * 32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -220,6 +234,7 @@ namespace Toggle
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
             creatures.Add(player);
+            cam.update();
 
            
 
@@ -228,8 +243,8 @@ namespace Toggle
             SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
             banditKing = banditKing_s.CreateInstance();
 
-            zone1good = Content.Load<SoundEffect>("zone1good").CreateInstance();
-            zone1bad = Content.Load<SoundEffect>("zone1bad").CreateInstance();
+            zone1good = Content.Load<SoundEffect>("zone4good").CreateInstance();
+            zone1bad = Content.Load<SoundEffect>("zone4bad").CreateInstance();
           
 
             //banditKing.Pitch = -1;
@@ -357,6 +372,7 @@ namespace Toggle
                             if (((Button)p).isHeavyButton() == false)
                             {
                                 p.onTrigger();
+                                Console.WriteLine("buttonpressed");
                             }
                         }
                     }
@@ -644,6 +660,22 @@ namespace Toggle
             else if (currentLevelString.Equals("laserIntroLevel"))
             {
                 currentLevel = laserIntroLevel;
+            }
+            else if (currentLevelString.Equals("marshEnterLevel"))
+            {
+                currentLevel = marshEnterLevel;
+            }
+            else if (currentLevelString.Equals("marsh1Level"))
+            {
+                currentLevel = marsh1Level;
+            }
+            else if (currentLevelString.Equals("marsh2Level"))
+            {
+                currentLevel = marsh2Level;
+            }
+            else if (currentLevelString.Equals("marshFinalLevel"))
+            {
+                currentLevel = marshFinalLevel;
             }
             creatures.Add(player);
             currentLevel.loadLevel();
@@ -1139,9 +1171,78 @@ namespace Toggle
             spriteBatch.Draw(Textures.textures["shiftCooldown"], shiftCDLocation, Color.White);
             if(player.isLocked())
             {
-                Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
-                spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+                //Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
+                //spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+                shiftLockFade = 0;
+                drawShiftCDLock(true);
             }
+            else
+            {
+                if (shiftLockFade < 20)
+                {
+                    drawShiftCDLock(false);
+                    shiftLockFade += 2;
+                }
+                else if (shiftLockFade == 20)
+                {
+                    shiftLockFade += 2;
+                    shiftLockJitterTime = 0;
+                    shiftLockScale = 5.0f;
+                    shiftLockAlpha = 0.0f;
+                }
+            }
+        }
+
+        public void drawShiftCDLock(bool fadein)
+        {
+            if (fadein)
+            {
+                if (shiftLockAlpha < 1.0)
+                {
+                    shiftLockAlpha += 0.04f;
+                }
+            }
+            else
+            {
+                shiftLockAlpha -= 0.1f;
+            }
+                
+            if (shiftLockScale > 1.0)
+            {
+                shiftLockScale -= 0.5f;
+            }
+            else
+                shiftLockScale = 1.0f;
+            Vector2 shiftCDLocation = new Vector2(getTopLeft().X + 10, getTopLeft().Y + 10);
+            int jitterX = 0;
+            int jitterY = 0;
+            if (shiftLockJitterTime > 0)
+            {
+                shiftLockJitterTime--;
+                jitterX = random.Next(5) - 2;
+                jitterY = random.Next(5) - 2;
+            }
+            Vector2 loc;
+            if(player.isLocked())
+                loc = new Vector2(shiftCDLocation.X + 128 / 2 + jitterX, shiftCDLocation.Y + 8 + jitterY);
+            else
+                loc = new Vector2(shiftCDLocation.X + 128 / 2, shiftCDLocation.Y + 8 + shiftLockFade);
+            //spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
+            spriteBatch.Draw(Textures.textures["shiftlocked"],
+                            loc, null,
+                                Color.White * shiftLockAlpha,
+                                0, new Vector2(14, 14), shiftLockScale, SpriteEffects.None, 0);
+
+        }
+
+        //called in player, to jitter on keypress
+        public void jitterLock()
+        {
+            if(player.isLocked())
+            {
+                shiftLockJitterTime = 15;
+            }
+
         }
 
         public void winFadeUpdate()
@@ -1609,6 +1710,22 @@ namespace Toggle
             {
                 currentLevelString = "laserIntroLevel";
             }
+            else if (currentLevel is MarshEnterLevel)
+            {
+                currentLevelString = "marshEnterLevel";
+            }
+            else if (currentLevel is Marsh1Level)
+            {
+                 currentLevelString = "marsh1Level";
+            }
+            else if (currentLevel is Marsh2Level)
+            {
+                 currentLevelString = "marsh2Level";
+            }
+             else if (currentLevel is MarshFinalLevel)
+             {
+                 currentLevelString = "marshFinalLevel";
+             }
 
 
             saveFile.WriteLine(currentLevelString);

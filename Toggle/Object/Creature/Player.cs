@@ -150,6 +150,7 @@ namespace Toggle
             else if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
             {
+                engine.jitterLock();
                 if (!stateLocked && engine.getShiftCD() == 0 && !standingOnStateTile())
                 {
                     engine.setShiftCD();
@@ -374,11 +375,13 @@ namespace Toggle
             base.reportCollision(o);
             if(o is FlowerTentacles && !o.getState())
             {
-                proportion -= 0.001;
+                //proportion -= 0.001;
+                damageProportion(0.2);
             }
             if (o is Item)
             {
                 pickUp((Item)o);
+                Textures.sounds["pickup"].Play();
             }
             if (o is GoodTile)
             {
@@ -396,11 +399,17 @@ namespace Toggle
             }
             if (o is LockTile)
             {
+                if (stateLocked == false)
+                    Textures.sounds["lock"].Play();
                 stateLocked = true;
+
             }
             if(o is UnlockTile)
             {
+                if (stateLocked == true)
+                    Textures.sounds["unlock"].Play();
                 stateLocked = false;
+                
             }
             if(o is LevelTile)
             {
@@ -430,7 +439,9 @@ namespace Toggle
             {
                 proportion -= damage;
                 hitInvulnTime = hitInvulnMax;
+                Textures.sounds["hit"].Play();
             }
+           
             
         }
 
@@ -440,6 +451,7 @@ namespace Toggle
             {
                 proportion -= damage;
                 hitInvulnTime = setInvuln;
+                Textures.sounds["weakhit"].Play();
             }
 
         }

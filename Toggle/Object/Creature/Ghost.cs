@@ -71,14 +71,15 @@ namespace Toggle
         public override void goodMove()
         {
             velocity = 1;
-            if ((x % 32 == 0 && y % 32 == 0) && Function.distanceTo(this,getPlayer()) > 96)
+            if ((x % 32 == 0 && y % 32 == 0) && Function.distanceTo(this, getPlayer()) > 96)
             {
                 defendTileGoodX = (int)(getPlayer().getCenter().X / 32);
                 defendTileGoodY = (int)(getPlayer().getCenter().Y / 32);
                 direction = getNextPathDirection((int)x / 32, (int)y / 32, defendTileGoodX, defendTileGoodY);
             }
 
-
+            int xprev = x;
+            int yprev = y;
             switch (direction)
             {
                 case 0:
@@ -96,6 +97,15 @@ namespace Toggle
                 default:
                     moving = false;
                     break;
+            }
+
+            if (x < 0 || x > boundBottomRight.X)
+            {
+                x = xprev;
+            }
+            if (y < 0 || y > boundBottomRight.Y)
+            {
+                y = yprev;
             }
         }
 
@@ -134,6 +144,192 @@ namespace Toggle
                     break;
             }
         }
+
+        public override void reportCollision(Object o)
+        {
+            if (!state)
+            {
+                if ((o is Wall) && o.blocksProjectiles())
+                {
+                    Rectangle hBO = o.getHitBox(); //hitBoxOther
+                    if (direction == 0)
+                    {
+                        //x = hBO.X + hBO.Width;
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                    }
+                    else if (direction == 1)
+                    {
+                        //y = hBO.Y + hBO.Height;
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                    }
+                    else if (direction == 2)
+                    {
+                        //x = hBO.X - hitBox.Width;
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                    }
+                    else if (direction == 3)
+                    {
+                        //y = hBO.Y - hitBox.Height;
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                    }
+
+                }
+        }
+            if (o is Creature)
+            {
+                //x = previousHitBox.X;
+                //y = previousHitBox.Y;
+
+                Rectangle previousHBO = ((Creature)o).getPreviousHitBox();
+                int directionOther = ((Creature)o).getDirection();
+
+                if (hitBox.Intersects(previousHBO))
+                {
+                    if (direction == 0)
+                    {
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                        //x = previousHBO.X + previousHBO.Width;
+                    }
+                    else if (direction == 1)
+                    {
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                        //y = previousHBO.Y + previousHBO.Height;
+                    }
+                    else if (direction == 2)
+                    {
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                        //x = previousHBO.X - hitBox.Width;
+                    }
+                    else if (direction == 3)
+                    {
+                        x = previousHitBox.X;
+                        y = previousHitBox.Y;
+                        // y = previousHBO.Y - hitBox.Height;
+                    }
+                    if (o is Ghost)
+                    {
+                        x = Game1.random.Next(boundBottomRight.X / 32) * 32;
+                        y = Game1.random.Next(boundBottomRight.Y / 32) * 32;
+                    }
+                }
+                
+            }
+
+            if (o is Miscellanious)
+            {
+                if (o.getCollision() == true)
+                {
+                    x = previousHitBox.X;
+                    y = previousHitBox.Y;
+                }
+            }
+            if (o is Pushable)
+            {
+                if (((Pushable)o).push(direction, velocity))
+                {
+
+                }
+                else
+                {
+                    x = previousHitBox.X;
+                    y = previousHitBox.Y;
+                }
+            }
+            hitBox = new Rectangle(x, y, width, height);
+
+        }
+
+        public override int getNextPathDirection(int currentTileX, int currentTileY, int desiredTileX, int desiredTileY)
+        {
+
+            if (currentTileX == desiredTileX && currentTileY == desiredTileY)
+            {
+                return -1;
+            }
+
+            if (tileIsOccupied(desiredTileX, desiredTileY))
+            {
+                return -1;
+            }
+            int yTiles = Game1.wallArray.GetLength(0);
+            int xTiles = Game1.wallArray.GetLength(1);
+
+
+            bool[,] visited = new bool[yTiles, xTiles];
+            Queue<TileNode> q = new Queue<TileNode>();
+
+            TileNode start = new TileNode(currentTileX, currentTileY);
+            TileNode end = new TileNode(desiredTileX, desiredTileY);
+            q.Enqueue(start);
+            visited[start.Y, start.X] = true;
+
+
+
+            while (q.Count != 0)
+            {
+                TileNode next = q.Dequeue();
+                if (next.X != end.X || next.Y != end.Y)
+                {
+                    if (next.X + 1 < xTiles && !visited[next.Y, next.X + 1] && (state || !Game1.wallArray[next.Y, next.X + 1]) && !tileIsOccupied(next.X + 1, next.Y))
+                    {
+                        TileNode temp = new TileNode(next.X + 1, next.Y, next);
+                        visited[next.Y, next.X + 1] = true;
+                        q.Enqueue(temp);
+                    }
+                    if (next.X - 1 >= 0 && !visited[next.Y, next.X - 1] && (state || !Game1.wallArray[next.Y, next.X - 1]) && !tileIsOccupied(next.X - 1, next.Y))
+                    {
+                        TileNode temp = new TileNode(next.X - 1, next.Y, next);
+                        visited[next.Y, next.X - 1] = true;
+                        q.Enqueue(temp);
+                    }
+                    if (next.Y + 1 < yTiles && !visited[next.Y + 1, next.X] && (state || !Game1.wallArray[next.Y + 1, next.X]) && !tileIsOccupied(next.X, next.Y + 1))
+                    {
+                        TileNode temp = new TileNode(next.X, next.Y + 1, next);
+                        visited[next.Y + 1, next.X] = true;
+                        q.Enqueue(temp);
+                    }
+                    if (next.Y - 1 >= 0 && !visited[next.Y - 1, next.X] && (state || !Game1.wallArray[next.Y - 1, next.X]) && !tileIsOccupied(next.X, next.Y - 1))
+                    {
+                        TileNode temp = new TileNode(next.X, next.Y - 1, next);
+                        visited[next.Y - 1, next.X] = true;
+                        q.Enqueue(temp);
+                    }
+                }
+                else
+                {
+                    while (!next.Parent.Equals(start))
+                    {
+                        next = (TileNode)next.Parent;
+                    }
+                    if (next.X < start.X)
+                    {
+                        return 0;
+                    }
+                    if (next.X > start.X)
+                    {
+                        return 2;
+                    }
+                    if (next.Y < start.Y)
+                    {
+                        return 1;
+                    }
+                    if (next.Y > start.Y)
+                    {
+                        return 3;
+                    }
+                }
+
+            }
+            return -1;
+        }
+
 
 
         public Player getPlayer()

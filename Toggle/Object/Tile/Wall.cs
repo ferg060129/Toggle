@@ -11,6 +11,7 @@ namespace Toggle
         {
             isSolid = true;
             collidable = true;
+            projectileBlocks = true;
         }
 
     }

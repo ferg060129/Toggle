@@ -10,6 +10,7 @@ namespace Toggle
     {
         DiaryPlatform dp = null;
         KnifePlatform kp = null;
+        RosePlatform rp = null;
         public HubLevel()
             : base()
         {
@@ -65,6 +66,12 @@ namespace Toggle
                 kp = new KnifePlatform(25 * 32, 26 * 32);
             }
             Game1.platforms.Add(kp);
+            if (rp == null)
+            {
+                rp = new RosePlatform(23 * 32, 28 * 32);
+            }
+            Game1.platforms.Add(rp);
+
 
             
 
@@ -102,6 +109,7 @@ namespace Toggle
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "schoolLevel",new Point(34 * 32, 24 * 32)));
             levelTiles.Add(new LevelTile(9 * 32, 8 * 32, "blackBlock", "blackBlock", "houseLevel", new Point(24 * 32, 16 * 32)));
             levelTiles.Add(new LevelTile(26 * 32, 5 * 32, "blackBlock", "blackBlock", "complex1Level", new Point(22 * 32, 12 * 32)));
+            levelTiles.Add(new LevelTile(36 * 32, 20 * 32, "blackBlock", "blackBlock", "marshEnterLevel", new Point(4 * 32, 9 * 32)));
         }
 
 

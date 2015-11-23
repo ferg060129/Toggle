@@ -67,6 +67,7 @@ namespace Toggle
             Game1.miscObjects.Add(myGate);
             ChalkboardTop ch = new ChalkboardTop(5 * 32, 0 * 32, myGate);
             Game1.miscObjects.Add(ch);
+            Game1.visuals.Add(new HiddenArrow(6 * 32, 2 * 32));
 
             Gate gate2 = new Gate(2 * 32, 17 * 32);
             Game1.miscObjects.Add(gate2);

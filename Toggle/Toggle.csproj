@@ -60,6 +60,10 @@
     <Compile Include="Function.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Level\MarshFinalLevel.cs" />
+    <Compile Include="Level\MarshEnterLevel.cs" />
+    <Compile Include="Level\Marsh2Level.cs" />
+    <Compile Include="Level\Marsh1Level.cs" />
     <Compile Include="Level\LaserIntro.cs" />
     <Compile Include="Level\Gate2Level.cs" />
     <Compile Include="Level\Complex1.cs" />
@@ -72,18 +76,24 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Level\TutorialLevel.cs" />
+    <Compile Include="Object\Creature\PlayerGhost.cs" />
     <Compile Include="Object\Inventory Item\DiaryI.cs" />
+    <Compile Include="Object\Inventory Item\KnifeI - Copy.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
     <Compile Include="Object\Inventory Item\RopeI.cs" />
     <Compile Include="Object\Item\Diary.cs" />
+    <Compile Include="Object\Item\Rose.cs" />
     <Compile Include="Object\Item\Knife.cs" />
     <Compile Include="Object\Item\Rope.cs" />
     <Compile Include="Object\Miscellanious\BoxTop.cs" />
+    <Compile Include="Object\Miscellanious\Button\ButtonShadow.cs" />
     <Compile Include="Object\Miscellanious\Button\ButtonHeavy.cs" />
     <Compile Include="Object\Miscellanious\Button\ButtonPlayer.cs" />
     <Compile Include="Object\Miscellanious\Fence.cs" />
     <Compile Include="Object\Miscellanious\Pushable\AngerBlob.cs" />
+    <Compile Include="Object\Miscellanious\Torch.cs" />
     <Compile Include="Object\Platform\DiaryPlatform.cs" />
+    <Compile Include="Object\Platform\RosePlatform.cs" />
     <Compile Include="Object\Platform\KnifePlatform.cs" />
     <Compile Include="Object\Platform\LanternPlatform.cs" />
     <Compile Include="Object\Platform\Platform.cs" />
@@ -130,6 +140,7 @@
     <Compile Include="Object\Tile\Wall.cs" />
     <Compile Include="Object\Miscellanious\ChalkboardTop.cs" />
     <Compile Include="Object\Visual\House.cs" />
+    <Compile Include="Object\Visual\HiddenArrow.cs" />
     <Compile Include="Object\Visual\School.cs" />
     <Compile Include="Object\Visual\Visual.cs" />
     <Compile Include="Object\Visual\Lake.cs" />
@@ -258,7 +269,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Image1.png" />
+    <Content Include="Content\screen_pics\diaryEntry.png" />
     <Content Include="Content\screen_pics\fallasleep.png" />
+    <Content Include="Content\screen_pics\findsDiary.png" />
     <Content Include="Content\screen_pics\hourglass.png" />
     <Content Include="Content\screen_pics\inventorytutorial.png" />
     <Content Include="Content\ItemBox.png">
