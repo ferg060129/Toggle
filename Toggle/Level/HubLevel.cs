@@ -10,6 +10,7 @@ namespace Toggle
     {
         DiaryPlatform dp = null;
         KnifePlatform kp = null;
+        RosePlatform rp = null;
         public HubLevel()
             : base()
         {
@@ -65,6 +66,12 @@ namespace Toggle
                 kp = new KnifePlatform(25 * 32, 26 * 32);
             }
             Game1.platforms.Add(kp);
+            if (rp == null)
+            {
+                rp = new RosePlatform(23 * 32, 28 * 32);
+            }
+            Game1.platforms.Add(rp);
+
 
             
 

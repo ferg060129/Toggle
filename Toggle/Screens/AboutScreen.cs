@@ -19,6 +19,7 @@ namespace Toggle
 
         private string[] buttonInfo = {"ButtonPlayer|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
                                       "ButtonHeavy|buttonHUp|buttonHUp|You'll need to push a heavier object \nonto this|You'll need to push a heavier object \nonto this",
+                                      "ButtonShadow|buttonSUp|buttonSUp|This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds |This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds ",
                                       "Desk|desk|deskBad|This is a desk|whoooo hooo",
                                       "Ghost|ghost|unghost|cute|spooky",
                                       "VineMoveBlock|BoxLight|BoxDark|This is a pushable object\nNote, enemies can push these too|This object is not pushable",

@@ -66,6 +66,7 @@ namespace Toggle
         MarshEnterLevel marshEnterLevel;
         Marsh1Level marsh1Level;
         Marsh2Level marsh2Level;
+        MarshFinalLevel marshFinalLevel;
         int time;
         int width;
         int height;
@@ -213,16 +214,18 @@ namespace Toggle
             levels.Add(marshEnterLevel = new MarshEnterLevel());
             levels.Add(marsh1Level = new Marsh1Level());
             levels.Add(marsh2Level = new Marsh2Level());
+            levels.Add(marshFinalLevel = new MarshFinalLevel());
            
             //normal is hubLevel, change only to test
-            currentLevel = hubLevel;
+            currentLevel = marshFinalLevel;
 
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             //hub start
-            player = new Player(13*32, 25*32, inventory, this);
+            //player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(9 * 32, 44 * 32, inventory, this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -669,6 +672,10 @@ namespace Toggle
             else if (currentLevelString.Equals("marsh2Level"))
             {
                 currentLevel = marsh2Level;
+            }
+            else if (currentLevelString.Equals("marshFinalLevel"))
+            {
+                currentLevel = marshFinalLevel;
             }
             creatures.Add(player);
             currentLevel.loadLevel();
@@ -1715,6 +1722,10 @@ namespace Toggle
             {
                  currentLevelString = "marsh2Level";
             }
+             else if (currentLevel is MarshFinalLevel)
+             {
+                 currentLevelString = "marshFinalLevel";
+             }
 
 
             saveFile.WriteLine(currentLevelString);
