@@ -193,7 +193,7 @@ namespace Toggle
             if (isDead())
             {
                 imageBoundingRectangle = new Rectangle(0, 0, 0, 0);
-                hitBox = previousHitBox;
+                velocity = 0;
             }
         }
 
