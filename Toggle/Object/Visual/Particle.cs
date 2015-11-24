@@ -15,17 +15,18 @@ namespace Toggle
             : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures[graphicString];
-            badGraphic = Textures.textures["berry"];
-            lifeTime = 50;
-            directionVector = new Vector2(Game1.random.Next(11) - 5, Game1.random.Next(11) - 5);
-            imageBoundingRectangle = new Rectangle(0,0,32,32);
+            badGraphic = Textures.textures[graphicString];
+            lifeTime = 10;
+            directionVector = new Vector2(Game1.random.Next(7) - 3, Game1.random.Next(7) - 3);
+            int randx = Game1.random.Next(1);
+            int randy = Game1.random.Next(1);
+            imageBoundingRectangle = new Rectangle(randx * 16,randy * 16,16,16);
         }
 
         public void update()
         {
             setPosition(getPosition() + directionVector);
-            spriteAlpha -= 0.02f;
-            imageBoundingRectangle = new Rectangle(0, 0, 32 , 32);
+            spriteAlpha -= 0.1f;
             lifeTime--;
         }
         
