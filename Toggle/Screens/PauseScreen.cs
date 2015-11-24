@@ -33,7 +33,7 @@ namespace Toggle
                     if (sb.getClickBox().Contains(cursorLocation))
                     {
                         string newState = sb.onClick();
-                        engine.setState(newState);
+                        engine.setState(newState,"");
                     }
                 }
             }

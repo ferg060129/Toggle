@@ -11,17 +11,18 @@ using System.Collections;
 
 namespace Toggle
 {
-    class InventoryScreen : TextBoxScreen
+    class PlatformScreen : TextBoxScreen
     {
-        public InventoryScreen(Game1 eng): base(eng)
+        public PlatformScreen(Game1 eng)
+            : base(eng)
         {
             buttons.Add(new InventoryScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start", "startHover", this));
             textBoxLocation = new Point(150, 100);
-            string[] temp = { "Congratulations, you have found an item! All items are stored in your inventory at the top right. You can press the I key to toggle it on and off.", "Hover over your items to learn something about them.", "Maybe you can even combine them to make something better!" };
-            
+            string[] temp = { "You can attempt to drop an item onto a platform by dragging it out of your inventory while standing on the platform.", "Use the I key to toggle the inventory on and off."};
+
             instructions = temp;
             currentInfoText = adjustTextForWrap(instructions[infoIndex], Textures.fonts["arial12"]);
-            numInfoBlocks = 3;
+            numInfoBlocks = 2;
 
         }
     }

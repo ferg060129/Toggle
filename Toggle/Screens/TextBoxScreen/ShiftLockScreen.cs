@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,17 +9,18 @@ using System.Collections;
 
 namespace Toggle
 {
-    class InventoryScreen : TextBoxScreen
+    class ShiftLockScreen : TextBoxScreen
     {
-        public InventoryScreen(Game1 eng): base(eng)
+        public ShiftLockScreen(Game1 eng)
+            : base(eng)
         {
             buttons.Add(new InventoryScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start", "startHover", this));
             textBoxLocation = new Point(150, 100);
-            string[] temp = { "Congratulations, you have found an item! All items are stored in your inventory at the top right. You can press the I key to toggle it on and off.", "Hover over your items to learn something about them.", "Maybe you can even combine them to make something better!" };
-            
+            string[] temp = { "The tile you have just stepped on has locked your ability to Shift! Notice the lock symbol on your Shift cooldown bar to the upper left.","Find a key tile to unlock it, so you may Shift once again!"};
+
             instructions = temp;
             currentInfoText = adjustTextForWrap(instructions[infoIndex], Textures.fonts["arial12"]);
-            numInfoBlocks = 3;
+            numInfoBlocks = 2;
 
         }
     }

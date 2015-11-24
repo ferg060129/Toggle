@@ -44,7 +44,7 @@ namespace Toggle
         public override void onHover()
         {
 
-            if(!engine.continueButtonPressable() && graphic.Equals("continue"))
+            if (!engine.continueButtonPressable() && graphic.Equals(Textures.textures["continue"]))
             {
                 return;
             }
