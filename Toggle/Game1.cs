@@ -47,6 +47,8 @@ namespace Toggle
         public static int[,] wallTileArray;
         public static double[,] darkTileArray;
 
+        private bool continueButtonActive = true;
+
         TutorialLevel tutorialLevel;
         HubLevel hubLevel;
         HouseLevel houseLevel;
@@ -118,12 +120,15 @@ namespace Toggle
         InventoryItem[,] backUpInventory;
         ArrayList backUpItems;
         bool[] backUpPlatformFilled;
-
+        private PlatformScreen platformScreen;
+        private ShiftLockScreen shiftLockScreen;
         private InventoryScreen inventoryScreen;
         private StartScreen startScreen;
         private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
+
+        private Screen currentTextBoxScreen;
 
         public static Dictionary<string, Level> stringToLevel = new Dictionary<string, Level>();
         public static Dictionary<Level, string> levelToString = new Dictionary<Level, string>();
@@ -261,6 +266,9 @@ namespace Toggle
             player = new Player(13 * 32, 25 * 32, inventory, this);
 
             playerGhost = new PlayerGhost(0, 0);
+
+            platformScreen = new PlatformScreen(this);
+            shiftLockScreen = new ShiftLockScreen(this);
             inventoryScreen = new InventoryScreen(this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
@@ -297,6 +305,8 @@ namespace Toggle
             //banditKing.Play();
 
             gameState = "start";
+            //Check whether there is a continue point
+            continueButtonActive = saveFileExists();
             //MediaPlayer.IsRepeating = true;
             zone1good.Volume = .7f;
             zone1bad.Volume = 0;
@@ -375,8 +385,8 @@ namespace Toggle
                 case "about":
                     aboutUpdate();
                     break;
-                case "inventory":
-                    inventoryScreenUpdate();
+                case "textbox":
+                    textBoxScreenUpdate();
                     break;
             }
             base.Update(gameTime);
@@ -477,6 +487,14 @@ namespace Toggle
                         gameState = "winfade";
                 }
             }
+            foreach (Platform p in platforms)
+            {
+                Rectangle hitBox = p.getHitBox();
+                if (player.getHitBox().Intersects(hitBox))
+                {
+                    player.reportCollision(p);
+                }
+            }
             checkLevelTileCollision();
         }
 
@@ -525,8 +543,8 @@ namespace Toggle
                 case "about":
                     aboutDraw();
                     break;
-                case "inventory":
-                    inventoryScreenDraw();
+                case "textbox":
+                    textBoxScreenDraw();
                     break;
             }
             base.Draw(gameTime);
@@ -703,7 +721,7 @@ namespace Toggle
                     if (isOnScreen(t.getHitBox()))
                     {
                         spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
-                        if (t is PlayerActivateTile)
+                        if (t is PlayerActivateTile || t is Grate)
                             aboutScreen.addSeenObject(t);
                     }
 
@@ -1306,19 +1324,21 @@ namespace Toggle
             spriteBatch.End();
         }
 
-        public void inventoryScreenUpdate()
+        public void textBoxScreenUpdate()
         {
-            inventoryScreen.checkButtonHovers();
-            inventoryScreen.checkButtonClicks();
+            
+            currentTextBoxScreen.checkButtonHovers();
+            currentTextBoxScreen.checkButtonClicks();
+            
         }
 
-        public void inventoryScreenDraw()
+        public void textBoxScreenDraw()
         {
             playDraw();
 
             spriteBatch.Begin();
             spriteBatch.Draw(screenDisplayed, new Vector2(0, 0), Color.White);
-            inventoryScreen.drawScreen(spriteBatch);
+            currentTextBoxScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
 
@@ -1772,7 +1792,7 @@ namespace Toggle
             return height;
         }
 
-        public void setState(string state)
+        public void setState(string state, string arg2)
         {
             gameState = state;
             if (gameState == "start")
@@ -1785,9 +1805,23 @@ namespace Toggle
                 titleScreenPhase = 2;
             }
 
-            if (gameState == "inventory")
+            if (gameState == "textbox")
             {
-                screenDisplayed = Textures.textures["inventorytutorial"];
+               switch(arg2)
+               {
+                   case "inventory":
+                       currentTextBoxScreen = inventoryScreen;
+                       showInventory = true;
+                       break;
+                   case "shiftLock":
+                       currentTextBoxScreen = shiftLockScreen;
+                       break;
+                   case "platform":
+                       currentTextBoxScreen = platformScreen;
+                       break;
+               }
+               screenDisplayed = Textures.textures["inventorytutorial"];
+                
             }
         }
 
@@ -1867,7 +1901,7 @@ namespace Toggle
             // {
             foreach (Platform p in platforms)
             {
-                string str = p.GetType().Name;
+                string str = "F:"+p.GetType().Name;
                 if (((Platform)p).isItemOnPlatform())
                 {
                     str += "|T";
@@ -2019,6 +2053,11 @@ namespace Toggle
 
         public bool continueButtonPressable()
         {
+            return continueButtonActive;
+        }
+
+        public bool saveFileExists()
+        {
             try
             {
                 StreamReader saveFile = new StreamReader("bananas.txt");
@@ -2035,6 +2074,10 @@ namespace Toggle
             return true;
         }
 
+        public void setShowInventory(bool b)
+        {
+            showInventory = b;
+        }
 
 
 

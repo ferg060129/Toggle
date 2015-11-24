@@ -31,6 +31,10 @@ namespace Toggle
 
         public override void onShift()
         {
+            for (int i = 0; i < 40; i++)
+            {
+                Game1.particles.Add(new Particle(x, y, "particleShadow"));
+            }
             triggerCooldown = false;
             Console.WriteLine(existState);
             if (state != existState)
@@ -49,6 +53,7 @@ namespace Toggle
         {
             if (triggerCooldown == false)
             {
+                
                 if (torches.Count > 0)
                 {
                     torches.Dequeue().onButton();

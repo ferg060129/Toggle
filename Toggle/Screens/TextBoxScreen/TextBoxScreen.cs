@@ -35,7 +35,7 @@ namespace Toggle
             infoIndex++;
             if (infoIndex >= numInfoBlocks)
             {
-                engine.setState("play");
+                engine.setState("play","");
                 infoIndex = 0;
             }
             currentStringLength = 0;
@@ -91,7 +91,7 @@ namespace Toggle
         public string adjustTextForWrap(string s, SpriteFont sf)
         {
             string returnString = "     ";
-            string currentLine = "";
+            string currentLine = "     ";
             string nextWord = "";
             int idx = 0;
             while(idx < s.Length)
