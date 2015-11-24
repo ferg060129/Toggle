@@ -13,7 +13,8 @@ namespace Toggle
         private Texture2D graphicHover;
         private string action;
         private SoundEffectInstance beep;
-        public StartScreenButton(int xLoc, int yLoc, string gra1, string gra2, string actionin)
+        Game1 engine;
+        public StartScreenButton(int xLoc, int yLoc, string gra1, string gra2, string actionin, Game1 eng)
         {
             graphic = Textures.textures[gra1];
             graphicHover = Textures.textures[gra2];
@@ -23,6 +24,7 @@ namespace Toggle
             imageBoundingRectangle = new Rectangle(0, 0, graphic.Width, graphic.Height);
             clickBox = new Rectangle(x, y, graphic.Width, graphic.Height);
             beep = Textures.sounds["beep"];
+            engine = eng;
         }
 
         public override Texture2D getGraphic()
@@ -41,6 +43,12 @@ namespace Toggle
 
         public override void onHover()
         {
+
+            if(!engine.continueButtonPressable() && graphic.Equals("continue"))
+            {
+                return;
+            }
+
             if(!isHovered)
             {
                 setHover(true);

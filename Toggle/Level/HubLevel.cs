@@ -117,6 +117,7 @@ namespace Toggle
         {
             Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
             levelItems.Add(gb);
+            gb.setFirstItem(true);
             /*
             Knife kn = new Knife(11 * 32, 25 * 32);
             levelItems.Add(kn);

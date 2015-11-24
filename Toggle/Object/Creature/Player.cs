@@ -330,8 +330,15 @@ namespace Toggle
         
         public void pickUp(Item i)
         {
-            if(i.canPickUp())
-            inventory.addInventoryItem(i.pickUpItem());
+            if (i.canPickUp())
+            { 
+                inventory.addInventoryItem(i.pickUpItem());
+                 if(i.isFirstItem())
+                 {
+                     engine.setState("inventory");
+                 }
+            }
+           
         }
         public override void reportCollision(Object o)
         {

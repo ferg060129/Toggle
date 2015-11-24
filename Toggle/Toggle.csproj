@@ -154,7 +154,8 @@
     <Compile Include="ScreenButtons\StartScreenButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
-    <Compile Include="Screens\InventoryScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\InventoryScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\TextBoxScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\StartScreen.cs" />
@@ -208,6 +209,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\chain.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\chalkboard.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\chalkboardtop.png">
@@ -272,9 +276,14 @@
     <Content Include="Content\house.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Image1.png" />
     <Content Include="Content\diaryEntry.png" />
     <Content Include="Content\fallasleep.png" />
     <Content Include="Content\findsDiary.png" />
+    <Content Include="Content\hourglassscreen.png" />
+    <Content Include="Content\textBox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\inventorytutorial.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -321,6 +330,9 @@
     <Content Include="Content\continue.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\inventorybutton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\startHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -348,6 +360,9 @@
     <Content Include="Content\buttonHUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\climbing_up_the_walls.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\grayblock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -358,6 +373,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Tile\HappyButtonPressed.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\hourglass.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\inventory2.png">
@@ -423,10 +441,19 @@
     <Content Include="Content\Tile\WoodFloor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\titleScreen.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\titleScreen2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\treespritesheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UnlitLantern.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\vineBlock.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\water2.png">
@@ -448,14 +475,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="Map Files\cir.txt" />
     <Content Include="Map Files\complex1.txt" />
     <Content Include="Map Files\gate1level.txt" />
     <Content Include="Map Files\gate2level.txt" />
     <Content Include="Map Files\gatelevel.txt" />
     <Content Include="Map Files\laserIntro.txt" />
+    <Content Include="Map Files\maze.txt" />
     <Content Include="Map Files\hub.txt" />
+    <Content Include="Map Files\out.txt" />
+    <Content Include="Map Files\practice.txt" />
     <Content Include="Map Files\laser.txt" />
+    <Content Include="Map Files\big.txt" />
     <Content Include="Map Files\home.txt" />
+    <Content Include="Map Files\map.txt" />
     <Content Include="Map Files\school.txt" />
     <Content Include="Map Files\testingLevel.txt" />
   </ItemGroup>
@@ -496,7 +529,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\screen_pics\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
