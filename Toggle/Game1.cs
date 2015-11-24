@@ -15,9 +15,6 @@ namespace Toggle
 
     public class Game1 : Game
     {
-
-
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -33,13 +30,12 @@ namespace Toggle
         public static ArrayList particles = new ArrayList();
 
         public static Random random = new Random();
-        
+
         //public static ArrayList collidableTiles = new ArrayList();
         public static ArrayList miscObjects = new ArrayList();
         public static ArrayList updateMiscObjects = new ArrayList();
         public static ArrayList playerActivateTiles = new ArrayList();
         public static ArrayList levelTiles = new ArrayList();
-        
 
         string gameState;
 
@@ -50,6 +46,8 @@ namespace Toggle
         public static bool[,] wallArray;
         public static int[,] wallTileArray;
         public static double[,] darkTileArray;
+
+        private bool continueButtonActive = true;
 
         TutorialLevel tutorialLevel;
         HubLevel hubLevel;
@@ -95,7 +93,7 @@ namespace Toggle
 
         public static bool boatSpawned = false;
 
-        
+
 
         private string currentLevelString;
         private float blackScreenAlpha;
@@ -122,14 +120,18 @@ namespace Toggle
         InventoryItem[,] backUpInventory;
         ArrayList backUpItems;
         bool[] backUpPlatformFilled;
-
+        private PlatformScreen platformScreen;
+        private ShiftLockScreen shiftLockScreen;
+        private InventoryScreen inventoryScreen;
         private StartScreen startScreen;
         private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
-        
-        
 
+        private Screen currentTextBoxScreen;
+
+        public static Dictionary<string, Level> stringToLevel = new Dictionary<string, Level>();
+        public static Dictionary<Level, string> levelToString = new Dictionary<Level, string>();
 
 
 
@@ -138,17 +140,17 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-           // graphics.IsFullScreen = true;
+            // graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             //IsMouseVisible = true;
-            
+
 
             //game.Add(this);
             //graphics.PreferredBackBufferWidth = 1400;
 
             //graphics.PreferredBackBufferHeight = 800;
             //graphics.ApplyChanges();
-          
+
         }
 
         protected override void Initialize()
@@ -164,7 +166,7 @@ namespace Toggle
             lastEnteredLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
             showInventory = false;
             AllowAccessibilityShortcutKeys(false);
-            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit); 
+            AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
         }
 
         protected override void LoadContent()
@@ -186,8 +188,8 @@ namespace Toggle
             {
                 Textures.textures.Add(Textures.graphicNames[x], Content.Load<Texture2D>(Textures.graphicNames[x]));
             }
-            
-            for(int x = 0; x < Textures.tileNames.Length; x++)
+
+            for (int x = 0; x < Textures.tileNames.Length; x++)
             {
                 Textures.textures.Add(Textures.tileNames[x], Content.Load<Texture2D>("Tile/" + Textures.tileNames[x]));
             }
@@ -217,17 +219,57 @@ namespace Toggle
             levels.Add(marsh1Level = new Marsh1Level());
             levels.Add(marsh2Level = new Marsh2Level());
             levels.Add(marshFinalLevel = new MarshFinalLevel());
-           
+
             //normal is hubLevel, change only to test
             currentLevel = hubLevel;
 
+            stringToLevel.Add("hubLevel", hubLevel);
+            stringToLevel.Add("houseLevel", houseLevel);
+            stringToLevel.Add("schoolLevel", schoolLevel);
+            stringToLevel.Add("gateLevel", gateLevel);
+            stringToLevel.Add("gate1Level", gate1Level);
+            stringToLevel.Add("gate2Level", gate2Level);
+            stringToLevel.Add("complex1Level", complex1Level);
+            stringToLevel.Add("ghostTestLevel", ghostTestLevel);
+            stringToLevel.Add("laserTestLevel", laserTestLevel);
+            stringToLevel.Add("laserIntroLevel", laserIntroLevel);
+            stringToLevel.Add("marshEnterLevel", marshEnterLevel);
+            stringToLevel.Add("marsh1Level", marsh1Level);
+            stringToLevel.Add("marsh2Level", marsh2Level);
+            stringToLevel.Add("marshFinalLevel", marshFinalLevel);
+            stringToLevel.Add("tutorialLevel", tutorialLevel);
+
+
+            levelToString.Add(hubLevel, "hubLevel");
+            levelToString.Add(houseLevel, "houseLevel");
+            levelToString.Add(schoolLevel, "schoolLevel");
+            levelToString.Add(gateLevel, "gateLevel");
+            levelToString.Add(gate1Level, "gate1Level");
+            levelToString.Add(gate2Level, "gate2Level");
+            levelToString.Add(complex1Level, "complex1Level");
+            levelToString.Add(ghostTestLevel, "ghostTestLevel");
+            levelToString.Add(laserTestLevel, "laserTestLevel");
+            levelToString.Add(laserIntroLevel, "laserIntroLevel");
+            levelToString.Add(marshEnterLevel, "marshEnterLevel");
+            levelToString.Add(marsh1Level, "marsh1Level");
+            levelToString.Add(marsh2Level, "marsh2Level");
+            levelToString.Add(marshFinalLevel, "marshFinalLevel");
+            levelToString.Add(tutorialLevel, "tutorialLevel");
+            //normal is hubLevel, change only to test
+            // currentLevel = marshFinalLevel;
+            currentLevel = hubLevel;
             inventory = new Inventory(this);
             //13 x 25 for hub level start
             //beep = Content.Load<SoundEffect>("beep").CreateInstance();
             //player = new Player(5 * 32, 32 * 5, inventory, this);
             //hub start
-            player = new Player(13*32, 25*32, inventory, this);
+            player = new Player(13 * 32, 25 * 32, inventory, this);
+
             playerGhost = new PlayerGhost(0, 0);
+
+            platformScreen = new PlatformScreen(this);
+            shiftLockScreen = new ShiftLockScreen(this);
+            inventoryScreen = new InventoryScreen(this);
             startScreen = new StartScreen(this);
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
@@ -238,7 +280,7 @@ namespace Toggle
             creatures.Add(player);
             cam.update();
 
-           
+
 
             //song = Content.Load<Song>("banditKing2");
 
@@ -247,7 +289,7 @@ namespace Toggle
 
             zone1good = Content.Load<SoundEffect>("zone4good").CreateInstance();
             zone1bad = Content.Load<SoundEffect>("zone4bad").CreateInstance();
-          
+
 
             //banditKing.Pitch = -1;
 
@@ -258,11 +300,13 @@ namespace Toggle
             tiles.AddRange(currentLevel.getLevelTiles());
             levelTiles.AddRange(currentLevel.getLevelTiles());
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
-            
+
             //MediaPlayer.Play(song);
             //banditKing.Play();
 
             gameState = "start";
+            //Check whether there is a continue point
+            continueButtonActive = saveFileExists();
             //MediaPlayer.IsRepeating = true;
             zone1good.Volume = .7f;
             zone1bad.Volume = 0;
@@ -271,8 +315,8 @@ namespace Toggle
             backUpInventory = inventory.getItemsCopy();
             backUpItems = (ArrayList)(currentLevel.getLevelItems()).Clone();
             backUpPlatformFilled = new bool[2];
-            if(currentLevel.Equals(hubLevel))
-            loadBackupPlatforms();
+            if (currentLevel.Equals(hubLevel))
+                loadBackupPlatforms();
         }
 
         public void reloadLevel()
@@ -281,6 +325,8 @@ namespace Toggle
             playerGhost.reset();
             worldState = true;
             //currentLevel.addInitialLevelItems();
+
+            /*
             inventory.setInventoryItems(backUpInventory);
             currentLevel.setLevelItems(backUpItems);
             if(currentLevel.Equals(hubLevel))
@@ -297,20 +343,25 @@ namespace Toggle
             }
             
             setLevel(lastEnteredLevelTile);
-            
+            syncStates();
+             * */
 
+            inventory.clearInventory();
+            currentLevel.reloadLevelItems();
+            continueGame();
+            syncStates();
 
         }
         protected override void UnloadContent()
         {
-          
+
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            switch(gameState)
+            switch (gameState)
             {
                 case "start":
                 case "help":
@@ -334,6 +385,9 @@ namespace Toggle
                 case "about":
                     aboutUpdate();
                     break;
+                case "textbox":
+                    textBoxScreenUpdate();
+                    break;
             }
             base.Update(gameTime);
 
@@ -341,7 +395,7 @@ namespace Toggle
 
         public void checkCollisions()
         {
-            foreach(Creature c in creatures)
+            foreach (Creature c in creatures)
             {
                 Rectangle hitBox = c.getHitBox();
                 foreach (Creature d in creatures)
@@ -349,7 +403,7 @@ namespace Toggle
                     if (!c.Equals(d))
                     {
                         Rectangle hitBoxOther = d.getHitBox();
-                        if(c.getHitBox().Intersects(hitBoxOther))
+                        if (c.getHitBox().Intersects(hitBoxOther))
                         {
                             c.reportCollision(d);
                         }
@@ -358,7 +412,7 @@ namespace Toggle
                 foreach (Tile t in solidTiles)
                 {
                     Rectangle hitBoxOther = t.getHitBox();
-                    
+
                     if (c.getHitBox().Intersects(hitBoxOther))
                     {
                         c.reportCollision(t);
@@ -409,7 +463,7 @@ namespace Toggle
                 }
             }
 
-            foreach(PlayerActivateTile t in playerActivateTiles)
+            foreach (PlayerActivateTile t in playerActivateTiles)
             {
                 Rectangle hitBox = t.getHitBox();
                 if (player.getHitBox().Intersects(hitBox))
@@ -421,7 +475,7 @@ namespace Toggle
                 {
                     t.setPressed(false);
                 }
-                
+
             }
             foreach (UpdateMiscellanious u in updateMiscObjects)
             {
@@ -429,8 +483,16 @@ namespace Toggle
                 if (player.getHitBox().Intersects(hitBox))
                 {
                     player.reportCollision(u);
-                    if(u is Boat)
-                    gameState = "winfade";
+                    if (u is Boat)
+                        gameState = "winfade";
+                }
+            }
+            foreach (Platform p in platforms)
+            {
+                Rectangle hitBox = p.getHitBox();
+                if (player.getHitBox().Intersects(hitBox))
+                {
+                    player.reportCollision(p);
                 }
             }
             checkLevelTileCollision();
@@ -439,12 +501,12 @@ namespace Toggle
 
         public void checkLevelTileCollision()
         {
-            for(int x = 0; x < levelTiles.Count; x++)
+            for (int x = 0; x < levelTiles.Count; x++)
             {
 
                 Tile t = (Tile)(levelTiles[x]);
                 Rectangle hitBox = t.getHitBox();
-                if(player.getHitBox().Intersects(hitBox))
+                if (player.getHitBox().Intersects(hitBox))
                 {
                     player.reportCollision(t);
                 }
@@ -454,7 +516,7 @@ namespace Toggle
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            
+
             switch (gameState)
             {
                 case "tutorial":
@@ -480,6 +542,9 @@ namespace Toggle
                     break;
                 case "about":
                     aboutDraw();
+                    break;
+                case "textbox":
+                    textBoxScreenDraw();
                     break;
             }
             base.Draw(gameTime);
@@ -548,12 +613,12 @@ namespace Toggle
             }*/
 
             InventoryItem[,] inventoryItems = inventory.getItems();
-            for(int x = 0; x < inventoryItems.GetLength(0);x++)
+            for (int x = 0; x < inventoryItems.GetLength(0); x++)
             {
-                for (int y = 0; y < inventoryItems.GetLength(1);y++ )
+                for (int y = 0; y < inventoryItems.GetLength(1); y++)
                 {
-                    if(inventoryItems[x,y] != null)
-                    inventoryItems[x, y].setState(worldState);
+                    if (inventoryItems[x, y] != null)
+                        inventoryItems[x, y].setState(worldState);
                 }
             }
             foreach (Tile t in tiles)
@@ -561,14 +626,93 @@ namespace Toggle
                 t.setState(worldState);
             }
         }
+
+        public void syncStates()
+        {
+            if (worldState)
+            {
+                zone1bad.Volume = 0;
+                zone1good.Volume = .7f;
+            }
+            else
+            {
+                zone1good.Volume = 0;
+                zone1bad.Volume = 1;
+            }
+
+            foreach (Creature c in creatures)
+            {
+                c.setState(worldState);
+                c.onShift();
+            }
+            foreach (Item i in items)
+            {
+                i.setState(worldState);
+            }
+            foreach (Miscellanious m in miscObjects)
+            {
+                m.setState(worldState);
+                m.onShift();
+                //Check if we are in a strawberry and snap into it
+                if ((worldState == true) && (m is Strawberry))
+                {
+                    if (player.checkOverlap(m))
+                    {
+                        player.setX(m.getX());
+                        player.setY(m.getY());
+                        player.updateHitbox();
+                    }
+                }
+            }
+            foreach (Visual v in visuals)
+            {
+                v.setState(worldState);
+            }
+            foreach (UpdateMiscellanious um in updateMiscObjects)
+            {
+                um.setState(worldState);
+            }
+            foreach (Platform p in platforms)
+            {
+                p.setState(worldState);
+            }
+            /*
+            if (worldState)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song);
+            }
+            else
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(song2);
+            }*/
+
+            InventoryItem[,] inventoryItems = inventory.getItems();
+            for (int x = 0; x < inventoryItems.GetLength(0); x++)
+            {
+                for (int y = 0; y < inventoryItems.GetLength(1); y++)
+                {
+                    if (inventoryItems[x, y] != null)
+                        inventoryItems[x, y].setState(worldState);
+                }
+            }
+            foreach (Tile t in tiles)
+            {
+                t.setState(worldState);
+            }
+        }
+
+
         public void drawMap(SpriteBatch sb)
         {
-            if(!draw)
+            if (!draw)
             {
                 draw = true;
                 return;
             }
-            foreach(Tile t in tiles){
+            foreach (Tile t in tiles)
+            {
                 int xLoc = t.getX();
                 int yLoc = t.getY();
                 if (((xLoc > player.getX() - width - 32) && (xLoc < player.getX() + width)) &&
@@ -577,10 +721,10 @@ namespace Toggle
                     if (isOnScreen(t.getHitBox()))
                     {
                         spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), Color.White);
-                        if(t is PlayerActivateTile)
-                        aboutScreen.addSeenObject(t);
+                        if (t is PlayerActivateTile || t is Grate)
+                            aboutScreen.addSeenObject(t);
                     }
-                    
+
                 }
             }
         }
@@ -599,7 +743,7 @@ namespace Toggle
                     {
                         double distance = Math.Sqrt(Math.Pow(player.getX() - xLoc, 2) + Math.Pow(player.getY() - yLoc, 2));
                         t.addLampLight(distance);
-                        
+
                     }
                     opacity = t.getOpacity();
                     spriteBatch.Draw(t.getGraphic(), new Vector2(xLoc, yLoc), new Rectangle(0, 0, 32, 32), new Color(Color.White, opacity));
@@ -619,12 +763,12 @@ namespace Toggle
 
             player.setLocked(false);
             backUpInventory = inventory.getItemsCopy();
-            
+
             lastEnteredLevelTile = level;
             Console.WriteLine(level.getLevel());
             currentLevelString = level.getLevel();
             //Eventually turn level strings into global constants
-            if(currentLevel != null)
+            if (currentLevel != null)
             {
                 currentLevel.unloadLevel();
             }
@@ -693,12 +837,12 @@ namespace Toggle
             levelTiles.AddRange(currentLevel.getLevelTiles());
             player.setX(currentLevel.getPlayerStartingX());
             player.setY(currentLevel.getPlayerStartingY());
-            
+
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();
             cam.update();
             if (level.getLevel().Equals("hubLevel"))
-            loadBackupPlatforms();
+                loadBackupPlatforms();
             saveGame(level);
         }
 
@@ -756,6 +900,9 @@ namespace Toggle
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
                     gameState = "play";
+                    LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
+                    saveGame(lv);
+                    //screenDisplayed = Textures.textures["inventorytutorial"];
                 }
             }
             if (newKeyBoardState.IsKeyUp(Keys.LeftShift) && newKeyBoardState.IsKeyUp(Keys.RightShift))
@@ -774,12 +921,12 @@ namespace Toggle
             Vector2 cursorPosition = new Vector2(mouseX, mouseY);
 
             spriteBatch.Begin();
-            spriteBatch.Draw(screenDisplayed, new Vector2(0,0), Color.White);
+            spriteBatch.Draw(screenDisplayed, new Vector2(0, 0), Color.White);
             if (titleScreenPhase == 0)
             {
                 startScreen.drawScreen(spriteBatch);
             }
-           
+
             spriteBatch.Draw(Textures.textures["cursor"], cursorPosition, new Rectangle(0, 0, 16, 16), Color.White);
             spriteBatch.End();
         }
@@ -791,7 +938,7 @@ namespace Toggle
                 zone1good.Play();
                 zone1bad.Play();
             }
-            
+
             time++;
             newKeyBoardState = Keyboard.GetState();
             IsMouseVisible = false;
@@ -811,7 +958,7 @@ namespace Toggle
             {
                 c.move();
             }
-            foreach(UpdateMiscellanious i in updateMiscObjects)
+            foreach (UpdateMiscellanious i in updateMiscObjects)
             {
                 i.move();
             }
@@ -867,7 +1014,7 @@ namespace Toggle
             {
                 gameState = "pause";
             }
-            else if(newKeyBoardState.IsKeyDown(Keys.A) && !oldKeyBoardState.IsKeyDown(Keys.A) && !player.isReadingChalkboard())
+            else if (newKeyBoardState.IsKeyDown(Keys.A) && !oldKeyBoardState.IsKeyDown(Keys.A) && !player.isReadingChalkboard())
             {
                 gameState = "about";
             }
@@ -877,7 +1024,7 @@ namespace Toggle
             }
             else if (newKeyBoardState.IsKeyDown(Keys.I) && !oldKeyBoardState.IsKeyDown(Keys.I) && !player.isReadingChalkboard())
             {
-                showInventory =! showInventory;
+                showInventory = !showInventory;
             }
 
             if (winCondition() && !boatSpawned)
@@ -896,7 +1043,7 @@ namespace Toggle
 
         public void playLaserDraw()
         {
-            int [] tempArray = new int[4];
+            int[] tempArray = new int[4];
             int po = 0;
             if (!worldState)
             {
@@ -929,9 +1076,9 @@ namespace Toggle
                         spriteBatch.Draw(laserColor,
                             new Rectangle(l.getX() + 24, l.getY() + 32, Math.Abs(tempArray[3] - l.getY()), 16),
                                 null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + po) * 3.14529 / 180))),
-                                (float)Math.PI / 2, new Vector2(0, 0), SpriteEffects.None,0);
+                                (float)Math.PI / 2, new Vector2(0, 0), SpriteEffects.None, 0);
                         spriteBatch.Draw(laserColor,
-                            new Rectangle(l.getX() + 8, l.getY(), Math.Abs(tempArray[2] - l.getY()),16 ),
+                            new Rectangle(l.getX() + 8, l.getY(), Math.Abs(tempArray[2] - l.getY()), 16),
                                 null, Color.White * (1.5f - Math.Abs((float)Math.Sin((time + 40 + po) * 3.14529 / 180))),
                                 (float)Math.PI * 3 / 2, new Vector2(0, 0), SpriteEffects.None, 0);
                     }
@@ -946,18 +1093,18 @@ namespace Toggle
             Point po = convertCursorLocation(mouseState);
             int mouseX = po.X;
             int mouseY = po.Y;
- 
+
             drawMap(spriteBatch);
-            
-            foreach(Platform p in platforms)
+
+            foreach (Platform p in platforms)
             {
-                if(isOnScreen(p.getHitBox()))
+                if (isOnScreen(p.getHitBox()))
                 {
                     spriteBatch.Draw(p.getGraphic(), new Vector2(p.getX(), p.getY()), p.getImageBoundingRectangle(), Color.White);
                     aboutScreen.addSeenObject(p);
                 }
-                
-                
+
+
             }
 
             foreach (Item i in items)
@@ -972,11 +1119,11 @@ namespace Toggle
                     spriteBatch.Draw(c.getGraphic(), new Vector2(c.getX(), c.getY()), c.getImageBoundingRectangle(), Color.White * c.getAlpha());
                     aboutScreen.addSeenObject(c);
                 }
-                
+
             }
             foreach (Miscellanious m in miscObjects)
             {
-                
+
                 if (isOnScreen(m.getHitBox()))
                 {
                     spriteBatch.Draw(m.getGraphic(), new Vector2(m.getX(), m.getY()), m.getImageBoundingRectangle(), Color.White);
@@ -992,13 +1139,13 @@ namespace Toggle
             {
                 spriteBatch.Draw(p.getGraphic(), new Vector2(p.getX(), p.getY()), p.getImageBoundingRectangle(), Color.White * p.getAlpha());
             }
-            
 
-           
+
+
 
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             if (!worldState)
-            drawDarkTiles(spriteBatch);
+                drawDarkTiles(spriteBatch);
 
             //Debug, draw player coords
             //spriteBatch.DrawString(Textures.fonts["mistral16"], player.getX() / 32 + " " + player.getY() / 32, new Vector2(player.getX(), player.getY() - 12), Color.Black);
@@ -1007,7 +1154,7 @@ namespace Toggle
             if (showInventory && !player.isReadingChalkboard())
             {
                 inventory.drawInventory(spriteBatch);
-                
+
                 foreach (InventoryItem i in inventory.getItems())
                 {
                     if (i != null)
@@ -1015,14 +1162,14 @@ namespace Toggle
                         Rectangle r = i.getHitBox();
 
                         //var mousePosition = new Point();
-                        if (r.Contains(cursorPosition) && (inventory.getSelectedItem() == null ||inventory.getSelectedItem().Equals(i)))
+                        if (r.Contains(cursorPosition) && (inventory.getSelectedItem() == null || inventory.getSelectedItem().Equals(i)))
                         {
                             string tip = i.getItemTip();
                             spriteBatch.DrawString(inventory.getFont(), tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
                         }
                     }
                 }
-               
+
             }
             foreach (UpdateMiscellanious i in updateMiscObjects)
             {
@@ -1045,7 +1192,7 @@ namespace Toggle
 
 
 
-                    
+
                     //spriteBatch.DrawString(box.getFont(), box.getAnswer(), new Vector2(getCenter().X - box.getAnswerWidth() / 2, getCenter().Y), Color.White);
                 }
                 else
@@ -1059,7 +1206,7 @@ namespace Toggle
             }
             //draw player ghost over most things on death
             if (playerGhost.isActive())
-                spriteBatch.Draw(playerGhost.getGraphic(), new Vector2(playerGhost.getX(),playerGhost.getY()), new Rectangle(0, 0, 32, 32), Color.White * playerGhost.getAlpha());
+                spriteBatch.Draw(playerGhost.getGraphic(), new Vector2(playerGhost.getX(), playerGhost.getY()), new Rectangle(0, 0, 32, 32), Color.White * playerGhost.getAlpha());
 
             //rays of light juice and darkness for dark world/any other effects to draw over everything
             spriteBatch.Draw(Textures.textures["shadowScreen"], new Vector2(-cam.getX() - width / 2, -cam.getY() - (height / 2) + (((float)Math.Sin(time * 3.14529 / 180) + 1.0f) * 40)), new Rectangle(0, 0, 800, 640), Color.White * 0.7f);
@@ -1067,7 +1214,7 @@ namespace Toggle
             {
                 if (currentLevel.getIndoors() == false)
                 {
-                spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time/2 * 3.14529 / 180) / 4));
+                    spriteBatch.Draw(Textures.textures["rays"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time / 2 * 3.14529 / 180) / 4));
                 }
             }
             else
@@ -1075,7 +1222,7 @@ namespace Toggle
                 spriteBatch.Draw(Textures.textures["darkHaze"], new Vector2(-cam.getX() - width / 2, -cam.getY() - height / 2), new Rectangle(0, 0, 800, 640), Color.White * ((float)Math.Sin(time * 3.14529 / 180) / 2f));
             }
 
-           
+
             //gui drawn last
             drawShiftCD();
             drawHealthBar();
@@ -1087,7 +1234,7 @@ namespace Toggle
             newKeyBoardState = Keyboard.GetState();
             pauseScreen.checkButtonHovers();
             pauseScreen.checkButtonClicks();
-            if(newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
+            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
             {
                 gameState = "play";
             }
@@ -1117,8 +1264,8 @@ namespace Toggle
             aboutScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
-        
-        
+
+
         public void lostUpdate()
         {
             newKeyBoardState = Keyboard.GetState();
@@ -1130,13 +1277,13 @@ namespace Toggle
             MouseState m = Mouse.GetState();
             if (m.LeftButton == ButtonState.Pressed)
             {
-                Rectangle replayButtonRect = new Rectangle(538,381,140,50);
-                Rectangle exitButtonRect = new Rectangle(544,483,90,45);
+                Rectangle replayButtonRect = new Rectangle(538, 381, 140, 50);
+                Rectangle exitButtonRect = new Rectangle(544, 483, 90, 45);
                 //Rectangle startButtonRect = new Rectangle((int)startButtonPosition.X,
-                 //                   (int)startButtonPosition.Y, 160, 64);
+                //                   (int)startButtonPosition.Y, 160, 64);
                 //Rectangle exitButtonRect = new Rectangle((int)exitButtonPosition.X,
-                  //                  (int)exitButtonPosition.Y, 160, 64);
-               // Console.Write(m.X+" "+m.Y+"\n");
+                //                  (int)exitButtonPosition.Y, 160, 64);
+                // Console.Write(m.X+" "+m.Y+"\n");
                 MouseState mouseState = Mouse.GetState();
                 int mouseX, mouseY;
                 Point p = convertCursorLocation(mouseState);
@@ -1150,11 +1297,11 @@ namespace Toggle
                     gameState = "play";
                     worldState = true;
                     currentLevel.unloadLevel();
-                    
+
                     currentLevel = hubLevel;
                     currentLevel.loadLevel();
                     inventory = new Inventory(this);
-                    player = new Player(13*32, 25*32, inventory, this);
+                    player = new Player(13 * 32, 25 * 32, inventory, this);
                     creatures.Add(player);
                     cam = new Camera(player, width, height);
                     cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
@@ -1174,6 +1321,24 @@ namespace Toggle
         {
             spriteBatch.Begin();
             spriteBatch.Draw(Textures.textures["lostScreen"], new Vector2(0, 0), Color.White);
+            spriteBatch.End();
+        }
+
+        public void textBoxScreenUpdate()
+        {
+            
+            currentTextBoxScreen.checkButtonHovers();
+            currentTextBoxScreen.checkButtonClicks();
+            
+        }
+
+        public void textBoxScreenDraw()
+        {
+            playDraw();
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(screenDisplayed, new Vector2(0, 0), Color.White);
+            currentTextBoxScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
 
@@ -1204,9 +1369,9 @@ namespace Toggle
 
             Rectangle r = new Rectangle(0, 0, rectWidth, 12);
 
-            spriteBatch.Draw(Textures.textures["shiftCooldownBar"], new Vector2(shiftCDLocation.X + 2, shiftCDLocation.Y + 2), r,Color.White);
+            spriteBatch.Draw(Textures.textures["shiftCooldownBar"], new Vector2(shiftCDLocation.X + 2, shiftCDLocation.Y + 2), r, Color.White);
             spriteBatch.Draw(Textures.textures["shiftCooldown"], shiftCDLocation, Color.White);
-            if(player.isLocked())
+            if (player.isLocked())
             {
                 //Vector2 loc = new Vector2(shiftCDLocation.X + 128 / 2 - 8, shiftCDLocation.Y);
                 //spriteBatch.Draw(Textures.textures["shiftlocked"], loc, Color.White);
@@ -1243,7 +1408,7 @@ namespace Toggle
             {
                 shiftLockAlpha -= 0.1f;
             }
-                
+
             if (shiftLockScale > 1.0)
             {
                 shiftLockScale -= 0.5f;
@@ -1260,7 +1425,7 @@ namespace Toggle
                 jitterY = random.Next(5) - 2;
             }
             Vector2 loc;
-            if(player.isLocked())
+            if (player.isLocked())
                 loc = new Vector2(shiftCDLocation.X + 128 / 2 + jitterX, shiftCDLocation.Y + 8 + jitterY);
             else
                 loc = new Vector2(shiftCDLocation.X + 128 / 2, shiftCDLocation.Y + 8 + shiftLockFade);
@@ -1275,7 +1440,7 @@ namespace Toggle
         //called in player, to jitter on keypress
         public void jitterLock()
         {
-            if(player.isLocked())
+            if (player.isLocked())
             {
                 shiftLockJitterTime = 15;
             }
@@ -1285,8 +1450,8 @@ namespace Toggle
         public void winFadeUpdate()
         {
             playUpdate();
-            
-            if(fadeTransparency < 1)
+
+            if (fadeTransparency < 1)
             {
                 fadeTransparency += 0.01f;
             }
@@ -1296,12 +1461,12 @@ namespace Toggle
                 player.setOnBoat(false);
                 player.setPosition(new Vector2((width / 64) * 32, (height / 64) * 32));
             }
-            
+
         }
 
         public void winFadeDraw()
         {
-            
+
             playDraw();
             spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, cam.getMatrix());
             spriteBatch.Draw(Textures.textures["whiteScreen"], new Vector2(getTopLeft().X, getTopLeft().Y), new Rectangle(0, 0, width, height), new Color(Color.Black, fadeTransparency));
@@ -1321,7 +1486,7 @@ namespace Toggle
 
         public void creditsDraw()
         {
-            
+
             int length;
             string str;
             SpriteFont sf = Textures.fonts["mistral16"];
@@ -1348,7 +1513,7 @@ namespace Toggle
             creditsOffset++;
 
 
-             spriteBatch.End();
+            spriteBatch.End();
         }
 
 
@@ -1357,11 +1522,11 @@ namespace Toggle
             int rectHeight;
             Color rectColor = Color.White;
             Texture2D rectTop, rectBottom = null;
-            Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height/2 + 32);
+            Vector2 healthBarLocation = new Vector2(-cam.getX() - width / 2 + 10, -cam.getY() - height / 2 + 32);
             if (!player.isDead())
                 rectHeight = (int)(player.getProportion() * healthBar.Height);
             else
-            { 
+            {
                 rectHeight = 0;
                 rectColor = Color.Red;
             }
@@ -1377,10 +1542,10 @@ namespace Toggle
                 rectBottom = Textures.textures["grayblock"];
             }
             spriteBatch.Draw(rectTop, healthBarLocation, new Rectangle(0, 0, rectBottom.Width, (healthBar.Height - rectHeight)), rectColor);
-            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0,0, rectBottom.Width, rectHeight), rectColor);
-            
+            spriteBatch.Draw(rectBottom, new Vector2(healthBarLocation.X, healthBarLocation.Y + (healthBar.Height - rectHeight)), new Rectangle(0, 0, rectBottom.Width, rectHeight), rectColor);
+
             if ((player.getProportion() < 0.20) && (time % 50 >= 45) && (!player.isDead()))
-            { 
+            {
                 spriteBatch.Draw(Textures.textures["hourglass2"], healthBarLocation, Color.White);
             }
             else
@@ -1466,14 +1631,14 @@ namespace Toggle
                         //Rectangle boxRect = new Rectangle(i.getX() + (int)(inventoryPosition.X + 0.5), i.getY() + (int)(inventoryPosition.Y + 0.5), 32, 32);
                         if (mouseState.LeftButton == ButtonState.Released)
                         {
-                            if(i.isSelected())
+                            if (i.isSelected())
                             {
-                                if(player.isAccessingBox())
+                                if (player.isAccessingBox())
                                 {
                                     Rectangle rhitbox = new Rectangle(player.getBox().getX(), player.getBox().getY(), 100, 100);
-                                    if(rhitbox.Contains(cursorPosition.X, cursorPosition.Y))
+                                    if (rhitbox.Contains(cursorPosition.X, cursorPosition.Y))
                                     {
-                                        if(player.getBox().setStoredItem(i))
+                                        if (player.getBox().setStoredItem(i))
                                         {
                                             inventory.removeItem(i);
                                         }
@@ -1481,7 +1646,7 @@ namespace Toggle
                                         {
                                             inventory.setNewIndex(i);
                                         }
-                                        
+
                                     }
                                     else
                                     {
@@ -1492,7 +1657,7 @@ namespace Toggle
                                 {
                                     inventory.setNewIndex(i);
                                 }
-                               
+
                             }
                             inventory.setSelectedItem(i, false);
                         }
@@ -1512,10 +1677,10 @@ namespace Toggle
                             int deltaX = mouseX - oldMouseX;
                             int deltaY = mouseY - oldMouseY;
 
-                           
+
                             i.setX(curX + deltaX);
                             i.setY(curY + deltaY);
-                            
+
                         }
                     }
                 }
@@ -1555,7 +1720,7 @@ namespace Toggle
 
         public static void chalkboardCommand(string s)
         {
-            if(s.Equals("IM A BANANA"))
+            if (s.Equals("IM A BANANA"))
             {
                 Console.WriteLine("It's true! I am a banana!");
             }
@@ -1569,13 +1734,13 @@ namespace Toggle
 
         public bool winCondition()
         {
-            if(platforms.Count <= 0)
+            if (platforms.Count <= 0)
             {
                 return false;
             }
-            foreach(Platform p in platforms)
+            foreach (Platform p in platforms)
             {
-                if(!p.isItemOnPlatform())
+                if (!p.isItemOnPlatform())
                 {
                     return false;
                 }
@@ -1609,7 +1774,7 @@ namespace Toggle
         {
 
             Rectangle camRectangle = new Rectangle(getTopLeft().X, getTopLeft().Y, width, height);
-            if(r.Intersects(camRectangle))
+            if (r.Intersects(camRectangle))
             {
                 return true;
             }
@@ -1627,7 +1792,7 @@ namespace Toggle
             return height;
         }
 
-        public void setState(string state)
+        public void setState(string state, string arg2)
         {
             gameState = state;
             if (gameState == "start")
@@ -1639,159 +1804,116 @@ namespace Toggle
             {
                 titleScreenPhase = 2;
             }
+
+            if (gameState == "textbox")
+            {
+               switch(arg2)
+               {
+                   case "inventory":
+                       currentTextBoxScreen = inventoryScreen;
+                       showInventory = true;
+                       break;
+                   case "shiftLock":
+                       currentTextBoxScreen = shiftLockScreen;
+                       break;
+                   case "platform":
+                       currentTextBoxScreen = platformScreen;
+                       break;
+               }
+               screenDisplayed = Textures.textures["inventorytutorial"];
+                
+            }
         }
 
         public void saveGame(LevelTile level)
         {
-            //write into file
-
-            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
             StreamWriter saveFile = new StreamWriter("bananas.txt");
-           // string dir = System.IO.Path.GetDirectoryName(
-//System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-            //string file = dir + @"/bananas.txt";
-
-            //FileStream fs = new FileStream(file, FileMode.OpenOrCreate);
-
-
-
-            //StreamWriter saveFile = new StreamWriter(@"../../../bananas.txt");
-            
             //Remove specified items from particular levels
-            foreach(Level l in levels)
+            foreach (Level l in levels)
             {
+                saveFile.WriteLine("L:" + levelToString[l]);
+
                 string[] itemStrings = l.getRemovedLevelItems();
-                for (int x = 0; x < itemStrings.Length;x++ )
+
+                for (int x = 0; x < itemStrings.Length; x++)
                 {
-                    saveFile.Write(itemStrings[x]);
-                    if(x<itemStrings.Length - 1 )
-                        saveFile.Write(",");
+                    saveFile.WriteLine("I:" + itemStrings[x]);
                 }
-                saveFile.WriteLine("");
+
+                foreach (Platform p in platforms)
+                {
+                    string str = "F:" + p.GetType().Name;
+                    if (((Platform)p).isItemOnPlatform())
+                    {
+                        str += "|T";
+                    }
+                    else
+                    {
+                        str += "|F";
+                    }
+                }
             }
 
             //Load which objects have been seen and which haven't
             ArrayList seenObjects = aboutScreen.getSeenObjects();
             for (int x = 0; x < seenObjects.Count; x++)
             {
-                saveFile.Write(seenObjects[x]);
-                if (x < seenObjects.Count - 1)
-                    saveFile.Write(",");
+                saveFile.WriteLine("S:" + seenObjects[x]);
             }
-            saveFile.WriteLine("");
 
             //Load the inventory
-            for (int x = 0; x < backUpInventory.GetLength(0); x++ )
+            for (int x = 0; x < backUpInventory.GetLength(0); x++)
             {
                 for (int y = 0; y < backUpInventory.GetLength(1); y++)
                 {
                     if (backUpInventory[x, y] == null) continue;
 
-                    saveFile.Write(backUpInventory[x, y].GetType().Name);
-                    saveFile.Write("|"+x+"|"+y+"|");
+                    string str = backUpInventory[x, y].GetType().Name;
+                    str += "|" + x + "|" + y;
 
-                    if (backUpInventory[x,y] is ScrollI)
+                    if (backUpInventory[x, y] is ScrollI)
                     {
-                        saveFile.Write(((ScrollI)backUpInventory[x, y]).getGoodItemTip() + "|" + ((ScrollI)backUpInventory[x, y]).getBadItemTip());
+                        str += "|" + ((ScrollI)backUpInventory[x, y]).getGoodItemTip() + "|" + ((ScrollI)backUpInventory[x, y]).getBadItemTip();
                     }
                     else if (backUpInventory[x, y] is LampI)
                     {
                         if (((LampI)backUpInventory[x, y]).hasBatteries())
                         {
-                            saveFile.Write("T|");
+                            str += "|T";
                         }
                         else
                         {
-                            saveFile.Write("F|");
+                            str += "|F";
                         }
                     }
-                    else
-                    {
-                        saveFile.Write("|");
-                    }
-                    if (y < backUpInventory.GetLength(1) - 1)
-                        saveFile.Write(",");
+                    saveFile.WriteLine("N:" + str);
                 }
-                saveFile.WriteLine("");
             }
 
-           // saveFile.WriteLine("");
-            //Load the current level
-            string currentLevelString = "";
-             if (currentLevel is HubLevel)
-            {
-                currentLevelString = "hubLevel";
-            }
-            else if (currentLevel is HouseLevel)
-            {
-                currentLevelString = "houseLevel";
-            }
-            else if (currentLevel is SchoolLevel)
-            {
-                currentLevelString = "schoolLevel";
-            }
-            else if (currentLevel is Gate1Level)
-            {
-                currentLevelString = "gate1Level";
-            }
-            else if (currentLevel is Gate2Level)
-            {
-                currentLevelString = "gate2Level";
-            }
-            else if (currentLevel is Complex1)
-            {
-                currentLevelString = "complex1Level";
-            }
-            else if (currentLevel is GhostTestLevel)
-            {
-                currentLevelString = "ghostTestLevel";
-            }
-            else if (currentLevel is LaserTestLevel)
-            {
-                currentLevelString = "laserTestLevel";
-            }
-            else if (currentLevel is LaserIntro)
-            {
-                currentLevelString = "laserIntroLevel";
-            }
-            else if (currentLevel is MarshEnterLevel)
-            {
-                currentLevelString = "marshEnterLevel";
-            }
-            else if (currentLevel is Marsh1Level)
-            {
-                 currentLevelString = "marsh1Level";
-            }
-            else if (currentLevel is Marsh2Level)
-            {
-                 currentLevelString = "marsh2Level";
-            }
-             else if (currentLevel is MarshFinalLevel)
-             {
-                 currentLevelString = "marshFinalLevel";
-             }
+            saveFile.WriteLine(levelToString[currentLevel]);
 
+            saveFile.WriteLine("P:" + level.getPlayerStart().X + "|" + level.getPlayerStart().Y);
 
-            saveFile.WriteLine(currentLevelString);
+            saveFile.WriteLine("C:" + levelToString[currentLevel]);
 
-            saveFile.WriteLine(level.getPlayerStart().X);
-            saveFile.WriteLine(level.getPlayerStart().Y);
-            if (levels.Equals("hubLevel"))
+            // if (level.Equals("hubLevel"))
+            // {
+            foreach (Platform p in platforms)
             {
-                foreach (Platform p in platforms)
+                string str = "F:"+p.GetType().Name;
+                if (((Platform)p).isItemOnPlatform())
                 {
-                    if (((Platform)p).isItemOnPlatform())
-                    {
-                        saveFile.WriteLine("T");
-                    }
-                    else
-                    {
-                        saveFile.WriteLine("F");
-                    }
+                    str += "|T";
                 }
+                else
+                {
+                    str += "|F";
+                }
+                saveFile.WriteLine(str);
             }
-            
+            //  }
+
 
 
 
@@ -1800,104 +1922,83 @@ namespace Toggle
 
         public void continueGame()
         {
-            string line;
-
-            //StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
-            //StreamReader saveFile = new StreamReader(@System.IO.Directory.GetCurrentDirectory() + "/bananas.txt");
-            //string dir = System.IO.Path.GetDirectoryName(
-//System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            //string file = dir + @"/bananas.txt";
-           // StreamReader saveFile = new StreamReader(@"../../../bananas.txt");
             StreamReader saveFile = new StreamReader("bananas.txt");
-            
-            foreach (Level l in levels)
+            string line;
+            Level currentReadLevel = null;
+            string tempLine = "";
+            int px = 0, py = 0;
+            string loadLevel = "";
+            while ((line = saveFile.ReadLine()) != null)
             {
-                line = saveFile.ReadLine();
-                string[] excludeItems = line.Split(',');
-                l.removeLevelItems(excludeItems);
-            }
-            line = saveFile.ReadLine();
-
-            string[] seenObjects = line.Split(',');
-
-            for (int x = 0; x < seenObjects.Length; x++)
-            {
-                aboutScreen.addSeenObject(seenObjects[x]);
-            }
-
-            InventoryItem[,] inventoryItems = inventory.getItems();
-            for (int x = 0; x < inventoryItems.GetLength(0); x++)
-            {
-                line = saveFile.ReadLine();
-
-                string[] inventoryItemStrings = line.Split(',');
-                for (int y = 0; y < inventoryItems.GetLength(1); y++)
+                tempLine = line.Substring(2, line.Length - 2);
+                string[] args = tempLine.Split('|');
+                //complete
+                if (line[0] == 'L')
                 {
-                    if (y >= inventoryItemStrings.Length) break;
-                    if (inventoryItemStrings[y].Equals("")) continue;
-                    
-                    string[] thisItem = inventoryItemStrings[y].Split('|');
-                    if (thisItem.Length <= 1) continue;
-                    int xLocation = Int32.Parse(thisItem[1]);
-                    int yLocation = Int32.Parse(thisItem[2]);
-
-                    switch(thisItem[0])
+                    currentReadLevel = stringToLevel[tempLine];
+                }
+                if (line[0] == 'I')
+                {
+                    currentReadLevel.removeLevelItem(tempLine);
+                }
+                if (line[0] == 'P')
+                {
+                    //Add player at location
+                    px = Int32.Parse(args[0]);
+                    py = Int32.Parse(args[1]);
+                }
+                if (line[0] == 'N')
+                {
+                    int itemX = Int32.Parse(args[1]);
+                    int itemY = Int32.Parse(args[2]);
+                    switch (args[0])
                     {
                         case "BatteryGooI":
-                            inventory.setInventoryItem(new BatteryGooI(), xLocation,yLocation);
+                            inventory.setInventoryItem(new BatteryGooI(), itemX, itemY);
                             break;
                         case "KnifeI":
-                            inventory.setInventoryItem(new KnifeI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new KnifeI(), itemX, itemY);
                             break;
                         case "DiaryI":
-                            inventory.setInventoryItem(new DiaryI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new DiaryI(), itemX, itemY);
                             break;
                         case "LampI":
                             LampI lamp = new LampI();
-                            if(thisItem[3].Equals("T"))
+                            if (args[3].Equals("T"))
                             {
                                 lamp.setBatteries(true);
                             }
-                            inventory.setInventoryItem(lamp, xLocation, yLocation);
+                            inventory.setInventoryItem(lamp, itemX, itemY);
                             break;
                         case "RopeI":
-                            inventory.setInventoryItem(new RopeI(), xLocation, yLocation);
+                            inventory.setInventoryItem(new RopeI(), itemX, itemY);
                             break;
                         case "ScrollI":
-                            inventory.setInventoryItem(new ScrollI(thisItem[3], thisItem[4]), xLocation, yLocation);
+                            inventory.setInventoryItem(new ScrollI(args[3], args[4]), itemX, itemY);
                             break;
                     }
-
                 }
-            }
-            line = saveFile.ReadLine();
-            string lvl = line;
-            int playerX = 0, playerY = 0, lvlidx = 0;
-            line = saveFile.ReadLine();
-            playerX = Int32.Parse(line);
-            line = saveFile.ReadLine();
-            playerY = Int32.Parse(line);
-
-            if(levels.Equals("hubLevel"))
-            {
-                foreach(Platform p in platforms)
+                if (line[0] == 'S')
                 {
-                    line = saveFile.ReadLine();
-                    if(line.Equals("T"))
-                    {
-                        ((Platform)p).setItemOnPlatform(true);
-                    }
+                    aboutScreen.addSeenObject(tempLine);
+                }
+                //complete
+                if (line[0] == 'F')
+                {
+                    bool platformComplete = (args[1].Equals("T"));
+
+                    findPlatformGivenString(args[0]).setItemOnPlatform(platformComplete);
+                }
+                if (line[0] == 'C')
+                {
+                    loadLevel = tempLine;
                 }
             }
-            
-
-            //InventoryItem[,] inventoryItems = inventory.getItems();
-            LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", lvl, new Point(playerX, playerY));
+            LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", loadLevel, new Point(px, py));
             saveFile.Close();
             gameState = "play";
             setLevel(lv);
-            
+
         }
 
         public void loadBackupPlatforms()
@@ -1914,23 +2015,68 @@ namespace Toggle
                 }
             }
         }
- 
+
         public void buttonCommand(string command)
         {
-            if(command.Equals("play"))
+            if (command.Equals("play"))
             {
                 titleScreenPhase = 1;
                 screenDisplayed = Textures.textures["controls1"];
             }
-            if(command.Equals("continue"))
+            if (command.Equals("continue"))
             {
                 //Do a try catch block to return to start screen if it fails
-                continueGame();
+                if (continueButtonPressable())
+                {
+                    continueGame();
+                }
+
             }
-            if(command.Equals("exit"))
+            if (command.Equals("exit"))
             {
                 Exit();
             }
+        }
+
+        public Platform findPlatformGivenString(string str)
+        {
+            foreach (Platform p in platforms)
+            {
+                if (p.GetType().Name.Equals(str))
+                {
+                    return p;
+                }
+            }
+            //shouldn't happen
+            return null;
+        }
+
+        public bool continueButtonPressable()
+        {
+            return continueButtonActive;
+        }
+
+        public bool saveFileExists()
+        {
+            try
+            {
+                StreamReader saveFile = new StreamReader("bananas.txt");
+                string line = saveFile.ReadLine();
+                saveFile.Close();
+                if (line.Equals("")) return false;
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("fail");
+                return false;
+            }
+
+            return true;
+        }
+
+        public void setShowInventory(bool b)
+        {
+            showInventory = b;
         }
 
 
@@ -1940,8 +2086,6 @@ namespace Toggle
 
 
 
-
-        
         //--------------------------------------STICKY KEYS BLOCK--------------------------------------------
         //Sticky keys disabling code. Credit goes to user x4000 at http://stackoverflow.com/questions/734618/disabling-accessibility-shortcuts-in-net-application
         [DllImport("user32.dll", EntryPoint = "SystemParametersInfo", SetLastError = false)]
@@ -2006,7 +2150,7 @@ namespace Toggle
 
     }
 
- 
+
 
     enum GameState
     {
@@ -2017,6 +2161,6 @@ namespace Toggle
     }
 
 
-    
+
 
 }

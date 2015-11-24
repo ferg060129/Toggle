@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Toggle
 {
-    class Platform : Object
+    public class Platform : Object
     {
         protected Type itemType = null;
         bool itemOnPlatform = false;

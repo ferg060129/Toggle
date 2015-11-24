@@ -70,15 +70,13 @@ namespace Toggle
 
         }
 
-        //Add extra condition for blue button
+
         public void addSeenObject(Object o)
         {
             string s = o.GetType().Name;
             if (stringToButton.ContainsKey(s))
             ((ObjectButton)stringToButton[s]).setSeen(true);
         }
-
-        //Add extra condition for blue button
         public void addSeenObject(string s)
         {
             if (stringToButton.ContainsKey(s))

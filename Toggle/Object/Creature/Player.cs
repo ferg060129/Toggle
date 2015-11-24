@@ -33,6 +33,8 @@ namespace Toggle
         Box playerBox;
         BoxTop collideBoxtop;
 
+        private bool hasFirstItem = false, hasBeenLocked = false, hasBeenOnPlatform = false;
+
         public Player(int xLocation, int yLocation, Inventory i, Game1 eng) : base(xLocation, yLocation)
         {
             animations.Add("idleDown",  new int[] { 0, 2 });
@@ -330,11 +332,29 @@ namespace Toggle
         
         public void pickUp(Item i)
         {
-            if(i.canPickUp())
-            inventory.addInventoryItem(i.pickUpItem());
+            if (i.canPickUp())
+            { 
+                inventory.addInventoryItem(i.pickUpItem());
+                if (!hasFirstItem)
+                 {
+                     engine.setState("textbox","inventory");
+                     //show inventory for inventoryTutorial
+                     hasFirstItem = true;
+                 }
+            }
+           
         }
         public override void reportCollision(Object o)
         {
+            if (o is Platform)
+            {
+                if(!hasBeenOnPlatform)
+                {
+                    engine.setState("textbox", "platform");
+                    hasBeenOnPlatform = true;
+                }
+                
+            }
             if (o is Boat && !onBoat)
             {
                 onBoat = true;
@@ -414,6 +434,11 @@ namespace Toggle
                 if (stateLocked == false)
                     Textures.sounds["lock"].Play();
                 stateLocked = true;
+                if(!hasBeenLocked)
+                {
+                    engine.setState("textbox", "shiftLock");
+                    hasBeenLocked = true;
+                }
 
             }
             if(o is UnlockTile)
@@ -428,8 +453,10 @@ namespace Toggle
                 if(this.x == o.getX() && this.y == o.getY())
                 {
                     engine.setLevel(((LevelTile)o));
+                    //engine.saveGame(((LevelTile)o));
                 }
             }
+
 
           
         }

@@ -10,7 +10,7 @@ namespace Toggle
     {
         protected InventoryItem inventoryItem;
         protected int itemPickupCD = 0;
-        protected bool pickupAble = true;  
+        protected bool pickupAble = true;
         public Item(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
             
@@ -22,7 +22,7 @@ namespace Toggle
             inventoryItem = new InventoryItem();
         }
 
-        public InventoryItem pickUpItem()
+        public virtual InventoryItem pickUpItem()
         {
             if(inventoryItem==null)
                 makeInventoryItem();
@@ -53,7 +53,6 @@ namespace Toggle
         {
             pickupAble = b;
         }
-
 
     }
 }
