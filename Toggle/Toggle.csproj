@@ -249,17 +249,10 @@
     <Content Include="Content\diaryBad.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\end_screen.png" />
     <Content Include="Content\exitHover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GoopFrame1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\rightArrow.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\leftArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\GoopFrame2.png">
@@ -282,7 +275,6 @@
     <Content Include="Content\diaryEntry.png" />
     <Content Include="Content\fallasleep.png" />
     <Content Include="Content\findsDiary.png" />
-    <Content Include="Content\hourglassscreen.png" />
     <Content Include="Content\textBox.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -301,7 +293,6 @@
     <Content Include="Content\knifePlatform.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\knife_diary.png" />
     <Content Include="Content\lanternPlatformComplete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
