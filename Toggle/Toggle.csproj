@@ -152,6 +152,9 @@
     <Compile Include="ScreenButtons\ObjectButton.cs" />
     <Compile Include="ScreenButtons\ScreenButton.cs" />
     <Compile Include="ScreenButtons\StartScreenButton.cs" />
+    <Compile Include="ScreenButtons\TextBoxExitButton.cs" />
+    <Compile Include="ScreenButtons\TextBoxLeftButton.cs" />
+    <Compile Include="ScreenButtons\TextBoxRightButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\InventoryScreen.cs" />
@@ -185,6 +188,21 @@
     </Content>
     <Content Include="Content\berry.png" />
     <Content Include="Content\blocks.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\leftArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\leftArrowHovered.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\rightArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\rightArrowHovered.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\xButtonHovered.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\xButton.png">
@@ -264,7 +282,9 @@
     <Content Include="Content\GoopFrame3.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\hourglassinstruction.png" />
+    <Content Include="Content\hourglassinstruction.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\housedark.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

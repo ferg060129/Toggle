@@ -895,7 +895,16 @@ namespace Toggle
             if (titleScreenPhase == 2)
             {
                 if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
-                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
+                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift))){
+                    screenDisplayed = Textures.textures["hourglassinstruction"];
+                    titleScreenPhase++;
+                    oldKeyBoardState = newKeyBoardState;
+                }
+            }
+            if (titleScreenPhase == 3)
+            {
+                if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))|| 
+                    (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
                     gameState = "play";
                     LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
@@ -1324,9 +1333,15 @@ namespace Toggle
 
         public void textBoxScreenUpdate()
         {
-            
+            newKeyBoardState = Keyboard.GetState();
             currentTextBoxScreen.checkButtonHovers();
             currentTextBoxScreen.checkButtonClicks();
+            if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
+                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
+            {
+                ((TextBoxScreen)currentTextBoxScreen).nextString();
+            }
+            oldKeyBoardState = newKeyBoardState;
             
         }
 
