@@ -883,7 +883,7 @@ namespace Toggle
                 if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
-                    gameState = "inventory";
+                    gameState = "play";
                     screenDisplayed = Textures.textures["inventorytutorial"];
                 }
             }

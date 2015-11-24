@@ -16,7 +16,7 @@ namespace Toggle
         public static string[] graphicNames = { "protagsheet", "itemblock", "baditemblock", "inventory2", "sprites",
                                                "BoxDark","BoxLight","lasBoxHori","lasBoxVert","cursor","battery","berry","berryRot", "start","startHover","continue","continueHover","exit","exitHover",
                                                "buttonUp","buttonDown","OpenGate","ClosedGate",
-                                               "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass","hourglass2","shiftlocked","buttonHUp","buttonHDown",
+                                               "LitLantern","UnlitLantern","BustedLantern", "shiftCooldown","hourglass2","shiftlocked","buttonHUp","buttonHDown",
                                                "titleScreen3","lostScreen","blackScreen","controls1","controls2","rays","darkHaze","pause","shadowScreen", "whiteblock", "grayblock",
                                                 "shiftCooldownBar", "house", "housedark", "housedarkNoEyes","GoopFrame1","GoopFrame2","GoopFrame3", "school","schooldark","laser","laserB",
                                               "water","water2","water3","water4", "boat", "whiteScreen","ghost","unghost","chalkboard2","chalkboard3", "chalkboardtop", "ItemBox", "boxInside",
