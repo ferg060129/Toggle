@@ -359,8 +359,6 @@ namespace Toggle
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             switch (gameState)
             {
                 case "start":
@@ -1010,7 +1008,7 @@ namespace Toggle
             }
 
 
-            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P) && !player.isReadingChalkboard())
+            if (((newKeyBoardState.IsKeyDown(Keys.Escape) && !oldKeyBoardState.IsKeyDown(Keys.Escape)) || (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))) && !player.isReadingChalkboard())
             {
                 gameState = "pause";
             }
@@ -1234,7 +1232,7 @@ namespace Toggle
             newKeyBoardState = Keyboard.GetState();
             pauseScreen.checkButtonHovers();
             pauseScreen.checkButtonClicks();
-            if (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P))
+            if ((newKeyBoardState.IsKeyDown(Keys.Escape) && !oldKeyBoardState.IsKeyDown(Keys.Escape)) || (newKeyBoardState.IsKeyDown(Keys.P) && !oldKeyBoardState.IsKeyDown(Keys.P)))
             {
                 gameState = "play";
             }
