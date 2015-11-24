@@ -10,7 +10,8 @@ namespace Toggle
     {
         protected InventoryItem inventoryItem;
         protected int itemPickupCD = 0;
-        protected bool pickupAble = true;  
+        protected bool pickupAble = true;
+        protected bool firstItem = false;
         public Item(int xLocation, int yLocation) : base(xLocation, yLocation)
         {
             
@@ -54,6 +55,15 @@ namespace Toggle
             pickupAble = b;
         }
 
+        public bool isFirstItem()
+        {
+            return firstItem;
+        }
+
+        public void setFirstItem(bool firstItem)
+        {
+            this.firstItem = firstItem;
+        }
 
     }
 }

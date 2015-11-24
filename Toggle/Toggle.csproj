@@ -154,7 +154,8 @@
     <Compile Include="ScreenButtons\StartScreenButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
-    <Compile Include="Screens\InventoryScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\InventoryScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\TextBoxScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\StartScreen.cs" />
@@ -272,6 +273,9 @@
     <Content Include="Content\fallasleep.png" />
     <Content Include="Content\findsDiary.png" />
     <Content Include="Content\hourglassscreen.png" />
+    <Content Include="Content\textBox.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\inventorytutorial.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
