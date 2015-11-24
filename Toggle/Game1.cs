@@ -15,9 +15,6 @@ namespace Toggle
 
     public class Game1 : Game
     {
-
-
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -885,7 +882,9 @@ namespace Toggle
                 || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
                     gameState = "play";
-                    screenDisplayed = Textures.textures["inventorytutorial"];
+                    LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
+                    saveGame(lv);
+                    //screenDisplayed = Textures.textures["inventorytutorial"];
                 }
             }
             if (newKeyBoardState.IsKeyUp(Keys.LeftShift) && newKeyBoardState.IsKeyUp(Keys.RightShift))
@@ -1785,6 +1784,11 @@ namespace Toggle
             {
                 titleScreenPhase = 2;
             }
+
+            if (gameState == "inventory")
+            {
+                screenDisplayed = Textures.textures["inventorytutorial"];
+            }
         }
 
         public void saveGame(LevelTile level)
@@ -1863,14 +1867,16 @@ namespace Toggle
             // {
             foreach (Platform p in platforms)
             {
+                string str = p.GetType().Name;
                 if (((Platform)p).isItemOnPlatform())
                 {
-                    saveFile.WriteLine("T");
+                    str += "|T";
                 }
                 else
                 {
-                    saveFile.WriteLine("F");
+                    str += "|F";
                 }
+                saveFile.WriteLine(str);
             }
             //  }
 
@@ -1986,7 +1992,11 @@ namespace Toggle
             if (command.Equals("continue"))
             {
                 //Do a try catch block to return to start screen if it fails
-                continueGame();
+                if (continueButtonPressable())
+                {
+                    continueGame();
+                }
+
             }
             if (command.Equals("exit"))
             {
@@ -2007,6 +2017,23 @@ namespace Toggle
             return null;
         }
 
+        public bool continueButtonPressable()
+        {
+            try
+            {
+                StreamReader saveFile = new StreamReader("bananas.txt");
+                string line = saveFile.ReadLine();
+                saveFile.Close();
+                if (line.Equals("")) return false;
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("fail");
+                return false;
+            }
+
+            return true;
+        }
 
 
 
