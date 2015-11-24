@@ -8,7 +8,8 @@ namespace Toggle
     class LaserBlock : Pushable
     {
         int updatePeriod;
-        bool direction; //true is horizontal, false is verticle
+        bool direction; //true is horizontal, false is verticle, current direction
+        bool spawnDirection; //same but determines spawn
         int[] laserEnds = new int[4]; //end points, (left x, right x, top y, bottom y)
         int phaseOffset;    //changes time that lasers fade in and out
         public LaserBlock(int xLocation, int yLocation) : base(xLocation, yLocation)
@@ -23,7 +24,8 @@ namespace Toggle
             : base(xLocation, yLocation)
         {
             phaseOffset = Game1.random.Next(0, 180);
-            direction = dirIn;
+            spawnDirection = dirIn;
+            direction = spawnDirection;
             updateGraphic();
             updatePeriod = 0;
         }
@@ -45,7 +47,21 @@ namespace Toggle
         public override void onShift()
         {
             base.onShift();
-            direction =! direction;
+            if (spawnDirection)
+            {
+                if (state)
+                    direction = true;
+                else
+                    direction = false;
+            }
+            else
+            {
+                if (state)
+                    direction = false;
+                else
+                    direction = true;
+            }
+            
             updateGraphic();
         }
 
