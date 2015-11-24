@@ -1308,14 +1308,16 @@ namespace Toggle
 
         public void inventoryScreenUpdate()
         {
-            startScreen.checkButtonHovers();
-            startScreen.checkButtonClicks();
+            inventoryScreen.checkButtonHovers();
+            inventoryScreen.checkButtonClicks();
         }
 
         public void inventoryScreenDraw()
         {
-            //playDraw();
+            playDraw();
+
             spriteBatch.Begin();
+            spriteBatch.Draw(screenDisplayed, new Vector2(0, 0), Color.White);
             inventoryScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }

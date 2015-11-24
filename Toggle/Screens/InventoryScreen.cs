@@ -13,7 +13,7 @@ namespace Toggle
 {
     class InventoryScreen : Screen
     {
-        Point textLocation = new Point(100, 100);
+        Point textLocation = new Point(150, 100);
         int index = 0;
         string[] instructions = { "first", "second", "third" };
 
@@ -43,8 +43,24 @@ namespace Toggle
             sb.Draw(Textures.textures["cursor"], new Vector2(mouseLoc.X, mouseLoc.Y), Color.White);
         }
 
-       
-      
+
+        public override void checkButtonClicks()
+        {
+            MouseState mouseState = Mouse.GetState();
+            Point cursorLocation = engine.convertCursorLocation(mouseState);
+            if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
+            {
+                foreach (InventoryScreenButton sb in buttons)
+                {
+
+                    if (sb.getClickBox().Contains(cursorLocation))
+                    {
+                        sb.onClick();
+                    }
+                }
+            }
+            oldMouseState = mouseState;
+        }
 
 
 
