@@ -1172,7 +1172,20 @@ namespace Toggle
             Vector2 cursorPosition = new Vector2(mouseX + getTopLeft().X, mouseY + getTopLeft().Y);
             if (showInventory && !player.isReadingChalkboard())
             {
+
+                if (inventory.getInventoryRectangle().Contains(cursorPosition) || inventory.getSelectedItem()!= null)
+                {
+                    inventory.setTransparent(false);
+                }
+                else
+                {
+                    inventory.setTransparent(true);
+                }
+                
+
                 inventory.drawInventory(spriteBatch);
+
+
 
                 foreach (InventoryItem i in inventory.getItems())
                 {

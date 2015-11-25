@@ -18,6 +18,7 @@ namespace Toggle
         private int x,y;
         SpriteFont sf;
         Game1 engine;
+        bool transparent = false;
         
         public Inventory(Game1 eng)
         {
@@ -72,7 +73,11 @@ namespace Toggle
 
         public void drawInventory(SpriteBatch sb)
         {
-            sb.Draw(inventoryGraphic, new Vector2(this.x, this.y), Color.White);
+            float alpha = 1.0f;
+            if (transparent) alpha = 0.025f;
+
+
+            sb.Draw(inventoryGraphic, new Vector2(this.x, this.y), new Color(Color.White, alpha));
 
 
             
@@ -82,14 +87,14 @@ namespace Toggle
                 {
                     if (items[x, y] != null)
                     {
-                        sb.Draw(items[x, y].getGraphic(), new Vector2(items[x, y].getX() + this.x, items[x, y].getY() + this.y), new Rectangle(0, 0, 32, 32), Color.White);
+                        sb.Draw(items[x, y].getGraphic(), new Vector2(items[x, y].getX() + this.x, items[x, y].getY() + this.y), new Rectangle(0, 0, 32, 32), new Color(Color.White,alpha));
                         items[x, y].setHitBox(new Rectangle(items[x, y].getX() + this.x, items[x, y].getY() + this.y, 32, 32));
                     }
                 }
             }
             //Draw the selected item last so it is on bottom.
             if(selectedItem != null)
-            sb.Draw(selectedItem.getGraphic(), new Vector2(selectedItem.getX() + this.x, selectedItem.getY() + this.y), new Rectangle(0, 0, 32, 32), Color.White);
+                sb.Draw(selectedItem.getGraphic(), new Vector2(selectedItem.getX() + this.x, selectedItem.getY() + this.y), new Rectangle(0, 0, 32, 32), new Color(Color.White, alpha));
         }
 
         
@@ -360,5 +365,18 @@ namespace Toggle
 
             }
         }
+
+        public Rectangle getInventoryRectangle()
+        {
+            return new Rectangle(x, y, inventoryGraphic.Width, inventoryGraphic.Height);
+
+        }
+
+        public void setTransparent(bool b)
+        {
+            transparent = b;
+        }
+
+
     }
 }

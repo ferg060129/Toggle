@@ -266,6 +266,8 @@ namespace Toggle
 
             if(tileIsOccupied(desiredTileX, desiredTileY))
             {
+                //this.x = (x / 32)*32;
+               // this.y = (y / 32) * 32;
                 return -1;
             }
             int yTiles = Game1.wallArray.GetLength(0);
