@@ -1231,7 +1231,7 @@ namespace Toggle
                         if (r.Contains(cursorPosition) && (inventory.getSelectedItem() == null || inventory.getSelectedItem().Equals(i)))
                         {
                             string tip = i.getItemTip();
-                            spriteBatch.DrawString(inventory.getFont(), tip, new Vector2(inventory.getX(), inventory.getY() + 70), Color.Black);
+                            spriteBatch.DrawString(inventory.getFont(), tip, new Vector2(inventory.getX() + 5, inventory.getY() + 75), Color.White);
                         }
                     }
                 }

@@ -47,7 +47,7 @@ namespace Toggle
             //next level
             levelTiles.Add(new LevelTile(24 * 32, 13 * 32, "blackBlock", "blackBlock", "marshFinalLevel", new Point(8 * 32, 46 * 32)));
             //previous
-            levelTiles.Add(new LevelTile(10 * 32, 14 * 32, "blackBlock", "blackBlock", "marsh1Level", new Point(26 * 32, 23 * 32)));
+            //levelTiles.Add(new LevelTile(10 * 32, 14 * 32, "blackBlock", "blackBlock", "marsh1Level", new Point(26 * 32, 23 * 32)));
         }
 
     }

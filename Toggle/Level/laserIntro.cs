@@ -31,7 +31,7 @@ namespace Toggle
             Game1.miscObjects.Add(new Strawberry(13 * 32, 10 * 32));
             //level tiles
             levelTiles.Add(new LevelTile(7 * 32, 3 * 32, "blackBlock", "blackBlock", "gate2Level",new Point(12 * 32, 10 * 32)));
-            levelTiles.Add(new LevelTile(27 * 32, 25 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(2 * 32, 8 * 32)));
+           // levelTiles.Add(new LevelTile(27 * 32, 25 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(2 * 32, 8 * 32)));
         }
     }
 }

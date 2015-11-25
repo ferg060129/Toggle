@@ -59,7 +59,7 @@ namespace Toggle
             Game1.miscObjects.Add(vb);
             //level tiles
             levelTiles.Add(new LevelTile(12 * 32, 3 * 32, "blackBlock", "blackBlock", "complex1Level",new Point(2 * 32, 4 * 32)));
-            levelTiles.Add(new LevelTile(4 * 32, 6 * 32, "blackBlock", "blackBlock", "laserIntroLevel", new Point(6 * 32, 4 * 32)));
+            //levelTiles.Add(new LevelTile(4 * 32, 6 * 32, "blackBlock", "blackBlock", "laserIntroLevel", new Point(6 * 32, 4 * 32)));
         }
     }
 }

@@ -22,22 +22,22 @@ namespace Toggle
         public override void loadLevelObjects()
         {
 
-            FlowerTentacles ft = new FlowerTentacles(32 * 11, 32 * 4);
-            VineMoveBlock vm = new VineMoveBlock(32 * 7, 32 * 25);
-            Game1.miscObjects.Add(vm);
-            vm = new VineMoveBlock(32 * 13, 32 * 19);
-            Game1.miscObjects.Add(vm);
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 25, 32 * 20));
+            //FlowerTentacles ft = new FlowerTentacles(32 * 11, 32 * 4);
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 7, 32 * 25));
+            Game1.miscObjects.Add(new VineMoveBlock(32 * 13, 32 * 19));
+            Game1.miscObjects.Add(new VineMoveBlock(34 * 32, 13 * 32));
+            /*
+            
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 25));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 20));
             Game1.miscObjects.Add(new VineMoveBlock(32 * 20, 32 * 15));
             //Game1.miscObjects.Add(new VineMoveBlock(32 * 34, 32 * 13));
             //Game1.creatures.Add(new Ghost(32 * 23, 32 * 3, new Point(1, 1), new Point(54, 5)));
             Game1.miscObjects.Add(new AngerBlob(32 * 22, 32 * 20));
+            */
 
 
-          
-            
+
 
             House house = new House(6 * 32, 3 * 32);
             Game1.visuals.Add(house);
@@ -117,9 +117,9 @@ namespace Toggle
 
         public override void addInitialLevelItems()
         {
-            Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
+            Scroll gb = new Scroll(12 * 32, 25 * 32, "Press Shift.", "Try not to die.");
             levelItems.Add(gb);
-
+            /*
             Rose r = new Rose(11 * 32, 25 * 32);
             levelItems.Add(r);
 
@@ -128,7 +128,7 @@ namespace Toggle
 
             Knife k = new Knife(9 * 32, 25 * 32);
             levelItems.Add(k);
-            
+            */
             /*
             Knife kn = new Knife(21 * 32, 25 * 32);
             levelItems.Add(kn);
