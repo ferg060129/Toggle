@@ -44,6 +44,7 @@ namespace Toggle
                        //Set position relative to the inventory
                         items[x, y].setX(xpos);
                         items[x, y].setY(ypos);
+                        items[x, y].setState(engine.getWorldState());
                        // items[x, y].setHitBox(new Rectangle(xpos + xx, ypos + yy, 32, 32));
                         return;
                    }

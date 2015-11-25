@@ -22,7 +22,7 @@ namespace Toggle
         public override void loadLevelObjects()
         {
             //next level
-            levelTiles.Add(new LevelTile(10 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(19 * 32, 7 * 32)));
+            levelTiles.Add(new LevelTile(10 * 32, 12 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(34 * 32, 20 * 32)));
             //previous
             //levelTiles.Add(new LevelTile(8 * 32, 48 * 32, "blackBlock", "blackBlock", "marsh2Level", new Point(21 * 32, 13 * 32)));
         }

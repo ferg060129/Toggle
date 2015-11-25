@@ -111,7 +111,7 @@ namespace Toggle
 
         Rectangle healthBar = new Rectangle(0, 0, 48, 48);
 
-        private SoundEffectInstance banditKing;
+        //private SoundEffectInstance banditKing;
         private SoundEffectInstance zone1good;
         private SoundEffectInstance zone1bad;
         private SoundEffectInstance beep;
@@ -147,7 +147,7 @@ namespace Toggle
             titleScreenPhase = 0;
             time = 0;
             graphics = new GraphicsDeviceManager(this);
-            // graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             Content.RootDirectory = "Content";
             //IsMouseVisible = true;
 
@@ -298,8 +298,8 @@ namespace Toggle
 
             //song = Content.Load<Song>("banditKing2");
 
-            SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
-            banditKing = banditKing_s.CreateInstance();
+            //SoundEffect banditKing_s = Content.Load<SoundEffect>("banditKing2");
+            //banditKing = banditKing_s.CreateInstance();
 
             zone1good = Content.Load<SoundEffect>("zone4good").CreateInstance();
             zone1bad = Content.Load<SoundEffect>("zone4bad").CreateInstance();
@@ -864,6 +864,7 @@ namespace Toggle
             if (level.getLevel().Equals("hubLevel"))
                 loadBackupPlatforms();
             saveGame(level);
+            syncStates();
         }
 
         //For each game state
