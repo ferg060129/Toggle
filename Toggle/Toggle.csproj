@@ -157,6 +157,7 @@
     <Compile Include="ScreenButtons\TextBoxRightButton.cs" />
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
+    <Compile Include="Screens\DeadScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\InventoryScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\PlatformScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\ShiftLockScreen.cs" />

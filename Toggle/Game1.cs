@@ -62,6 +62,8 @@ namespace Toggle
         LaserTestLevel laserTestLevel;
         LaserIntro laserIntroLevel;
         LevelTile lastEnteredLevelTile;
+        LevelTile hubLevelTile;
+
         MarshEnterLevel marshEnterLevel;
         Marsh1Level marsh1Level;
         Marsh2Level marsh2Level;
@@ -127,6 +129,7 @@ namespace Toggle
         private PauseScreen pauseScreen;
         private AboutScreen aboutScreen;
         private DanceScreen danceScreen;
+        private DeadScreen  deadScreen;
 
         private Screen currentTextBoxScreen;
 
@@ -164,6 +167,7 @@ namespace Toggle
             blackScreenAlpha = 0;
             currentLevelString = "hub";
             lastEnteredLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
+            hubLevelTile = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
             showInventory = false;
             AllowAccessibilityShortcutKeys(false);
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
@@ -274,6 +278,7 @@ namespace Toggle
             aboutScreen = new AboutScreen(this);
             danceScreen = new DanceScreen(this, player);
             pauseScreen = new PauseScreen(this);
+            deadScreen = new DeadScreen(this);
             //player = new Player(15*32, 2*32, inventory, this);
             //player = new Player(30 * 32, 9 * 32, inventory, this);
             cam = new Camera(player, width, height);
@@ -859,6 +864,7 @@ namespace Toggle
 
                 startScreen.checkButtonHovers();
                 startScreen.checkButtonClicks();
+                //if we set state to start from a button
                 /*
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
@@ -1014,6 +1020,7 @@ namespace Toggle
             {
                 gameState = "lost";
                 IsMouseVisible = true;
+                playerGhost.reset();
             }
 
 
@@ -1275,6 +1282,17 @@ namespace Toggle
 
         public void lostUpdate()
         {
+            MouseState mouseState = Mouse.GetState();
+            int mouseX, mouseY;
+
+            Point p = convertCursorLocation(mouseState);
+            mouseX = p.X;
+            mouseY = p.Y;
+
+            deadScreen.checkButtonHovers();
+            deadScreen.checkButtonClicks();
+
+
             newKeyBoardState = Keyboard.GetState();
             if (newKeyBoardState.IsKeyDown(Keys.R) && !oldKeyBoardState.IsKeyDown(Keys.R))
             {
@@ -1282,6 +1300,7 @@ namespace Toggle
                 gameState = "play";
             }
             MouseState m = Mouse.GetState();
+            /*
             if (m.LeftButton == ButtonState.Pressed)
             {
                 Rectangle replayButtonRect = new Rectangle(538, 381, 140, 50);
@@ -1321,13 +1340,15 @@ namespace Toggle
                     Exit();
                 }
             }
+             * */
 
 
         }
         public void lostDraw()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Textures.textures["lostScreen"], new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(Textures.textures["deadScreen"], new Vector2(0, 0), Color.White);
+            deadScreen.drawScreen(spriteBatch);
             spriteBatch.End();
         }
 
@@ -2036,6 +2057,12 @@ namespace Toggle
         {
             if (command.Equals("play"))
             {
+                //make sure level is back to start
+                currentLevel = hubLevel;
+                currentLevelString = "hubLevel";
+                inventory.clearInventory();
+                setLevel(hubLevelTile);
+                reloadLevel();
                 titleScreenPhase = 1;
                 screenDisplayed = Textures.textures["controls1"];
             }
@@ -2051,6 +2078,19 @@ namespace Toggle
             if (command.Equals("exit"))
             {
                 Exit();
+            }
+            if (command.Equals("reload"))
+            {
+                reloadLevel();
+                gameState = "play";
+            }
+            if (command.Equals("startscreen"))
+            {
+                reloadLevel();
+                gameState = "start";
+                titleScreenPhase = 0;
+                screenDisplayed = Textures.textures["titleScreen3"];
+                
             }
         }
 

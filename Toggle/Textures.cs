@@ -24,7 +24,7 @@ namespace Toggle
                                               "aboutScreen2", "questionBox","fence", "barbedBottomLeft","barbedHor","barbedVertical1","blocks","goodBlob","badBlob","title","help",
                                               "diary","diaryBad","diaryPlatformB","diaryPlatformG","diaryPlatformCompleteB","diaryPlatformCompleteG","glow32","hiddenArrow","nothing","ghostGate","buttonSUp",
                                               "torchGood","torchBad","rose","rosePlatform","rosePlatformComplete","playerGhost","inventorytutorial", "textBox","hourglassinstruction","particleShadow", "leftArrow", "rightArrow",
-                                              "leftArrowHovered", "rightArrowHovered", "xButton","xButtonHovered","particleSpark"};
+                                              "leftArrowHovered", "rightArrowHovered", "xButton","xButtonHovered","particleSpark","exitDead","exitDeadHover","respawn","respawnHover","startover","startoverHover","deadScreen"};
 
 
         public static string[] tileNames = {"grass5","grass6","grass7","grass8","darkgrass5","darkgrass6","darkgrass7","darkgrass8",

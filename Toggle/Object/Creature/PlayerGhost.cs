@@ -19,7 +19,7 @@ namespace Toggle
         {
             goodGraphic = Textures.textures["playerGhost"];
             badGraphic = Textures.textures["playerGhost"];
-            timeAlive = 200;
+            timeAlive = 100;
             imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
          
         }
@@ -30,7 +30,7 @@ namespace Toggle
             {
                 x = lastX + (int)(Math.Sin((timeAlive - 200) * Math.PI / 20) * 8);
                 y--;
-                spriteAlpha -= 0.004f;
+                spriteAlpha -= 0.01f;
                 timeAlive--;
             }
         }
