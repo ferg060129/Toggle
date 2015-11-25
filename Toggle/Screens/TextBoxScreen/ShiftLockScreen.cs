@@ -14,8 +14,6 @@ namespace Toggle
         public ShiftLockScreen(Game1 eng)
             : base(eng)
         {
-            buttons.Add(new InventoryScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start", "startHover", this));
-            
             string[] temp = { "The tile you have just stepped on has locked your ability to Shift! Notice the lock symbol on your Shift cooldown bar to the upper left.","Find a key tile to unlock it, so you may Shift once again!"};
 
             instructions = temp;

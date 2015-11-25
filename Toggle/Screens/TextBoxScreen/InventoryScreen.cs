@@ -15,7 +15,6 @@ namespace Toggle
     {
         public InventoryScreen(Game1 eng): base(eng)
         {
-            buttons.Add(new InventoryScreenButton(eng.GraphicsDevice.Viewport.Width / 2 + 160, 300, "start", "startHover", this));
             string[] temp = { "Congratulations, you have found an item! All items are stored in your inventory at the top right. You can press the I key to toggle it on and off.", "Hover over your items to learn something about them.", "Maybe you can even combine them to make something better!" };
             
             instructions = temp;

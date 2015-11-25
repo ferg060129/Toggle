@@ -364,6 +364,10 @@ namespace Toggle
 
         protected override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && gameState.Equals("credits"))
+            {
+                Exit();
+            }
             switch (gameState)
             {
                 case "start":
@@ -1358,8 +1362,7 @@ namespace Toggle
             newKeyBoardState = Keyboard.GetState();
             currentTextBoxScreen.checkButtonHovers();
             currentTextBoxScreen.checkButtonClicks();
-            if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))
-                || (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
+            if ((newKeyBoardState.IsKeyDown(Keys.Enter) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.Enter)))
             {
                 ((TextBoxScreen)currentTextBoxScreen).nextString();
             }
