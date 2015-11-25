@@ -74,7 +74,7 @@ namespace Toggle
         public void drawInventory(SpriteBatch sb)
         {
             float alpha = 1.0f;
-            if (transparent) alpha = 0.025f;
+            if (transparent) alpha = 0.5f;
 
 
             sb.Draw(inventoryGraphic, new Vector2(this.x, this.y), new Color(Color.White, alpha));
