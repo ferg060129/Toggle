@@ -52,16 +52,16 @@ namespace Toggle
             if (spawnDirection)
             {
                 if (state)
-                    direction = false;
-                else
                     direction = true;
+                else
+                    direction = false;
             }
             else
             {
                 if (state)
-                    direction = true;
-                else
                     direction = false;
+                else
+                    direction = true;
             }
             
             updateGraphic();
