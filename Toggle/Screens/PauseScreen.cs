@@ -17,8 +17,8 @@ namespace Toggle
             : base(eng)
             {
                 engine = eng;
-                buttons.Add(new MenuButton(290, 280, "title", "start"));
-                buttons.Add(new MenuButton(290, 380, "help", "help"));
+                buttons.Add(new StartScreenButton(290, 280, "title","titleHover", "startscreen",eng));
+                buttons.Add(new StartScreenButton(290, 380, "help","helpHover", "help",eng));
             }
 
         public override void checkButtonClicks()
@@ -27,13 +27,13 @@ namespace Toggle
             Point cursorLocation = engine.convertCursorLocation(mouseState);
             if (mouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton != ButtonState.Pressed)
             {
-                foreach (MenuButton sb in buttons)
+                foreach (StartScreenButton sb in buttons)
                 {
 
                     if (sb.getClickBox().Contains(cursorLocation))
                     {
                         string newState = sb.onClick();
-                        engine.setState(newState,"");
+                        engine.buttonCommand(newState);
                     }
                 }
             }

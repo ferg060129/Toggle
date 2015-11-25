@@ -1019,7 +1019,8 @@ namespace Toggle
             if (playerGhost.getTimeAlive() <= 0)
             {
                 gameState = "lost";
-                IsMouseVisible = true;
+                //game cursor works now so should be fine
+                //IsMouseVisible = true;
                 playerGhost.reset();
             }
 
@@ -2063,6 +2064,12 @@ namespace Toggle
                 inventory.clearInventory();
                 setLevel(hubLevelTile);
                 reloadLevel();
+                titleScreenPhase = 1;
+                screenDisplayed = Textures.textures["controls1"];
+            }
+            if (command.Equals("help"))
+            {
+                setState("start", "");
                 titleScreenPhase = 1;
                 screenDisplayed = Textures.textures["controls1"];
             }
