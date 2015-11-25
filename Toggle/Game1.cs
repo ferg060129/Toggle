@@ -2109,6 +2109,7 @@ namespace Toggle
                 inventory.clearInventory();
                 setLevel(hubLevelTile);
                 reloadLevel();
+                setState("start", "");
                 titleScreenPhase = 1;
                 screenDisplayed = Textures.textures["controls1"];
             }
