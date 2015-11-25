@@ -929,7 +929,16 @@ namespace Toggle
                 if ((newKeyBoardState.IsKeyDown(Keys.LeftShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.LeftShift))|| 
                     (newKeyBoardState.IsKeyDown(Keys.RightShift) && oldKeyBoardState != null && !oldKeyBoardState.IsKeyDown(Keys.RightShift)))
                 {
-                    gameState = "play";
+                    if(!beginningExpositionShown)
+                    {
+                        setState("textbox", "beginningExposition");
+                        beginningExpositionShown = true;
+                    }
+                    else
+                    {
+                        gameState = "play";
+                    }
+
                     LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", "hubLevel", new Point(13 * 32, 25 * 32));
                     saveGame(lv);
                     //screenDisplayed = Textures.textures["inventorytutorial"];
@@ -1065,13 +1074,6 @@ namespace Toggle
                 Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
                 //hubLevel.addLevelItem(boat);
-            }
-
-            if(!beginningExpositionShown)
-            {
-                setState("textbox", "beginningExposition");
-
-                beginningExpositionShown = true;
             }
 
 

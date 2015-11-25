@@ -17,24 +17,25 @@ namespace Toggle
         Vector2 descriptionLoc = new Vector2(525, 224);
         Dictionary<string, ScreenButton> stringToButton = new Dictionary<string, ScreenButton>();
 
-        private string[] buttonInfo = {"ButtonPlayer|buttonUp|buttonUp|This is a thingy you should step on|This is still a tihngy",
-                                      "ButtonHeavy|buttonHUp|buttonHUp|You'll need to push a heavier object \nonto this|You'll need to push a heavier object \nonto this",
-                                      "ButtonShadow|buttonSUp|buttonSUp|This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds |This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds ",
-                                      "Desk|desk|deskBad|This is a desk|whoooo hooo",
-                                      "Ghost|ghost|unghost|cute|spooky",
-                                      "VineMoveBlock|BoxLight|BoxDark|This is a pushable object\nNote, enemies can push these too|This object is not pushable",
-                                      "Gate|ClosedGate|ClosedGate|This is an impassable gate opened\noften by utilizing a button|This is an impassable gate opened\noften by utilizing a button",
-                                      "LaserBlock|lasBoxHori|lasBoxVert|This is a laser which cannot be touched\nShifting causes the laser to rotate\nand change colors|This is a laser which cannot be touched\nShifting causes the laser to rotate\nand change colors",
-                                      "Strawberry|berry|berryRot|This is not passable|This is passable",
-                                      "KnifePlatform|knifePlatform|knifePlatform|place knife here|place knife here",
-                                      "LanternPlatform|lanternPlatform|lanternPlatform|place lantern here|place lantern here",
-                                      "Boat|boat|boat|Hop aboard to win the game|Hop aboard to win the game",
-                                      "BadTile|AngryButton|AngryButton|Stepping on this shifts to the bad world|Stepping on this shifts to the bad world",
-                                      "GoodTile|HappyButton|HappyButton|Stepping on this shifts to the good world|Stepping on this shifts to the good world",
-                                      "LockTile|HoleTile|HoleTile|Stepping on this locks your ability\nto shift|Stepping on this locks your ability\nto shift",
-                                      "UnlockTile|KeyButton|KeyButton|Stepping on this unlocks your ability\nto shift|Stepping on this unlocks your ability\nto shift",
-                                      "Grate|grate|grateRust|Lasers can pass through, but you can't|Lasers can pass through, but you can't",
-                                      "DiaryPlatform|diaryPlatformG|diaryPlatformB|Place your diary here|Place you diary here"
+        private string[] buttonInfo = {
+                                      "Desk|desk|deskBad|This is a desk.|This is a metal desk.",
+                                      "Ghost|ghost|unghost|This little guy will follow you. \nHe can pass through walls.|This scary fellow will chase you down. \nHe cannot go through walls.",
+                                      "VineMoveBlock|BoxLight|BoxDark|This is a pushable object.\nNote, enemies can push these too.|This object is not pushable.",
+                                      "LaserBlock|lasBoxHori|lasBoxVert|This is a pushable block emitting a deadly laser.\nShifting causes the laser to rotate\nand change colors.|This is a pushable block emitting a deadly laser.\nShifting causes the laser to rotate\nand change colors.",
+                                      "Strawberry|berry|berryRot|This is not passable.|This is passable.",
+                                      "ButtonPlayer|buttonUp|buttonUp|Step on this to perform an effect.|Step on this to perform an effect.",
+                                      "ButtonHeavy|buttonHUp|buttonHUp|You'll need to push a heavier object \nonto this.|You'll need to push a heavier object \nonto this.",
+                                      "ButtonShadow|buttonSUp|buttonSUp|This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds. |This tricky button takes a lot of presses\n to work. Seems to alternate between\n worlds. ",
+                                      "Gate|ClosedGate|ClosedGate|This is an impassable gate opened\noften by utilizing a button.|This is an impassable gate opened\noften by utilizing a button.",
+                                      "BadTile|AngryButton|AngryButton|Stepping on this shifts to the bad \nworld.|Stepping on this shifts to the bad \nworld.",
+                                      "GoodTile|HappyButton|HappyButton|Stepping on this shifts to the good \nworld.|Stepping on this shifts to the good \nworld.",
+                                      "LockTile|HoleTile|HoleTile|Stepping on this locks your ability\nto shift.|Stepping on this locks your ability\nto shift.",
+                                      "UnlockTile|KeyButton|KeyButton|Stepping on this unlocks your ability\nto shift.|Stepping on this unlocks your ability\nto shift.",
+                                      "Grate|grate|grateRust|Lasers can pass through, but you can't.|Lasers can pass through, but you can't.",
+                                      "DiaryPlatform|diaryPlatformG|diaryPlatformB|Place your diary here.|Place you diary here.",
+                                      "KnifePlatform|knifePlatform|knifePlatform|Place knife here.|Place knife here.",
+                                      "RosePlatform|rosePlatform|rosePlatform|Place rose here.|Place rose here.",
+                                      "Boat|boat|boat|Hop aboard to leave this world.|Hop aboard to leave this world."
                                       };
 
 
