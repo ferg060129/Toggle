@@ -32,6 +32,13 @@ namespace Toggle
 
         public override void onButton()
         {
+            if (collidable == true)
+            {
+                for (int i = 0; i < 40; i++)
+                {
+                    Game1.particles.Add(new Particle(x, y, "particleSpark"));
+                }
+            }
             goodGraphic = Textures.textures["OpenGate"];
             badGraphic = Textures.textures["OpenGate"];
             collidable = false;

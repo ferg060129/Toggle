@@ -5,18 +5,18 @@ using System.Text;
 
 namespace Toggle
 {
-    class RoseI : InventoryItem
+    class KnifeI : InventoryItem
     {
 
-        public RoseI()
+        public KnifeI()
             : base()
         {
-            goodGraphic = Textures.textures["rose"];
-            badGraphic = Textures.textures["rose"];
+            goodGraphic = Textures.textures["knife"];
+            badGraphic = Textures.textures["knife"];
             width = 32;
             height = 32;
-            itemTipGood = "It's quite beautiful";
-            itemTipBad = "It's quite sharp";
+            itemTipGood = "This is sharp";
+            itemTipBad = "Whose blood is this?";
         }
     }
 }

@@ -78,8 +78,8 @@
     <Compile Include="Level\TutorialLevel.cs" />
     <Compile Include="Object\Creature\PlayerGhost.cs" />
     <Compile Include="Object\Inventory Item\DiaryI.cs" />
-    <Compile Include="Object\Inventory Item\KnifeI - Copy.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
+    <Compile Include="Object\Inventory Item\RoseI.cs" />
     <Compile Include="Object\Inventory Item\RopeI.cs" />
     <Compile Include="Object\Item\Diary.cs" />
     <Compile Include="Object\Item\Rose.cs" />

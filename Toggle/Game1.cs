@@ -1986,6 +1986,9 @@ namespace Toggle
                         case "RopeI":
                             inventory.setInventoryItem(new RopeI(), itemX, itemY);
                             break;
+                        case "RoseI":
+                            inventory.setInventoryItem(new RoseI(), itemX, itemY);
+                            break;
                         case "ScrollI":
                             inventory.setInventoryItem(new ScrollI(args[3], args[4]), itemX, itemY);
                             break;

@@ -63,11 +63,6 @@ namespace Toggle
 
         public override void move()
         {
-            //test particles
-            if (Game1.random.Next(0) <= 10)
-            {
-                Game1.particles.Add(new Particle(x, y, "knife"));
-            }
             if (readingChalkboard && !hitBox.Intersects(collideChalkboard.getHitBox()))
             {
                 readingChalkboard = false;
@@ -194,6 +189,10 @@ namespace Toggle
             {
                 imageBoundingRectangle = new Rectangle(0, 0, 0, 0);
                 velocity = 0;
+            }
+            else
+            {
+                velocity = 4;
             }
         }
 
