@@ -138,9 +138,9 @@ namespace Toggle
             levelItems.Clear();
             //Scroll b = new Scroll(32 * 12, 32 * 7, "Bananaphone", "ring ring ring");
             //levelItems.Add(b);
-            levelItems.Add(new Scroll(32 * 15, 32 * 25, "The word you seek has eight letters", "Unscramble the word demurrer"));
+            levelItems.Add(new Scroll(32 * 15, 32 * 25, "The word you seek has eight letters", "Don't let the r's touch"));
             levelItems.Add(new Scroll(32 * 56, 32 * 18, "Three syllables", "The third is -er"));
-            levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Don't let the r's touch"));
+            levelItems.Add(new Scroll(32 * 58, 32 * 5, "It all starts with m", "Unscramble the word demurrer"));
             levelItems.Add(new Knife(32 * 1, 32 * 8));
             levelItems.Add(new Rope(32 * 1, 32 * 17));
         }
