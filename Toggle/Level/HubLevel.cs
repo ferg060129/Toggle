@@ -104,12 +104,14 @@ namespace Toggle
             }
 
 
-                levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(20 * 32, 10 * 32)));
-            //levelTiles.Add(new LevelTile(17 * 32, 3 * 32, "blackBlock", "blackBlock", "schoolLevel",new Point(9 * 32, 10 * 32)));
+            levelTiles.Add(new LevelTile(19 * 32, 5 * 32, "blackBlock", "blackBlock", "gate1Level", new Point(20 * 32, 10 * 32)));
             levelTiles.Add(new LevelTile(35 * 32, 8 * 32, "blackBlock", "blackBlock", "schoolLevel",new Point(34 * 32, 24 * 32)));
             levelTiles.Add(new LevelTile(9 * 32, 8 * 32, "blackBlock", "blackBlock", "houseLevel", new Point(24 * 32, 16 * 32)));
             levelTiles.Add(new LevelTile(26 * 32, 5 * 32, "blackBlock", "blackBlock", "complex1Level", new Point(22 * 32, 12 * 32)));
             levelTiles.Add(new LevelTile(36 * 32, 20 * 32, "blackBlock", "blackBlock", "marshEnterLevel", new Point(4 * 32, 9 * 32)));
+
+            //debug room
+            //levelTiles.Add(new LevelTile(4 * 32, 27 * 32, "blackBlock", "blackBlock", "ghostTestLevel", new Point(5 * 32, 27 * 32)));
         }
 
 

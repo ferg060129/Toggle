@@ -16,6 +16,7 @@ namespace Toggle
         Game1 engine;
         bool stateLocked = false;
         bool currentlyMove = false;
+        int hitByLaser = 10;
         int distanceTraveled = 0;
         double proportion = 0;
         Boat myBoat = null;
@@ -58,6 +59,14 @@ namespace Toggle
             inventory = i;
             engine = eng;
             proportion = 0.5;
+            hitByLaser = 10;
+        }
+
+        public void initialize()
+        {
+            proportion = 0.5;
+            hitByLaser = 10;
+            velocity = 4;
         }
 
 
@@ -327,6 +336,14 @@ namespace Toggle
         {   
             //instakill for now
             damageProportion(1, 40);
+            if (hitByLaser > 0)
+            {
+                for (int i = 0; i < 10 + (hitByLaser * 2); i++)
+                {
+                    Game1.particles.Add(new Particle(x, y, "particleLaser"));
+                }
+                hitByLaser--;
+            }
         }
         
         public void pickUp(Item i)

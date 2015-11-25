@@ -335,7 +335,7 @@ namespace Toggle
 
         public void reloadLevel()
         {
-            player.setPropotion(0.5);
+            player.initialize();
             playerGhost.reset();
             worldState = true;
             //currentLevel.addInitialLevelItems();
@@ -1175,7 +1175,10 @@ namespace Toggle
             }
             foreach (Particle p in particles)
             {
-                spriteBatch.Draw(p.getGraphic(), new Vector2(p.getX(), p.getY()), p.getImageBoundingRectangle(), Color.White * p.getAlpha());
+                spriteBatch.Draw(p.getGraphic(),
+                                 p.getPosition(), p.getImageBoundingRectangle(),
+                                 p.getColor() * p.getAlpha(),
+                                 p.getRotation(), new Vector2(16, 16), p.getScale(), SpriteEffects.None, 0);
             }
 
 

@@ -19,11 +19,11 @@ namespace Toggle
         }
         public override void loadLevelObjects()
         {
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 15, 32 * 10));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 15));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 5, 32 * 10));
-            Game1.miscObjects.Add(new VineMoveBlock(32 * 10, 32 * 5));
-            Game1.creatures.Add(new Ghost(32 * 13, 32 * 3, new Point(1, 1), new Point(54, 5)));
+            Game1.miscObjects.Add(new VineMoveBlock(20 * 32, 20 * 32));
+            Gate daGate = new Gate(22 * 32, 20 * 32);
+            Game1.miscObjects.Add(daGate);
+            Game1.miscObjects.Add(new ButtonShadow(24 * 32, 20 * 32,daGate,true));
+            Game1.miscObjects.Add(new LaserBlock(24 * 32, 20 * 32, true));
 
             levelTiles.Add(new LevelTile(15 * 32, 8 * 32, "blackBlock", "blackBlock", "hubLevel", new Point(19 * 32, 7 * 32)));
         }
