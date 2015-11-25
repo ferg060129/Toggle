@@ -117,11 +117,15 @@ namespace Toggle
         {
             Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
             levelItems.Add(gb);
+            
             /*
-            Knife kn = new Knife(11 * 32, 25 * 32);
+            Knife kn = new Knife(21 * 32, 25 * 32);
             levelItems.Add(kn);
-            Diary di = new Diary(10 * 32, 25 * 32);
-            levelItems.Add(di);*/
+            Diary di = new Diary(20 * 32, 25 * 32);
+            levelItems.Add(di);
+            Rose rb = new Rose(22 * 32, 25 * 32);
+            levelItems.Add(rb);
+             */
         }
     }
 }
