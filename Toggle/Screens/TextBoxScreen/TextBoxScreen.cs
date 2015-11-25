@@ -17,6 +17,7 @@ namespace Toggle
         protected Point exitButtonLocation = new Point(0, 0);
         protected Point leftButtonLocation = new Point(0, 0);
         protected Point rightButtonLocation = new Point(0, 0);
+        protected Point pageQuotientLocation = new Point(0, 0);
         protected int padding = 15;
         protected int infoIndex = 0;
         protected string[] instructions;
@@ -34,6 +35,7 @@ namespace Toggle
             leftButtonLocation = new Point(padding + textBoxLocation.X, textBoxLocation.Y + textBox.Height - (Textures.textures["leftArrow"].Height + padding));
             rightButtonLocation = new Point(textBoxLocation.X + textBox.Width - (Textures.textures["leftArrow"].Width + padding), textBoxLocation.Y + textBox.Height - (Textures.textures["leftArrow"].Height + padding));
             exitButtonLocation = new Point(textBoxLocation.X + textBox.Width - (Textures.textures["xButton"].Width + padding), padding + textBoxLocation.Y);
+            pageQuotientLocation = new Point(textBoxLocation.X + textBox.Width/2,rightButtonLocation.Y);
             buttons.Add(new TextBoxLeftButton(leftButtonLocation.X, leftButtonLocation.Y, "leftArrow", "leftArrowHovered", this));
             buttons.Add(new TextBoxRightButton(rightButtonLocation.X, rightButtonLocation.Y, "rightArrow", "rightArrowHovered", this));
             buttons.Add(new TextBoxExitButton(exitButtonLocation.X, exitButtonLocation.Y, "xButton", "xButtonHovered", this));
@@ -84,6 +86,11 @@ namespace Toggle
 
             }
             sb.DrawString(Textures.fonts["arial12"], currentInfoText.Substring(0, currentStringLength), new Vector2(textBoxLocation.X + padding, textBoxLocation.Y + padding + 20), Color.Black);
+            
+            string index = (infoIndex + 1) + "/" + numInfoBlocks;
+            sb.DrawString(Textures.fonts["arial12"], index, new Vector2(pageQuotientLocation.X - (int)(Textures.fonts["arial12"].MeasureString(index).X) / 2, pageQuotientLocation.Y), Color.Black);
+            
+            
             sb.Draw(Textures.textures["cursor"], new Vector2(mouseLoc.X, mouseLoc.Y), Color.White);
             if (currentStringLength < currentInfoText.Length && waitCtr == 0)
             {
