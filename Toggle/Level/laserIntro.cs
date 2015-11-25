@@ -26,8 +26,8 @@ namespace Toggle
             Game1.miscObjects.Add(btn2);
             Game1.miscObjects.Add(gate1);
             Game1.miscObjects.Add(gate2);
-            Game1.miscObjects.Add(new LaserBlock(15 * 32, 13 * 32, false));
-            Game1.miscObjects.Add(new LaserBlock(4 * 32, 8 * 32, true));
+            Game1.miscObjects.Add(new LaserBlock(15 * 32, 13 * 32, true));
+            Game1.miscObjects.Add(new LaserBlock(4 * 32, 8 * 32, false));
             Game1.miscObjects.Add(new Strawberry(13 * 32, 10 * 32));
             //level tiles
             levelTiles.Add(new LevelTile(7 * 32, 3 * 32, "blackBlock", "blackBlock", "gate2Level",new Point(12 * 32, 10 * 32)));

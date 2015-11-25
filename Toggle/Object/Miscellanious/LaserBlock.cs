@@ -16,6 +16,8 @@ namespace Toggle
         {
             phaseOffset = Game1.random.Next(0, 180);
             direction = true;
+            spawnDirection = true;
+            onShift();
             updateGraphic();
             updatePeriod = 0;
         }
@@ -25,7 +27,7 @@ namespace Toggle
         {
             phaseOffset = Game1.random.Next(0, 180);
             spawnDirection = dirIn;
-            direction = spawnDirection;
+            onShift();
             updateGraphic();
             updatePeriod = 0;
         }
@@ -50,16 +52,16 @@ namespace Toggle
             if (spawnDirection)
             {
                 if (state)
-                    direction = true;
-                else
                     direction = false;
+                else
+                    direction = true;
             }
             else
             {
                 if (state)
-                    direction = false;
-                else
                     direction = true;
+                else
+                    direction = false;
             }
             
             updateGraphic();
