@@ -92,6 +92,7 @@ namespace Toggle
         int shiftLockJitterTime = 0;
         float fadeTransparency = 0.0f;
         int creditsOffset = 0;
+        bool beginningExpositionShown = false;
 
 
 
@@ -120,6 +121,11 @@ namespace Toggle
         InventoryItem[,] backUpInventory;
         ArrayList backUpItems;
         bool[] backUpPlatformFilled;
+
+        private RoseExpositionScreen roseExpositionScreen;
+        private OpeningExpositionScreen openingExpositionScreen;
+        private KnifeExpositionScreen knifeExpositionScreen;
+        private DiaryExpositionScreen diaryExpositionScreen;
         private PlatformScreen platformScreen;
         private ShiftLockScreen shiftLockScreen;
         private InventoryScreen inventoryScreen;
@@ -269,6 +275,11 @@ namespace Toggle
 
             playerGhost = new PlayerGhost(0, 0);
 
+
+            roseExpositionScreen = new RoseExpositionScreen(this);
+            openingExpositionScreen = new OpeningExpositionScreen(this);
+            knifeExpositionScreen = new KnifeExpositionScreen(this);
+            diaryExpositionScreen = new DiaryExpositionScreen(this);
             platformScreen = new PlatformScreen(this);
             shiftLockScreen = new ShiftLockScreen(this);
             inventoryScreen = new InventoryScreen(this);
@@ -1054,6 +1065,13 @@ namespace Toggle
                 Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
                 //hubLevel.addLevelItem(boat);
+            }
+
+            if(!beginningExpositionShown)
+            {
+                setState("textbox", "beginningExposition");
+
+                beginningExpositionShown = true;
             }
 
 
@@ -1864,6 +1882,18 @@ namespace Toggle
                        break;
                    case "platform":
                        currentTextBoxScreen = platformScreen;
+                       break;
+                   case "beginningExposition":
+                       currentTextBoxScreen = openingExpositionScreen;
+                       break;
+                   case "diaryExposition":
+                       currentTextBoxScreen = diaryExpositionScreen;
+                       break;
+                   case "knifeExposition":
+                       currentTextBoxScreen = knifeExpositionScreen;
+                       break;
+                   case "roseExposition":
+                       currentTextBoxScreen = roseExpositionScreen;
                        break;
                }
                screenDisplayed = Textures.textures["inventorytutorial"];

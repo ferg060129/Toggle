@@ -158,8 +158,12 @@
     <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\DanceScreen.cs" />
     <Compile Include="Screens\DeadScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\DiaryExpositionScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\InventoryScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\KnifeExpositionScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\OpeningExpositionScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\PlatformScreen.cs" />
+    <Compile Include="Screens\TextBoxScreen\RoseExpositionScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\ShiftLockScreen.cs" />
     <Compile Include="Screens\TextBoxScreen\TextBoxScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />

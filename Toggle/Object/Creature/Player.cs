@@ -411,6 +411,21 @@ namespace Toggle
             }
             if (o is Item)
             {
+                if(o is Diary)
+                {
+                    engine.setState("textbox", "diaryExposition");
+                }
+                if(o is Knife)
+                {
+                    engine.setState("textbox", "knifeExposition");
+                }
+                if(o is Rose)
+                {
+                    engine.setState("textbox", "roseExposition");
+                }
+
+
+
                 pickUp((Item)o);
                 Textures.sounds["pickup"].Play();
             }
