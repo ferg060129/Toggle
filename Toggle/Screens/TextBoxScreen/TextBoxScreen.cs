@@ -23,6 +23,7 @@ namespace Toggle
         protected string[] instructions;
         protected int currentStringLength = 0;
         protected int waitCtr = 0;
+        protected int subCtr = 0;
         protected int numInfoBlocks;
         protected Texture2D textBox;
         protected string currentInfoText = "";
@@ -95,8 +96,13 @@ namespace Toggle
             if (currentStringLength < currentInfoText.Length && waitCtr == 0)
             {
                 currentStringLength++;
+                if (subCtr % 3 == 0)
+                {
+                Textures.sounds["textCrawl2"].Play();
+                }
 
             }
+            subCtr++;
             waitCtr++;
             if(waitCtr >= 2)
             {

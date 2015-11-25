@@ -1155,3 +1155,9 @@
 /processorParam:TextureFormat=Color
 /build:particleLaser.png
 
+#begin textCrawl2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:textCrawl2.wav
+

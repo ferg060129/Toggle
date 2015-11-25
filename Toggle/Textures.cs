@@ -34,7 +34,7 @@ namespace Toggle
                                            "KeyButton","KeyButtonPressed","stone","blackBlock","woodfloor","darkwoodfloor","grate","grateRust","WoodenWall","woodenWallR","woodenWallU","woodenWallD","woodenWallL",
                                            "waterTile","waterTile2","waterTile3","waterTile4","waterTileBad","waterTileBad2","waterTileBad3","waterTileBad4","muddytile1","muddytile2",};
         public static string[] spritefonts = { "mistral16", "arial12" };
-        public static string[] soundsNames = { "beep","unlock","lock","hit","pickup","weakhit"};
+        public static string[] soundsNames = { "beep","unlock","lock","hit","pickup","weakhit","textCrawl2"};
 
         public static Dictionary<char, string> charToFileName = new Dictionary<char, string>()
             {
