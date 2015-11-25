@@ -34,9 +34,9 @@ namespace Toggle
         {
             if (collidable == true)
             {
-                for (int i = 0; i < 40; i++)
+                for (int i = 0; i < 20; i++)
                 {
-                    Game1.particles.Add(new Particle(x + 16, y + 16, "particleSpark"));
+                    Game1.particles.Add(new Particle(x + 16, y + 16, "particleSpark",5,1,10));
                 }
             }
             goodGraphic = Textures.textures["OpenGate"];

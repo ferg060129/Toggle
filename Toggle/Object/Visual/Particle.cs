@@ -35,6 +35,48 @@ namespace Toggle
             }
         }
 
+        //set velocity cons
+        public Particle(int xLocation, int yLocation, string graphicString, float velocity)
+            : base(xLocation, yLocation)
+        {
+            goodGraphic = Textures.textures[graphicString];
+            badGraphic = Textures.textures[graphicString];
+            cMod = Color.White;
+            scale = (float)(Game1.random.NextDouble() * 2);
+            rotation = (float)(Game1.random.NextDouble() * Math.PI * 2);
+            lifeTime = 20 + Game1.random.Next(20);
+            lifeTick = lifeTime;
+            directionVector = new Vector2((float)((Game1.random.NextDouble() * velocity) - (velocity/2)), ((float)(Game1.random.NextDouble() * velocity) - (velocity/2)));
+            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            int randx = Game1.random.Next(2);
+            int randy = Game1.random.Next(2);
+            if (graphicString == "particleShadow")
+            {
+                imageBoundingRectangle = new Rectangle(randx * 16, randy * 16, 16, 16);
+            }
+        }
+
+        //set velocity, scale, lifetimebase
+        public Particle(int xLocation, int yLocation, string graphicString, float velocity,float scaleIn, int lifeTimeBase)
+            : base(xLocation, yLocation)
+        {
+            goodGraphic = Textures.textures[graphicString];
+            badGraphic = Textures.textures[graphicString];
+            cMod = Color.White;
+            scale = (float)(Game1.random.NextDouble() * (scaleIn - 0.5f)) + 0.5f;
+            rotation = (float)(Game1.random.NextDouble() * Math.PI * 2);
+            lifeTime = lifeTimeBase + Game1.random.Next(20);
+            lifeTick = lifeTime;
+            directionVector = new Vector2((float)((Game1.random.NextDouble() * velocity) - (velocity / 2)), ((float)(Game1.random.NextDouble() * velocity) - (velocity / 2)));
+            imageBoundingRectangle = new Rectangle(0, 0, 32, 32);
+            int randx = Game1.random.Next(2);
+            int randy = Game1.random.Next(2);
+            if (graphicString == "particleShadow")
+            {
+                imageBoundingRectangle = new Rectangle(randx * 16, randy * 16, 16, 16);
+            }
+        }
+
         public void update()
         {
             setPosition(getPosition() + directionVector);
