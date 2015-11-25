@@ -93,8 +93,6 @@ namespace Toggle
         float fadeTransparency = 0.0f;
         int creditsOffset = 0;
 
-        public static bool boatSpawned = false;
-
 
 
         private string currentLevelString;
@@ -355,6 +353,10 @@ namespace Toggle
             currentLevel.reloadLevelItems();
             continueGame();
             syncStates();
+
+
+            
+
 
         }
         protected override void UnloadContent()
@@ -1046,9 +1048,8 @@ namespace Toggle
                 showInventory = !showInventory;
             }
 
-            if (winCondition() && !boatSpawned)
+            if (winCondition() && !boatSpawned())
             {
-                boatSpawned = true;
 
                 Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
@@ -1798,11 +1799,6 @@ namespace Toggle
             return true;
         }
 
-        public static bool isBoatSpawned()
-        {
-            return boatSpawned;
-        }
-
         public Point convertCursorLocation(MouseState m)
         {
             int xLoc, yLoc;
@@ -2050,6 +2046,7 @@ namespace Toggle
             LevelTile lv = new LevelTile(0, 0, "blackBlock", "blackBlock", loadLevel, new Point(px, py));
             saveFile.Close();
             gameState = "play";
+
             setLevel(lv);
 
         }
@@ -2108,7 +2105,8 @@ namespace Toggle
             }
             if (command.Equals("startscreen"))
             {
-                reloadLevel();
+                refreshAllItems();
+                //reloadLevel();
                 gameState = "start";
                 titleScreenPhase = 0;
                 screenDisplayed = Textures.textures["titleScreen3"];
@@ -2157,6 +2155,25 @@ namespace Toggle
             showInventory = b;
         }
 
+        public void refreshAllItems()
+        {
+            foreach(Level l in levels)
+            {
+                l.reloadLevelItems();
+               // l.addInitialLevelItems();
+            }
+            
+
+        }
+
+        public static bool boatSpawned()
+        {
+            foreach (Object o in updateMiscObjects)
+            {
+                if (o is Boat) return true;
+            }
+            return false;
+        }
 
 
 

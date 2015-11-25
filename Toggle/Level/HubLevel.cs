@@ -75,12 +75,12 @@ namespace Toggle
 
             
 
-
+            /*
             if (Game1.isBoatSpawned())
             {
                 Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
-            }
+            }*/
 
             /* gb = new GreenBlock(11 * 32, 25 * 32);
            Game1.items.Add(gb);
