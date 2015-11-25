@@ -1567,16 +1567,16 @@ namespace Toggle
 
             danceScreen.drawDanceSreen(spriteBatch);
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
-            str = "Isaac";
+            str = "Isaac Dickson";
             length = str.Length * 12;
             spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset), Color.Blue);
-            str = "Merle";
+            str = "Merle Ferguson";
             length = str.Length * 12;
             spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 400), Color.Blue);
-            str = "Kevin";
+            str = "Kevin Spies";
             length = str.Length * 12;
             spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 800), Color.Blue);
-            str = "Mayris";
+            str = "Mayris Rios";
             length = str.Length * 12;
             spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1200), Color.Blue);
             str = "Dreamshift";

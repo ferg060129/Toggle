@@ -340,7 +340,7 @@ namespace Toggle
             {
                 for (int i = 0; i < 10 + (hitByLaser * 2); i++)
                 {
-                    Game1.particles.Add(new Particle(x, y, "particleLaser"));
+                    Game1.particles.Add(new Particle(x + 16, y + 16, "particleLaser"));
                 }
                 hitByLaser--;
             }
