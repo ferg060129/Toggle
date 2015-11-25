@@ -78,7 +78,7 @@ namespace Toggle
 
             if (Game1.isBoatSpawned())
             {
-                Boat boat = new Boat(28 * 32, 28 * 32);
+                Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
             }
 
@@ -117,6 +117,15 @@ namespace Toggle
         {
             Scroll gb = new Scroll(12 * 32, 25 * 32, "I am a paper", "What are u?");
             levelItems.Add(gb);
+
+            Rose r = new Rose(11 * 32, 25 * 32);
+            levelItems.Add(r);
+
+            Diary d = new Diary(10 * 32, 25 * 32);
+            levelItems.Add(d);
+
+            Knife k = new Knife(9 * 32, 25 * 32);
+            levelItems.Add(k);
             
             /*
             Knife kn = new Knife(21 * 32, 25 * 32);

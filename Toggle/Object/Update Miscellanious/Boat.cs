@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Collections;
+using Microsoft.Xna.Framework;
 namespace Toggle
 {
     class Boat : UpdateMiscellanious
@@ -10,11 +11,14 @@ namespace Toggle
         int direction = -1;
         int velocity = 1;
         bool moving = false;
-        public Boat(int xLocation, int yLocation)
+        Point stopLocation;
+        public Boat(int xLocation, int yLocation, Point p)
             : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures["boat"];
             badGraphic = Textures.textures["boat"];
+            stopLocation = p;
+            setMotion(0);
         }
 
         public void setMotion(int dir)
@@ -38,8 +42,15 @@ namespace Toggle
         {
             if(!moving)
             {
+                hitBox = new Rectangle(x, y, width, height);
                 return;
             }
+
+            if (direction == 0 && x == stopLocation.X && y == stopLocation.Y)
+            {
+                moving = false;
+            }
+
             switch (direction)
             {
                 default:

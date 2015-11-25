@@ -1050,7 +1050,7 @@ namespace Toggle
             {
                 boatSpawned = true;
 
-                Boat boat = new Boat(28 * 32, 28 * 32);
+                Boat boat = new Boat(40 * 32, 28 * 32, new Point(28 * 32, 28 * 32));
                 Game1.updateMiscObjects.Add(boat);
                 //hubLevel.addLevelItem(boat);
             }
@@ -1160,9 +1160,19 @@ namespace Toggle
             }
 
 
-
+            //Duct tape to draw boat under player
+            foreach (UpdateMiscellanious i in updateMiscObjects)
+            {
+                if (i is Boat)
+                {
+                    spriteBatch.Draw(i.getGraphic(), new Vector2(i.getX(), i.getY()), i.getImageBoundingRectangle(), Color.White);
+                }
+            }
 
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
+
+
+            
             if (!worldState)
                 drawDarkTiles(spriteBatch);
 
@@ -1205,6 +1215,8 @@ namespace Toggle
             }
             foreach (UpdateMiscellanious i in updateMiscObjects)
             {
+                //Duct tape to draw boat under player
+                if (i is Boat) continue;
                 if (i is Chalkboard)
                 {
                     if (player.isReadingChalkboard())
@@ -1213,19 +1225,6 @@ namespace Toggle
                         spriteBatch.Draw(i.getGraphic(), new Vector2(getCenter().X - i.getImageBoundingRectangle().Width / 2, getCenter().Y - i.getImageBoundingRectangle().Height / 2), i.getImageBoundingRectangle(), Color.White);
                         spriteBatch.DrawString(ch.getFont(), ch.getAnswer(), new Vector2(getCenter().X - ch.getAnswerWidth() / 2, getCenter().Y), Color.White);
                     }
-                }
-                else if (i is Box)
-                {
-                    Box box = (Box)i;
-                    box.setX(getCenter().X - i.getImageBoundingRectangle().Width / 2);
-                    box.setY(getCenter().Y - i.getImageBoundingRectangle().Height / 2 - 64);
-
-                    box.drawBox(spriteBatch);
-
-
-
-
-                    //spriteBatch.DrawString(box.getFont(), box.getAnswer(), new Vector2(getCenter().X - box.getAnswerWidth() / 2, getCenter().Y), Color.White);
                 }
                 else
                 {
