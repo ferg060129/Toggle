@@ -2127,6 +2127,10 @@ namespace Toggle
                 //Do a try catch block to return to start screen if it fails
                 if (continueButtonPressable())
                 {
+                    if(inventory!= null)
+                    inventory.clearInventory();
+                    if (currentLevel!=null)
+                    currentLevel.reloadLevelItems();
                     continueGame();
                 }
 
@@ -2147,7 +2151,7 @@ namespace Toggle
                 gameState = "start";
                 titleScreenPhase = 0;
                 screenDisplayed = Textures.textures["titleScreen3"];
-                
+                continueButtonActive = saveFileExists();
             }
         }
 
