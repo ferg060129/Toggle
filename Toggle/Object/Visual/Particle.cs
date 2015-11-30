@@ -15,6 +15,7 @@ namespace Toggle
         Color cMod;
         float scale;
         float rotation;
+        bool scaleGrow; //does particle get smaller (false) or bigger (true)
         public Particle(int xLocation, int yLocation,string graphicString)
             : base(xLocation, yLocation)
         {
@@ -22,6 +23,7 @@ namespace Toggle
             badGraphic = Textures.textures[graphicString];
             cMod = Color.White;
             scale = (float)(Game1.random.NextDouble() * 2);
+            scaleGrow = false;
             rotation = (float)(Game1.random.NextDouble() * Math.PI * 2);
             lifeTime = 20 + Game1.random.Next(20);
             lifeTick = lifeTime;
@@ -43,6 +45,7 @@ namespace Toggle
             badGraphic = Textures.textures[graphicString];
             cMod = Color.White;
             scale = (float)(Game1.random.NextDouble() * 2);
+            scaleGrow = false;
             rotation = (float)(Game1.random.NextDouble() * Math.PI * 2);
             lifeTime = 20 + Game1.random.Next(20);
             lifeTick = lifeTime;
@@ -57,13 +60,14 @@ namespace Toggle
         }
 
         //set velocity, scale, lifetimebase
-        public Particle(int xLocation, int yLocation, string graphicString, float velocity,float scaleIn, int lifeTimeBase)
+        public Particle(int xLocation, int yLocation, string graphicString, float velocity,float scaleIn, int lifeTimeBase,bool scaleGrowin)
             : base(xLocation, yLocation)
         {
             goodGraphic = Textures.textures[graphicString];
             badGraphic = Textures.textures[graphicString];
             cMod = Color.White;
             scale = (float)(Game1.random.NextDouble() * (scaleIn - 0.5f)) + 0.5f;
+            scaleGrow = scaleGrowin;
             rotation = (float)(Game1.random.NextDouble() * Math.PI * 2);
             lifeTime = lifeTimeBase + Game1.random.Next(20);
             lifeTick = lifeTime;
@@ -81,7 +85,10 @@ namespace Toggle
         {
             setPosition(getPosition() + directionVector);
             spriteAlpha -= ((float)1/lifeTime);
-            scale -= ((float)1 / lifeTime);
+            if (scaleGrow)
+                scale += ((float)1 / lifeTime);
+            else
+                scale -= ((float)1 / lifeTime);
             lifeTick--;
         }
         

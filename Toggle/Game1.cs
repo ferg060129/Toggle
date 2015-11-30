@@ -857,6 +857,16 @@ namespace Toggle
             levelTiles.AddRange(currentLevel.getLevelTiles());
             player.setX(currentLevel.getPlayerStartingX());
             player.setY(currentLevel.getPlayerStartingY());
+            //set flag for dirt particles
+            if (!currentLevel.getIndoors())
+            {
+                player.setTracks(true);
+            }
+            else
+            {
+                player.setTracks(false);
+            }
+
 
             cam.setBounds(currentLevel.getMapSizeX(), currentLevel.getMapSizeY());
             cam.changeRoom();

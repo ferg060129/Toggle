@@ -36,7 +36,7 @@ namespace Toggle
             {
                 for (int i = 0; i < 20; i++)
                 {
-                    Game1.particles.Add(new Particle(x + 16, y + 16, "particleSpark",5,1,10));
+                    Game1.particles.Add(new Particle(x + 16, y + 16, "particleSpark",5,1,10,false));
                 }
             }
             goodGraphic = Textures.textures["OpenGate"];

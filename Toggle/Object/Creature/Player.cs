@@ -24,6 +24,8 @@ namespace Toggle
         int hitInvulnMax = 120;
         //prevent shifting for a short while at start of game
         int initialShiftCD = 10;
+        int timeTick = 0;
+        bool dirtTracks = false;
 
 
         bool readingChalkboard = false;
@@ -60,6 +62,7 @@ namespace Toggle
             engine = eng;
             proportion = 0.5;
             hitByLaser = 10;
+            dirtTracks = false;
         }
 
         public void initialize()
@@ -67,11 +70,13 @@ namespace Toggle
             proportion = 0.5;
             hitByLaser = 10;
             velocity = 4;
+            dirtTracks = false;
         }
 
 
         public override void move()
         {
+            timeTick++;
             if (readingChalkboard && !hitBox.Intersects(collideChalkboard.getHitBox()))
             {
                 readingChalkboard = false;
@@ -300,23 +305,33 @@ namespace Toggle
 
             if (currentlyMove)
             {
-                switch (direction)
-                {
-                    default:
-                        break;
-                    case 0:
-                        x -= velocity;
-                        break;
-                    case 1:
-                        y -= velocity;
-                        break;
-                    case 2:
-                        x += velocity;
-                        break;
-                    case 3:
-                        y += velocity;
-                        break;
-                }
+                int xshift = 0;
+                    switch (direction)
+                    {
+                        default:
+                            break;
+                        case 0:
+                            x -= velocity;
+                            xshift = -8;
+                            break;
+                        case 1:
+                            y -= velocity;
+                            break;
+                        case 2:
+                            x += velocity;
+                            xshift = 8;
+                            break;
+                        case 3:
+                            y += velocity;
+                            break;
+                    }
+                    if ((timeTick % 8 == 1) && dirtTracks)
+                    {
+                        for (int i = 0; i < 2; i++)
+                        {
+                            Game1.particles.Add(new Particle(x + 16 + xshift, y + 32, "particleDirt", 2f, 0f, 2, true));
+                        }
+                    }
                 distanceTraveled += velocity;
             }
             //snapped to tile
@@ -537,6 +552,11 @@ namespace Toggle
         {
             base.setState(st);
             proportion = 1 - proportion;
+        }
+
+        public void setTracks(bool input)
+        {
+            dirtTracks = input;
         }
 
         public bool isDead()
