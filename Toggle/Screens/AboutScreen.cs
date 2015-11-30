@@ -32,7 +32,7 @@ namespace Toggle
                                       "LockTile|HoleTile|HoleTile|Stepping on this locks your ability\nto shift.|Stepping on this locks your ability\nto shift.",
                                       "UnlockTile|KeyButton|KeyButton|Stepping on this unlocks your ability\nto shift.|Stepping on this unlocks your ability\nto shift.",
                                       "Grate|grate|grateRust|Lasers can pass through, but you can't.|Lasers can pass through, but you can't.",
-                                      "DiaryPlatform|diaryPlatformG|diaryPlatformB|Place your diary here.|Place you diary here.",
+                                      "DiaryPlatform|diaryPlatformG|diaryPlatformB|Place your diary here.|Place your diary here.",
                                       "KnifePlatform|knifePlatform|knifePlatform|Place knife here.|Place knife here.",
                                       "RosePlatform|rosePlatform|rosePlatform|Place rose here.|Place rose here.",
                                       "Boat|boat|boat|Hop aboard to leave this world.|Hop aboard to leave this world."
