@@ -79,6 +79,7 @@
     <Compile Include="Level\Level.cs" />
     <Compile Include="Level\SchoolLevel.cs" />
     <Compile Include="Level\TutorialLevel.cs" />
+    <Compile Include="Object\Creature\BossGhost.cs" />
     <Compile Include="Object\Creature\PlayerGhost.cs" />
     <Compile Include="Object\Inventory Item\DiaryI.cs" />
     <Compile Include="Object\Inventory Item\KnifeI.cs" />
