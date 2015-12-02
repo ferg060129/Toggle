@@ -62,7 +62,6 @@ namespace Toggle
                 {'m', "muddytile1,muddytile1, w"},
                 {'n', "muddytile2,muddytile2, w"}
             };
-        
-
+     
     }
 }
