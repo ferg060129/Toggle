@@ -15,8 +15,8 @@ namespace Toggle
             : base()
         {
             map = "laserSetup.txt";
-            playerStartingX = 9 * 32;
-            playerStartingY = 9 * 32;
+            playerStartingX = 10 * 32;
+            playerStartingY = 13 * 32;
             playerStartLocation = new Point(playerStartingX, playerStartingY);
         }
         public override void loadLevelObjects()
@@ -27,14 +27,14 @@ namespace Toggle
             vm = new VineMoveBlock(32 * 13, 32 * 19);
             Game1.miscObjects.Add(vm);
             Game1.miscObjects.Add(new LaserBlock(3 * 32, 6 * 32,false));
-            Game1.miscObjects.Add(new LaserBlock(2 * 32, 7 * 32,true));
+            //Game1.miscObjects.Add(new LaserBlock(2 * 32, 7 * 32,true));
             Game1.miscObjects.Add(new LaserBlock(2 * 32, 9 * 32,false));
             
             Game1.miscObjects.Add(new LaserBlock(22 * 32, 6 * 32,false));
-            Game1.miscObjects.Add(new LaserBlock(22 * 32, 9 * 32,true));
-            Game1.miscObjects.Add(new LaserBlock(14 * 32, 3 * 32, false));
+            //Game1.miscObjects.Add(new LaserBlock(22 * 32, 9 * 32,true));
+            //Game1.miscObjects.Add(new LaserBlock(14 * 32, 3 * 32, false));
             Game1.miscObjects.Add(new LaserBlock(11 * 32, 1 * 32, true));
-            Game1.miscObjects.Add(new LaserBlock(13 * 32, 1 * 32, true));
+            //Game1.miscObjects.Add(new LaserBlock(13 * 32, 1 * 32, true));
             Gate gate = new Gate(23 * 32, 13 * 32);
             Game1.miscObjects.Add(gate);
             Button button = new ButtonPlayer(9 * 32, 5 * 32, gate);
