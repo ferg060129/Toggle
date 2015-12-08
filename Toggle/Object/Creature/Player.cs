@@ -561,7 +561,12 @@ namespace Toggle
 
         public bool isDead()
         {
+            if (proportion <= 0)
+            {
+                dirtTracks = false;
+            }
             return proportion <= 0;
+          
         }
 
         public bool isLocked()

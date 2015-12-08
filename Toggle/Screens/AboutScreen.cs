@@ -21,7 +21,7 @@ namespace Toggle
                                       "Desk|desk|deskBad|This is a desk.|This is a metal desk.",
                                       "Ghost|ghost|unghost|This little guy will follow you. \nHe can pass through walls.|This scary fellow will chase you down. \nHe cannot go through walls.",
                                       "VineMoveBlock|BoxLight|BoxDark|This is a pushable object.\nNote, enemies can push these too.|This object is not pushable.",
-                                      "LaserBlock|lasBoxHori|lasBoxVert|This is a pushable block emitting a deadly laser.\nShifting causes the laser to rotate\nand change colors.|This is a pushable block emitting a deadly laser.\nShifting causes the laser to rotate\nand change colors.",
+                                      "LaserBlock|lasBoxHori|lasBoxVert|This is a pushable block emitting a \ndeadly laser. Shifting causes the laser \nto rotate and change colors.|This is a pushable block emitting a \ndeadly laser. Shifting causes the laser \nto rotate and change colors.",
                                       "Strawberry|berry|berryRot|This is not passable.|This is passable.",
                                       "ButtonPlayer|buttonUp|buttonUp|Step on this to perform an effect.|Step on this to perform an effect.",
                                       "ButtonHeavy|buttonHUp|buttonHUp|You'll need to push a heavier object \nonto this.|You'll need to push a heavier object \nonto this.",
