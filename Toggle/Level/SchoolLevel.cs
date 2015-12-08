@@ -49,10 +49,9 @@ namespace Toggle
             {
                 for (int j = 2; j < 9; j ++)
                 {
-                    if (((i % 12) == 0) && ((j - 3) % 4 == 0))
+                    if (((i % 24) == 0) && ((j - 3) % 4 == 0))
                     {
                         Game1.miscObjects.Add(new LaserBlock(i * 32, j * 32, lasDir));
-                        lasDir = !lasDir;
                     }
                 }
                 if ((i % 12) == 0)
@@ -60,7 +59,7 @@ namespace Toggle
                     lasDir = !lasDir;
                 }
             }
-            Game1.miscObjects.Add(new LaserBlock(49 * 32, 5 * 32,true));
+            //Game1.miscObjects.Add(new LaserBlock(49 * 32, 5 * 32,true));
             Game1.miscObjects.Add(new VineMoveBlock(30 * 32, 5 * 32));
             //end laser puzzle
             Gate myGate = new Gate(2 * 32, 4 * 32);
