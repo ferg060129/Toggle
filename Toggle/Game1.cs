@@ -331,6 +331,7 @@ namespace Toggle
             backUpPlatformFilled = new bool[2];
             if (currentLevel.Equals(hubLevel))
                 loadBackupPlatforms();
+            creditsOffset = -height + 200;
         }
 
         public void reloadLevel()
@@ -1582,19 +1583,25 @@ namespace Toggle
             spriteBatch.Draw(player.getGraphic(), new Vector2(player.getX(), player.getY()), player.getImageBoundingRectangle(), Color.White);
             str = "Isaac Dickson";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset), Color.Cyan);
             str = "Merle Ferguson";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 400), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 400), Color.Cyan);
             str = "Kevin Spies";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 800), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 800), Color.Cyan);
             str = "Mayris Rios";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1200), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1200), Color.Cyan);
+
+            str = "Frederick Thayer";
+            length = str.Length * 12;
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1600), Color.Cyan);
+
+
             str = "Dreamshift";
             length = str.Length * 12;
-            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 1800), Color.Blue);
+            spriteBatch.DrawString(sf, str, new Vector2(width / 2 - length / 2, height / 2 - creditsOffset + 2200), Color.Cyan);
             creditsOffset++;
 
 
